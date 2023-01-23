@@ -32,6 +32,13 @@ func SetupDatabase() {
 		//Patient
 		&Symptom{},
 		&Patient{},
+		//MedicalDevice
+		&Type{},
+		&Status{},
+		&MedicalDevice{},
+		//Repair
+		&Damage_leval{},
+		Repair{},
 	)
 
 	db = database
