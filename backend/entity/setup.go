@@ -40,6 +40,11 @@ func SetupDatabase() {
 		//Patien_schedule
 		&Reason{},
 		&Patien_schedule{},
+		&Repair{},
+		//Dentist
+		&Specialized{},
+		&University{},
+		&Dentist{},
 	)
 
 	db = database

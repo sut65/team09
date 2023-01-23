@@ -11,6 +11,7 @@ type Role struct {
 	gorm.Model
 	Role_name string
 	Employees []Employee `gorm:"foreignKey:RoleID"`
+	Dentists  []Dentist  `gorm:"foreignKey:RoleID"`
 }
 
 type Gender struct {
@@ -18,12 +19,14 @@ type Gender struct {
 	Gender_name string
 	Employees   []Employee `gorm:"foreignKey:GenderID"`
 	Patients    []Patient  `gorm:"foreignKey: GenderID"`
+	Dentists    []Dentist  `gorm:"foreignKey:GenderID"`
 }
 
 type Province struct {
 	gorm.Model
 	Province_name string
 	Districts     []District `gorm:"foreignKey:ProvinceID"`
+	Dentists      []Dentist  `gorm:"foreignKey:ProvinceID"`
 }
 
 type District struct {
@@ -175,4 +178,51 @@ type Patien_schedule struct {
 	ReasonID  *uint
 	Reason    Reason `gorm:"references:id"`
 	Date_time time.Time
+}
+
+	// -----ระบบบันทึกเครื่องมือแพทย์-----
+type Specialized struct {
+	gorm.Model
+	Specialized_Name string
+
+	Dentists []Dentist `gorm:"foreignKey:SpecializedID"`
+}
+
+type University struct {
+	gorm.Model
+	University_Name string
+
+	Dentists []Dentist `gorm:"foreignKey:UniversityID"`
+}
+
+type Dentist struct {
+	gorm.Model
+
+	FirstName    string
+	LastName     string
+	Personal_id  string `gorm:"uniqueIndex"`
+	Email        string `gorm:"uniqueIndex"`
+	Password     string
+	Age          int
+	Phone_Number string `gorm:"uniqueIndex"`
+
+	//GenderID ทำหน้าที่เป็น FK
+	GenderID *uint
+	Gender   Gender `gorm:"references:id"`
+
+	//SpecializedID ทำหน้าที่เป็น FK
+	SpecializedID *uint
+	Specialized   Specialized `gorm:"references:id"`
+
+	//UniversityID ทำหน้าที่เป็น FK
+	UniversityID *uint
+	University   University `gorm:"references:id"`
+
+	//RoleID ทำหน้าที่เป็น FK
+	RoleID *uint
+	Role   Role `gorm:"references:id"`
+
+	//ProvinceID ทำหน้าที่เป็น FK
+	ProvinceID *uint
+	Province   Province `gorm:"references:id"`
 }
