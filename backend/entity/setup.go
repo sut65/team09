@@ -29,6 +29,9 @@ func SetupDatabase() {
 		&District{},
 		&Sub_district{},
 		&Employee{},
+		//Patient
+		&Symptom{},
+		&Patient{},
 	)
 
 	db = database

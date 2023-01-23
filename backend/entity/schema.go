@@ -15,6 +15,7 @@ type Gender struct {
 	gorm.Model
 	Gender_name string
 	Employees   []Employee `gorm:"foreignKey:GenderID"`
+	Patients    []Patient  `gorm:"foreignKey: GenderID"`
 }
 
 type Province struct {
@@ -39,6 +40,7 @@ type Sub_district struct {
 	DistrictID *uint
 	District   District   `gorm:"references:id"`
 	Employees  []Employee `gorm:"foreignKey:Sub_districtID"`
+	Patients   []Patient  `gorm:"foreignKey: Sub_districtID"`
 }
 
 type Employee struct {
@@ -61,4 +63,40 @@ type Employee struct {
 	//RoleID ทำหน้าที่เป็น FK
 	RoleID *uint
 	Role   Role `gorm:"references:id"`
+
+	Patients []Patient `gorm:"foreignKey: EmployeeID"`
+}
+
+// -----ระบบผู้ป่วย--------
+type Symptom struct {
+	gorm.Model
+	Symptom_name string
+	Patients     []Patient `gorm:"foreignKey: SymptomID"`
+}
+
+type Patient struct {
+	gorm.Model
+	Patient_name       string
+	Personal_id        string `gorm:"uniqueIndex"`
+	Old                uint
+	Weight             uint
+	Height             uint
+	Underlying_disease string
+	Drug_alergy        string
+	House_no           string
+
+	//Sub_districtID ทำหน้าที่เป็น FK
+	Sub_districtID *uint
+	Sub_district   Sub_district `gorm:"references:id"`
+
+	//GenderID ทำหน้าที่เป็น FK
+	GenderID *uint
+	Gender   Gender `gorm:"references:id"`
+
+	//RoleID ทำหน้าที่เป็น FK
+	SymptomID *uint
+	Symptom   Symptom `gorm:"references:id"`
+
+	EmployeeID *uint
+	Employee   Employee `gorm:"references:id"`
 }
