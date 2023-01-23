@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sut65/team09/controller/patienschedule"
+	"github.com/sut65/team09/controller/treatment"
 	"github.com/sut65/team09/entity"
 )
 
@@ -30,6 +31,27 @@ func main() {
 	router.POST("/reasons", patienschedule.CreateReason)
 	router.PATCH("/reasons", patienschedule.UpdateReason)
 	router.DELETE("/reasons/:id", patienschedule.DeleteReason)
+
+	// Treatment Routes	
+	r.GET("/treatments", controller.ListTreatmentShow)
+	r.GET("/treatments/:id", controller.GetTreatment)
+	r.POST("/treatments", controller.CreateTreatment) 
+	r.PATCH("/treatments", controller.UpdateTreatment)  
+	r.DELETE("/treatments/:id", controller.DeleteTreatment)
+
+	// Type of number of treatment Routes	
+	r.GET("/type_of_number_of_treatments", controller.List_Type_of_number_of_treatment)
+	r.GET("/type_of_number_of_treatments/:id", controller.Get_Type_of_number_of_treatment)
+	r.POST("/type_of_number_of_treatments", controller.Create_Type_of_number_of_treatment)
+	r.PATCH("/type_of_number_of_treatments", controller.Update_Type_of_number_of_treatment)
+	r.DELETE("/type_of_number_of_treatments/:id", controller.Delete_Type_of_number_of_treatment)
+	
+	// Type of treatment Routes
+	r.GET("/type_of_treatments", controller.List_Type_of_treatment)
+	r.GET("/type_of_treatments/:id", controller.Get_Type_of_treatment)
+	r.POST("/type_of_treatments", controller.Create_Type_of_treatment)
+	r.PATCH("/type_of_treatments", controller.Update_Type_of_treatment)
+	r.DELETE("/type_of_treatments/:id", controller.Delete_Type_of_treatment)
 
 	
 	// // login User Route
