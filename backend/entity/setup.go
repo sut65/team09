@@ -1,9 +1,6 @@
 package entity
 
 import (
-	//"fmt"
-	//"time"
-
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
