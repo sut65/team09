@@ -37,8 +37,8 @@ func SetupDatabase() {
 		&Status{},
 		&MedicalDevice{},
 		//Repair
-		&Damage_leval{},
-		Repair{},
+		&DamageLeval{},
+		&Repair{},
 	)
 
 	db = database
