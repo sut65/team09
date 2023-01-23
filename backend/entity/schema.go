@@ -137,10 +137,10 @@ type MedicalDevice struct {
 }
 
 // -----ระบบแจ้งซ่อมเครื่องมือแพทย์-----
-type DamageLeval struct {
+type Damage_leval struct {
 	gorm.Model
 	Damage_Choice string
-	Repairs       []Repair `gorm:"foreignKey:DamageLevalID"`
+	Repairs       []Repair `gorm:"foreignKey:Damage_ID"`
 }
 
 type Repair struct {
@@ -151,8 +151,8 @@ type Repair struct {
 	MedicalDeviceID *uint
 	MedicalDevice   MedicalDevice
 
-	DamageLevalID *int
-	DamageLeval   DamageLeval
+	Damage_ID    *uint
+	Damage_leval Damage_leval
 
 	Date_Of_Repair time.Time
 }
