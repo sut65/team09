@@ -1,6 +1,8 @@
 package entity
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -64,7 +66,9 @@ type Employee struct {
 	RoleID *uint
 	Role   Role `gorm:"references:id"`
 
-	Patients []Patient `gorm:"foreignKey: EmployeeID"`
+	Patients       []Patient       `gorm:"foreignKey: EmployeeID"`
+	Medical_device []MedicalDevice `gorm:"foreignKey:EmployeeID"`
+	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
 }
 
 // -----ระบบผู้ป่วย--------
@@ -99,4 +103,56 @@ type Patient struct {
 
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
+}
+
+// -----ระบบเครื่องมือแพทย์-----
+type Type struct {
+	gorm.Model
+	Type_Name      string
+	Medical_device []MedicalDevice `gorm:"foreignKey:Type_ID"`
+}
+
+type Status struct {
+	gorm.Model
+	Status_Choice  string
+	Medical_device []MedicalDevice `gorm:"foreignKey:Status_ID"`
+}
+
+type MedicalDevice struct {
+	gorm.Model
+	EmployeeID *uint
+	Employee   Employee
+
+	Type_ID *uint
+	Type    Type
+
+	Status_ID *uint
+	Status    Status
+
+	Device_Name string
+	Amount      int
+	Date        time.Time
+
+	Repairs []Repair `gorm:"foreignKey:MedicalDeviceID"`
+}
+
+// -----ระบบแจ้งซ่อมเครื่องมือแพทย์-----
+type Damage_leval struct {
+	gorm.Model
+	Damage_Choice string
+	Repairs       []Repair `gorm:"foreignKey:Damage_ID"`
+}
+
+type Repair struct {
+	gorm.Model
+	EmployeeID *uint
+	Employee   Employee
+
+	MedicalDeviceID *uint
+	MedicalDevice   MedicalDevice
+
+	Damage_ID    *uint
+	Damage_leval Damage_leval
+
+	Date_Of_Repair time.Time
 }
