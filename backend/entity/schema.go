@@ -110,6 +110,9 @@ type Patient struct {
 	Employee   Employee `gorm:"references:id"`
 
 	Prescriptions 	[]Prescription `gorm:"foreignKey:PatientID"`
+
+	//สำหรับ entity การรักษาดึงไป
+	Treatment        []Treatment  `gorm:"foreignkey:PatientID"`
 }
 
 // -----ระบบเครื่องมือแพทย์-----
@@ -229,6 +232,9 @@ type Dentist struct {
 	Province   Province `gorm:"references:id"`
 
 	Prescriptions 	[]Prescription `gorm:"foreignKey:DentistID"`
+
+	//สำหรับ entity การรักษาดึงไป
+	Treatment        []Treatment  `gorm:"foreignkey:DentistID"`
 }
 
 // -----ระบบสั่งจ่ายยา-----
@@ -250,4 +256,48 @@ type Prescription struct {
 	//MedicineID 	ทำหน้าที่เป็น FK
 	MedicineID *uint
 	Medicine   Medicine
+}
+
+/// ระบบบันทึกการรักษา
+type Type_of_treatment struct {
+	gorm.Model
+	Type_of_treatment_name       string
+	Price 						 int
+	Treatment        []Treatment  `gorm:"foreignkey:Type_Of_TreatmentID"`
+} 
+
+type Type_of_number_of_treatment struct {
+	gorm.Model
+	Type_of_number_of_treatment_name       string
+	Treatment        []Treatment  `gorm:"foreignkey:Type_Of_Number_Of_TreatmentID"`
+} 
+
+type Treatment struct {
+	gorm.Model		
+ 
+	DentistID *uint   
+	Dentist   Dentist
+
+	PatientID *uint  
+	Patient   Patient
+
+	Number_of_cavities int    
+ 
+	Number_of_swollen_gums int 
+
+	Other_teeth_problems string
+
+	Type_Of_TreatmentID *uint 
+	Type_Of_Treatment	Type_of_treatment
+
+	Number_of_treatment int
+
+	Type_Of_Number_Of_TreatmentID *uint
+	Type_Of_Number_Of_Treatment Type_of_number_of_treatment
+		
+	Treatment_detail string
+
+	Treatment_time time.Time
+
+	Treatment_code string
 }

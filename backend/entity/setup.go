@@ -45,6 +45,9 @@ func SetupDatabase() {
 		&Specialized{},
 		&University{},
 		&Dentist{},
+		&Treatment{},
+
+
 	)
 
 	db = database
