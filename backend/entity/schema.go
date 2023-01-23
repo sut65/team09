@@ -69,6 +69,8 @@ type Employee struct {
 	Patients       []Patient       `gorm:"foreignKey: EmployeeID"`
 	Medical_device []MedicalDevice `gorm:"foreignKey:EmployeeID"`
 	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
+	//โยงกับระบบนัดผู้ป่วย
+	Patien_schedule []Patien_schedule `gorm:"foreignKey:EmployeeID"`
 }
 
 // -----ระบบผู้ป่วย--------
@@ -155,4 +157,22 @@ type Repair struct {
 	Damage_leval Damage_leval
 
 	Date_Of_Repair time.Time
+}
+
+// ระบบนัดผู้ป่วย
+type Reason struct {
+	gorm.Model
+	Method          string
+	Patien_schedule []Patien_schedule `gorm:"foreignKey:ReasonID"`
+}
+
+type Patien_schedule struct {
+	gorm.Model
+
+	EmployeeID *uint
+	Employee   Employee `gorm:"references:id"`
+
+	ReasonID  *uint
+	Reason    Reason `gorm:"references:id"`
+	Date_time time.Time
 }

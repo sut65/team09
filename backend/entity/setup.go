@@ -39,7 +39,16 @@ func SetupDatabase() {
 		//Repair
 		&Damage_leval{},
 		Repair{},
+
+		//Patien_schedule
+		&Reason{},
+		&Patien_schedule{},
 	)
 
 	db = database
+
+	method1 := Reason{
+		Method: "อยากโดนเข็ม",
+	}
+	db.Model(&Reason{}).Create(&method1)
 }
