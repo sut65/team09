@@ -15,8 +15,8 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from '@mui/material/InputLabel';
 
 //import Interface
-import {ReasonInterface} from "../interfaces/IReason";
-import {PatienSceheduleInterface} from "../interfaces/IPatienSchedule";
+import {ReasonInterface} from "../models/IReason";
+import {PatienSceheduleInterface} from "../models/IPatienSchedule";
 
 import {
     GetPatientSchedules,
