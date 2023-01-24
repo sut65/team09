@@ -51,7 +51,8 @@ type Sub_district struct {
 type Employee struct {
 	gorm.Model
 	Employee_number string `gorm:"uniqueIndex"`
-	Employee_name   string
+	FirstName       string
+	LastName        string
 	Personal_id     string `gorm:"uniqueIndex"`
 	Password        string `gorm:"uniqueIndex"`
 	Phone           uint
@@ -85,7 +86,8 @@ type Symptom struct {
 
 type Patient struct {
 	gorm.Model
-	Patient_name       string
+	FirstName          string
+	LastName           string
 	Personal_id        string `gorm:"uniqueIndex"`
 	Old                uint
 	Weight             uint
