@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"time"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -46,6 +47,10 @@ func SetupDatabase() {
 		&University{},
 		&Dentist{},
 		&Treatment{},
+		//Prescription
+		&Medicine{},
+		&Medicine_status{},
+		&Prescription{},
 	)
 
 	db = database
@@ -54,4 +59,41 @@ func SetupDatabase() {
 		Method: "อยากโดนเข็ม",
 	}
 	db.Model(&Reason{}).Create(&method1)
+	
+	///////////////ข้อมูล ทดสอบ///////////
+	Patient1 := Patient{
+		FirstName: "อยากโดนเข็ม",
+	}
+	db.Model(&Patient{}).Create(&Patient1)
+
+	///////////////ข้อมูล ทดสอบ///////////
+	Dentist1 := Dentist{
+		FirstName: "อยากโดนเข็ม",
+	}
+	db.Model(&Dentist{}).Create(&Dentist1)
+	
+	///////////////ข้อมูลใน entity Medicine///////////
+	Medicine1 := Medicine{
+		Medicine_name: "แก้ปวด",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine1)
+
+	///////////////ข้อมูลใน entity Medicine_status///////////
+	Medicine_status1 := Medicine_status{
+		Medicine_status_name: "รับยาแล้ว",
+	}
+	db.Model(&Medicine_status{}).Create(&Medicine_status1)
+
+	///////////////ข้อมูลใน entity Prescription///////////
+	DateTimePrescriptionA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+	//DateTimePrescriptionB := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+	Prescription1 := Prescription{
+		Medicine:			Medicine1,
+		Medicine_status:	Medicine_status1,
+		Patient:			Patient1,
+		Dentist:			Dentist1,
+		DateTimePrescription: DateTimePrescriptionA,
+	}
+	db.Model(&Prescription{}).Create(&Prescription1)
 }
