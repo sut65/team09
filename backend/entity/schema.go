@@ -115,6 +115,9 @@ type Patient struct {
 
 	//สำหรับ entity การรักษาดึงไป
 	Treatment []Treatment `gorm:"foreignkey:PatientID"`
+
+	//ระบบนัดผู้ป่วย ดึงไป
+	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
 }
 
 // -----ระบบเครื่องมือแพทย์-----
@@ -180,12 +183,18 @@ type Reason struct {
 type Patien_schedule struct {
 	gorm.Model
 
+	PatientID *uint
+	Patient   Patient `gorm:"references:id"`
+
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
 
-	ReasonID  *uint
-	Reason    Reason `gorm:"references:id"`
-	Date_time time.Time
+	ReasonID *uint
+	Reason   Reason `gorm:"references:id"`
+
+	Type_Of_TreatmentID *uint
+	Type_Of_Treatment   Type_of_treatment `gorm:"references:id"`
+	Date_time           time.Time
 }
 
 // -----ระบบบันทึกเครื่องมือแพทย์-----
@@ -267,6 +276,8 @@ type Type_of_treatment struct {
 	Type_of_treatment_name string
 	Price                  int
 	Treatment              []Treatment `gorm:"foreignkey:Type_Of_TreatmentID"`
+	//โยงกับระบบนัดผู้ป่วย
+	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
 }
 
 type Type_of_number_of_treatment struct {

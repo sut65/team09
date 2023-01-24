@@ -49,7 +49,8 @@ func CreateEmployee(c *gin.Context) {
 	}
 
 	emp := entity.Employee{
-		Employee_name:   employee.Employee_name,
+		FirstName:       employee.FirstName,
+		LastName:        employee.LastName,
 		Employee_number: employee.Employee_number,
 		Personal_id:     employee.Personal_id,
 		Password:        string(hashPassword),
