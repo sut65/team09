@@ -75,7 +75,7 @@ type Employee struct {
 	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
 	//โยงกับระบบนัดผู้ป่วย
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:EmployeeID"`
-	Payments        []Payment `gorm:"foreignKey:EmployeeID"`
+	Payments        []Payment	`gorm:"foreignKey:EmployeeID"`
 }
 
 // -----ระบบผู้ป่วย--------
@@ -251,7 +251,8 @@ type Medicine_status struct {
 
 type Medicine struct {
 	gorm.Model
-	Medicine_name string
+	Medicine_name 	string
+	Medicine_price	uint
 	Prescriptions []Prescription `gorm:"foreignKey:MedicineID"`
 }
 
