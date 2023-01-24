@@ -15,14 +15,14 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from '@mui/material/InputLabel';
 
 //import Interface
-import {ReasonInterface} from "../models/IReason";
-import {PatienSceheduleInterface} from "../models/IPatienSchedule";
+import {ReasonInterface} from "../../models/IReason";
+import {PatienSceheduleInterface} from "../../models/IPatienSchedule";
 
 import {
     GetPatientSchedules,
     GetReasons,
     PatientSchedules,
-} from "../services/HttpClientService";
+} from "../../services/HttpClientService";
 
 
 

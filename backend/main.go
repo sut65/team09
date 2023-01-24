@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	medicaldevice "github.com/sut65/team09/controller/medicaldevice"
-	"github.com/sut65/team09/controller/patienschedule"
+	patienschedule "github.com/sut65/team09/controller/patienschedule"
 	controller "github.com/sut65/team09/controller/treatment"
 	"github.com/sut65/team09/entity"
 )
