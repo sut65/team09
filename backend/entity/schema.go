@@ -111,13 +111,7 @@ type Patient struct {
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
 
-	Prescriptions []Prescription `gorm:"foreignKey:PatientID"`
-
-	//สำหรับ entity การรักษาดึงไป
-	Treatment []Treatment `gorm:"foreignkey:PatientID"`
-
-	//ระบบนัดผู้ป่วย ดึงไป
-	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
+	Prescriptions 	[]Prescription `gorm:"foreignKey:PatientID"`
 }
 
 // -----ระบบเครื่องมือแพทย์-----
@@ -243,13 +237,16 @@ type Dentist struct {
 	ProvinceID *uint
 	Province   Province `gorm:"references:id"`
 
-	Prescriptions []Prescription `gorm:"foreignKey:DentistID"`
-
-	//สำหรับ entity การรักษาดึงไป
-	Treatment []Treatment `gorm:"foreignkey:DentistID"`
+	Prescriptions 	[]Prescription `gorm:"foreignKey:DentistID"`
 }
 
 // -----ระบบสั่งจ่ายยา-----
+type Medicine_status struct {
+	gorm.Model
+	Medicine_status_name string
+	Prescriptions        []Prescription `gorm:"foreignKey:Medicine_statusID"`
+}
+
 type Medicine struct {
 	gorm.Model
 	Medicine_name string
@@ -265,6 +262,9 @@ type Prescription struct {
 	//DentistID 	ทำหน้าที่เป็น FK
 	DentistID *uint
 	Dentist   Dentist
+	//Medicine_statusID 	ทำหน้าที่เป็น FK
+	Medicine_statusID *uint
+	Medicine_status   Medicine_status
 	//MedicineID 	ทำหน้าที่เป็น FK
 	MedicineID *uint
 	Medicine   Medicine
