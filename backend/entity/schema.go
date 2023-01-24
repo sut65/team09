@@ -75,6 +75,7 @@ type Employee struct {
 	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
 	//โยงกับระบบนัดผู้ป่วย
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:EmployeeID"`
+	Payments        []Payment `gorm:"foreignKey:EmployeeID"`
 }
 
 // -----ระบบผู้ป่วย--------
@@ -112,6 +113,7 @@ type Patient struct {
 	Employee   Employee `gorm:"references:id"`
 
 	Prescriptions 	[]Prescription `gorm:"foreignKey:PatientID"`
+	Payments        []Payment `gorm:"foreignKey:PatientID"`
 }
 
 // -----ระบบเครื่องมือแพทย์-----
@@ -315,3 +317,26 @@ type Treatment struct {
 
 	Treatment_code string
 }
+
+// -----ระบบแจ้งยอดชำระ-----
+type Payment_status struct {
+	gorm.Model
+	Payment_status_name string
+	Payments        []Payment `gorm:"foreignKey:Payment_statusID"`
+}
+
+type Payment struct {
+	gorm.Model
+	Total_price	uint
+	DateTimePayment time.Time
+	//PatientID 	ทำหน้าที่เป็น FK
+	PatientID *uint
+	Patient		Patient
+	//EmployeeID 	ทำหน้าที่เป็น FK
+	EmployeeID *uint
+	Employee	Employee
+	//Payment_statusID 	ทำหน้าที่เป็น FK
+	Payment_statusID *uint
+	Payment_status	Payment_status
+}
+
