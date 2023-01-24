@@ -2,8 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	medicaldevice "github.com/sut65/team09/controller/medicaldevice"
 	"github.com/sut65/team09/controller/patienschedule"
-	"github.com/sut65/team09/controller/treatment"
+	controller "github.com/sut65/team09/controller/treatment"
 	"github.com/sut65/team09/entity"
 )
 
@@ -32,20 +33,20 @@ func main() {
 	router.PATCH("/reasons", patienschedule.UpdateReason)
 	router.DELETE("/reasons/:id", patienschedule.DeleteReason)
 
-	// Treatment Routes	
+	// Treatment Routes
 	r.GET("/treatments", controller.ListTreatmentShow)
 	r.GET("/treatments/:id", controller.GetTreatment)
-	r.POST("/treatments", controller.CreateTreatment) 
-	r.PATCH("/treatments", controller.UpdateTreatment)  
+	r.POST("/treatments", controller.CreateTreatment)
+	r.PATCH("/treatments", controller.UpdateTreatment)
 	r.DELETE("/treatments/:id", controller.DeleteTreatment)
 
-	// Type of number of treatment Routes	
+	// Type of number of treatment Routes
 	r.GET("/type_of_number_of_treatments", controller.List_Type_of_number_of_treatment)
 	r.GET("/type_of_number_of_treatments/:id", controller.Get_Type_of_number_of_treatment)
 	r.POST("/type_of_number_of_treatments", controller.Create_Type_of_number_of_treatment)
 	r.PATCH("/type_of_number_of_treatments", controller.Update_Type_of_number_of_treatment)
 	r.DELETE("/type_of_number_of_treatments/:id", controller.Delete_Type_of_number_of_treatment)
-	
+
 	// Type of treatment Routes
 	r.GET("/type_of_treatments", controller.List_Type_of_treatment)
 	r.GET("/type_of_treatments/:id", controller.Get_Type_of_treatment)
@@ -53,7 +54,19 @@ func main() {
 	r.PATCH("/type_of_treatments", controller.Update_Type_of_treatment)
 	r.DELETE("/type_of_treatments/:id", controller.Delete_Type_of_treatment)
 
-	
+	//----medicaldevice-----
+	r.GET("/medicaldevices", medicaldevice.ListMedicalDevices)
+	r.GET("/medicaldevice/:id", medicaldevice.GetMedicalDevice)
+	r.POST("/medicaldevices", medicaldevice.CreateMedicalDevice)
+	r.PATCH("/medicaldevices", medicaldevice.UpdateMedicalDevice)
+	r.DELETE("/medicaldevice/:id", medicaldevice.DeleteMedicalDevice)
+
+	r.GET("/statuses", medicaldevice.ListStatuses)
+	r.GET("/status/:id", medicaldevice.GetStatus)
+
+	r.GET("/types", medicaldevice.ListTypes)
+	r.GET("/ttype/:id", medicaldevice.GetType)
+
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)
 	// r.POST("/users", user_controller.CreateUser)
@@ -77,7 +90,6 @@ func main() {
 	// 		protected.GET("/user_game/:email", user_controller.ListUserGames)
 	// 	}
 	// }
-
 
 	// Run the server
 

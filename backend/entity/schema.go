@@ -109,10 +109,10 @@ type Patient struct {
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
 
-	Prescriptions 	[]Prescription `gorm:"foreignKey:PatientID"`
+	Prescriptions []Prescription `gorm:"foreignKey:PatientID"`
 
 	//สำหรับ entity การรักษาดึงไป
-	Treatment        []Treatment  `gorm:"foreignkey:PatientID"`
+	Treatment []Treatment `gorm:"foreignkey:PatientID"`
 }
 
 // -----ระบบเครื่องมือแพทย์-----
@@ -147,10 +147,11 @@ type MedicalDevice struct {
 }
 
 // -----ระบบแจ้งซ่อมเครื่องมือแพทย์-----
-type Damage_leval struct {
+type DamageLevel struct {
 	gorm.Model
 	Damage_Choice string
-	Repairs       []Repair `gorm:"foreignKey:Damage_ID"`
+
+	Repairs []Repair `gorm:"foreignKey:DamageLevelID"`
 }
 
 type Repair struct {
@@ -161,8 +162,8 @@ type Repair struct {
 	MedicalDeviceID *uint
 	MedicalDevice   MedicalDevice
 
-	Damage_ID    *uint
-	Damage_leval Damage_leval
+	DamageLevelID *uint
+	DamageLevel   DamageLevel
 
 	Date_Of_Repair time.Time
 }
@@ -185,7 +186,7 @@ type Patien_schedule struct {
 	Date_time time.Time
 }
 
-	// -----ระบบบันทึกเครื่องมือแพทย์-----
+// -----ระบบบันทึกเครื่องมือแพทย์-----
 type Specialized struct {
 	gorm.Model
 	Specialized_Name string
@@ -231,17 +232,17 @@ type Dentist struct {
 	ProvinceID *uint
 	Province   Province `gorm:"references:id"`
 
-	Prescriptions 	[]Prescription `gorm:"foreignKey:DentistID"`
+	Prescriptions []Prescription `gorm:"foreignKey:DentistID"`
 
 	//สำหรับ entity การรักษาดึงไป
-	Treatment        []Treatment  `gorm:"foreignkey:DentistID"`
+	Treatment []Treatment `gorm:"foreignkey:DentistID"`
 }
 
 // -----ระบบสั่งจ่ายยา-----
 type Medicine struct {
 	gorm.Model
-	Medicine_name	string
-	Prescriptions 	[]Prescription `gorm:"foreignKey:MedicineID"`
+	Medicine_name string
+	Prescriptions []Prescription `gorm:"foreignKey:MedicineID"`
 }
 
 type Prescription struct {
@@ -258,43 +259,43 @@ type Prescription struct {
 	Medicine   Medicine
 }
 
-/// ระบบบันทึกการรักษา
+// / ระบบบันทึกการรักษา
 type Type_of_treatment struct {
 	gorm.Model
-	Type_of_treatment_name       string
-	Price 						 int
-	Treatment        []Treatment  `gorm:"foreignkey:Type_Of_TreatmentID"`
-} 
+	Type_of_treatment_name string
+	Price                  int
+	Treatment              []Treatment `gorm:"foreignkey:Type_Of_TreatmentID"`
+}
 
 type Type_of_number_of_treatment struct {
 	gorm.Model
-	Type_of_number_of_treatment_name       string
-	Treatment        []Treatment  `gorm:"foreignkey:Type_Of_Number_Of_TreatmentID"`
-} 
+	Type_of_number_of_treatment_name string
+	Treatment                        []Treatment `gorm:"foreignkey:Type_Of_Number_Of_TreatmentID"`
+}
 
 type Treatment struct {
-	gorm.Model		
- 
-	DentistID *uint   
+	gorm.Model
+
+	DentistID *uint
 	Dentist   Dentist
 
-	PatientID *uint  
+	PatientID *uint
 	Patient   Patient
 
-	Number_of_cavities int    
- 
-	Number_of_swollen_gums int 
+	Number_of_cavities int
+
+	Number_of_swollen_gums int
 
 	Other_teeth_problems string
 
-	Type_Of_TreatmentID *uint 
-	Type_Of_Treatment	Type_of_treatment
+	Type_Of_TreatmentID *uint
+	Type_Of_Treatment   Type_of_treatment
 
 	Number_of_treatment int
 
 	Type_Of_Number_Of_TreatmentID *uint
-	Type_Of_Number_Of_Treatment Type_of_number_of_treatment
-		
+	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
+
 	Treatment_detail string
 
 	Treatment_time time.Time
