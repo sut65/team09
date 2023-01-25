@@ -359,7 +359,7 @@ function EmployeeCreate() {
                 value={employee.Sub_districtID + ""}
                 onChange={handleChange}
                 inputProps={{
-                  name: "SubdistrictID",
+                  name: "Sub_districtID",
                 }}
               >
                 <option aria-label="None" value="">

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	employee "github.com/sut65/team09/controller/employee"
 	medicaldevice "github.com/sut65/team09/controller/medicaldevice"
 	patienschedule "github.com/sut65/team09/controller/patienschedule"
 	controller "github.com/sut65/team09/controller/treatment"
@@ -18,8 +19,46 @@ func main() {
 	r.Use(CORSMiddleware())
 
 	router := r.Group("/")
-	// patien_schedule Routes
+	//---------Employee-------------
+	router.GET("/roles", employee.ListRole)
+	router.GET("/roles/:id", employee.GetRole)
+	router.POST("/roles", employee.CreateRole)
+	router.PATCH("/roles", employee.UpdateRole)
+	router.DELETE("/roles/:id", employee.DeleteRole)
 
+	router.GET("/genders", employee.ListGenders)
+	router.GET("/gender/:id", employee.GetGender)
+	router.POST("/genders", employee.CreateGender)
+	router.PATCH("/genders", employee.UpdateGender)
+	router.DELETE("/genders/:id", employee.DeleteGender)
+
+	router.GET("/provinces", employee.ListProvince)
+	router.GET("/province/:id", employee.GetProvince)
+	router.POST("/provinces", employee.CreateProvince)
+	router.PATCH("/provinces", employee.UpdateProvince)
+	router.DELETE("/provinces/:id", employee.DeleteProvince)
+
+	router.GET("/district", employee.ListDistrict)
+	router.GET("/district/:id", employee.GetDistrict)
+	router.POST("/district", employee.CreateDistrict)
+	router.PATCH("/district", employee.UpdateDistrict)
+	router.DELETE("/district/:id", employee.DeleteDistrict)
+
+	router.GET("/subdistricts", employee.ListSubDistrict)
+	router.GET("/subdistricts/:id", employee.GetSubDistrict)
+	router.POST("/subdistrict", employee.CreateSubDistrict)
+	router.PATCH("/subdistrict", employee.UpdateSubDistrict)
+	router.DELETE("/subdistrict/:id", employee.DeleteSubDistrict)
+
+	router.GET("/employees", employee.ListEmployee)
+	router.GET("/employee/:id", employee.GetEmployee)
+	router.POST("/employees", employee.CreateEmployee)
+	router.PATCH("/employees", employee.UpdateEmployee)
+	router.DELETE("/employees/:id", employee.DeleteEmployee)
+
+	//------------------------------------
+
+	// patien_schedule Routes
 	router.GET("/patien_schedules", patienschedule.ListPatienSchedules)
 	router.GET("/patien_schedules/:id", patienschedule.GetPatienSchedule)
 	router.POST("/patien_schedules", patienschedule.CreatePatienSchedule)

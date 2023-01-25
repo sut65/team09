@@ -25,6 +25,8 @@ type Gender struct {
 type Province struct {
 	gorm.Model
 	Province_name string
+	Employees     []Employee `gorm:"foreignKey:ProvinceID"`
+	Patients      []Patient  `gorm:"foreignKey: ProvinceID"`
 	Districts     []District `gorm:"foreignKey:ProvinceID"`
 	Dentists      []Dentist  `gorm:"foreignKey:ProvinceID"`
 }
@@ -35,6 +37,8 @@ type District struct {
 	//ProvinceID ทำหน้าที่เป็น FK
 	ProvinceID    *uint
 	Province      Province       `gorm:"references:id"`
+	Employees     []Employee     `gorm:"foreignKey:DistrictID"`
+	Patients      []Patient      `gorm:"foreignKey:DistrictID"`
 	Sub_districts []Sub_district `gorm:"foreignKey:DistrictID"`
 }
 
@@ -61,6 +65,14 @@ type Employee struct {
 	//Sub_districtID ทำหน้าที่เป็น FK
 	Sub_districtID *uint
 	Sub_district   Sub_district `gorm:"references:id"`
+
+	//DistrictID ทำหน้าที่เป็น FK
+	DistrictID *uint
+	District   District `gorm:"references:id"`
+
+	//ProvinceID ทำหน้าที่เป็น FK
+	ProvinceID *uint
+	Province   Province `gorm:"references:id"`
 
 	//GenderID ทำหน้าที่เป็น FK
 	GenderID *uint
@@ -99,6 +111,14 @@ type Patient struct {
 	//Sub_districtID ทำหน้าที่เป็น FK
 	Sub_districtID *uint
 	Sub_district   Sub_district `gorm:"references:id"`
+
+	//DistrictID ทำหน้าที่เป็น FK
+	DistrictID *uint
+	District   District `gorm:"references:id"`
+
+	//ProvinceID ทำหน้าที่เป็น FK
+	ProvinceID *uint
+	Province   Province `gorm:"references:id"`
 
 	//GenderID ทำหน้าที่เป็น FK
 	GenderID *uint

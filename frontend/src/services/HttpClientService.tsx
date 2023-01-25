@@ -71,7 +71,7 @@ async function GetRole() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/role`, requestOptions)
+  let res = await fetch(`${apiUrl}/roles`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -93,7 +93,7 @@ async function GetGender() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/gender`, requestOptions)  
+  let res = await fetch(`${apiUrl}/genders`, requestOptions)  
     .then((response) => response.json()) 
     .then((res) => {   
       if (res.data) { 
@@ -159,7 +159,7 @@ async function GetSubdistrict() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/sub_district`, requestOptions)
+  let res = await fetch(`${apiUrl}/subdistricts`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -204,7 +204,7 @@ async function GetEmployee() {
       body: JSON.stringify(data),
     };
 
-    let res = await fetch(`${apiUrl}/employee`, requestOptions)
+    let res = await fetch(`${apiUrl}/employees`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
