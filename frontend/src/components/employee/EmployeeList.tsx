@@ -54,17 +54,9 @@ function Employees() {
           </Box>
           <Box>
           <Stack spacing={2} direction="row">
-          <Button
-                component={RouterLink}
-                to="/employee/create"
-                variant="contained"
-                color="error"
-                >
-                ลบข้อมูล
-            </Button>
             <Button
                 component={RouterLink}
-                to="/employee/create"
+                to=""
                 variant="contained"
                 color="primary"
                 >

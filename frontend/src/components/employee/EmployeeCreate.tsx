@@ -16,18 +16,22 @@ import TextField from "@mui/material/TextField";
 //import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 //import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-// import { ProvincesInterface } from "../interfaces/IProvince"; 
-// import { GendersInterface } from "../interfaces/IGender";
-// import { EmployeeInterface } from "../interfaces/IEmployee";
+import { RoleInterface } from "../../models/IRole";
+import { GenderInterface } from "../../models/IGender";
+import { ProvinceInterface } from "../../models/IProvince";
+import { EmployeeInterface } from "../../models/IEmployee";
+import { DistrictInterface } from "../../models/IDistrict";
+import { Sub_districtInterface } from "../../models/ISub_district";
 
-// import {
-//   GetGender,
-//   GetJob_Positions,
-//   GetProvinces,
-//   CreateEmployees,
-
-// } from "../services/HttpClientService";
-// import { Job_positionsInterface } from "../interfaces/IJob_Position";
+import {
+  GetEmployee,
+  GetRole,
+  GetGender,
+  GetProvince,
+  GetDistrict,
+  GetSubdistrict,
+  CreateEmployee,
+} from "../../services/HttpClientService";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -37,10 +41,12 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 function EmployeeCreate() {
-//   const [gender, setGenders] = useState<GendersInterface[]>([]);
-//   const [job_position, setJob_Positions] = useState<Job_positionsInterface[]>([]);
-//   const [provinces, setProvinces] = React.useState<ProvincesInterface[]>([]);
-//   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
+  const [gender, setGender] = useState<GenderInterface[]>([]);
+  const [role, setRole] = useState<RoleInterface[]>([]);
+  const [province, setProvince] = React.useState<ProvinceInterface[]>([]);
+  const [district, setDistrict] = React.useState<DistrictInterface[]>([]);
+  const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
+  const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -59,47 +65,62 @@ function EmployeeCreate() {
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
     const name = event.target.name as keyof typeof EmployeeCreate;
-    // setEmployee({
-    //   ...employee,
-    //   [name]: event.target.value,
-    // });
+    setEmployee({
+      ...employee,
+      [name]: event.target.value,
+    });
   };
 
   //text field
   const handleInputChange = (
     event: React.ChangeEvent<{ id?: string; value: any }>
   ) => {
-    // const id = event.target.id as keyof typeof employee;
-    // const { value } = event.target;
-    // setEmployee({ ...employee, [id]: value });
+    const id = event.target.id as keyof typeof employee;
+    const { value } = event.target;
+    setEmployee({ ...employee, [id]: value });
   };
   
-  const getGenders = async () => {
-    // let res = await GetGender();
-    // if (res) {
-    //   setGenders(res);
-    // }
+  const getGender = async () => {
+    let res = await GetGender();
+    if (res) {
+      setGender(res);
+    }
   };
 
-  const getJob_Positions = async () => {
-    // let res = await GetJob_Positions();
-    // if (res) {
-    //   setJob_Positions(res);
-    // }
+  const getRole = async () => {
+    let res = await GetRole();
+    if (res) {
+      setRole(res);
+    }
   };
 
+  const getProvince = async () => {
+    let res = await GetProvince();
+    if (res) {
+      setProvince(res);
+    }
+  };
 
-  const getProvinces = async () => {
-    // let res = await GetProvinces();
-    // if (res) {
-    //   setProvinces(res);
-    // }
+  const getDistrict = async () => {
+    let res = await GetDistrict();
+    if (res) {
+      setDistrict(res);
+    }
+  };
+
+  const getSubdistrict = async () => {
+    let res = await GetSubdistrict();
+    if (res) {
+      setSubdistrict(res);
+    }
   };
 
   useEffect(() => {
-    getGenders();
-    getJob_Positions();
-    getProvinces();
+    getGender();
+    getRole();
+    getProvince();
+    getDistrict();
+    getSubdistrict();
   }, []);
 
   const convertType = (data: string | number | undefined) => {
@@ -111,23 +132,28 @@ function EmployeeCreate() {
   
   async function submit() {
     let data = {
-    //   Name: employee.Name,
-    //   Email: employee.Email,
-    //   Personal_ID: employee.Personal_ID,
-    //   Password: employee.Password,
-    //   GenderID: convertType(employee.GenderID),
-    //   Job_PositionID: convertType(employee.Job_PositionID),
-    //   ProvinceID: convertType(employee.ProvinceID),
+      Employee_number: employee.Employee_number,
+      FirstName: employee.FirstName,
+      LastName: employee.LastName,
+      Personal_id: employee.Personal_id,
+      Password: employee.Password,
+      Phone: employee.Phone,
+      House_no: employee.House_no,
+      RoleID: convertType(employee.RoleID),
+      GenderID: convertType(employee.GenderID),
+      ProvinceID: convertType(employee.ProvinceID),
+      DistrictID: convertType(employee.DistrictID),
+      Sub_districtID: convertType(employee.Sub_districtID),
     };
     console.log(data);
 
-    // let res = await CreateEmployees(data);
-    // console.log(res);
-    // if (res) { 
-    //   setSuccess(true);
-    // } else {
-    //   setError(true);
-    // }
+    let res = await CreateEmployee(data);
+    console.log(res);
+    if (res) { 
+      setSuccess(true);
+    } else {
+      setError(true);
+    }
   }
 
   return (
@@ -177,12 +203,12 @@ function EmployeeCreate() {
             <p>รหัสพนักงาน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Name"
+                id="Employee_number"
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกชื่อ-สกุล"
-                // value={employee.Name || ""}
+                placeholder="กรุณากรอกรหัสพนักงาน"
+                value={employee.Employee_number || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -192,12 +218,12 @@ function EmployeeCreate() {
             <p>บัตรประจำตัวประชาชน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Personal_ID"
+                id="Personal_id"
                 variant="outlined"
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกบัตรประชาชน"
-                // value={employee.Personal_ID || ""}
+                value={employee.Personal_id || ""}
                 onChange={handleInputChange}
                 inputProps={{maxLength :13}}
               />
@@ -208,12 +234,12 @@ function EmployeeCreate() {
             <p>ชื่อ</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Name"
+                id="FirstName"
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกชื่อ-สกุล"
-                // value={employee.Name || ""}
+                placeholder="กรุณากรอกชื่อ"
+                value={employee.FirstName || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -223,12 +249,12 @@ function EmployeeCreate() {
             <p>นามสกุล</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Name"
+                id="LastName"
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกชื่อ-สกุล"
-                // value={employee.Name || ""}
+                placeholder="กรุณากรอกนามสกุล"
+                value={employee.LastName || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -243,7 +269,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสผ่าน"
-                // value={employee.Password || ""}
+                value={employee.Password || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -253,12 +279,12 @@ function EmployeeCreate() {
             <p>เบอร์โทรศัพท์</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Email"
+                id="Phone"
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกอีเมลล์"
-                // value={employee.Email || ""}
+                placeholder="กรุณากรอกเบอร์โทรศัพท์"
+                value={employee.Phone || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -268,12 +294,12 @@ function EmployeeCreate() {
             <p>ที่อยู่</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Email"
+                id="House_no"
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกอีเมลล์"
-                // value={employee.Email || ""}
+                placeholder="กรุณากรอกที่อยู่"
+                value={employee.House_no || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -284,7 +310,7 @@ function EmployeeCreate() {
               <p>จังหวัด</p>
               <Select
                 native
-                // value={employee.ProvinceID + ""}
+                value={employee.ProvinceID + ""}
                 onChange={handleChange}
                 inputProps={{
                   name: "ProvinceID",
@@ -293,11 +319,11 @@ function EmployeeCreate() {
                 <option aria-label="None" value="">
                   กรุณาเลือกจังหวัด
                 </option>
-                {/* {provinces.map((item: ProvincesInterface) => (
+                {province.map((item: ProvinceInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Name}
+                    {item.Province_name}
                   </option>
-                ))} */}
+                ))}
               </Select>
             </FormControl>
         </Grid>
@@ -307,20 +333,20 @@ function EmployeeCreate() {
               <p>อำเภอ</p>
               <Select
                 native
-                // value={employee.ProvinceID + ""}
+                value={employee.DistrictID + ""}
                 onChange={handleChange}
                 inputProps={{
-                  name: "ProvinceID",
+                  name: "DistrictID",
                 }}
               >
                 <option aria-label="None" value="">
-                  กรุณาเลือกจังหวัด
+                  กรุณาเลือกอำเภอ
                 </option>
-                {/* {provinces.map((item: ProvincesInterface) => (
+                {district.map((item: DistrictInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Name}
+                    {item.District_name}
                   </option>
-                ))} */}
+                ))}
               </Select>
             </FormControl>
         </Grid>
@@ -330,20 +356,20 @@ function EmployeeCreate() {
               <p>ตำบล</p>
               <Select
                 native
-                // value={employee.ProvinceID + ""}
+                value={employee.Sub_districtID + ""}
                 onChange={handleChange}
                 inputProps={{
-                  name: "ProvinceID",
+                  name: "SubdistrictID",
                 }}
               >
                 <option aria-label="None" value="">
-                  กรุณาเลือกจังหวัด
+                  กรุณาเลือกตำบล
                 </option>
-                {/* {provinces.map((item: ProvincesInterface) => (
+                {subdistrict.map((item: Sub_districtInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Name}
+                    {item.Sub_district_name}
                   </option>
-                ))} */}
+                ))}
               </Select>
             </FormControl>
         </Grid>
@@ -353,7 +379,7 @@ function EmployeeCreate() {
               <p>เพศ</p>
               <Select
                 native
-                // value={employee.GenderID + ""}
+                value={employee.GenderID + ""}
                 onChange={handleChange}
                 inputProps={{
                   name: "GenderID",
@@ -362,11 +388,11 @@ function EmployeeCreate() {
                 <option aria-label="None" value="">
                   กรุณาเลือกเพศ
                 </option>
-                {/* {gender.map((item: GendersInterface) => (
+                {gender.map((item: GenderInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.GENDER_NAME}
+                    {item.Gender_name}
                   </option>
-                ))} */}
+                ))}
               </Select>
             </FormControl>
           </Grid>
@@ -377,20 +403,20 @@ function EmployeeCreate() {
               <p>ตำแหน่งงาน</p>
               <Select
                 native
-                // value={employee.Job_PositionID + ""}
+                value={employee.RoleID + ""}
                 onChange={handleChange}
                 inputProps={{
-                  name: "Job_PositionID",
+                  name: "RoleID",
                 }}
               >
                 <option aria-label="None" value="">
-                  กรุณาเลือกตำแหน่งงาน
+                  กรุณาเลือกบทบาท
                 </option>
-                {/* {job_position.map((item: Job_positionsInterface) => (
+                {role.map((item: RoleInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Name}
+                    {item.Role_name}
                   </option>
-                ))} */}
+                ))}
               </Select>
             </FormControl>
           </Grid>
