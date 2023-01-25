@@ -27,6 +27,8 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import EmployeeList from "./components/employee/EmployeeList";
 import EmployeeCreate from "./components/employee/EmployeeCreate";
 import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
+import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleHome";
+import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -205,6 +207,8 @@ function App() {
                 <Route path="/employees" element={<EmployeeList />} />
                 <Route path="/employee/create" element={<EmployeeCreate />} />
                 <Route path="/PatientSchedule/create" element={<PatientSchedule />} />
+                <Route path="/PatientSchedule/home" element={<PatientScheduleHome />} />
+                <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
               </Routes>
             </Container>
           </Box>

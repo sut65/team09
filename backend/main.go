@@ -5,6 +5,7 @@ import (
 	medicaldevice "github.com/sut65/team09/controller/medicaldevice"
 	patienschedule "github.com/sut65/team09/controller/patienschedule"
 	controller "github.com/sut65/team09/controller/treatment"
+	docterschedule "github.com/sut65/team09/controller/docterschedule"
 	"github.com/sut65/team09/entity"
 )
 
@@ -66,6 +67,28 @@ func main() {
 
 	r.GET("/types", medicaldevice.ListTypes)
 	r.GET("/ttype/:id", medicaldevice.GetType)
+
+	//Daywork Routes
+	router.GET("/dayworks", docterschedule.ListDayworks)
+	router.GET("/daywork/:id", docterschedule.GetDaywork)
+	router.POST("/dayworks", docterschedule.CreateDaywork)
+	router.PATCH("/dayworks", docterschedule.UpdateDaywork)
+	router.DELETE("/dayworks/:id", docterschedule.DeleteDaywork)
+
+	//Doctask Routes
+	router.GET("/doctasks", docterschedule.ListDoctasks)
+	router.GET("/doctask/:id", docterschedule.GetDoctask)
+	router.POST("/doctasks", docterschedule.CreateDoctask)
+	router.PATCH("/doctasks", docterschedule.UpdateDoctask)
+	router.DELETE("/doctasks/:id", docterschedule.DeleteDoctask)
+
+	//Dentist_Schedule
+	router.GET("/dentist_schedules", docterschedule.ListDentistSchedules)
+	router.GET("/dentist_schedules/:id", docterschedule.GetDentistSchedule)
+	router.POST("/dentist_schedules", docterschedule.CreateDentistSchedule)
+	router.PATCH("/dentist_schedules", docterschedule.UpdateDentistSchedules)
+	router.DELETE("/dentist_schedules/:id", docterschedule.DeleteDentistSchedule)
+
 
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)

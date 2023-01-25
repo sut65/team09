@@ -249,6 +249,8 @@ type Dentist struct {
 	Treatment []Treatment `gorm:"foreignkey:DentistID"`
 
 	Prescriptions 	[]Prescription `gorm:"foreignKey:DentistID"`
+	//โยงกับระบบจัดตารางงานแพทย์
+	Dentist_schedule	[]Dentist_schedule `gorm:"foreignKey:DentistID"`
 }
 
 // -----ระบบสั่งจ่ายยา-----
@@ -350,3 +352,28 @@ type Payment struct {
 	Payment_status	Payment_status
 }
 
+//ระบบจัดตารางงานแพทย์
+type Daywork struct {
+	gorm.Model
+	Day          string
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:DayworkID"`
+}
+
+type Doctask struct {
+	gorm.Model
+	Respon          string
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:ResponID"`
+}
+
+type Dentist_schedule struct {
+	gorm.Model
+	DayworkID *uint
+	Daywork	Daywork `gorm:"references:id"`
+
+	ResponID *uint
+	Doctask	Doctask `gorm:"foreignKey:ID;references:ResponID"`
+
+	DentistID	*uint
+	Dentist	Dentist `gorm:"references:id"`
+	TimeWork time.Time	
+}

@@ -15,21 +15,24 @@ import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 
 //import Interface
-import {ReasonInterface} from "../../models/IReason";
-import {PatienSceheduleInterface} from "../../models/IPatienSchedule";
+import {DayworkInterface } from "../../models/IDaywork";
+import {DoctaskInterface} from "../../models/IDoctask";
+import {DentistSceheduleInterface} from "../../models/IDentistScheduleInterface";
 
 import {
-    GetPatientSchedules,
-    GetReasons,
-    PatientSchedules,
+    GetDentistScehedules,
+    GetDoctasks,
+    DentistScehedules,
+    GetDayworks,
 } from "../../services/HttpClientService";
 
 
 
-function PatientSchedule() {
+function DentistScheduleCreate() {
 
-    const [reasons, setReasons] = useState<ReasonInterface[]>([]);
-    const [patien_schedule, setPatienSchedule] = useState<PatienSceheduleInterface>({
+    const [dayworks, setDayworks] = useState<DayworkInterface []>([]);
+    const [doctasks, setDoctasks] = useState<DoctaskInterface []>([]);
+    const [dentist_schedule, setDentistScehedule] = useState<DentistSceheduleInterface>({
     
     });
 
@@ -48,27 +51,34 @@ function PatientSchedule() {
     };
 
     const handleChange = (event: SelectChangeEvent) => {
-        const name = event.target.name as keyof typeof patien_schedule;
-        setPatienSchedule({
-            ...patien_schedule,
+        const name = event.target.name as keyof typeof dentist_schedule;
+        setDentistScehedule({
+            ...dentist_schedule,
             [name]: event.target.value,
         });
     };
 
-    const getReasons = async () => {
-        let res = await GetReasons();
-        patien_schedule.ReasonID = res.ID;
+    const getDoctasks = async () => {
+        let res = await GetDoctasks();
+        dentist_schedule.ResponID = res.ID;
         if (res) {
-            setReasons(res);
+            setDoctasks(res);
         }
     };
-
     useEffect(() => {
-        getReasons();
+        getDoctasks();
     }, []);
-
-
-
+    const getDayworks = async () => {
+        let res = await GetDayworks();
+        dentist_schedule.DayID = res.ID;
+        if (res) {
+            setDayworks(res);
+        }
+    };
+    useEffect(() => {
+        getDayworks();
+    }, []);
+    
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -80,20 +90,17 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
-useEffect(() => {
-    getReasons();
-   
-}, []);
 const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
     return val;
 };
 async function submit() {
     let data = {
-        ReasonID: convertType(patien_schedule.ReasonID)
+        ResponID: convertType(dentist_schedule.ResponID),
+        DayID: convertType(dentist_schedule.DayID),
     };
     console.log(data);
-    let res = await PatientSchedules(data);
+    let res = await DentistScehedules(data);
     if (res) {
         setSuccess(true);
     } else {
@@ -118,30 +125,30 @@ async function submit() {
                             paddingY: 2,
                         }}
                     >
-                        <h2>Patient Schedule Create</h2>
+                        <h2>Dentist Schedule Create</h2>
                     </Box>
                     <hr />
                     <Grid container spacing={1} sx={{ padding: 2 }}>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
                         <FormControl sx = {{width: 400}}>
-                        <InputLabel id="demo-simple-select-label">ชื่อ-สกุล</InputLabel>
+                        <InputLabel id="demo-simple-select-label">งานที่รับผิดชอบ</InputLabel>
                                 <Select
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
+                                    value={dentist_schedule.ResponID + ""}
                                     onChange={handleChange}
-                                    label= "Reason"
+                                    label= "งานที่รับผิดชอบ"
                                     inputProps={{
-                                        name: "ReasonID",
+                                        name: "ResponID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
-                                    กรุณาเลือกผู้ป่วย
+                                    กรุณาเลือกงานที่รับผิดชอบ
                                   </option>
-                                    {reasons.map((item: ReasonInterface) => (
+                                    {doctasks.map((item: DoctaskInterface) => (
                                         <option value={item.ID} key={item.ID}>
-                                            {item.Method}
+                                            {item.Respon}
                                         </option>
                                     ))}
                                 </Select>
@@ -149,104 +156,37 @@ async function submit() {
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}> 
                         <FormControl sx = {{width: 400}}>
-                        <InputLabel id="demo-simple-select-label">ทันตแพทย์</InputLabel>
+                        <InputLabel id="demo-simple-select-label">วันเข้าทำงาน</InputLabel>
                                 <Select
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
+                                    value={dentist_schedule.DayID + ""}
                                     onChange={handleChange}
-                                    label= "Reason"
+                                    label= "วันเข้าทำงาน"
                                     inputProps={{
-                                        name: "ReasonID",
+                                        name: "DayID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
-                                    กรุณาเลือกแพทย์ผู้รับผิดชอบ
+                                    กรุณาเลือกวันที่เข้าทำงาน
                                   </option>
-                                    {reasons.map((item: ReasonInterface) => (
+                                    {dayworks.map((item: DayworkInterface) => (
                                         <option value={item.ID} key={item.ID}>
-                                            {item.Method}
-                                        </option>
-                                    ))}
-                                </Select>
-                            </FormControl>
-
-                        </Grid>
-                        <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        <FormControl sx = {{width: 400}}>
-                        <InputLabel id="demo-simple-select-label">หมายเหตุ</InputLabel>
-                                <Select
-                                    native
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
-                                    onChange={handleChange}
-                                    label= "Reason"
-                                    inputProps={{
-                                        name: "ReasonID",
-                                    }}
-                                >
-                                  <option aria-label="None" value="">
-                                    กรุณาเลือกเหตุผล
-                                  </option>
-                                    {reasons.map((item: ReasonInterface) => (
-                                        <option value={item.ID} key={item.ID}>
-                                            {item.Method}
+                                            {item.Day}
                                         </option>
                                     ))}
                                 </Select>
                             </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        <FormControl sx = {{width: 400}}>
-                        <InputLabel id="demo-simple-select-label">นัดไปห้องตรวจ</InputLabel>
-                                <Select
-                                    native
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
-                                    onChange={handleChange}
-                                    label= "Reason"
-                                    inputProps={{
-                                        name: "ReasonID",
-                                    }}
-                                >
-                                  <option aria-label="None" value="">
-                                    กรุณาเลือกห้องตรวจ
-                                  </option>
-                                    {reasons.map((item: ReasonInterface) => (
-                                        <option value={item.ID} key={item.ID}>
-                                            {item.Method}
-                                        </option>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                       
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        <FormControl sx = {{width: 400}}>
-                        <InputLabel id="demo-simple-select-label">ประเภทการรักษา</InputLabel>
-                                <Select
-                                    native
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
-                                    onChange={handleChange}
-                                    label= "Reason"
-                                    inputProps={{
-                                        name: "ReasonID",
-                                    }}
-                                >
-                                  <option aria-label="None" value="">
-                                    กรุณาเลือกประภทการรักษา
-                                  </option>
-                                    {reasons.map((item: ReasonInterface) => (
-                                        <option value={item.ID} key={item.ID}>
-                                            {item.Method}
-                                        </option>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                        
+                        </Grid>
+                        <Grid xs={6}  sx={{ padding: 1.3 }}>
+                        
                         </Grid>
                         <Grid xs={3.25} sx={{ padding: 1.3 }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -298,4 +238,4 @@ const top100Films = [
 
 
 
-export default PatientSchedule;
+export default DentistScheduleCreate;
