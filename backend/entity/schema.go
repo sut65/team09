@@ -53,7 +53,7 @@ type Employee struct {
 	Employee_number string `gorm:"uniqueIndex"`
 	FirstName       string
 	LastName        string
-	Personal_id     uint64 `gorm:"uniqueIndex"`
+	Personal_id     string `gorm:"uniqueIndex"`
 	Password        string `gorm:"uniqueIndex"`
 	Phone           string
 	House_no        string
