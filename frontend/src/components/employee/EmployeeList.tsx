@@ -7,26 +7,32 @@ import Box from "@mui/material/Box";
 import { EmployeeInterface } from "../../models/IEmployee";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
-// import { GetEmployees } from "../services/HttpClientService";
+import { GetEmployee } from "../../services/HttpClientService";
 
 function Employees() {
   const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
 
   const getEmployes = async () => {
-    // let res = await GetEmployees();
-    // if (res) {
-    //   setEmployees(res);
-    // }
+    let res = await GetEmployee();
+    if (res) {
+      setEmployees(res);
+    }
   };
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 50 },
-    { field: "Name", headerName: "ชื่อ-สกุล", width: 250,  valueFormatter: (params) => params.value.Name,},
-    { field: "Email", headerName: "อีเมลล์", width: 250 , valueFormatter: (params) => params.value.Email,},  
-    { field: "Gender", headerName: "เพศ", width: 100 , valueFormatter: (params) => params.value.GENDER_NAME,},    
-    { field: "Job_Position", headerName: "ตำแหน่งงาน", width: 200 , valueFormatter: (params) => params.value.Name,}, 
-    { field: "Province", headerName: "จังหวัด", width: 200  ,valueFormatter: (params) => params.value.Name,},    
-       
+    { field: "Employee_number", headerName: "รหัสพนักงาน", width: 250,  valueFormatter: (params) => params.value.Employee_number,},
+    { field: "FirstName", headerName: "ชื่อ", width: 250,  valueFormatter: (params) => params.value.FirstName,},
+    { field: "LastName", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
+    { field: "Personal_id", headerName: "เลขประจำตัวประชาชน", width: 250,  valueFormatter: (params) => params.value.Personal_id,},
+    { field: "Password", headerName: "รหัสผ่าน", width: 250,  valueFormatter: (params) => params.value.Password,},
+    { field: "Phone", headerName: "เบอร์โทรศัพท์", width: 250,  valueFormatter: (params) => params.value.Phone,},
+    { field: "House_no", headerName: "ที่อยู่", width: 250,  valueFormatter: (params) => params.value.House_no,},
+    { field: "Sub_district", headerName: "ตำบล", width: 250,  valueFormatter: (params) => params.value.Sub_district_name,},
+    { field: "District", headerName: "อำเภอ", width: 250,  valueFormatter: (params) => params.value.District_name,},
+    { field: "Province", headerName: "จังหวัด", width: 250,  valueFormatter: (params) => params.value.Province_name,},
+    { field: "Gender", headerName: "เพศ", width: 100 , valueFormatter: (params) => params.value.Gender_name,},       
+    { field: "Role", headerName: "บทบาท", width: 250,  valueFormatter: (params) => params.value.Role_name,},
   ];
 
   useEffect(() => {
