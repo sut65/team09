@@ -53,9 +53,9 @@ type Employee struct {
 	Employee_number string `gorm:"uniqueIndex"`
 	FirstName       string
 	LastName        string
-	Personal_id     string `gorm:"uniqueIndex"`
+	Personal_id     uint64 `gorm:"uniqueIndex"`
 	Password        string `gorm:"uniqueIndex"`
-	Phone           uint
+	Phone           string
 	House_no        string
 
 	//Sub_districtID ทำหน้าที่เป็น FK
@@ -75,7 +75,6 @@ type Employee struct {
 	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
 	//โยงกับระบบนัดผู้ป่วย
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:EmployeeID"`
-	Payments        []Payment	`gorm:"foreignKey:EmployeeID"`
 }
 
 // -----ระบบผู้ป่วย--------
@@ -112,14 +111,10 @@ type Patient struct {
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
 
+	Prescriptions []Prescription `gorm:"foreignKey:PatientID"`
+
 	//สำหรับ entity การรักษาดึงไป
 	Treatment []Treatment `gorm:"foreignkey:PatientID"`
-
-	//ระบบนัดผู้ป่วย ดึงไป
-	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
-
-	Prescriptions 	[]Prescription `gorm:"foreignKey:PatientID"`
-	Payments        []Payment `gorm:"foreignKey:PatientID"`
 }
 
 // -----ระบบเครื่องมือแพทย์-----
@@ -248,7 +243,7 @@ type Dentist struct {
 	//สำหรับ entity การรักษาดึงไป
 	Treatment []Treatment `gorm:"foreignkey:DentistID"`
 
-	Prescriptions 	[]Prescription `gorm:"foreignKey:DentistID"`
+	Prescriptions []Prescription `gorm:"foreignKey:DentistID"`
 }
 
 // -----ระบบสั่งจ่ายยา-----
@@ -260,9 +255,9 @@ type Medicine_status struct {
 
 type Medicine struct {
 	gorm.Model
-	Medicine_name 	string
-	Medicine_price	uint
-	Prescriptions []Prescription `gorm:"foreignKey:MedicineID"`
+	Medicine_name  string
+	Medicine_price uint
+	Prescriptions  []Prescription `gorm:"foreignKey:MedicineID"`
 }
 
 type Prescription struct {
@@ -332,21 +327,20 @@ type Treatment struct {
 type Payment_status struct {
 	gorm.Model
 	Payment_status_name string
-	Payments        []Payment `gorm:"foreignKey:Payment_statusID"`
+	Payments            []Payment `gorm:"foreignKey:Payment_statusID"`
 }
 
 type Payment struct {
 	gorm.Model
-	Total_price	uint
+	Total_price     uint
 	DateTimePayment time.Time
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID *uint
-	Patient		Patient
+	Patient   Patient
 	//EmployeeID 	ทำหน้าที่เป็น FK
 	EmployeeID *uint
-	Employee	Employee
+	Employee   Employee
 	//Payment_statusID 	ทำหน้าที่เป็น FK
 	Payment_statusID *uint
-	Payment_status	Payment_status
+	Payment_status   Payment_status
 }
-
