@@ -53,6 +53,11 @@ func SetupDatabase() {
 		&Medicine{},
 		&Medicine_status{},
 		&Prescription{},
+	    //DoctorSchedule
+		&Daywork{},
+		&Doctask{},
+		&Dentist_schedule{},
+		
 	)
 
 	db = database
@@ -238,4 +243,22 @@ func SetupDatabase() {
 		DateTimePrescription: DateTimePrescriptionA,
 	}
 	db.Model(&Prescription{}).Create(&Prescription1)
+
+	//จำลองข้อมูลระบบจัดตารางงานแพทย์
+var day = []Daywork{
+	{Day: "วันจันทร์"},
+	{Day: "วันอังคาร"},
+	{Day: "วันพุธ"},
+	{Day: "วันพฤหัสบดี"},
+} 
+db.CreateInBatches(day, 4)
+
+var task = []Doctask{
+	{Respon: "ตรวจผู้ป่วย"},
+	{Respon: "เข้าเวร"},
+	{Respon: "ตรวจสอบอุปกรณ์"},
+	{Respon: "ทำการรักษา"},
+} 
+db.CreateInBatches(task, 4)
 }
+
