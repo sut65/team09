@@ -5,7 +5,6 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
-import Autocomplete from '@mui/material/Autocomplete';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -13,6 +12,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from '@mui/material/InputLabel';
+import Button from '@mui/material/Button';
 
 //import Interface
 import {ReasonInterface} from "../../models/IReason";
@@ -30,7 +30,7 @@ function PatientSchedule() {
 
     const [reasons, setReasons] = useState<ReasonInterface[]>([]);
     const [patien_schedule, setPatienSchedule] = useState<PatienSceheduleInterface>({
-     
+    
     });
 
     const [success, setSuccess] = useState(false);
@@ -84,7 +84,22 @@ useEffect(() => {
     getReasons();
    
 }, []);
-
+const convertType = (data: string | number | undefined) => {
+    let val = typeof data === "string" ? parseInt(data) : data;
+    return val;
+};
+async function submit() {
+    let data = {
+        ReasonID: convertType(patien_schedule.ReasonID)
+    };
+    console.log(data);
+    let res = await PatientSchedules(data);
+    if (res) {
+        setSuccess(true);
+    } else {
+        setError(true);
+    }
+}
 
 
 
@@ -100,27 +115,30 @@ useEffect(() => {
                         sx={{
                             marginTop: 2,
                             paddingX: 2,
-                            paddingY: 4,
+                            paddingY: 2,
                         }}
                     >
-                        <h1>Patient Schedule</h1>
+                        <h2>Patient Schedule Create</h2>
                     </Box>
                     <hr />
-                    <Grid container spacing={1}>
-                        <Grid xs={6}>
-                        <FormControl fullWidth variant="outlined">
-                                <InputLabel id="demo-simple-select-label">Reason</InputLabel>
+                    <Grid container spacing={1} sx={{ padding: 2 }}>
+                        <Grid xs={6}  sx={{ padding: 1.3 }}>
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">ชื่อ-สกุล</InputLabel>
                                 <Select
                                     native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
                                     value={patien_schedule.ReasonID + ""}
                                     onChange={handleChange}
+                                    label= "Reason"
                                     inputProps={{
-                                        name: "Reason",
+                                        name: "ReasonID",
                                     }}
                                 >
-                                    <option aria-label="None" value="">
-
-                                    </option>
+                                  <option aria-label="None" value="">
+                                    กรุณาเลือกผู้ป่วย
+                                  </option>
                                     {reasons.map((item: ReasonInterface) => (
                                         <option value={item.ID} key={item.ID}>
                                             {item.Method}
@@ -129,26 +147,112 @@ useEffect(() => {
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid xs={6}> 
-    
+                        <Grid xs={6}  sx={{ padding: 1.3 }}> 
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">ทันตแพทย์</InputLabel>
+                                <Select
+                                    native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={patien_schedule.ReasonID + ""}
+                                    onChange={handleChange}
+                                    label= "Reason"
+                                    inputProps={{
+                                        name: "ReasonID",
+                                    }}
+                                >
+                                  <option aria-label="None" value="">
+                                    กรุณาเลือกแพทย์ผู้รับผิดชอบ
+                                  </option>
+                                    {reasons.map((item: ReasonInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.Method}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
 
                         </Grid>
-                        <Grid xs={6}>
-                        
+                        <Grid xs={6}  sx={{ padding: 1.3 }}>
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">เหตุผล</InputLabel>
+                                <Select
+                                    native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={patien_schedule.ReasonID + ""}
+                                    onChange={handleChange}
+                                    label= "Reason"
+                                    inputProps={{
+                                        name: "ReasonID",
+                                    }}
+                                >
+                                  <option aria-label="None" value="">
+                                    กรุณาเลือกเหตุผล
+                                  </option>
+                                    {reasons.map((item: ReasonInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.Method}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
-                        <Grid xs={6}>
-                       
+                        <Grid xs={6}  sx={{ padding: 1.3 }}>
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">นัดไปห้องตรวจ</InputLabel>
+                                <Select
+                                    native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={patien_schedule.ReasonID + ""}
+                                    onChange={handleChange}
+                                    label= "Reason"
+                                    inputProps={{
+                                        name: "ReasonID",
+                                    }}
+                                >
+                                  <option aria-label="None" value="">
+                                    กรุณาเลือกห้องตรวจ
+                                  </option>
+                                    {reasons.map((item: ReasonInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.Method}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
-                        <Grid xs={6} >
-                       
+                        <Grid xs={6}  sx={{ padding: 1.3 }}>
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">ประเภทการรักษา</InputLabel>
+                                <Select
+                                    native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={patien_schedule.ReasonID + ""}
+                                    onChange={handleChange}
+                                    label= "Reason"
+                                    inputProps={{
+                                        name: "ReasonID",
+                                    }}
+                                >
+                                  <option aria-label="None" value="">
+                                    กรุณาเลือกประภทการรักษา
+                                  </option>
+                                    {reasons.map((item: ReasonInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.Method}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
-                        <Grid xs={3.25}>
-                        </Grid>
-                        <Grid xs={2.75}>
+                        <Grid xs={3.25} sx={{ padding: 1.3 }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker 
                             renderInput={(props) => <TextField {...props} />}
-                            label="DateTimePicker"
+                            label="วันนัดเข้าพบแพทย์"
                             value={value}
                             onChange={(newValue) => {
                             setValue(newValue);
@@ -156,6 +260,11 @@ useEffect(() => {
                             
                         />
                         </LocalizationProvider>
+                        </Grid>
+                        <Grid xs={2.75} sx={{ padding: 1.3 }}>
+                        <Button sx={{ paddingY: 1.7, }} fullWidth variant="outlined" size="large" onClick={submit}>
+                                บันทึกข้อมูล
+                            </Button>
                         
                         </Grid>
                      

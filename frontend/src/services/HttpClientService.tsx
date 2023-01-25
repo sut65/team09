@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PatienSceheduleInterface } from "../interfaces/IPatienSchedule";
+import { PatienSceheduleInterface } from "../models/IPatienSchedule";
 const apiUrl = "http://localhost:3001";
 
 async function GetPatientSchedules() {

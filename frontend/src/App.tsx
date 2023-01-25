@@ -26,6 +26,7 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 // import Home from "./components/Home";
 import EmployeeList from "./components/employee/EmployeeList";
 import EmployeeCreate from "./components/employee/EmployeeCreate";
+import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -203,6 +204,7 @@ function App() {
                 {/* <Route path="/" element={<Home />} /> */}
                 <Route path="/employees" element={<EmployeeList />} />
                 <Route path="/employee/create" element={<EmployeeCreate />} />
+                <Route path="/PatientSchedule/create" element={<PatientSchedule />} />
               </Routes>
             </Container>
           </Box>
