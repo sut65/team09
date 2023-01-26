@@ -101,9 +101,9 @@ type Patient struct {
 	FirstName          string
 	LastName           string
 	Personal_id        string `gorm:"uniqueIndex"`
-	Old                uint
-	Weight             uint
-	Height             uint
+	Old                uint8
+	Weight             uint8
+	Height             uint8
 	Underlying_disease string
 	Drug_alergy        string
 	House_no           string
@@ -263,10 +263,9 @@ type Dentist struct {
 	//สำหรับ entity การรักษาดึงไป
 	Treatment []Treatment `gorm:"foreignkey:DentistID"`
 
-
-	Prescriptions 	[]Prescription `gorm:"foreignKey:DentistID"`
+	Prescriptions []Prescription `gorm:"foreignKey:DentistID"`
 	//โยงกับระบบจัดตารางงานแพทย์
-	Dentist_schedule	[]Dentist_schedule `gorm:"foreignKey:DentistID"`
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:DentistID"`
 }
 
 // -----ระบบสั่งจ่ายยา-----
@@ -368,28 +367,28 @@ type Payment struct {
 	Payment_status   Payment_status
 }
 
-//ระบบจัดตารางงานแพทย์
+// ระบบจัดตารางงานแพทย์
 type Daywork struct {
 	gorm.Model
-	Day          string
+	Day              string
 	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:DayworkID"`
 }
 
 type Doctask struct {
 	gorm.Model
-	Respon          string
+	Respon           string
 	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:ResponID"`
 }
 
 type Dentist_schedule struct {
 	gorm.Model
 	DayworkID *uint
-	Daywork	Daywork `gorm:"references:id"`
+	Daywork   Daywork `gorm:"references:id"`
 
 	ResponID *uint
-	Doctask	Doctask `gorm:"foreignKey:ID;references:ResponID"`
+	Doctask  Doctask `gorm:"foreignKey:ID;references:ResponID"`
 
-	DentistID	*uint
-	Dentist	Dentist `gorm:"references:id"`
-	TimeWork time.Time	
+	DentistID *uint
+	Dentist   Dentist `gorm:"references:id"`
+	TimeWork  time.Time
 }

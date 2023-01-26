@@ -53,11 +53,10 @@ func SetupDatabase() {
 		&Medicine{},
 		&Medicine_status{},
 		&Prescription{},
-	    //DoctorSchedule
+		//DoctorSchedule
 		&Daywork{},
 		&Doctask{},
 		&Dentist_schedule{},
-		
 	)
 
 	db = database
@@ -207,11 +206,73 @@ func SetupDatabase() {
 		Role:            role2,
 	}
 	db.Model(&Employee{}).Create(&em2)
-	///////////////ข้อมูล ทดสอบ///////////
-	Patient1 := Patient{
-		FirstName: "อยากโดนเข็ม",
+	//----------- ผู้ป่วย --------
+	//symptom
+	symp1 := Symptom{
+		Symptom_name: "have a toothache",
 	}
-	db.Model(&Patient{}).Create(&Patient1)
+	db.Model(&Symptom{}).Create(&symp1)
+
+	symp2 := Symptom{
+		Symptom_name: "gum pain",
+	}
+	db.Model(&Symptom{}).Create(&symp2)
+
+	symp3 := Symptom{
+		Symptom_name: "Other",
+	}
+	db.Model(&Symptom{}).Create(&symp3)
+
+	//patient
+	patient1 := Patient{
+		FirstName:          "Kaoru",
+		LastName:           "Saki",
+		Personal_id:        "1162567945367",
+		Old:                23,
+		Weight:             60,
+		Height:             170,
+		Underlying_disease: "-",
+		Drug_alergy:        "-",
+		House_no:           "112",
+		Sub_districtID:     new(uint),
+		Sub_district:       subdistrict1,
+		DistrictID:         new(uint),
+		District:           district3,
+		ProvinceID:         new(uint),
+		Province:           province2,
+		GenderID:           new(uint),
+		Gender:             gender2,
+		SymptomID:          new(uint),
+		Symptom:            symp1,
+		EmployeeID:         new(uint),
+		Employee:           em1,
+	}
+	db.Model(&Patient{}).Create(&patient1)
+
+	patient2 := Patient{
+		FirstName:          "Miya",
+		LastName:           "Takaru",
+		Personal_id:        "1234343526782",
+		Old:                25,
+		Weight:             90,
+		Height:             190,
+		Underlying_disease: "-",
+		Drug_alergy:        "-",
+		House_no:           "56",
+		Sub_districtID:     new(uint),
+		Sub_district:       subdistrict1,
+		DistrictID:         new(uint),
+		District:           district3,
+		ProvinceID:         new(uint),
+		Province:           province2,
+		GenderID:           new(uint),
+		Gender:             gender1,
+		SymptomID:          new(uint),
+		Symptom:            symp2,
+		// EmployeeID:         new(uint),
+		Employee: em1,
+	}
+	db.Model(&Patient{}).Create(&patient2)
 
 	///////////////ข้อมูล ทดสอบ///////////
 	Dentist1 := Dentist{
@@ -238,27 +299,26 @@ func SetupDatabase() {
 	Prescription1 := Prescription{
 		Medicine:             Medicine1,
 		Medicine_status:      Medicine_status1,
-		Patient:              Patient1,
+		Patient:              patient1,
 		Dentist:              Dentist1,
 		DateTimePrescription: DateTimePrescriptionA,
 	}
 	db.Model(&Prescription{}).Create(&Prescription1)
 
 	//จำลองข้อมูลระบบจัดตารางงานแพทย์
-var day = []Daywork{
-	{Day: "วันจันทร์"},
-	{Day: "วันอังคาร"},
-	{Day: "วันพุธ"},
-	{Day: "วันพฤหัสบดี"},
-} 
-db.CreateInBatches(day, 4)
+	var day = []Daywork{
+		{Day: "วันจันทร์"},
+		{Day: "วันอังคาร"},
+		{Day: "วันพุธ"},
+		{Day: "วันพฤหัสบดี"},
+	}
+	db.CreateInBatches(day, 4)
 
-var task = []Doctask{
-	{Respon: "ตรวจผู้ป่วย"},
-	{Respon: "เข้าเวร"},
-	{Respon: "ตรวจสอบอุปกรณ์"},
-	{Respon: "ทำการรักษา"},
-} 
-db.CreateInBatches(task, 4)
+	var task = []Doctask{
+		{Respon: "ตรวจผู้ป่วย"},
+		{Respon: "เข้าเวร"},
+		{Respon: "ตรวจสอบอุปกรณ์"},
+		{Respon: "ทำการรักษา"},
+	}
+	db.CreateInBatches(task, 4)
 }
-
