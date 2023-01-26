@@ -1,9 +1,10 @@
-package patienschedule
+package controller
 
 import (
-	"github.com/sut65/team09/entity"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sut65/team09/entity"
 )
 
 func CreateReason(c *gin.Context) {

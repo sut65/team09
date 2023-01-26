@@ -25,6 +25,8 @@ type Gender struct {
 type Province struct {
 	gorm.Model
 	Province_name string
+	Employees     []Employee `gorm:"foreignKey:ProvinceID"`
+	Patients      []Patient  `gorm:"foreignKey: ProvinceID"`
 	Districts     []District `gorm:"foreignKey:ProvinceID"`
 	Dentists      []Dentist  `gorm:"foreignKey:ProvinceID"`
 }
@@ -35,6 +37,8 @@ type District struct {
 	//ProvinceID ทำหน้าที่เป็น FK
 	ProvinceID    *uint
 	Province      Province       `gorm:"references:id"`
+	Employees     []Employee     `gorm:"foreignKey:DistrictID"`
+	Patients      []Patient      `gorm:"foreignKey:DistrictID"`
 	Sub_districts []Sub_district `gorm:"foreignKey:DistrictID"`
 }
 
@@ -51,15 +55,24 @@ type Sub_district struct {
 type Employee struct {
 	gorm.Model
 	Employee_number string `gorm:"uniqueIndex"`
-	Employee_name   string
+	FirstName       string
+	LastName        string
 	Personal_id     string `gorm:"uniqueIndex"`
 	Password        string `gorm:"uniqueIndex"`
-	Phone           uint
+	Phone           string
 	House_no        string
 
 	//Sub_districtID ทำหน้าที่เป็น FK
 	Sub_districtID *uint
 	Sub_district   Sub_district `gorm:"references:id"`
+
+	//DistrictID ทำหน้าที่เป็น FK
+	DistrictID *uint
+	District   District `gorm:"references:id"`
+
+	//ProvinceID ทำหน้าที่เป็น FK
+	ProvinceID *uint
+	Province   Province `gorm:"references:id"`
 
 	//GenderID ทำหน้าที่เป็น FK
 	GenderID *uint
@@ -85,11 +98,12 @@ type Symptom struct {
 
 type Patient struct {
 	gorm.Model
-	Patient_name       string
+	FirstName          string
+	LastName           string
 	Personal_id        string `gorm:"uniqueIndex"`
-	Old                uint
-	Weight             uint
-	Height             uint
+	Old                uint8
+	Weight             uint8
+	Height             uint8
 	Underlying_disease string
 	Drug_alergy        string
 	House_no           string
@@ -97,6 +111,14 @@ type Patient struct {
 	//Sub_districtID ทำหน้าที่เป็น FK
 	Sub_districtID *uint
 	Sub_district   Sub_district `gorm:"references:id"`
+
+	//DistrictID ทำหน้าที่เป็น FK
+	DistrictID *uint
+	District   District `gorm:"references:id"`
+
+	//ProvinceID ทำหน้าที่เป็น FK
+	ProvinceID *uint
+	Province   Province `gorm:"references:id"`
 
 	//GenderID ทำหน้าที่เป็น FK
 	GenderID *uint
@@ -178,12 +200,18 @@ type Reason struct {
 type Patien_schedule struct {
 	gorm.Model
 
+	PatientID *uint
+	Patient   Patient `gorm:"references:id"`
+
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
 
-	ReasonID  *uint
-	Reason    Reason `gorm:"references:id"`
-	Date_time time.Time
+	ReasonID *uint
+	Reason   Reason `gorm:"references:id"`
+
+	Type_Of_TreatmentID *uint
+	Type_Of_Treatment   Type_of_treatment `gorm:"references:id"`
+	Date_time           time.Time
 }
 
 // -----ระบบบันทึกเครื่องมือแพทย์-----
@@ -232,17 +260,26 @@ type Dentist struct {
 	ProvinceID *uint
 	Province   Province `gorm:"references:id"`
 
-	Prescriptions []Prescription `gorm:"foreignKey:DentistID"`
-
 	//สำหรับ entity การรักษาดึงไป
 	Treatment []Treatment `gorm:"foreignkey:DentistID"`
+
+	Prescriptions []Prescription `gorm:"foreignKey:DentistID"`
+	//โยงกับระบบจัดตารางงานแพทย์
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:DentistID"`
 }
 
 // -----ระบบสั่งจ่ายยา-----
+type Medicine_status struct {
+	gorm.Model
+	Medicine_status_name string
+	Prescriptions        []Prescription `gorm:"foreignKey:Medicine_statusID"`
+}
+
 type Medicine struct {
 	gorm.Model
-	Medicine_name string
-	Prescriptions []Prescription `gorm:"foreignKey:MedicineID"`
+	Medicine_name  string
+	Medicine_price uint
+	Prescriptions  []Prescription `gorm:"foreignKey:MedicineID"`
 }
 
 type Prescription struct {
@@ -254,6 +291,9 @@ type Prescription struct {
 	//DentistID 	ทำหน้าที่เป็น FK
 	DentistID *uint
 	Dentist   Dentist
+	//Medicine_statusID 	ทำหน้าที่เป็น FK
+	Medicine_statusID *uint
+	Medicine_status   Medicine_status
 	//MedicineID 	ทำหน้าที่เป็น FK
 	MedicineID *uint
 	Medicine   Medicine
@@ -265,6 +305,8 @@ type Type_of_treatment struct {
 	Type_of_treatment_name string
 	Price                  int
 	Treatment              []Treatment `gorm:"foreignkey:Type_Of_TreatmentID"`
+	//โยงกับระบบนัดผู้ป่วย
+	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
 }
 
 type Type_of_number_of_treatment struct {
@@ -301,4 +343,52 @@ type Treatment struct {
 	Treatment_time time.Time
 
 	Treatment_code string
+}
+
+// -----ระบบแจ้งยอดชำระ-----
+type Payment_status struct {
+	gorm.Model
+	Payment_status_name string
+	Payments            []Payment `gorm:"foreignKey:Payment_statusID"`
+}
+
+type Payment struct {
+	gorm.Model
+	Total_price     uint
+	DateTimePayment time.Time
+	//PatientID 	ทำหน้าที่เป็น FK
+	PatientID *uint
+	Patient   Patient
+	//EmployeeID 	ทำหน้าที่เป็น FK
+	EmployeeID *uint
+	Employee   Employee
+	//Payment_statusID 	ทำหน้าที่เป็น FK
+	Payment_statusID *uint
+	Payment_status   Payment_status
+}
+
+// ระบบจัดตารางงานแพทย์
+type Daywork struct {
+	gorm.Model
+	Day              string
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:DayworkID"`
+}
+
+type Doctask struct {
+	gorm.Model
+	Respon           string
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:ResponID"`
+}
+
+type Dentist_schedule struct {
+	gorm.Model
+	DayworkID *uint
+	Daywork   Daywork `gorm:"references:id"`
+
+	ResponID *uint
+	Doctask  Doctask `gorm:"foreignKey:ID;references:ResponID"`
+
+	DentistID *uint
+	Dentist   Dentist `gorm:"references:id"`
+	TimeWork  time.Time
 }
