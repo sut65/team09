@@ -2,11 +2,12 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	docterschedule "github.com/sut65/team09/controller/docterschedule"
 	employee "github.com/sut65/team09/controller/employee"
 	medicaldevice "github.com/sut65/team09/controller/medicaldevice"
 	patienschedule "github.com/sut65/team09/controller/patienschedule"
+	patient "github.com/sut65/team09/controller/patient"
 	controller "github.com/sut65/team09/controller/treatment"
-	docterschedule "github.com/sut65/team09/controller/docterschedule"
 	"github.com/sut65/team09/entity"
 )
 
@@ -20,6 +21,19 @@ func main() {
 	r.Use(CORSMiddleware())
 
 	router := r.Group("/")
+	//------- patient -------
+	router.GET("/symptoms", patient.ListSymptom)
+	router.GET("/symptoms/:id", patient.GetSymptom)
+	router.POST("/symptoms", patient.CreateSymptom)
+	router.PATCH("/symptoms", patient.UpdateSymptom)
+	router.DELETE("/symptoms/:id", patient.DeleteSymptom)
+
+	router.GET("/patients", patient.ListPatient)
+	router.GET("/patients/:id", patient.GetPatient)
+	router.POST("/patients", patient.CreatePatient)
+	router.PATCH("/patients", patient.UpdatePatient)
+	router.DELETE("/patients/:id", patient.DeletePatient)
+
 	//---------Employee-------------
 	router.GET("/roles", employee.ListRole)
 	router.GET("/roles/:id", employee.GetRole)
@@ -127,7 +141,6 @@ func main() {
 	router.POST("/dentist_schedules", docterschedule.CreateDentistSchedule)
 	router.PATCH("/dentist_schedules", docterschedule.UpdateDentistSchedules)
 	router.DELETE("/dentist_schedules/:id", docterschedule.DeleteDentistSchedule)
-
 
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)

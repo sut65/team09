@@ -151,6 +151,7 @@ function PaitentCreate() {
       ProvinceID: convertType(patient.ProvinceID),
       DistrictID: convertType(patient.DistrictID),
       Sub_districtID: convertType(patient.Sub_districtID),
+      EmployeeID: convertType(patient.EmployeeID),
     };
     console.log(data);
 
@@ -316,7 +317,7 @@ function PaitentCreate() {
             <p>การแพ้ยา</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Drug_alergy "
+                id="Drug_alergy"
                 variant="outlined"
                 type="string"
                 size="medium"
