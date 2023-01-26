@@ -62,6 +62,74 @@ const apiUrl = "http://localhost:3001";
 
 //   return res;
 // }
+//---------------- patient -----------------
+//------------------------------------------
+async function GetSymptom() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  let res = await fetch(`${apiUrl}/symptoms`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+
+async function GetPatient() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  let res = await fetch(`${apiUrl}/patients`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+
+  async function CreatePatient(data: EmployeeInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+
+    let res = await fetch(`${apiUrl}/patients`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+
+    return res;
+  }
 
 // --------------------------------Employee--------------------------------------
 // ---------------------------------------------------------------------------------
@@ -512,5 +580,8 @@ async function GetReasons() {
     GetStatus,
     GetMedicalDevice,
     CreateMedicalDevice,
+    GetPatient,
+    CreatePatient,
+    GetSymptom,
   };
 
