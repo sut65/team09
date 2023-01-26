@@ -4,6 +4,7 @@ import { PatienSceheduleInterface } from "../models/IPatienSchedule";
 import { EmployeeInterface } from "../models/IEmployee";
 import {DentistSceheduleInterface} from "../models/IDentistScheduleInterface";
 import { MedicalDeviceInterface } from "../models/IMedicaldevice";
+import { PatientInterface } from "../models/IPatient";
 
 const apiUrl = "http://localhost:3001";
 
@@ -108,7 +109,7 @@ async function GetPatient() {
   return res;
 }
 
-  async function CreatePatient(data: EmployeeInterface) {
+  async function CreatePatient(data: PatientInterface) {
     const requestOptions = {
       method: "POST",
       headers: {
