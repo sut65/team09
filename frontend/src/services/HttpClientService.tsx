@@ -3,6 +3,7 @@ import React from "react";
 import { PatienSceheduleInterface } from "../models/IPatienSchedule";
 import { EmployeeInterface } from "../models/IEmployee";
 import {DentistSceheduleInterface} from "../models/IDentistScheduleInterface";
+import { MedicalDeviceInterface } from "../models/IMedicaldevice";
 
 const apiUrl = "http://localhost:3001";
 
@@ -128,7 +129,7 @@ async function GetProvince() {
     });
 
   return res;
-}
+}  
 
 async function GetDistrict() {
   const requestOptions = {
@@ -151,6 +152,7 @@ async function GetDistrict() {
 
   return res;
 }
+  
 
 async function GetSubdistrict() {
   const requestOptions = {
@@ -246,6 +248,98 @@ async function GetEmployee() {
 // }
 
 // --------------------------------------------------------------
+
+//------MedicalDevice-------
+async function GetType() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  let res = await fetch(`${apiUrl}/types`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+
+async function GetStatus() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  let res = await fetch(`${apiUrl}/statuses`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+
+async function GetMedicalDevice() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  let res = await fetch(`${apiUrl}/medicaldevices`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+
+async function CreateMedicalDevice(data: MedicalDeviceInterface) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  let res = await fetch(`${apiUrl}/medicaldevices`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+//--------------------------------------------------------------------
+
 async function GetPatientSchedules() {
     const requestOptions = {
       method: "GET",
@@ -414,4 +508,9 @@ async function GetReasons() {
     GetEmployee,
     CreateEmployee,
     GetDayworks,
+    GetType, 
+    GetStatus,
+    GetMedicalDevice,
+    CreateMedicalDevice,
   };
+

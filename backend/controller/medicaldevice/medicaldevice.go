@@ -7,7 +7,7 @@ import (
 	"github.com/sut65/team09/entity"
 )
 
-// POST /MedicalDevice
+// POST /MedicalDevices
 func CreateMedicalDevice(c *gin.Context) {
 	var medicaldevice entity.MedicalDevice
 	var employee entity.Employee

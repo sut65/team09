@@ -29,6 +29,7 @@ import EmployeeCreate from "./components/employee/EmployeeCreate";
 import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
 import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleHome";
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
+import CreateMedicalDevice from "./components/MedialDevice/CreateMedicalDevice"
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -209,6 +210,7 @@ function App() {
                 <Route path="/PatientSchedule/create" element={<PatientSchedule />} />
                 <Route path="/PatientSchedule/home" element={<PatientScheduleHome />} />
                 <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
+                <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
               </Routes>
             </Container>
           </Box>

@@ -98,7 +98,7 @@ func main() {
 	r.GET("/medicaldevices", medicaldevice.ListMedicalDevices)
 	r.GET("/medicaldevice/:id", medicaldevice.GetMedicalDevice)
 	r.POST("/medicaldevices", medicaldevice.CreateMedicalDevice)
-	r.PATCH("/medicaldevices", medicaldevice.UpdateMedicalDevice)
+	r.PATCH("/medicaldevice", medicaldevice.UpdateMedicalDevice)
 	r.DELETE("/medicaldevice/:id", medicaldevice.DeleteMedicalDevice)
 
 	r.GET("/statuses", medicaldevice.ListStatuses)
