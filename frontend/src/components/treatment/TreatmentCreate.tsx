@@ -436,7 +436,7 @@ function TreatmentCreate() {
                     
 
                     <Grid item xs={12}>
-                        <Button component={RouterLink} to="/treatment_grid" variant="contained">
+                        <Button component={RouterLink} to="/treatmentlistshow" variant="contained">
                             <div className="good-font">
                                 กลับ
                             </div>

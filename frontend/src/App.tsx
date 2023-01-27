@@ -36,6 +36,9 @@ import PatientCreate from "./components/patient/PatientCreate";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import MedicalDeviceList from "./components/MedialDevice/MedicalDeviceList";
+import Treatment from "./components/Treatment";
+import TreatmentCreate from "./components/treatment/TreatmentCreate";
+import TreatmentUpdate from "./components/TreatmentUpdate";
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -100,6 +103,7 @@ const menu = [
   { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
+  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
 ];
 
 function App() {
@@ -224,6 +228,9 @@ function App() {
                 <Route path="/DentistSchedule/home" element={<DentistSchedule />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
                 <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
+                <Route path="/treatmentlistshow" element={<Treatment />} />
+                <Route path="/treatmentscreate" element={<TreatmentCreate />} />
+                <Route path="/treatmentupdate" element={<TreatmentUpdate />} />
               </Routes>
             </Container>
           </Box>
