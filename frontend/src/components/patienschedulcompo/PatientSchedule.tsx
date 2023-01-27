@@ -13,24 +13,38 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 //import Interface
 import {ReasonInterface} from "../../models/IReason";
 import {PatienSceheduleInterface} from "../../models/IPatienSchedule";
+import { EmployeeInterface } from "../../models/IEmployee";
+// import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
+import { PatientInterface } from "../../models/IPatient";
 
 import {
     GetPatientSchedules,
+    GetEmployee,
+    GetPatient,
     GetReasons,
     PatientSchedules,
 } from "../../services/HttpClientService";
-
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 
 function PatientSchedule() {
 
+    const [patients, setPatients] = useState<PatientInterface[]>([]);
+    const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
     const [reasons, setReasons] = useState<ReasonInterface[]>([]);
+    // const [type_of_treatmentses, setType_of_treatmentses] = useState<Type_of_treatments_Interface[]>([]);
     const [patien_schedule, setPatienSchedule] = useState<PatienSceheduleInterface>({
-    
+        Date_time: new Date(),
     });
 
     const [success, setSuccess] = useState(false);
@@ -63,8 +77,33 @@ function PatientSchedule() {
         }
     };
 
+    // const getReasons = async () => {
+    //     let res = await GetReasons();
+    //     patien_schedule.ReasonID = res.ID;
+    //     if (res) {
+    //         setReasons(res);
+    //     }
+    // };
+
+    const getEmployees = async () => {
+        let res = await GetEmployee();
+        patien_schedule.EmployeeID = res.ID;
+        if (res) {
+            setEmployees(res);
+        }
+    };
+    const getPatients = async () => {
+        let res = await GetPatient();
+        patien_schedule.PatientID = res.ID;
+        if (res) {
+            setPatients(res);
+        }
+    };
+
     useEffect(() => {
         getReasons();
+        getEmployees();
+        getPatients();
     }, []);
 
 
@@ -90,7 +129,8 @@ const convertType = (data: string | number | undefined) => {
 };
 async function submit() {
     let data = {
-        ReasonID: convertType(patien_schedule.ReasonID)
+        ReasonID: convertType(patien_schedule.ReasonID),
+        Date_time: patien_schedule.Date_time
     };
     console.log(data);
     let res = await PatientSchedules(data);
@@ -108,6 +148,21 @@ async function submit() {
             <Box sx={{ flexGrow: 1 }}>
             </Box>
             <Container maxWidth="lg">
+            <Snackbar
+                open={success}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                >
+                <Alert onClose={handleClose} severity="success">
+                บันทึกข้อมูลสำเร็จ
+                </Alert>
+                </Snackbar>
+                <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                บันทึกข้อมูลไม่สำเร็จ
+                </Alert>
+                </Snackbar>
                 {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', width: '190vh' }} /> */}
                 <Paper >
                     <Box
@@ -129,19 +184,19 @@ async function submit() {
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
+                                    value={patien_schedule.PatientID + ""}
                                     onChange={handleChange}
-                                    label= "Reason"
+                                    label= "ชื่อ-สกุล"
                                     inputProps={{
-                                        name: "ReasonID",
+                                        name: "PatientID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
                                     กรุณาเลือกผู้ป่วย
                                   </option>
-                                    {reasons.map((item: ReasonInterface) => (
+                                    {patients.map((item: PatientInterface) => (
                                         <option value={item.ID} key={item.ID}>
-                                            {item.Method}
+                                            {item.FirstName}
                                         </option>
                                     ))}
                                 </Select>
@@ -154,19 +209,19 @@ async function submit() {
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
+                                    value={patien_schedule.EmployeeID + ""}
                                     onChange={handleChange}
-                                    label= "Reason"
+                                    label= "ทันตแพทย์"
                                     inputProps={{
-                                        name: "ReasonID",
+                                        name: "EmployeeID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
                                     กรุณาเลือกแพทย์ผู้รับผิดชอบ
                                   </option>
-                                    {reasons.map((item: ReasonInterface) => (
+                                    {employees.map((item: EmployeeInterface) => (
                                         <option value={item.ID} key={item.ID}>
-                                            {item.Method}
+                                            {item.FirstName}
                                         </option>
                                     ))}
                                 </Select>
@@ -199,7 +254,7 @@ async function submit() {
                             </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        <FormControl sx = {{width: 400}}>
+                        {/* <FormControl sx = {{width: 400}}>
                         <InputLabel id="demo-simple-select-label">นัดไปห้องตรวจ</InputLabel>
                                 <Select
                                     native
@@ -221,10 +276,10 @@ async function submit() {
                                         </option>
                                     ))}
                                 </Select>
-                            </FormControl>
+                            </FormControl> */}
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        <FormControl sx = {{width: 400}}>
+                        {/* <FormControl sx = {{width: 400}}>
                         <InputLabel id="demo-simple-select-label">ประเภทการรักษา</InputLabel>
                                 <Select
                                     native
@@ -246,16 +301,19 @@ async function submit() {
                                         </option>
                                     ))}
                                 </Select>
-                            </FormControl>
+                            </FormControl> */}
                         </Grid>
                         <Grid xs={3.25} sx={{ padding: 1.3 }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker 
                             renderInput={(props) => <TextField {...props} />}
                             label="วันนัดเข้าพบแพทย์"
-                            value={value}
+                            value={patien_schedule.Date_time}
                             onChange={(newValue) => {
-                            setValue(newValue);
+                                setPatienSchedule({
+                                    ...patien_schedule,
+                                    Date_time: newValue,
+                                  });
                             }}
                             
                         />
@@ -292,9 +350,6 @@ async function submit() {
     );
 }
 
-const top100Films = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-];
 
 
 

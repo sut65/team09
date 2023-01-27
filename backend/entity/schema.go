@@ -391,4 +391,5 @@ type Dentist_schedule struct {
 	DentistID *uint
 	Dentist   Dentist `gorm:"references:id"`
 	TimeWork  time.Time
+	TimeEnd   time.Time
 }
