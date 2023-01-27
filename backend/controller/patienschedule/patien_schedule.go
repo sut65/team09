@@ -69,7 +69,7 @@ func GetPatienSchedule(c *gin.Context) {
 // GET /patien_schedules
 func ListPatienSchedules(c *gin.Context) {
 	var patien_schedules []entity.Patien_schedule
-	if err := entity.DB().Preload("Reason").Preload("Patient").Preload("Employee").Preload("Treatment").Raw("SELECT * FROM patien_schedules").Find(&patien_schedules).Error; err != nil {
+	if err := entity.DB().Preload("Reason").Preload("Patient").Preload("Employee").Preload("Type_of_treatment").Raw("SELECT * FROM patien_schedules").Find(&patien_schedules).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

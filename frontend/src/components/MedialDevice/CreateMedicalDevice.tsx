@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { EmployeeInterface } from "../../models/IEmployee";
 import { TypeInterface } from "../../models/IType";
 import { StatusInterface } from "../../models/IStatus";
 import { MedicalDeviceInterface } from "../../models/IMedicaldevice";
@@ -8,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import { Snackbar, Select, Typography, Button, FormGroup, Checkbox, FormControlLabel } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 //import { GetAdminByID } from "../services/HttpClientService";
 
@@ -15,7 +17,8 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {
   GetType,
   GetStatus,
-  CreateMedicalDevice
+  CreateMedicalDevice,
+  GetEmployee
 } from '../../services/HttpClientService';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -29,6 +32,7 @@ function MedicalDevice() {
   const [medicaldevice, setMedicalDevice] = useState<MedicalDeviceInterface>({});
   const [type, setType] = useState<TypeInterface[]>([]);
   const [status, setStatus] = useState<StatusInterface[]>([]);
+  const [employee, setEmployee] = useState<EmployeeInterface[]>([]);
   const [amount, setAmount] = useState<number>(0);
   const [device_name, setDevice_Name] = useState<string>("");
   // const [admin, setAdmin] = useState<Partial<AdminInterface>>({ Name: "" });
@@ -79,24 +83,34 @@ function MedicalDevice() {
     return val;
   };
 
+  //ทดสอบข้อมูล
+  const fetchEmployees = async () => {
+    let res = await GetEmployee();
+    res && setEmployee(res);
+  };
+
   // insert data to db
   const submit = async () => {
     let data = {
-      //EmployID: convertType(medicaldevice.EmployeeID),
+      EmployID: convertType(medicaldevice.EmployeeID),
       Type_ID: convertType(medicaldevice.TypeID),
       Status_ID: convertType(medicaldevice.StatusID),
       Device_Name: medicaldevice.Device_Name,
-      Date: medicaldevice.Date,
+      Amount: medicaldevice.Amount,
+      TimeStamp: date,
     };
+
+    console.log("data", data)
 
     let res = await CreateMedicalDevice(data);
     res ? setSuccess(true) : setError(true);
-    // window.location.href = "/articles"
+    // window.location.href = "/MedicalDevice"
   };
 
   useEffect(() => {
     fetchTypes();
     fetchStatuses();
+    fetchEmployees();
     //fetchEmployeeID();
   }, []);
 
@@ -143,6 +157,37 @@ function MedicalDevice() {
             Medical Device
           </Typography>
           <hr style={{ width: "400px", opacity: "0.5" }} />
+          
+          {/*Employee ID*/}
+          <Box
+            sx={{
+              display: "flex",
+              mt: 2,
+            }}
+          >
+            <Box
+              sx={{
+                width: "400px"
+              }}
+            >
+              <Select
+                native
+                fullWidth
+                value={medicaldevice.EmployeeID + ""}
+                onChange={handleChange}
+                inputProps={{
+                  name: "EmployeeID",
+                }}
+              >
+                <option aria-label="None" value="">
+                  Employee
+                </option>
+                {employee.map((item: EmployeeInterface) => (
+                  <option value={item.ID}>{item.ID}</option>
+                ))}
+              </Select>
+            </Box>
+          </Box>
 
           {/*Type ID*/}
           <Box
@@ -273,12 +318,12 @@ function MedicalDevice() {
                 width: "400px"
               }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DateTimePicker
+              <DateTimePicker
                   renderInput={(props) => <TextField
                     required
                     fullWidth
                     {...props} />}
-                  label="Date"
+                  label="TimeStamp"
                   value={date}
                   onChange={(newValue) => {
                     setDate(newValue);

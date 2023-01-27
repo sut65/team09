@@ -8,5 +8,7 @@ export interface DentistSceheduleInterface {
 
     DayID?: number;
     Day?: DayworkInterface;
-    
+
+    TimeWork: Date | null;
+    TimeEnd: Date | null;
   }

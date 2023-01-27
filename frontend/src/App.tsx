@@ -29,9 +29,13 @@ import EmployeeCreate from "./components/employee/EmployeeCreate";
 import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
 import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleHome";
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
-import CreateMedicalDevice from "./components/MedialDevice/CreateMedicalDevice"
+import DentistSchedule from "./components/dentistschedule/DentistSchedule";
+import CreateMedicalDevice from "./components/MedialDevice/CreateMedicalDevice";
 import PatientList from "./components/patient/PatientList";
 import PatientCreate from "./components/patient/PatientCreate";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import MedicalDeviceList from "./components/MedialDevice/MedicalDeviceList";
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -91,9 +95,11 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const menu = [
-  { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,position: "Admin"},
-  { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" , position: "Admin"},
-  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" , position: "Admin"},
+  { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,},
+  { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" ,},
+  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,},
+  { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
+  { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
 ];
 
 function App() {
@@ -178,7 +184,7 @@ function App() {
             <Divider />
             <List>
               {menu.map((item, index) => 
-                position === item.position && (
+                
                 <Link
                   to={item.path}
                   key={item.name}
@@ -189,7 +195,7 @@ function App() {
                     <ListItemText primary={item.name} />
                   </ListItem>
                 </Link>
-              ))}
+              )}
             </List>
           </Drawer>
           <Box
@@ -215,7 +221,9 @@ function App() {
                 <Route path="/PatientSchedule/create" element={<PatientSchedule />} />
                 <Route path="/PatientSchedule/home" element={<PatientScheduleHome />} />
                 <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
+                <Route path="/DentistSchedule/home" element={<DentistSchedule />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
+                <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
               </Routes>
             </Container>
           </Box>

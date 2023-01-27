@@ -141,13 +141,13 @@ type Patient struct {
 type Type struct {
 	gorm.Model
 	Type_Name      string
-	Medical_device []MedicalDevice `gorm:"foreignKey:Type_ID"`
+	Medical_device []MedicalDevice `gorm:"foreignKey:TypeID"`
 }
 
 type Status struct {
 	gorm.Model
 	Status_Choice  string
-	Medical_device []MedicalDevice `gorm:"foreignKey:Status_ID"`
+	Medical_device []MedicalDevice `gorm:"foreignKey:StatusID"`
 }
 
 type MedicalDevice struct {
@@ -163,7 +163,7 @@ type MedicalDevice struct {
 
 	Device_Name string
 	Amount      int
-	Date        time.Time
+	TimeStamp   time.Time
 
 	Repairs []Repair `gorm:"foreignKey:MedicalDeviceID"`
 }
@@ -391,4 +391,5 @@ type Dentist_schedule struct {
 	DentistID *uint
 	Dentist   Dentist `gorm:"references:id"`
 	TimeWork  time.Time
+	TimeEnd   time.Time
 }
