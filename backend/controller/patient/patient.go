@@ -80,10 +80,12 @@ func CreatePatient(c *gin.Context) {
 		Drug_alergy:        patient.Drug_alergy,
 		House_no:           patient.House_no,
 		Symptom:            symptom,
-		Province:           province,
-		District:           district,
-		Sub_district:       sub_district,
-		Employee:           employee,
+		Gender:             gender,
+
+		Province:     province,
+		District:     district,
+		Sub_district: sub_district,
+		Employee:     employee,
 	}
 	// 13: บันทึก
 	if err := entity.DB().Create(&pt).Error; err != nil {

@@ -35,6 +35,7 @@ import {
   GetDistrict,
   GetSubdistrict,
   CreateEmployee,
+  GetEmployeeByUID,
 } from "../../services/HttpClientService";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -120,12 +121,22 @@ function PaitentCreate() {
     }
   };
 
+  const getEmployeeByUID = async ()=>{
+    let res = await GetEmployeeByUID();
+    patient.EmployeeID = res.ID;
+    if (res) {
+      setEmployee(res);
+    }
+  }
+
+
   useEffect(() => {
     getGender();
     getSymptom();
     getProvince();
     getDistrict();
     getSubdistrict();
+    getEmployeeByUID();
   }, []);
 
   const convertType = (data: string | number | undefined) => {
@@ -140,9 +151,9 @@ function PaitentCreate() {
       FirstName: patient.FirstName,
       LastName: patient.LastName,
       Personal_id: patient.Personal_id,
-      Old: patient.Old,
-      Weight: patient.Weight,
-      Height: patient.Height,
+      Old: convertType(patient.Old),
+      Weight: convertType(patient.Weight),
+      Height: convertType(patient.Height),
       Underlying_disease: patient.Underlying_disease,
       Drug_alergy: patient.Drug_alergy,
       House_no: patient.House_no,

@@ -13,11 +13,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 //import Interface
 import {DayworkInterface } from "../../models/IDaywork";
 import {DoctaskInterface} from "../../models/IDoctask";
 import {DentistSceheduleInterface} from "../../models/IDentistScheduleInterface";
+
 
 import {
     GetDentistScehedules,
@@ -25,15 +27,20 @@ import {
     DentistScehedules,
     GetDayworks,
 } from "../../services/HttpClientService";
-
-
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 function DentistScheduleCreate() {
 
     const [dayworks, setDayworks] = useState<DayworkInterface []>([]);
     const [doctasks, setDoctasks] = useState<DoctaskInterface []>([]);
     const [dentist_schedule, setDentistScehedule] = useState<DentistSceheduleInterface>({
-    
+        TimeWork: new Date(),
+        TimeEnd: new Date(),
     });
 
     const [success, setSuccess] = useState(false);
@@ -88,7 +95,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
   
 
-const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
+// const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
 
 const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
@@ -98,6 +105,8 @@ async function submit() {
     let data = {
         ResponID: convertType(dentist_schedule.ResponID),
         DayID: convertType(dentist_schedule.DayID),
+        TimeWork: dentist_schedule.TimeWork,
+        TimeEnd: dentist_schedule.TimeEnd,
     };
     console.log(data);
     let res = await DentistScehedules(data);
@@ -115,6 +124,21 @@ async function submit() {
             <Box sx={{ flexGrow: 1 }}>
             </Box>
             <Container maxWidth="lg">
+                <Snackbar
+                open={success}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                >
+                <Alert onClose={handleClose} severity="success">
+                บันทึกข้อมูลสำเร็จ
+                </Alert>
+                </Snackbar>
+                <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                บันทึกข้อมูลไม่สำเร็จ
+                </Alert>
+                </Snackbar>
                 {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', width: '190vh' }} /> */}
                 <Paper >
                     <Box
@@ -188,18 +212,43 @@ async function submit() {
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
                         
                         </Grid>
-                        <Grid xs={3.25} sx={{ padding: 1.3 }}>
+                        <Grid xs={3} sx={{ padding: 1.3 }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker 
                             renderInput={(props) => <TextField {...props} />}
-                            label="วันนัดเข้าพบแพทย์"
-                            value={value}
+                            label="เวลาเข้าทำงานแพทย์"
+                            value={dentist_schedule.TimeWork}
                             onChange={(newValue) => {
-                            setValue(newValue);
+                                setDentistScehedule({
+                                    ...dentist_schedule,
+                                    TimeWork: newValue,
+                                  });
                             }}
                             
                         />
                         </LocalizationProvider>
+                        </Grid>
+                        <Grid xs={3} sx={{ padding: 1.3 }}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateTimePicker 
+                            renderInput={(props) => <TextField {...props} />}
+                            label="วันเวลาออกงานแพทย์"
+                            value={dentist_schedule.TimeEnd}
+                            onChange={(newValue) => {
+                                setDentistScehedule({
+                                    ...dentist_schedule,
+                                    TimeEnd: newValue,
+                                  });   
+                            }}
+                           
+                        />
+                        </LocalizationProvider>
+                        </Grid>
+                        <Grid xs={6}  sx={{ padding: 1.3 }}>
+                        
+                        </Grid>
+                        <Grid xs={3.25} sx={{ padding: 1.3 }}>
+                     
                         </Grid>
                         <Grid xs={2.75} sx={{ padding: 1.3 }}>
                         <Button sx={{ paddingY: 1.7, }} fullWidth variant="outlined" size="large" onClick={submit}>
@@ -207,7 +256,6 @@ async function submit() {
                             </Button>
                         
                         </Grid>
-                     
                         <Grid xs={6}>
                        
                         </Grid>
@@ -231,11 +279,6 @@ async function submit() {
 
     );
 }
-
-const top100Films = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-];
-
 
 
 export default DentistScheduleCreate;

@@ -45,7 +45,7 @@ func CreateMedicalDevice(c *gin.Context) {
 		Status:      status,
 		Device_Name: medicaldevice.Device_Name,
 		Amount:      medicaldevice.Amount,
-		Date:        medicaldevice.Date,
+		TimeStamp:   medicaldevice.TimeStamp,
 	}
 
 	// บันทึก
