@@ -323,6 +323,7 @@ func SetupDatabase() {
 	db.CreateInBatches(task, 4)
 
 	//-------MedicalDevice------------
+	//---Type---
 	Type1 := Type{
 		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
 	}
@@ -343,6 +344,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Type{}).Create(&Type4)
 
+	//---Status---
 	Status1 := Status{
 		Status_Choice: "Sterile",
 	}
@@ -353,6 +355,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Status{}).Create(&Status2)
 
+	//----ตารางหลัก-----
 	DateTimeA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
 
 	MedicalDevice1 := MedicalDevice{
