@@ -35,6 +35,7 @@ import PatientList from "./components/patient/PatientList";
 import PatientCreate from "./components/patient/PatientCreate";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import MedicalDeviceList from "./components/MedialDevice/MedicalDeviceList";
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -222,6 +223,7 @@ function App() {
                 <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
                 <Route path="/DentistSchedule/home" element={<DentistSchedule />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
+                <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
               </Routes>
             </Container>
           </Box>

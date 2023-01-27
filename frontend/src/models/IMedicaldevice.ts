@@ -4,8 +4,10 @@ import { StatusInterface } from "./IStatus";
 
 export interface MedicalDeviceInterface{
     ID?: number,
-    Employee?: string,
-    EmployeeID?: EmployeeInterface,
+    // Employee?: string,
+    // EmployeeID?: EmployeeInterface,
+    Employee?: EmployeeInterface,
+    EmployeeID?: number,
 
     Type?: TypeInterface,
     TypeID?: number,
@@ -15,5 +17,5 @@ export interface MedicalDeviceInterface{
 
     Device_Name?: string,
     Amount?: number,
-    Date?: Date
+    TimeStamp?: Date | null,
 }
