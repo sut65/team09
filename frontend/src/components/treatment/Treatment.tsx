@@ -11,7 +11,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import axios from 'axios';
 import { ButtonGroup } from "@mui/material";
 
-function Treatment(props: any){
+function Treatment(props: any) {
     const [treatment, setTreatment] = React.useState<TreatmentsInterface[]>([]);
     const getTreatment = async () => {
         const apiUrl = "http://localhost:8080/treatments";
@@ -72,12 +72,12 @@ function Treatment(props: any){
 
         { field: "type_of_treatment_name", headerName: "Type of treatment", width: 130 },
 
-        
 
-        
+
+
 
         { field: "treatment_detail", headerName: "Treatment", width: 90 },
- 
+
         { field: "treatment_time", headerName: "Treatment Time", width: 120 },
 
         { field: "treatment_code", headerName: "Treatment code", width: 120 },
@@ -94,17 +94,17 @@ function Treatment(props: any){
         //     </ButtonGroup>
         // },
         {
-            field: "action", headerName: "Action",width: 200, sortable: false, renderCell: ({ row }) =>
-            <ButtonGroup>
-                <Button onClick={() => handleDelete(row.id)}>
-                    delete
-                </Button>
-                <Button component={RouterLink} to={`/treatmentsupdate/${row.id}`} variant="contained">
-                            <div className="good-font">
-                                update
-                            </div>
-                        </Button>
-            </ButtonGroup>
+            field: "action", headerName: "Action", width: 200, sortable: false, renderCell: ({ row }) =>
+                <ButtonGroup>
+                    <Button onClick={() => handleDelete(row.id)}>
+                        delete
+                    </Button>
+                    <Button component={RouterLink} to={`/treatmentupdate/${row.id}`} variant="contained">
+                        <div className="good-font">
+                            update
+                        </div>
+                    </Button>
+                </ButtonGroup>
         },
 
     ];
@@ -142,7 +142,7 @@ function Treatment(props: any){
                             color="primary"
                         >
                             <div className="good-font-white">
-                                เพิ่มข้อการรักษา
+                                เพิ่มข้อมูลการรักษา
                             </div>
                         </Button>
                     </Box>
