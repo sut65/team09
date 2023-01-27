@@ -588,6 +588,144 @@ async function GetReasons() {
     return res;
   }
 
+  //---------------------treatment---------------------//
+  async function GetTreatment() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/treatments`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function CreateTreatment(data: PatienSceheduleInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/treatments`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  //-------------Type of treatment------------//
+  async function GetTypeOfTreatment() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/type_of_treatments`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function CreateTypeOfTreatment(data: PatienSceheduleInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/type_of_treatments`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  //------------Type of number of treatment-----------------//
+  async function GetTypeOfNumberOfTreatment() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/type_of_number_of_treatments`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function CreateTypeOfNumberOfTreatment(data: PatienSceheduleInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/type_of_number_of_treatments`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
   export {
     GetPatientSchedules,
     GetDentistScehedules,
@@ -611,5 +749,11 @@ async function GetReasons() {
     CreatePatient,
     GetEmployeeByUID,
     GetSymptom,
+    GetTreatment,
+    CreateTreatment,
+    GetTypeOfTreatment,
+    CreateTypeOfTreatment,
+    GetTypeOfNumberOfTreatment,
+    CreateTypeOfNumberOfTreatment,
   };
 
