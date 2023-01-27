@@ -7,7 +7,9 @@ import Box from "@mui/material/Box";
 import { EmployeeInterface } from "../../models/IEmployee";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
+import axios from 'axios';
 import { GetEmployee } from "../../services/HttpClientService";
+import { ButtonGroup } from "@mui/material";
 
 function Employees() {
   const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
@@ -17,6 +19,26 @@ function Employees() {
     if (res) {
       setEmployees(res);
     }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/employees/${id}`, {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              'Content-Type': 'application/json',
+          }
+      });
+
+      if (response.status === 200) {
+          console.log("Employee deleted successfully");
+          getEmployes();
+      } else {
+          throw new Error("Failed to delete Employee");
+      }
+  } catch (err) {
+      console.error(err);
+  }
   };
 
   const columns: GridColDef[] = [
@@ -33,6 +55,12 @@ function Employees() {
     { field: "Province", headerName: "จังหวัด", width: 250,  valueFormatter: (params) => params.value.Province_name,},
     { field: "Gender", headerName: "เพศ", width: 100 , valueFormatter: (params) => params.value.Gender_name,},       
     { field: "Role", headerName: "บทบาท", width: 250,  valueFormatter: (params) => params.value.Role_name,},
+    {
+      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
+            <Button onClick={() => handleDelete(row.ID)} size="small" variant="contained" color="error" >
+                delete
+            </Button>
+    },
   ];
 
   useEffect(() => {
