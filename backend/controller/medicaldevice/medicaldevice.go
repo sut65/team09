@@ -27,13 +27,13 @@ func CreateMedicalDevice(c *gin.Context) {
 	}
 
 	// ค้นหา type ด้วย id
-	if tx := entity.DB().Where("id = ?", medicaldevice.Type_ID).First(&ttype); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", medicaldevice.TypeID).First(&ttype); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "type not found"})
 		return
 	}
 
 	// ค้นหา status ด้วย id
-	if tx := entity.DB().Where("id = ?", medicaldevice.Status_ID).First(&status); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", medicaldevice.StatusID).First(&status); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "status not found"})
 		return
 	}
@@ -72,7 +72,7 @@ func GetMedicalDevice(c *gin.Context) {
 // GET /MedicalDevices
 func ListMedicalDevices(c *gin.Context) {
 	var medicaldevices []entity.MedicalDevice
-	if err := entity.DB().Preload("Employee").Preload("Type").Preload("Status").Raw("SELECT * FROM medicaldevices").Find(&medicaldevices).Error; err != nil {
+	if err := entity.DB().Preload("Employee").Preload("Type").Preload("Status").Raw("SELECT * FROM medical_devices").Find(&medicaldevices).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -84,7 +84,7 @@ func ListMedicalDevices(c *gin.Context) {
 func DeleteMedicalDevice(c *gin.Context) {
 	id := c.Param("id")
 
-	if tx := entity.DB().Exec("DELETE FROM medicaldevices WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM medical_devices WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "medicaldevices not found"})
 		return
 	}

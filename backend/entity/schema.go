@@ -155,11 +155,11 @@ type MedicalDevice struct {
 	EmployeeID *uint
 	Employee   Employee
 
-	Type_ID *uint
-	Type    Type
+	TypeID *uint
+	Type   Type
 
-	Status_ID *uint
-	Status    Status
+	StatusID *uint
+	Status   Status
 
 	Device_Name string
 	Amount      int

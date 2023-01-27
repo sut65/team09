@@ -13,7 +13,7 @@ func GetType(c *gin.Context) {
 	var ttype entity.Type
 	id := c.Param("id")
 
-	if err := entity.DB().Raw("SELECT * FROM fines WHERE id = ?", id).Scan(&ttype).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM types WHERE id = ?", id).Scan(&ttype).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -22,9 +22,9 @@ func GetType(c *gin.Context) {
 
 // GET /types
 func ListTypes(c *gin.Context) {
-	var types []entity.Status
+	var types []entity.Type
 
-	if err := entity.DB().Raw("SELECT * FROM fines").Scan(&types).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM types").Scan(&types).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
