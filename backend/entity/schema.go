@@ -214,7 +214,7 @@ type Patien_schedule struct {
 	Date_time           time.Time
 }
 
-// -----ระบบบันทึกเครื่องมือแพทย์-----
+// -----ระบบจัดการข้อมูลทันตแพทย์-----
 type Specialized struct {
 	gorm.Model
 	Specialized_Name string
