@@ -30,6 +30,8 @@ import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
 import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleHome";
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
 import CreateMedicalDevice from "./components/MedialDevice/CreateMedicalDevice"
+import PatientList from "./components/patient/PatientList";
+import PatientCreate from "./components/patient/PatientCreate";
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -91,6 +93,7 @@ const mdTheme = createTheme();
 const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,position: "Admin"},
   { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" , position: "Admin"},
+  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" , position: "Admin"},
 ];
 
 function App() {
@@ -205,6 +208,8 @@ function App() {
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
               <Routes>
                 {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/patients" element={<PatientList />} />
+                <Route path="/patients/create" element={<PatientCreate />} />
                 <Route path="/employees" element={<EmployeeList />} />
                 <Route path="/employee/create" element={<EmployeeCreate />} />
                 <Route path="/PatientSchedule/create" element={<PatientSchedule />} />

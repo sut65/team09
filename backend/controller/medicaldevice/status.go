@@ -13,7 +13,7 @@ func GetStatus(c *gin.Context) {
 	var status entity.Status
 	id := c.Param("id")
 
-	if err := entity.DB().Raw("SELECT * FROM fines WHERE id = ?", id).Scan(&status).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM statuses WHERE id = ?", id).Scan(&status).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -24,7 +24,7 @@ func GetStatus(c *gin.Context) {
 func ListStatuses(c *gin.Context) {
 	var statuses []entity.Status
 
-	if err := entity.DB().Raw("SELECT * FROM fines").Scan(&statuses).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM statuses").Scan(&statuses).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
