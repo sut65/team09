@@ -22,6 +22,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 
 // import Home from "./components/Home";
 import EmployeeList from "./components/employee/EmployeeList";
@@ -101,6 +102,7 @@ const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,},
   { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" ,},
   { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,},
+  { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
   { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},

@@ -384,7 +384,7 @@ func SetupDatabase() {
 		Status:      Status2,
 		Device_Name: "เก้าอี้ทำฟัน",
 		Amount:      1,
-		TimeStamp:   DateTimeA,
+		Record_Date: DateTimeA,
 	}
 	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
 

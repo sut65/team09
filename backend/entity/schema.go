@@ -166,7 +166,7 @@ type MedicalDevice struct {
 
 	Device_Name string
 	Amount      int
-	TimeStamp   time.Time
+	Record_Date time.Time
 
 	Repairs []Repair `gorm:"foreignKey:MedicalDeviceID"`
 }
