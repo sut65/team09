@@ -81,7 +81,7 @@ function Treatment(props: any){
         {
             field: "action", headerName: "Action",width: 200, sortable: false, renderCell: ({ row }) =>
             <ButtonGroup>
-                <Button onClick={() => handleDelete(row.id)}>
+                <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
                     delete
                 </Button>
                 <Button component={RouterLink} to={`/treatmentsupdate/${row.id}`} variant="contained">
@@ -127,7 +127,7 @@ function Treatment(props: any){
                             color="primary"
                         >
                             <div className="good-font-white">
-                                เพิ่มข้อการรักษา
+                                เพิ่มข้อมูลการรักษา
                             </div>
                         </Button>
                     </Box>

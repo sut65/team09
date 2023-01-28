@@ -37,7 +37,7 @@ function TreatmentUpdate() {
     const [errorMessage, setErrorMessage] = React.useState("");
 
     const [dentist, setADentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
-  
+
 
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
     const [type_of_treatments, setType_of_treatments] = React.useState<Type_of_treatments_Interface[]>([]);
@@ -49,7 +49,7 @@ function TreatmentUpdate() {
     const [number_of_cavities, setNumber_of_cavities] = React.useState(0);
     const [number_of_swollen_gums, setNumber_of_swollen_gums] = React.useState(0);
     const [number_of_treatment, setNumber_of_treatment] = React.useState(0);
-    
+
 
     const apiUrl = "http://localhost:3001";
     const requestOptions = {
@@ -62,44 +62,44 @@ function TreatmentUpdate() {
 
     const { id } = useParams();
 
-    
-  useEffect(() => {
-    fetch(`http://localhost:8080/treatments/${id}`)
-    .then((response) => response.json())
-    .then((res) => {
-             
-           
-          
-            if (res.data) {
-                console.log("gt")               
-                console.log(res.data.Treatment_code)
-                setTreatment_code(res.data.Treatment_code.toString());      
-                console.log(res.data.Treatment_detail)
-                setTreatment_detail(res.data.Treatment_detail.toString());
-                console.log(res.data.Other_teeth_problems)
-                setOther_teeth_problems(res.data.Other_teeth_problems.toString());
-                console.log(res.data.Number_of_cavities)               
-                console.log(res.data.Number_of_swollen_gums)
-                console.log(res.data.Number_of_treatment)
-                setNumber_of_cavities(res.data.Number_of_cavities.toString());               
-                setNumber_of_swollen_gums(res.data.Number_of_swollen_gums.toString());
-                setNumber_of_treatment(res.data.Number_of_treatment.toString());
-                console.log(res.data.DentistID)              
-                console.log("id forenkey")             
-                console.log("af set")
-                console.log(treatment_code)
-                console.log("af set")
-                console.log("gt")
-                console.log("treatment +id")
-                const dataString = JSON.stringify(res.data);
-                console.log(dataString);
-                console.log("treatment +id")   
-            }
-        }
-      )
-  }, [id])
 
-  
+    useEffect(() => {
+        fetch(`http://localhost:8080/treatments/${id}`)
+            .then((response) => response.json())
+            .then((res) => {
+
+
+
+                if (res.data) {
+                    console.log("gt")
+                    console.log(res.data.Treatment_code)
+                    setTreatment_code(res.data.Treatment_code.toString());
+                    console.log(res.data.Treatment_detail)
+                    setTreatment_detail(res.data.Treatment_detail.toString());
+                    console.log(res.data.Other_teeth_problems)
+                    setOther_teeth_problems(res.data.Other_teeth_problems.toString());
+                    console.log(res.data.Number_of_cavities)
+                    console.log(res.data.Number_of_swollen_gums)
+                    console.log(res.data.Number_of_treatment)
+                    setNumber_of_cavities(res.data.Number_of_cavities.toString());
+                    setNumber_of_swollen_gums(res.data.Number_of_swollen_gums.toString());
+                    setNumber_of_treatment(res.data.Number_of_treatment.toString());
+                    console.log(res.data.DentistID)
+                    console.log("id forenkey")
+                    console.log("af set")
+                    console.log(treatment_code)
+                    console.log("af set")
+                    console.log("gt")
+                    console.log("treatment +id")
+                    const dataString = JSON.stringify(res.data);
+                    console.log(dataString);
+                    console.log("treatment +id")
+                }
+            }
+            )
+    }, [id])
+
+
 
     const handleClose = (
         event?: React.SyntheticEvent | Event,
@@ -178,7 +178,7 @@ function TreatmentUpdate() {
             });
     };
 
-    
+
     // const value = parseInt(treatmentID!)
     // console.log("treatment by use Params id is"+treatmentID)
 
@@ -250,14 +250,14 @@ function TreatmentUpdate() {
             >
                 <Alert onClose={handleClose} severity="success">
                     <div className="good-font">
-                        บันทึกข้อมูลสำเร็จ
+                        อัปเดตข้อมูลสำเร็จ
                     </div>
                 </Alert>
             </Snackbar>
             <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
-                        บันทึกข้อมูลไม่สำเร็จ
+                        อัปเดตข้อมูลไม่สำเร็จ
                     </div>
                 </Alert>
             </Snackbar>
@@ -293,19 +293,19 @@ function TreatmentUpdate() {
                             <Autocomplete
                                 disablePortal
                                 id="DentistID"
-                                getOptionLabel={(item: DentistInterface) => `${item.FirstName}`}                                                               
+                                getOptionLabel={(item: DentistInterface) => `${item.FirstName}`}
                                 options={dentist}
                                 //defaultValue={{ ID: 2 ,Dentist_name: "moyong"}}
                                 sx={{ width: 'auto' }}
                                 isOptionEqualToValue={(option, value) =>
                                     option.ID === value.ID}
                                 onChange={(e, value) => { treatment.DentistID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกoooo"/>} 
+                                renderInput={(params) => <TextField {...params} label="เลือกทันตเเพทย์" />}
 
                             />
                         </FormControl>
                     </Grid>
-                    
+
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
@@ -439,8 +439,8 @@ function TreatmentUpdate() {
                                 value={treatment.treatment_detail || "" || treatment_detail}
                                 onChange={handleInputChange}
                                 defaultValue={treatment_detail}
-                                
-                                
+
+
                             />
                         </FormControl>
                     </Grid>
@@ -490,7 +490,7 @@ function TreatmentUpdate() {
                             color="primary"
                         >
                             <div className="good-font-white">
-                                บันทึก
+                                อัปเดตข้อมูล
                             </div>
                         </Button>
                     </Grid>

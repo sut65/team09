@@ -53,7 +53,7 @@ function Branch() {
         } catch (err) {
             console.error(err);
         }
-    };
+    }; 
 
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 70 },
@@ -79,7 +79,7 @@ function Branch() {
         {
             field: "action", headerName: "Action", width: 200, sortable: false, renderCell: ({ row }) =>
                 <ButtonGroup>
-                    <Button onClick={() => handleDelete(row.id)}>
+                    <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
                         delete
                     </Button>
                     <Button component={RouterLink} to={`/treatmentplan_update/${row.id}`} variant="contained">
