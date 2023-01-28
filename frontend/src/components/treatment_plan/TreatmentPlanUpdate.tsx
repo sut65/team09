@@ -262,14 +262,14 @@ function TreatmentCreate() {
             >
                 <Alert onClose={handleClose} severity="success">
                     <div className="good-font">
-                        บันทึกข้อมูลสำเร็จ
+                        อัปเดตข้อมูลสำเร็จ
                     </div>
                 </Alert>
             </Snackbar>
             <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
-                        บันทึกข้อมูลไม่สำเร็จ
+                        อัปเดตข้อมูลไม่สำเร็จ
                     </div>
                 </Alert>
             </Snackbar>
@@ -315,7 +315,7 @@ function TreatmentCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ผู้ป่าย</p>
+                            <p className="good-font">ผู้ป่วย</p>
                             <Autocomplete
                                 disablePortal
                                 id="PatientID"
@@ -463,7 +463,7 @@ function TreatmentCreate() {
                             color="primary"
                         >
                             <div className="good-font">
-                                บันทึกข้อมูล
+                                อัปเดตข้อมูล
                             </div>
                         </Button>
                     </Grid>

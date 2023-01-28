@@ -16,7 +16,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-import { TreatmentsPlanInterface } from "../../models/ITreatment_plan";
+import { TreatmentsPlanInterface } from "../../models/ITreatment_plan"; 
 import { Type_of_treatments_Interface } from "../../models/IType_of_treatment"; 
 import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment"; 
 import { DentistInterface } from "../../models/IDentist"; 
@@ -228,7 +228,7 @@ function TreatmentCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">oooooo</p>
+                            <p className="good-font">ทันตเเพทย์</p>
                             <Autocomplete
                                 disablePortal
                                 id="DentistID"
@@ -238,14 +238,14 @@ function TreatmentCreate() {
                                 isOptionEqualToValue={(option, value) =>
                                     option.ID === value.ID}
                                 onChange={(e, value) => { treatment_plan.DentistID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกoooo" />}
+                                renderInput={(params) => <TextField {...params} label="เลือกทันตเเพทย์" />}
                             />
                         </FormControl>
                     </Grid>
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ผู้ป่าย</p>
+                            <p className="good-font">ผู้ป่วย</p>
                             <Autocomplete
                                 disablePortal
                                 id="PatientID"

@@ -261,7 +261,7 @@ function TreatmentCreate() {
                                 isOptionEqualToValue={(option, value) =>
                                     option.ID === value.ID}
                                 onChange={(e, value) => { treatment.DentistID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกoooo" />}
+                                renderInput={(params) => <TextField {...params} label="เลือกทันตเเพทย์" />}
                             />
                         </FormControl>
                     </Grid>
