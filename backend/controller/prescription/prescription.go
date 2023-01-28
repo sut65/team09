@@ -72,8 +72,8 @@ func GetPrescription(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": prescription})
 }
 
-// GET /confirmations ดึงข้อมูล confirmation ทั้งหมด
-func ListConfirmations(c *gin.Context) {
+// GET /Prescriptions ดึงข้อมูล Prescription ทั้งหมด
+func ListPrescriptions(c *gin.Context) {
 	var prescriptions []entity.Prescription
 
 	if err := entity.DB().Preload("Patient").Preload("Dentist").Preload("Medicine").Preload("Medicine_status").Raw("SELECT * FROM prescriptions").Scan(&prescriptions).Error; err != nil {

@@ -8,6 +8,8 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { MedicalDeviceInterface } from "../../models/IMedicaldevice";
 import { GetMedicalDevice } from "../../services/HttpClientService";
 import moment from "moment";
+import axios from 'axios';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function MedicalDeviceList() {
   const [medicalDevice, setMedicalDevice] = useState<MedicalDeviceInterface[]>([]);
@@ -22,6 +24,27 @@ function MedicalDeviceList() {
       setMedicalDevice(res);
     } 
   };
+
+  const Delete = async (id: number) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/medicaldevice/${id}`, {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              'Content-Type': 'application/json',
+          }
+      });
+
+      if (response.status === 200) {
+          console.log("MedicalDevic deleted successfully");
+          getMedicalDevice();
+      } else {
+          throw new Error("Failed to delete MedicalDevic");
+      }
+  } catch (err) {
+      console.error(err);
+  }
+  };
+
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "No.", width: 50 },
@@ -46,6 +69,12 @@ function MedicalDeviceList() {
     { field: "Device_Name", headerName: "ชื่ออุปกรณ์", width: 250 },
     { field: "Amount", headerName: "จำนวน", width: 70 },
     { field: "Record_Date", headerName: "วันที่ เวลาตอนบันทึกข้อมูล", width: 250, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm') },
+    {
+      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
+            <Button  onClick={() => Delete(row.ID)} size="small" variant="contained" color="error" >
+                Delete <DeleteForeverIcon />
+            </Button>
+    },
 
   ];
 

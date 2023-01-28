@@ -19,13 +19,14 @@ import Snackbar from "@mui/material/Snackbar";
 import {DayworkInterface } from "../../models/IDaywork";
 import {DoctaskInterface} from "../../models/IDoctask";
 import {DentistSceheduleInterface} from "../../models/IDentistScheduleInterface";
-
+import { DentistInterface } from '../../models/IDentist';
 
 import {
     GetDentistScehedules,
     GetDoctasks,
     DentistScehedules,
     GetDayworks,
+    GetDentists,
 } from "../../services/HttpClientService";
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -35,7 +36,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   });
 
 function DentistScheduleCreate() {
-
+    const [dentists, setDentists] = useState<DentistInterface []>([]);
     const [dayworks, setDayworks] = useState<DayworkInterface []>([]);
     const [doctasks, setDoctasks] = useState<DoctaskInterface []>([]);
     const [dentist_schedule, setDentistScehedule] = useState<DentistSceheduleInterface>({
@@ -72,9 +73,15 @@ function DentistScheduleCreate() {
             setDoctasks(res);
         }
     };
-    useEffect(() => {
-        getDoctasks();
-    }, []);
+
+    const getDentists = async () => {
+        let res = await GetDentists();
+        dentist_schedule.DentistID = res.ID;
+        if (res) {
+            setDentists(res);
+        }
+    };
+  
     const getDayworks = async () => {
         let res = await GetDayworks();
         dentist_schedule.DayID = res.ID;
@@ -84,6 +91,8 @@ function DentistScheduleCreate() {
     };
     useEffect(() => {
         getDayworks();
+        getDoctasks();
+        getDentists();
     }, []);
     
 const Item = styled(Paper)(({ theme }) => ({
@@ -95,7 +104,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
   
 
-// const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
+
 
 const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
@@ -103,6 +112,7 @@ const convertType = (data: string | number | undefined) => {
 };
 async function submit() {
     let data = {
+        DentistID: convertType(dentist_schedule.DentistID),
         ResponID: convertType(dentist_schedule.ResponID),
         DayID: convertType(dentist_schedule.DayID),
         TimeWork: dentist_schedule.TimeWork,
@@ -204,7 +214,29 @@ async function submit() {
                             </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                       
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">ทันตแพทย์</InputLabel>
+                                <Select
+                                    native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={dentist_schedule.DentistID + ""}
+                                    onChange={handleChange}
+                                    label= "ทันตแพทย์"
+                                    inputProps={{
+                                        name: "DentistID",
+                                    }}
+                                >
+                                  <option aria-label="None" value="">
+                                    กรุณาเลือกรายชื่อ
+                                  </option>
+                                    {dentists.map((item: DentistInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.FirstName}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
                         

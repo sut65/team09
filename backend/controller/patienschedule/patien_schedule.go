@@ -39,12 +39,19 @@ func CreatePatienSchedule(c *gin.Context) {
 	}
 
 	// 11.5: ค้นหา type_of_treatment ด้วย id
-	if tx := entity.DB().Where("id = ?", patien_schedule.Type_Of_TreatmentID).First(&type_of_treatment); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", patien_schedule.Type_of_treatmentID).First(&type_of_treatment); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "type_of_treatment not found"})
 		return
 	}
 	// 12: สร้าง scholarship
-	wv := entity.Patien_schedule{}
+	wv := entity.Patien_schedule{
+		Patient:         patien,     
+		Employee:    employee,          
+		Reason: reason,       	
+		Type_of_treatment:	type_of_treatment,
+		Date_time:       patien_schedule.Date_time,
+
+	}
 
 	// 13: บันทึก
 	if err := entity.DB().Create(&wv).Error; err != nil {
@@ -69,7 +76,7 @@ func GetPatienSchedule(c *gin.Context) {
 // GET /patien_schedules
 func ListPatienSchedules(c *gin.Context) {
 	var patien_schedules []entity.Patien_schedule
-	if err := entity.DB().Preload("Reason").Preload("Patient").Preload("Employee").Preload("Type_of_treatment").Raw("SELECT * FROM patien_schedules").Find(&patien_schedules).Error; err != nil {
+	if err := entity.DB().Preload("Patient").Preload("Employee").Preload("Reason").Preload("Type_of_treatment",).Raw("SELECT * FROM patien_schedules").Find(&patien_schedules).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

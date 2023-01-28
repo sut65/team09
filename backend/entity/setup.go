@@ -50,8 +50,8 @@ func SetupDatabase() {
 		&Dentist{},
 		//treatment and treatment_plan
 		&Treatment{},
-		&Treatment_plan{}, 
-		&Type_of_treatment{}, 
+		&Treatment_plan{},
+		&Type_of_treatment{},
 		&Type_of_number_of_treatment{},
 		//Prescription
 		&Medicine{},
@@ -61,7 +61,6 @@ func SetupDatabase() {
 		&Daywork{},
 		&Doctask{},
 		&Dentist_schedule{},
-		
 	)
 
 	db = database
@@ -296,7 +295,7 @@ func SetupDatabase() {
 
 	///////////////ข้อมูล ทดสอบ///////////
 	Dentist1 := Dentist{
-		FirstName: "อยากโดนเข็ม",
+		FirstName: "หมอเทวดา",
 	}
 	db.Model(&Dentist{}).Create(&Dentist1)
 
@@ -326,6 +325,12 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription1)
 
 	//จำลองข้อมูลระบบจัดตารางงานแพทย์
+	var Ttype = []Type_of_treatment{
+		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
+		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
+	}
+	db.CreateInBatches(Ttype, 2)
+
 	var day = []Daywork{
 		{Day: "วันจันทร์"},
 		{Day: "วันอังคาร"},
@@ -388,7 +393,6 @@ func SetupDatabase() {
 	}
 	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
 
-
 	//--------ระบบจัดการข้อมูลแพทย์---------
 	//---Specialized---
 	specialized1 := Specialized{
@@ -436,7 +440,6 @@ func SetupDatabase() {
 	}
 	db.Model(&Specialized{}).Create(&specialized9)
 
-
 	//University
 	University1 := University{
 		University_Name: "มหาวิทยาลัยมหิดล",
@@ -473,94 +476,93 @@ func SetupDatabase() {
 	}
 	db.Model(&University{}).Create(&University7)
 
-
 	//insert dentist
 	dentist1 := Dentist{
-		FirstName:  	"Lawn",
-		LastName:   	"Helkin",
-		Personal_id:	"6520365417856",
-		Email:			"lawn@gmail.com",
-		Password:    	string(password4),
-		Age:			31,
-		Phone_Number:	"0645127854",
+		FirstName:    "Lawn",
+		LastName:     "Helkin",
+		Personal_id:  "6520365417856",
+		Email:        "lawn@gmail.com",
+		Password:     string(password4),
+		Age:          31,
+		Phone_Number: "0645127854",
 
-		Gender:			gender1,
-		Specialized: 	specialized9,
-		University:		University2,
-		Role:			role3,
-		Province:     	province2,
+		Gender:      gender1,
+		Specialized: specialized9,
+		University:  University2,
+		Role:        role3,
+		Province:    province2,
 	}
 	db.Model(&Dentist{}).Create(&dentist1)
 
 	dentist2 := Dentist{
-		FirstName:  	"Emma",
-		LastName:   	"Watson",
-		Personal_id:	"4752103658952",
-		Email:			"emma@gmail.com",
-		Password:    	string(password3),
-		Age:			28,
-		Phone_Number:	"0854123457",
+		FirstName:    "Emma",
+		LastName:     "Watson",
+		Personal_id:  "4752103658952",
+		Email:        "emma@gmail.com",
+		Password:     string(password3),
+		Age:          28,
+		Phone_Number: "0854123457",
 
-		Gender:			gender2,
-		Specialized: 	specialized4,
-		University:		University5,
-		Role:			role3,
-		Province:     	province1,
+		Gender:      gender2,
+		Specialized: specialized4,
+		University:  University5,
+		Role:        role3,
+		Province:    province1,
 	}
 	db.Model(&Dentist{}).Create(&dentist2)
 
 	dentist3 := Dentist{
-		FirstName:  	"Shiro",
-		LastName:   	"Uki",
-		Personal_id:	"4521032568745",
-		Email:			"shiro@hotmail.com",
-		Password:    	string(password5),
-		Age:			41,
-		Phone_Number:	"0965412547",
+		FirstName:    "Shiro",
+		LastName:     "Uki",
+		Personal_id:  "4521032568745",
+		Email:        "shiro@hotmail.com",
+		Password:     string(password5),
+		Age:          41,
+		Phone_Number: "0965412547",
 
-		Gender:			gender1,
-		Specialized: 	specialized1,
-		University:		University1,
-		Role:			role3,
-		Province:     	province3,
+		Gender:      gender1,
+		Specialized: specialized1,
+		University:  University1,
+		Role:        role3,
+		Province:    province3,
 	}
 	db.Model(&Dentist{}).Create(&dentist3)
 
 	dentist4 := Dentist{
-		FirstName:  	"Olivia",
-		LastName:   	"Cruz",
-		Personal_id:	"5230145278964",
-		Email:			"olivia@hotmail.com",
-		Password:    	string(password7),
-		Age:			39,
-		Phone_Number:	"0654174582",
+		FirstName:    "Olivia",
+		LastName:     "Cruz",
+		Personal_id:  "5230145278964",
+		Email:        "olivia@hotmail.com",
+		Password:     string(password7),
+		Age:          39,
+		Phone_Number: "0654174582",
 
-		Gender:			gender2,
-		Specialized: 	specialized8,
-		University:		University6,
-		Role:			role3,
-		Province:     	province3,
+		Gender:      gender2,
+		Specialized: specialized8,
+		University:  University6,
+		Role:        role3,
+		Province:    province3,
 	}
 	db.Model(&Dentist{}).Create(&dentist4)
 
 	dentist5 := Dentist{
-		FirstName:  	"Bucky",
-		LastName:   	"Crosia",
-		Personal_id:	"9520136457824",
-		Email:			"bucky@gmail.com",
-		Password:    	string(password6),
-		Age:			45,
-		Phone_Number:	"0854127833",
+		FirstName:    "Bucky",
+		LastName:     "Crosia",
+		Personal_id:  "9520136457824",
+		Email:        "bucky@gmail.com",
+		Password:     string(password6),
+		Age:          45,
+		Phone_Number: "0854127833",
 
-		Gender:			gender1,
-		Specialized: 	specialized2,
-		University:		University4,
-		Role:			role3,
-		Province:     	province1,
+		Gender:      gender1,
+		Specialized: specialized2,
+		University:  University4,
+		Role:        role3,
+		Province:    province1,
 	}
 	db.Model(&Dentist{}).Create(&dentist5)
 
-	//Type of treatment 
+	//Type of treatment
 	Type_of_treatment1 := Type_of_treatment{
 		Type_of_treatment_name: "รักษารากฟัน(ฟันหน้า)",
 		Price:                  5000,
@@ -620,7 +622,7 @@ func SetupDatabase() {
 		Price:                  2000,
 	}
 	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment10)
-	
+
 	Type_of_treatment11 := Type_of_treatment{
 		Type_of_treatment_name: "รักษาโรคเหงือก",
 		Price:                  500,

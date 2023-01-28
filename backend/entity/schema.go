@@ -83,7 +83,7 @@ type Employee struct {
 	Role   Role `gorm:"references:id"`
 
 	Patients       []Patient       `gorm:"foreignKey: EmployeeID"`
-	Medical_device []MedicalDevice `gorm:"foreignKey:EmployeeID"`
+	// Medical_device []MedicalDevice `gorm:"foreignKey:EmployeeID"`
 	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
 	//โยงกับระบบนัดผู้ป่วย
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:EmployeeID"`
@@ -169,6 +169,7 @@ type MedicalDevice struct {
 	Record_Date time.Time
 
 	Repairs []Repair `gorm:"foreignKey:MedicalDeviceID"`
+	Room_Details []Room_Detail `gorm:"foreignKey:MedicalDeviceID"`
 }
 
 // -----ระบบแจ้งซ่อมเครื่องมือแพทย์-----
@@ -185,7 +186,7 @@ type Repair struct {
 	Employee   Employee
 
 	MedicalDeviceID *uint
-	MedicalDevice   MedicalDevice
+	// MedicalDevice   MedicalDevice
 
 	DamageLevelID *uint
 	DamageLevel   DamageLevel
@@ -212,8 +213,9 @@ type Patien_schedule struct {
 	ReasonID *uint
 	Reason   Reason `gorm:"references:id"`
 
-	Type_Of_TreatmentID *uint
-	Type_Of_Treatment   Type_of_treatment `gorm:"references:id"`
+	Type_of_treatmentID *uint
+	Type_of_treatment   Type_of_treatment	`gorm:"references:id"`
+
 	Date_time           time.Time
 }
 
@@ -317,7 +319,7 @@ type Type_of_treatment struct {
 	Treatment_plan []Treatment_plan `gorm:"foreignkey:Type_Of_TreatmentID"`
 
 	//โยงกับระบบนัดผู้ป่วย
-	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
+	Patien_schedule 	[]Patien_schedule `gorm:"foreignKey:Type_of_treatmentID"`
 }
 
 type Type_of_number_of_treatment struct {
@@ -423,4 +425,35 @@ type Dentist_schedule struct {
 	Dentist   Dentist `gorm:"references:id"`
 	TimeWork  time.Time
 	TimeEnd   time.Time
+}
+
+//ระบบจัดการห้อง
+type Category struct {
+	gorm.Model
+	Category_Name string
+
+	Room_Details []Room_Detail `gorm:"foreignKey:CategoryID"`
+}
+
+type Room_Number struct {
+	gorm.Model
+	Room_number string
+
+	Room_Details []Room_Detail `gorm:"foreignKey:Room_NumberID"`
+}
+
+type Room_Detail struct {
+	gorm.Model
+
+	//CategoryID ทำหน้าที่เป็น FK
+	CategoryID *uint
+	Category   Category `gorm:"references:id"`
+
+	//NumberID ทำหน้าที่เป็น FK
+	Room_NumberID *uint
+	Room_Number   Room_Number `gorm:"references:id"`
+
+	//MedicialDeviceID ทำหน้าที่เป็น FK
+	MedicialDeviceID *uint
+	MedicialDevice   MedicalDevice `gorm:"references:id"`
 }
