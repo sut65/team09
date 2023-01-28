@@ -45,7 +45,7 @@ func CreateMedicalDevice(c *gin.Context) {
 		Status:      status,
 		Device_Name: medicaldevice.Device_Name,
 		Amount:      medicaldevice.Amount,
-		TimeStamp:   medicaldevice.TimeStamp,
+		Record_Date: medicaldevice.Record_Date,
 	}
 
 	// บันทึก
@@ -101,7 +101,7 @@ func UpdateMedicalDevice(c *gin.Context) {
 		return
 	}
 	if tx := entity.DB().Where("id = ?", medicaldevice.ID).First(&medicaldevice); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "patien_schedule not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "medicaldevices not found"})
 		return
 	}
 	if err := entity.DB().Save(&medicaldevice).Error; err != nil {

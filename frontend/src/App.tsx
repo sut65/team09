@@ -22,6 +22,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 
 // import Home from "./components/Home";
 import EmployeeList from "./components/employee/EmployeeList";
@@ -36,6 +37,9 @@ import PatientCreate from "./components/patient/PatientCreate";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import MedicalDeviceList from "./components/MedialDevice/MedicalDeviceList";
+import Treatment from "./components/treatment/Treatment";
+import TreatmentCreate from "./components/treatment/TreatmentCreate";
+import TreatmentUpdate from "./components/treatment/TreatmentUpdate";
 // import EmployeeCreate from "./components/EmployeeCreate";
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
@@ -98,8 +102,10 @@ const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,},
   { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" ,},
   { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,},
+  { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
+  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
 ];
 
 function App() {
@@ -224,6 +230,9 @@ function App() {
                 <Route path="/DentistSchedule/home" element={<DentistSchedule />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
                 <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
+                <Route path="/treatmentlistshow" element={<Treatment />} />
+                <Route path="/treatmentscreate" element={<TreatmentCreate />} />
+                <Route path="/treatmentupdate" element={<TreatmentUpdate />} />
               </Routes>
             </Container>
           </Box>

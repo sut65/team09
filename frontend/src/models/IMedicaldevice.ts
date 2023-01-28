@@ -17,5 +17,5 @@ export interface MedicalDeviceInterface{
 
     Device_Name?: string,
     Amount?: number,
-    TimeStamp?: Date | null,
+    Record_Date?: Date | null,
 }

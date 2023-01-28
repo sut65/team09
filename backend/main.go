@@ -7,6 +7,7 @@ import (
 	medicaldevice "github.com/sut65/team09/controller/medicaldevice"
 	patienschedule "github.com/sut65/team09/controller/patienschedule"
 	patient "github.com/sut65/team09/controller/patient"
+	dentist "github.com/sut65/team09/controller/dentist"
 	controller "github.com/sut65/team09/controller/treatment"
 	"github.com/sut65/team09/entity"
 )
@@ -141,6 +142,28 @@ func main() {
 	router.POST("/dentist_schedules", docterschedule.CreateDentistSchedule)
 	router.PATCH("/dentist_schedules", docterschedule.UpdateDentistSchedules)
 	router.DELETE("/dentist_schedules/:id", docterschedule.DeleteDentistSchedule)
+
+	//-------------Dentist-------------------
+	// specialized Routes
+	router.GET("/specializeds", dentist.ListSpecialized)
+	router.GET("/specialized/:id", dentist.GetSpecialized)
+	router.POST("/specializeds", dentist.CreateSpecialized)
+	router.PATCH("/specializeds", dentist.UpdateSpecialized)
+	router.DELETE("/specialized/:id", dentist.DeleteSpecialized)
+
+	// university Routes
+	router.GET("/universitys", dentist.ListUniversity)
+	router.GET("/university/:id", dentist.GetUniversity)
+	router.POST("/universitys", dentist.CreateUniversity)
+	router.PATCH("/universitys", dentist.UpdateUniversity)
+	router.DELETE("/university/:id", dentist.DeleteUniversity)
+
+	// dentists Routes
+	router.GET("/dentists", dentist.ListDentist)
+	router.GET("/dentist/:id", dentist.GetDentist)
+	router.POST("/dentists", dentist.CreateDentist)
+	router.PATCH("/dentists", dentist.UpdateDentist)
+	router.DELETE("/dentist/:id", dentist.DeleteDentist)
 
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)

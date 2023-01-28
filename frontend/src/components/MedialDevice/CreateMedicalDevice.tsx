@@ -11,6 +11,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { Link as RouterLink } from "react-router-dom";
 //import { GetAdminByID } from "../services/HttpClientService";
 
 //api
@@ -84,33 +85,33 @@ function MedicalDevice() {
   };
 
   //ทดสอบข้อมูล
-  const fetchEmployees = async () => {
-    let res = await GetEmployee();
-    res && setEmployee(res);
-  };
+  // const fetchEmployees = async () => {
+  //   let res = await GetEmployee();
+  //   res && setEmployee(res);
+  // };
 
   // insert data to db
   const submit = async () => {
     let data = {
-      EmployID: convertType(medicaldevice.EmployeeID),
-      Type_ID: convertType(medicaldevice.TypeID),
-      Status_ID: convertType(medicaldevice.StatusID),
+      //EmployeeID: convertType(medicaldevice.EmployeeID),
+      TypeID: convertType(medicaldevice.TypeID),
+      StatusID: convertType(medicaldevice.StatusID),
       Device_Name: medicaldevice.Device_Name,
-      Amount: medicaldevice.Amount,
-      TimeStamp: date,
+      Amount: convertType(medicaldevice.Amount),
+      Record_Date: date,
     };
 
     console.log("data", data)
 
     let res = await CreateMedicalDevice(data);
     res ? setSuccess(true) : setError(true);
-    // window.location.href = "/MedicalDevice"
+    window.location.href = "/MedicalDevice"
   };
 
   useEffect(() => {
     fetchTypes();
     fetchStatuses();
-    fetchEmployees();
+    //fetchEmployees();
     //fetchEmployeeID();
   }, []);
 
@@ -158,8 +159,8 @@ function MedicalDevice() {
           </Typography>
           <hr style={{ width: "400px", opacity: "0.5" }} />
           
-          {/*Employee ID*/}
-          <Box
+          {/*Employee ID รอดึงข้อมูลจากผูู้ login*/ }
+          {/* <Box
             sx={{
               display: "flex",
               mt: 2,
@@ -187,7 +188,7 @@ function MedicalDevice() {
                 ))}
               </Select>
             </Box>
-          </Box>
+          </Box> */}
 
           {/*Type ID*/}
           <Box
@@ -333,13 +334,13 @@ function MedicalDevice() {
             </Box>
           </Box>
 
-          {/* Btn submit */}
+          {/* Btn submit and back */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
             <Button
-              style={{ fontSize: "1rem" }}
-              onClick={submit}
-              variant="contained"
-              color="primary"
+               component={RouterLink}
+               to="/MedicalDevice"
+               variant="contained"
+               color="error"
             >
               Back
             </Button>

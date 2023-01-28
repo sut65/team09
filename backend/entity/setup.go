@@ -48,7 +48,11 @@ func SetupDatabase() {
 		&Specialized{},
 		&University{},
 		&Dentist{},
+		//treatment and treatment_plan
 		&Treatment{},
+		&Treatment_plan{}, 
+		&Type_of_treatment{}, 
+		&Type_of_number_of_treatment{},
 		//Prescription
 		&Medicine{},
 		&Medicine_status{},
@@ -57,6 +61,7 @@ func SetupDatabase() {
 		&Daywork{},
 		&Doctask{},
 		&Dentist_schedule{},
+		
 	)
 
 	db = database
@@ -80,6 +85,11 @@ func SetupDatabase() {
 	}
 	db.Model(&Role{}).Create(&role2)
 
+	role3 := Role{
+		Role_name: "Dentist",
+	}
+	db.Model(&Role{}).Create(&role3)
+
 	//Gender
 	gender1 := Gender{
 		Gender_name: "Male",
@@ -99,6 +109,11 @@ func SetupDatabase() {
 
 	province2 := Province{
 		Province_name: "Chiang Mai",
+	}
+	db.Model(&Province{}).Create(&province2)
+
+	province3 := Province{
+		Province_name: "Bangkok",
 	}
 	db.Model(&Province{}).Create(&province2)
 
@@ -164,6 +179,11 @@ func SetupDatabase() {
 	//employee
 	password1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
 	password2, err := bcrypt.GenerateFromPassword([]byte("5678"), 14)
+	password3, err := bcrypt.GenerateFromPassword([]byte("12123"), 14)
+	password4, err := bcrypt.GenerateFromPassword([]byte("abcde00"), 14)
+	password5, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+	password6, err := bcrypt.GenerateFromPassword([]byte("0001111"), 14)
+	password7, err := bcrypt.GenerateFromPassword([]byte("www"), 14)
 
 	em1 := Employee{
 		Employee_number: "B0000001",
@@ -364,8 +384,280 @@ func SetupDatabase() {
 		Status:      Status2,
 		Device_Name: "เก้าอี้ทำฟัน",
 		Amount:      1,
-		TimeStamp:   DateTimeA,
+		Record_Date: DateTimeA,
 	}
 	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
 
+
+	//--------ระบบจัดการข้อมูลแพทย์---------
+	//---Specialized---
+	specialized1 := Specialized{
+		Specialized_Name: "สาขาปริทันตวิทยา",
+	}
+	db.Model(&Specialized{}).Create(&specialized1)
+
+	specialized2 := Specialized{
+		Specialized_Name: "สาขาทันตกรรมหัตถการ",
+	}
+	db.Model(&Specialized{}).Create(&specialized2)
+
+	specialized3 := Specialized{
+		Specialized_Name: "สาขาศัลยศาสตร์ช่องปากและแม็กซิลโลเฟเชียล",
+	}
+	db.Model(&Specialized{}).Create(&specialized3)
+
+	specialized4 := Specialized{
+		Specialized_Name: "สาขาทันตสาธารณสุข",
+	}
+	db.Model(&Specialized{}).Create(&specialized4)
+
+	specialized5 := Specialized{
+		Specialized_Name: "สาขาทันตกรรมประดิษฐ์",
+	}
+	db.Model(&Specialized{}).Create(&specialized5)
+
+	specialized6 := Specialized{
+		Specialized_Name: "สาขาทันตกรรมสำหรับเด็ก",
+	}
+	db.Model(&Specialized{}).Create(&specialized6)
+
+	specialized7 := Specialized{
+		Specialized_Name: "สาขาวิทยาเอ็นโดดอนต์",
+	}
+	db.Model(&Specialized{}).Create(&specialized7)
+
+	specialized8 := Specialized{
+		Specialized_Name: "สาขาทันตกรรมจัดฟัน",
+	}
+	db.Model(&Specialized{}).Create(&specialized8)
+
+	specialized9 := Specialized{
+		Specialized_Name: "สาขาวิทยาการวินิจฉัยโรคช่องปาก",
+	}
+	db.Model(&Specialized{}).Create(&specialized9)
+
+
+	//University
+	University1 := University{
+		University_Name: "มหาวิทยาลัยมหิดล",
+	}
+	db.Model(&University{}).Create(&University1)
+
+	University2 := University{
+		University_Name: "จุฬาลงกรณ์มหาวิทยาลัย",
+	}
+	db.Model(&University{}).Create(&University2)
+
+	University3 := University{
+		University_Name: "มหาวิทยาลัยเชียงใหม่",
+	}
+	db.Model(&University{}).Create(&University3)
+
+	University4 := University{
+		University_Name: "มหาวิทยาลัยเชียงใหม่",
+	}
+	db.Model(&University{}).Create(&University4)
+
+	University5 := University{
+		University_Name: "มหาวิทยาลัยเชียงใหม่",
+	}
+	db.Model(&University{}).Create(&University5)
+
+	University6 := University{
+		University_Name: "มหาวิทยาลัยรังสิต",
+	}
+	db.Model(&University{}).Create(&University6)
+
+	University7 := University{
+		University_Name: "มหาวิทยาลัยเทคโนโลยีสุรนารี",
+	}
+	db.Model(&University{}).Create(&University7)
+
+
+	//insert dentist
+	dentist1 := Dentist{
+		FirstName:  	"Lawn",
+		LastName:   	"Helkin",
+		Personal_id:	"6520365417856",
+		Email:			"lawn@gmail.com",
+		Password:    	string(password4),
+		Age:			31,
+		Phone_Number:	"0645127854",
+
+		Gender:			gender1,
+		Specialized: 	specialized9,
+		University:		University2,
+		Role:			role3,
+		Province:     	province2,
+	}
+	db.Model(&Dentist{}).Create(&dentist1)
+
+	dentist2 := Dentist{
+		FirstName:  	"Emma",
+		LastName:   	"Watson",
+		Personal_id:	"4752103658952",
+		Email:			"emma@gmail.com",
+		Password:    	string(password3),
+		Age:			28,
+		Phone_Number:	"0854123457",
+
+		Gender:			gender2,
+		Specialized: 	specialized4,
+		University:		University5,
+		Role:			role3,
+		Province:     	province1,
+	}
+	db.Model(&Dentist{}).Create(&dentist2)
+
+	dentist3 := Dentist{
+		FirstName:  	"Shiro",
+		LastName:   	"Uki",
+		Personal_id:	"4521032568745",
+		Email:			"shiro@hotmail.com",
+		Password:    	string(password5),
+		Age:			41,
+		Phone_Number:	"0965412547",
+
+		Gender:			gender1,
+		Specialized: 	specialized1,
+		University:		University1,
+		Role:			role3,
+		Province:     	province3,
+	}
+	db.Model(&Dentist{}).Create(&dentist3)
+
+	dentist4 := Dentist{
+		FirstName:  	"Olivia",
+		LastName:   	"Cruz",
+		Personal_id:	"5230145278964",
+		Email:			"olivia@hotmail.com",
+		Password:    	string(password7),
+		Age:			39,
+		Phone_Number:	"0654174582",
+
+		Gender:			gender2,
+		Specialized: 	specialized8,
+		University:		University6,
+		Role:			role3,
+		Province:     	province3,
+	}
+	db.Model(&Dentist{}).Create(&dentist4)
+
+	dentist5 := Dentist{
+		FirstName:  	"Bucky",
+		LastName:   	"Crosia",
+		Personal_id:	"9520136457824",
+		Email:			"bucky@gmail.com",
+		Password:    	string(password6),
+		Age:			45,
+		Phone_Number:	"0854127833",
+
+		Gender:			gender1,
+		Specialized: 	specialized2,
+		University:		University4,
+		Role:			role3,
+		Province:     	province1,
+	}
+	db.Model(&Dentist{}).Create(&dentist5)
+
+	//Type of treatment 
+	Type_of_treatment1 := Type_of_treatment{
+		Type_of_treatment_name: "รักษารากฟัน(ฟันหน้า)",
+		Price:                  5000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment1)
+
+	Type_of_treatment2 := Type_of_treatment{
+		Type_of_treatment_name: "รักษารากฟัน(ฟันกราน้อย)",
+		Price:                  7000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment2)
+
+	Type_of_treatment3 := Type_of_treatment{
+		Type_of_treatment_name: "รักษารากฟัน(ฟันกราม)",
+		Price:                  7000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment3)
+
+	Type_of_treatment4 := Type_of_treatment{
+		Type_of_treatment_name: "รากฟันเทียม",
+		Price:                  50000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment4)
+
+	Type_of_treatment5 := Type_of_treatment{
+		Type_of_treatment_name: "รากฟันเทียม",
+		Price:                  50000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment5)
+
+	Type_of_treatment6 := Type_of_treatment{
+		Type_of_treatment_name: "การถ่ายภาพรังสี (X-ray)",
+		Price:                  150,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment6)
+
+	Type_of_treatment7 := Type_of_treatment{
+		Type_of_treatment_name: "อุดฟัน",
+		Price:                  1000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment7)
+
+	Type_of_treatment8 := Type_of_treatment{
+		Type_of_treatment_name: "ถอนฟัน",
+		Price:                  800,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment8)
+
+	Type_of_treatment9 := Type_of_treatment{
+		Type_of_treatment_name: "จัดฟัน",
+		Price:                  100000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment9)
+
+	Type_of_treatment10 := Type_of_treatment{
+		Type_of_treatment_name: "ฟอกสีฟัน",
+		Price:                  2000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment10)
+	
+	Type_of_treatment11 := Type_of_treatment{
+		Type_of_treatment_name: "รักษาโรคเหงือก",
+		Price:                  500,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment11)
+
+	Type_of_treatment12 := Type_of_treatment{
+		Type_of_treatment_name: "ใส่ฟันเทียมบางส่วนเเบบถอดได้",
+		Price:                  4000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment12)
+
+	Type_of_treatment13 := Type_of_treatment{
+		Type_of_treatment_name: "ใส่ฟันเทียมบางส่วนเเบบติดเเน่น",
+		Price:                  10000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment13)
+
+	Type_of_treatment14 := Type_of_treatment{
+		Type_of_treatment_name: "ใส่ฟันเทียมทั้งปาก (บน-ล่าง)",
+		Price:                  20000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment14)
+
+	//Type of number of treatment
+	Type_of_number_of_treatment1 := Type_of_number_of_treatment{
+		Type_of_number_of_treatment_name: "ซี่",
+	}
+	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment1)
+
+	Type_of_number_of_treatment2 := Type_of_number_of_treatment{
+		Type_of_number_of_treatment_name: "ฟิล์ม",
+	}
+	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment2)
+
+	Type_of_number_of_treatment3 := Type_of_number_of_treatment{
+		Type_of_number_of_treatment_name: "ด้าน",
+	}
+	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment3)
 }

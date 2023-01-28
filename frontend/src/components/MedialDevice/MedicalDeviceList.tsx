@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { MedicalDeviceInterface } from "../../models/IMedicaldevice";
 import { GetMedicalDevice } from "../../services/HttpClientService";
+import moment from "moment";
 
 function MedicalDeviceList() {
   const [medicalDevice, setMedicalDevice] = useState<MedicalDeviceInterface[]>([]);
@@ -44,7 +45,7 @@ function MedicalDeviceList() {
     },
     { field: "Device_Name", headerName: "ชื่ออุปกรณ์", width: 250 },
     { field: "Amount", headerName: "จำนวน", width: 70 },
-    { field: "Date", headerName: "วันที่ เวลาตอนบันทึกข้อมูล", width: 250 },
+    { field: "Record_Date", headerName: "วันที่ เวลาตอนบันทึกข้อมูล", width: 250, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm') },
 
   ];
 
