@@ -10,6 +10,8 @@ import (
 	dentist "github.com/sut65/team09/controller/dentist"
 	treatment "github.com/sut65/team09/controller/treatment"
 	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
+	payment "github.com/sut65/team09/controller/payment"
+	prescription "github.com/sut65/team09/controller/prescription"
 	"github.com/sut65/team09/entity"
 	
 	
@@ -174,6 +176,43 @@ func main() {
 	router.POST("/dentists", dentist.CreateDentist)
 	router.PATCH("/dentists", dentist.UpdateDentist)
 	router.DELETE("/dentist/:id", dentist.DeleteDentist)
+
+	//---------Payment-------------
+	// Payment_status Routes
+	router.GET("/payment_statuses", payment.ListPayment_statuses)
+	router.GET("/payment_status/:id", payment.GetPayment_status)
+	//router.POST("/payment_statuses", payment.CreatePayment_status)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	// Payment Routes
+	router.GET("/payments", payment.ListPayments)
+	router.GET("/payment/:id", payment.GetPayment)
+	router.POST("/payments", payment.CreatePayment)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	//---------Prescription-------------
+	// Medicine_status Routes
+	router.GET("/Medicine_statuses", prescription.ListMedicine_statuses)
+	router.GET("/Medicine_status/:id", prescription.GetMedicine_status)
+	//router.POST("/payment_statuses", payment.CreatePayment_status)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	// Medicine Routes
+	router.GET("/Medicines", prescription.ListMedicines)
+	router.GET("/Medicine/:id", prescription.GetMedicine)
+	//router.POST("/payment_statuses", payment.CreatePayment_status)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	// Prescription Routes
+	router.GET("/prescriptions", prescription.ListPrescriptions)
+	router.GET("/prescription/:id", prescription.GetPrescription)
+	router.POST("/prescription", prescription.CreatePrescription)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)
