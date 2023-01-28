@@ -169,6 +169,7 @@ type MedicalDevice struct {
 	Record_Date time.Time
 
 	Repairs []Repair `gorm:"foreignKey:MedicalDeviceID"`
+	Room_Details []Room_Detail `gorm:"foreignKey:MedicalDeviceID"`
 }
 
 // -----ระบบแจ้งซ่อมเครื่องมือแพทย์-----
@@ -424,4 +425,35 @@ type Dentist_schedule struct {
 	Dentist   Dentist `gorm:"references:id"`
 	TimeWork  time.Time
 	TimeEnd   time.Time
+}
+
+//ระบบจัดการห้อง
+type Category struct {
+	gorm.Model
+	Category_Name string
+
+	Room_Details []Room_Detail `gorm:"foreignKey:CategoryID"`
+}
+
+type Room_Number struct {
+	gorm.Model
+	Room_number string
+
+	Room_Details []Room_Detail `gorm:"foreignKey:Room_NumberID"`
+}
+
+type Room_Detail struct {
+	gorm.Model
+
+	//CategoryID ทำหน้าที่เป็น FK
+	CategoryID *uint
+	Category   Category `gorm:"references:id"`
+
+	//NumberID ทำหน้าที่เป็น FK
+	Room_NumberID *uint
+	Room_Number   Room_Number `gorm:"references:id"`
+
+	//MedicialDeviceID ทำหน้าที่เป็น FK
+	MedicialDeviceID *uint
+	MedicialDevice   MedicalDevice `gorm:"references:id"`
 }
