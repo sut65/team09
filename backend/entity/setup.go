@@ -48,7 +48,11 @@ func SetupDatabase() {
 		&Specialized{},
 		&University{},
 		&Dentist{},
+		//treatment and treatment_plan
 		&Treatment{},
+		&Treatment_plan{}, 
+		&Type_of_treatment{}, 
+		&Type_of_number_of_treatment{},
 		//Prescription
 		&Medicine{},
 		&Medicine_status{},
@@ -57,6 +61,7 @@ func SetupDatabase() {
 		&Daywork{},
 		&Doctask{},
 		&Dentist_schedule{},
+		
 	)
 
 	db = database
@@ -554,4 +559,105 @@ func SetupDatabase() {
 		Province:     	province1,
 	}
 	db.Model(&Dentist{}).Create(&dentist5)
+
+	//Type of treatment 
+	Type_of_treatment1 := Type_of_treatment{
+		Type_of_treatment_name: "รักษารากฟัน(ฟันหน้า)",
+		Price:                  5000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment1)
+
+	Type_of_treatment2 := Type_of_treatment{
+		Type_of_treatment_name: "รักษารากฟัน(ฟันกราน้อย)",
+		Price:                  7000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment2)
+
+	Type_of_treatment3 := Type_of_treatment{
+		Type_of_treatment_name: "รักษารากฟัน(ฟันกราม)",
+		Price:                  7000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment3)
+
+	Type_of_treatment4 := Type_of_treatment{
+		Type_of_treatment_name: "รากฟันเทียม",
+		Price:                  50000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment4)
+
+	Type_of_treatment5 := Type_of_treatment{
+		Type_of_treatment_name: "รากฟันเทียม",
+		Price:                  50000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment5)
+
+	Type_of_treatment6 := Type_of_treatment{
+		Type_of_treatment_name: "การถ่ายภาพรังสี (X-ray)",
+		Price:                  150,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment6)
+
+	Type_of_treatment7 := Type_of_treatment{
+		Type_of_treatment_name: "อุดฟัน",
+		Price:                  1000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment7)
+
+	Type_of_treatment8 := Type_of_treatment{
+		Type_of_treatment_name: "ถอนฟัน",
+		Price:                  800,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment8)
+
+	Type_of_treatment9 := Type_of_treatment{
+		Type_of_treatment_name: "จัดฟัน",
+		Price:                  100000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment9)
+
+	Type_of_treatment10 := Type_of_treatment{
+		Type_of_treatment_name: "ฟอกสีฟัน",
+		Price:                  2000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment10)
+	
+	Type_of_treatment11 := Type_of_treatment{
+		Type_of_treatment_name: "รักษาโรคเหงือก",
+		Price:                  500,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment11)
+
+	Type_of_treatment12 := Type_of_treatment{
+		Type_of_treatment_name: "ใส่ฟันเทียมบางส่วนเเบบถอดได้",
+		Price:                  4000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment12)
+
+	Type_of_treatment13 := Type_of_treatment{
+		Type_of_treatment_name: "ใส่ฟันเทียมบางส่วนเเบบติดเเน่น",
+		Price:                  10000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment13)
+
+	Type_of_treatment14 := Type_of_treatment{
+		Type_of_treatment_name: "ใส่ฟันเทียมทั้งปาก (บน-ล่าง)",
+		Price:                  20000,
+	}
+	db.Model(&Type_of_treatment{}).Create(&Type_of_treatment14)
+
+	//Type of number of treatment
+	Type_of_number_of_treatment1 := Type_of_number_of_treatment{
+		Type_of_number_of_treatment_name: "ซี่",
+	}
+	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment1)
+
+	Type_of_number_of_treatment2 := Type_of_number_of_treatment{
+		Type_of_number_of_treatment_name: "ฟิล์ม",
+	}
+	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment2)
+
+	Type_of_number_of_treatment3 := Type_of_number_of_treatment{
+		Type_of_number_of_treatment_name: "ด้าน",
+	}
+	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment3)
 }
