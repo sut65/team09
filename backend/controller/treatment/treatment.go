@@ -79,9 +79,11 @@ func GetTreatment(c *gin.Context) {
 func ListTreatments(c *gin.Context) { 
 	var treatments []entity.Treatment
 	if err := entity.DB().Raw("SELECT * FROM treatments").Scan(&treatments).Error; err != nil {
+
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 
 		return
+
 	}
 	c.JSON(http.StatusOK, gin.H{"data": treatments}) 
 }
