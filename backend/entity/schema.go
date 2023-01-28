@@ -133,8 +133,11 @@ type Patient struct {
 
 	Prescriptions []Prescription `gorm:"foreignKey:PatientID"`
 
-	//สำหรับ entity การรักษาดึงไป
+	//โยงกับระบบบันทึกการรักษา
 	Treatment []Treatment `gorm:"foreignkey:PatientID"`
+
+	//โยงกับระบบจัดแผนการรักษา
+	Treatment_plan []Treatment_plan `gorm:"foreignkey:PatientID"`
 }
 
 // -----ระบบเครื่องมือแพทย์-----
@@ -260,8 +263,11 @@ type Dentist struct {
 	ProvinceID *uint
 	Province   Province `gorm:"references:id"`
 
-	//สำหรับ entity การรักษาดึงไป
+	//โยงกับระบบบันทึกการรักษา
 	Treatment []Treatment `gorm:"foreignkey:DentistID"`
+
+	//โยงกับระบบจัดเเผนการรักษา
+	Treatment_plan []Treatment_plan `gorm:"foreignkey:DentistID"`
 
 	Prescriptions []Prescription `gorm:"foreignKey:DentistID"`
 	//โยงกับระบบจัดตารางงานแพทย์
@@ -304,7 +310,12 @@ type Type_of_treatment struct {
 	gorm.Model
 	Type_of_treatment_name string
 	Price                  int
-	Treatment              []Treatment `gorm:"foreignkey:Type_Of_TreatmentID"`
+	//โยงกับระบบบันทึกการักษา
+	Treatment []Treatment `gorm:"foreignkey:Type_Of_TreatmentID"`
+
+	//โยงกับระบบจัดเเผนการักษา
+	Treatment_plan []Treatment_plan `gorm:"foreignkey:Type_Of_TreatmentID"`
+
 	//โยงกับระบบนัดผู้ป่วย
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
 }
@@ -312,37 +323,57 @@ type Type_of_treatment struct {
 type Type_of_number_of_treatment struct {
 	gorm.Model
 	Type_of_number_of_treatment_name string
-	Treatment                        []Treatment `gorm:"foreignkey:Type_Of_Number_Of_TreatmentID"`
+
+	//โยงกับระบบบันทึกการรักษา
+	Treatment []Treatment `gorm:"foreignkey:Type_Of_Number_Of_TreatmentID"`
+
+	//โยงกับระบบจัดเเผนการรักษา
+	Treatment_plan []Treatment_plan `gorm:"foreignkey:Type_Of_Number_Of_TreatmentID"`
 }
 
 type Treatment struct {
 	gorm.Model
-
+	//DentistID 	ทำหน้าที่เป็น FK
 	DentistID *uint
 	Dentist   Dentist
-
-	PatientID *uint
-	Patient   Patient
-
-	Number_of_cavities int
-
+	//PatientID 	ทำหน้าที่เป็น FK
+	PatientID              *uint
+	Patient                Patient
+	Number_of_cavities     int
 	Number_of_swollen_gums int
-
-	Other_teeth_problems string
-
+	Other_teeth_problems   string
+	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment
-
 	Number_of_treatment int
-
+	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
+	Treatment_detail              string
+	Treatment_time                time.Time
+	Treatment_code                string
+}
 
-	Treatment_detail string
-
-	Treatment_time time.Time
-
-	Treatment_code string
+// ------ระบบจัดแผนการรักษา------//
+type Treatment_plan struct {
+	gorm.Model
+	//DentistID 	ทำหน้าที่เป็น FK
+	DentistID *uint
+	Dentist   Dentist
+	//PatientID 	ทำหน้าที่เป็น FK
+	PatientID          *uint
+	Patient            Patient
+	Order_of_treatment int
+	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
+	Type_Of_TreatmentID *uint
+	Type_Of_Treatment   Type_of_treatment
+	Number_of_treatment int
+	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
+	Type_Of_Number_Of_TreatmentID *uint
+	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
+	Treatment_detail              string
+	Treatment_explain             string
+	Treatment_time                time.Time
 }
 
 // -----ระบบแจ้งยอดชำระ-----
