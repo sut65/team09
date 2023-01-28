@@ -11,10 +11,6 @@ import { GetPatientSchedules } from "../../services/HttpClientService";
 function PatienScheduleHome() {
   const [patien_schedule, setPatien_schedule] = useState<PatienSceheduleInterface[]>([]);
 
-  useEffect(() => {
-    getPatien_schedules();
-  }, []);
-
   const getPatien_schedules = async () => {
     let res = await GetPatientSchedules();
     if (res) {
@@ -22,18 +18,23 @@ function PatienScheduleHome() {
     } 
   };
 
+  useEffect(() => {
+    getPatien_schedules();
+  }, []);
+
+
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 60 },
-    { field: "PatientID",headerName: "ชื่อ-สกุล ผู้ป่วย",width: 150, valueFormatter: (params) => params.value.ID,},
-    { field: "EmployeeID",headerName: "แพทย์ที่รับผิดชอบ",width: 250,valueFormatter: (params) => params.value.Name,},
-    { field: "ReasonID",headerName: "หมายเหตุ",width: 150,valueFormatter: (params) => params.value.Commerce,},
+    { field: "PatientID",headerName: "ชื่อ ผู้ป่วย",width: 150,},
+    { field: "EmployeeID",headerName: "แพทย์ที่รับผิดชอบ",width: 250,},
+    { field: "ReasonID",headerName: "หมายเหตุ",width: 150,},
     { field: "Type_Of_TreatmentID", headerName: "ประเภทการรักษา", width: 100 ,},
     { field: "Date_time", headerName: "วันที่และเวลา", width: 200 },
   ];
 
   return (
     <div>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Box
           display="flex"
           sx={{

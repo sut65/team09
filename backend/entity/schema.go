@@ -83,7 +83,7 @@ type Employee struct {
 	Role   Role `gorm:"references:id"`
 
 	Patients       []Patient       `gorm:"foreignKey: EmployeeID"`
-	Medical_device []MedicalDevice `gorm:"foreignKey:EmployeeID"`
+	// Medical_device []MedicalDevice `gorm:"foreignKey:EmployeeID"`
 	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
 	//โยงกับระบบนัดผู้ป่วย
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:EmployeeID"`
@@ -185,7 +185,7 @@ type Repair struct {
 	Employee   Employee
 
 	MedicalDeviceID *uint
-	MedicalDevice   MedicalDevice
+	// MedicalDevice   MedicalDevice
 
 	DamageLevelID *uint
 	DamageLevel   DamageLevel
@@ -212,8 +212,9 @@ type Patien_schedule struct {
 	ReasonID *uint
 	Reason   Reason `gorm:"references:id"`
 
-	Type_Of_TreatmentID *uint
-	Type_Of_Treatment   Type_of_treatment `gorm:"references:id"`
+	Type_of_treatmentID *uint
+	Type_of_treatment   Type_of_treatment	`gorm:"references:id"`
+
 	Date_time           time.Time
 }
 
@@ -317,7 +318,7 @@ type Type_of_treatment struct {
 	Treatment_plan []Treatment_plan `gorm:"foreignkey:Type_Of_TreatmentID"`
 
 	//โยงกับระบบนัดผู้ป่วย
-	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_Of_TreatmentID"`
+	Patien_schedule 	[]Patien_schedule `gorm:"foreignKey:Type_of_treatmentID"`
 }
 
 type Type_of_number_of_treatment struct {

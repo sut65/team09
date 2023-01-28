@@ -15,15 +15,17 @@ import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+
 //import Interface
 import {ReasonInterface} from "../../models/IReason";
 import {PatienSceheduleInterface} from "../../models/IPatienSchedule";
 import { EmployeeInterface } from "../../models/IEmployee";
-// import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
+import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { PatientInterface } from "../../models/IPatient";
 
 import {
     GetPatientSchedules,
+    GetTypeOfTreatment,
     GetEmployee,
     GetPatient,
     GetReasons,
@@ -42,7 +44,7 @@ function PatientSchedule() {
     const [patients, setPatients] = useState<PatientInterface[]>([]);
     const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
     const [reasons, setReasons] = useState<ReasonInterface[]>([]);
-    // const [type_of_treatmentses, setType_of_treatmentses] = useState<Type_of_treatments_Interface[]>([]);
+    const [type_of_treatmentses, setType_of_treatmentses] = useState<Type_of_treatments_Interface[]>([]);
     const [patien_schedule, setPatienSchedule] = useState<PatienSceheduleInterface>({
         Date_time: new Date(),
     });
@@ -67,6 +69,7 @@ function PatientSchedule() {
             ...patien_schedule,
             [name]: event.target.value,
         });
+        console.log(patien_schedule)
     };
 
     const getReasons = async () => {
@@ -77,13 +80,13 @@ function PatientSchedule() {
         }
     };
 
-    // const getReasons = async () => {
-    //     let res = await GetReasons();
-    //     patien_schedule.ReasonID = res.ID;
-    //     if (res) {
-    //         setReasons(res);
-    //     }
-    // };
+    const getType_of_treatmentses = async () => {
+        let res = await GetTypeOfTreatment();
+        patien_schedule.Type_Of_TreatmentID = res.ID;
+        if (res) {
+            setType_of_treatmentses(res);
+        }
+    };
 
     const getEmployees = async () => {
         let res = await GetEmployee();
@@ -104,6 +107,7 @@ function PatientSchedule() {
         getReasons();
         getEmployees();
         getPatients();
+        getType_of_treatmentses();
     }, []);
 
 
@@ -116,9 +120,6 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
   
-
-const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
-
 useEffect(() => {
     getReasons();
    
@@ -129,8 +130,11 @@ const convertType = (data: string | number | undefined) => {
 };
 async function submit() {
     let data = {
+        PatientID: convertType(patien_schedule.PatientID),
+        EmployeeID: convertType(patien_schedule.EmployeeID),
         ReasonID: convertType(patien_schedule.ReasonID),
-        Date_time: patien_schedule.Date_time
+        Type_Of_TreatmentID: convertType(patien_schedule.Type_Of_TreatmentID),
+        Date_time: patien_schedule.Date_time,
     };
     console.log(data);
     let res = await PatientSchedules(data);
@@ -279,29 +283,29 @@ async function submit() {
                             </FormControl> */}
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        {/* <FormControl sx = {{width: 400}}>
+                        <FormControl sx = {{width: 400}}>
                         <InputLabel id="demo-simple-select-label">ประเภทการรักษา</InputLabel>
                                 <Select
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
+                                    value={patien_schedule.Type_Of_TreatmentID + ""}
                                     onChange={handleChange}
-                                    label= "Reason"
+                                    label= "ประเภทการรักษา"
                                     inputProps={{
-                                        name: "ReasonID",
+                                        name: "Type_Of_TreatmentID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
                                     กรุณาเลือกประภทการรักษา
                                   </option>
-                                    {reasons.map((item: ReasonInterface) => (
+                                    {type_of_treatmentses.map((item: Type_of_treatments_Interface) => (
                                         <option value={item.ID} key={item.ID}>
-                                            {item.Method}
+                                            {item.Type_of_treatment_name}
                                         </option>
                                     ))}
                                 </Select>
-                            </FormControl> */}
+                            </FormControl>
                         </Grid>
                         <Grid xs={3.25} sx={{ padding: 1.3 }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>

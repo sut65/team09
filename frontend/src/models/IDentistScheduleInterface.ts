@@ -1,5 +1,6 @@
 import { DayworkInterface } from "./IDaywork";
 import { DoctaskInterface } from "./IDoctask";
+import { DentistInterface } from "./IDentist";
 export interface DentistSceheduleInterface {
     ID?: number;
    
@@ -8,6 +9,9 @@ export interface DentistSceheduleInterface {
 
     DayID?: number;
     Day?: DayworkInterface;
+
+    DentistID?: number;
+	  Dentist?:   DentistInterface;
 
     TimeWork: Date | null;
     TimeEnd: Date | null;

@@ -24,10 +24,9 @@ function DentistSchedule() {
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 60 },
-    { field: "DayworkID",headerName: "วันที่ทำงาน",width: 150, valueFormatter: (params) => params.value.ID,},
-    { field: "ResponID",headerName: "งานที่รับผิดชอบ",width: 250,valueFormatter: (params) => params.value.Name,},
-    { field: "DentistID",headerName: "ทันตแพทย์",width: 150,valueFormatter: (params) => params.value.Commerce,},
-    // { field: "Type_Of_TreatmentID", headerName: "ประเภทการรักษา", width: 100 ,},
+    { field: "DayworkID",headerName: "วันที่ทำงาน",width: 150, },
+    { field: "ResponID",headerName: "งานที่รับผิดชอบ",width: 250,},
+    // { field: "DentistID",headerName: "ทันตแพทย์",width: 150,valueFormatter: (params) => params.value.Commerce,},
     { field: "TimeWork", headerName: "เวลา", width: 100 },
     { field: "TimeEnd", headerName: "ถึง'", width: 100 },
   ];

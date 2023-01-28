@@ -33,9 +33,9 @@ func SetupDatabase() {
 		&Symptom{},
 		&Patient{},
 		//MedicalDevice
-		&Type{},
-		&Status{},
-		&MedicalDevice{},
+		// &Type{},
+		// &Status{},
+		// &MedicalDevice{},
 		//Repair
 		&DamageLevel{},
 		&Repair{},
@@ -296,7 +296,7 @@ func SetupDatabase() {
 
 	///////////////ข้อมูล ทดสอบ///////////
 	Dentist1 := Dentist{
-		FirstName: "อยากโดนเข็ม",
+		FirstName: "หมอเทวดา",
 	}
 	db.Model(&Dentist{}).Create(&Dentist1)
 
@@ -326,6 +326,12 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription1)
 
 	//จำลองข้อมูลระบบจัดตารางงานแพทย์
+	var Ttype = []Type_of_treatment{
+		{Type_of_treatment_name: "อยากรักษาาาาาา",Price: 1000},
+		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา",Price: 2000},
+	}
+	db.CreateInBatches(Ttype , 2)
+	
 	var day = []Daywork{
 		{Day: "วันจันทร์"},
 		{Day: "วันอังคาร"},
@@ -333,6 +339,9 @@ func SetupDatabase() {
 		{Day: "วันพฤหัสบดี"},
 	}
 	db.CreateInBatches(day, 4)
+
+	
+	
 
 	var task = []Doctask{
 		{Respon: "ตรวจผู้ป่วย"},
@@ -344,38 +353,38 @@ func SetupDatabase() {
 
 	//-------MedicalDevice------------
 	//---Type---
-	Type1 := Type{
-		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
-	}
-	db.Model(&Type{}).Create(&Type1)
+// 	Type1 := Type{
+// 		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
+// 	}
+// 	db.Model(&Type{}).Create(&Type1)
 
-	Type2 := Type{
-		Type_Name: "ทันตกรรมจัดฟัน",
-	}
-	db.Model(&Type{}).Create(&Type2)
+// 	Type2 := Type{
+// 		Type_Name: "ทันตกรรมจัดฟัน",
+// 	}
+// 	db.Model(&Type{}).Create(&Type2)
 
-	Type3 := Type{
-		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
-	}
-	db.Model(&Type{}).Create(&Type3)
+// 	Type3 := Type{
+// 		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
+// 	}
+// 	db.Model(&Type{}).Create(&Type3)
 
 	Type4 := Type{
 		Type_Name: "อุปกรณ์ทั่วไป",
 	}
 	db.Model(&Type{}).Create(&Type4)
 
-	//---Status---
-	Status1 := Status{
-		Status_Choice: "Sterile",
-	}
-	db.Model(&Status{}).Create(&Status1)
+// 	//---Status---
+// 	Status1 := Status{
+// 		Status_Choice: "Sterile",
+// 	}
+// 	db.Model(&Status{}).Create(&Status1)
 
 	Status2 := Status{
 		Status_Choice: "Non-Sterile",
 	}
 	db.Model(&Status{}).Create(&Status2)
 
-	//----ตารางหลัก-----
+// 	//----ตารางหลัก-----
 	DateTimeA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
 
 	MedicalDevice1 := MedicalDevice{
