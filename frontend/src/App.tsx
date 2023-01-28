@@ -51,6 +51,12 @@ import Treatment from "./components/treatment/Treatment";
 import TreatmentCreate from "./components/treatment/TreatmentCreate";
 import TreatmentUpdate from "./components/treatment/TreatmentUpdate";
 
+import Treatment_plan from "./components/treatment_plan/Treatment_plan";
+import TreatmentPlanCreate from "./components/treatment_plan/TreatmentPlanCreate";
+import TreatmentPlanUpdate from "./components/treatment_plan/TreatmentPlanUpdate";
+
+
+
 // import Students from "./components/Student";
 // import StudentCreate from "./components/StudentCreate";
 // import SignIn from "./components/SignIn";
@@ -115,7 +121,8 @@ const menu = [
   { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
-  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
+  { name: "บันทึกการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
+  { name: "จัดแผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,},
   { name: "จัดการข้อมูลแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,},
 
 ];
@@ -244,8 +251,11 @@ function App() {
                 <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
                 <Route path="/treatmentlistshow" element={<Treatment />} />
                 <Route path="/treatmentscreate" element={<TreatmentCreate />} />
-                <Route path="/treatmentsupdate/:id" element={<TreatmentUpdate />} />
                 <Route path="/treatmentupdate" element={<TreatmentUpdate />} />
+                <Route path="/treatmentsupdate/:id" element={<TreatmentUpdate />} />
+                <Route path="/treatmentplanlistshow" element={<Treatment_plan />} />
+                <Route path="/treatment_plan_create" element={<TreatmentPlanCreate />} />
+                <Route path="/treatmentplan_update/:id" element={<TreatmentPlanUpdate />} />         
                 <Route path="/dentists" element={<Dentists />} />
                 <Route path="/dentist/create" element={<DentistCreate />} />
               </Routes>

@@ -8,8 +8,13 @@ import (
 	patienschedule "github.com/sut65/team09/controller/patienschedule"
 	patient "github.com/sut65/team09/controller/patient"
 	dentist "github.com/sut65/team09/controller/dentist"
-	controller "github.com/sut65/team09/controller/treatment"
+	treatment "github.com/sut65/team09/controller/treatment"
+	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
+	payment "github.com/sut65/team09/controller/payment"
+	prescription "github.com/sut65/team09/controller/prescription"
 	"github.com/sut65/team09/entity"
+	
+	
 )
 
 const PORT = "3001"
@@ -89,25 +94,32 @@ func main() {
 	router.DELETE("/reasons/:id", patienschedule.DeleteReason)
 
 	// Treatment Routes
-	r.GET("/treatments", controller.ListTreatmentShow)
-	r.GET("/treatments/:id", controller.GetTreatment)
-	r.POST("/treatments", controller.CreateTreatment)
-	r.PATCH("/treatments/:id", controller.UpdateTreatment)
-	r.DELETE("/treatments/:id", controller.DeleteTreatment)
+	r.GET("/treatments", treatment.ListTreatmentShow)
+	r.GET("/treatments/:id", treatment.GetTreatment)
+	r.POST("/treatments", treatment.CreateTreatment)
+	r.PATCH("/treatments/:id", treatment.UpdateTreatment)
+	r.DELETE("/treatments/:id", treatment.DeleteTreatment)
 
 	// Type of number of treatment Routes
-	r.GET("/type_of_number_of_treatments", controller.List_Type_of_number_of_treatment)
-	r.GET("/type_of_number_of_treatments/:id", controller.Get_Type_of_number_of_treatment)
-	r.POST("/type_of_number_of_treatments", controller.Create_Type_of_number_of_treatment)
-	r.PATCH("/type_of_number_of_treatments", controller.Update_Type_of_number_of_treatment)
-	r.DELETE("/type_of_number_of_treatments/:id", controller.Delete_Type_of_number_of_treatment)
+	r.GET("/type_of_number_of_treatments", treatment.List_Type_of_number_of_treatment)
+	r.GET("/type_of_number_of_treatments/:id", treatment.Get_Type_of_number_of_treatment)
+	r.POST("/type_of_number_of_treatments", treatment.Create_Type_of_number_of_treatment)
+	r.PATCH("/type_of_number_of_treatments", treatment.Update_Type_of_number_of_treatment)
+	r.DELETE("/type_of_number_of_treatments/:id", treatment.Delete_Type_of_number_of_treatment)
+
+	// Treatment Plan Routes
+	r.GET("/treatment_plans", treatment_plan.ListTreatment_plan_show)
+	r.GET("/treatment_plans/:id", treatment_plan.GetTreatment_plan)
+	r.POST("/treatment_plans", treatment_plan.CreateTreatment_plan) 
+	r.PATCH("/treatment_plans", treatment_plan.UpdateTreatment_plan)  
+	r.DELETE("/treatment_plans/:id", treatment_plan.DeleteTreatment_plan)  
 
 	// Type of treatment Routes
-	r.GET("/type_of_treatments", controller.List_Type_of_treatment)
-	r.GET("/type_of_treatments/:id", controller.Get_Type_of_treatment)
-	r.POST("/type_of_treatments", controller.Create_Type_of_treatment)
-	r.PATCH("/type_of_treatments", controller.Update_Type_of_treatment)
-	r.DELETE("/type_of_treatments/:id", controller.Delete_Type_of_treatment)
+	r.GET("/type_of_treatments", treatment.List_Type_of_treatment)
+	r.GET("/type_of_treatments/:id", treatment.Get_Type_of_treatment)
+	r.POST("/type_of_treatments", treatment.Create_Type_of_treatment)
+	r.PATCH("/type_of_treatments", treatment.Update_Type_of_treatment)
+	r.DELETE("/type_of_treatments/:id", treatment.Delete_Type_of_treatment)
 
 	//----medicaldevice-----
 	r.GET("/medicaldevices", medicaldevice.ListMedicalDevices)
@@ -164,6 +176,43 @@ func main() {
 	router.POST("/dentists", dentist.CreateDentist)
 	router.PATCH("/dentists", dentist.UpdateDentist)
 	router.DELETE("/dentist/:id", dentist.DeleteDentist)
+
+	//---------Payment-------------
+	// Payment_status Routes
+	router.GET("/payment_statuses", payment.ListPayment_statuses)
+	router.GET("/payment_status/:id", payment.GetPayment_status)
+	//router.POST("/payment_statuses", payment.CreatePayment_status)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	// Payment Routes
+	router.GET("/payments", payment.ListPayments)
+	router.GET("/payment/:id", payment.GetPayment)
+	router.POST("/payments", payment.CreatePayment)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	//---------Prescription-------------
+	// Medicine_status Routes
+	router.GET("/Medicine_statuses", prescription.ListMedicine_statuses)
+	router.GET("/Medicine_status/:id", prescription.GetMedicine_status)
+	//router.POST("/payment_statuses", payment.CreatePayment_status)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	// Medicine Routes
+	router.GET("/Medicines", prescription.ListMedicines)
+	router.GET("/Medicine/:id", prescription.GetMedicine)
+	//router.POST("/payment_statuses", payment.CreatePayment_status)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	// Prescription Routes
+	router.GET("/prescriptions", prescription.ListPrescriptions)
+	router.GET("/prescription/:id", prescription.GetPrescription)
+	router.POST("/prescription", prescription.CreatePrescription)
+	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
+	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)
