@@ -231,7 +231,7 @@ function TreatmentCreate() {
         console.log(JSON.stringify(data))
 
         const requestOptions = {
-            method: "POST",
+            method: "PATCH",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json"
@@ -239,7 +239,7 @@ function TreatmentCreate() {
             body: JSON.stringify(data),
         };
 
-        fetch(`${apiUrl}/treatment_plans`, requestOptions)
+        fetch(`${apiUrl}/treatment_plans/${id}`, requestOptions)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {

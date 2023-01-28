@@ -104,14 +104,14 @@ func main() {
 	r.GET("/type_of_number_of_treatments", treatment.List_Type_of_number_of_treatment)
 	r.GET("/type_of_number_of_treatments/:id", treatment.Get_Type_of_number_of_treatment)
 	r.POST("/type_of_number_of_treatments", treatment.Create_Type_of_number_of_treatment)
-	r.PATCH("/type_of_number_of_treatments", treatment.Update_Type_of_number_of_treatment)
+	r.PATCH("/type_of_number_of_treatments", treatment.Update_Type_of_number_of_treatment) 
 	r.DELETE("/type_of_number_of_treatments/:id", treatment.Delete_Type_of_number_of_treatment)
 
 	// Treatment Plan Routes
 	r.GET("/treatment_plans", treatment_plan.ListTreatment_plan_show)
 	r.GET("/treatment_plans/:id", treatment_plan.GetTreatment_plan)
 	r.POST("/treatment_plans", treatment_plan.CreateTreatment_plan) 
-	r.PATCH("/treatment_plans", treatment_plan.UpdateTreatment_plan)  
+	r.PATCH("/treatment_plans/:id", treatment_plan.UpdateTreatment_plan)  
 	r.DELETE("/treatment_plans/:id", treatment_plan.DeleteTreatment_plan)  
 
 	// Type of treatment Routes

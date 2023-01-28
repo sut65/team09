@@ -82,7 +82,7 @@ func ListTreatment_plan(c *gin.Context) {
 func ListTreatment_plan_show(c *gin.Context) {
 	result := []map[string]interface{}{}
 	entity.DB().Table("treatment_plans").
-		Select("treatment_plans.id, dentists.first_name, patients.first_name, treatment_plans.order_of_treatment, type_of_treatments.type_of_treatment_name, type_of_number_of_treatments.type_of_number_of_treatment_name, treatment_plans.treatment_detail, treatment_plans.treatment_time").
+		Select("treatment_plans.id, dentists.first_name, patients.first_name, treatment_plans.order_of_treatment, type_of_treatments.type_of_treatment_name,treatment_plans.number_of_treatment, type_of_number_of_treatments.type_of_number_of_treatment_name, treatment_plans.treatment_detail,treatment_plans.treatment_explain, treatment_plans.treatment_time").
 		Joins("left join dentists on dentists.id = treatment_plans.dentist_id").
 		Joins("left join patients on patients.id = treatment_plans.patient_id").
 		Joins("left join type_of_treatments on type_of_treatments.id = treatment_plans.type_of_treatment_id").
@@ -93,7 +93,7 @@ func ListTreatment_plan_show(c *gin.Context) {
 
 func DeleteTreatment_plan(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM treatment_plans WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM treatment_plans WHERE id = ?", id); tx.RowsAffected == 0 { 
 		c.JSON(http.StatusBadRequest, gin.H{"error": "treatment_plans not found"})
 		return
 	}
