@@ -10,8 +10,8 @@ import (
 // POST /dentist_schedules
 func CreateDentistSchedule(c *gin.Context) {
 	var dentist_schedule entity.Dentist_schedule
-	var respon entity.Doctask
-	var day entity.Daywork
+	var doctask entity.Doctask
+	// var daywork entity.Daywork
 	var dentist entity.Dentist
 
 	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร dentist_schedule
@@ -21,12 +21,12 @@ func CreateDentistSchedule(c *gin.Context) {
 	}
 
 	// 9: ค้นหา daywork ด้วย id
-	if tx := entity.DB().Where("id = ?", dentist_schedule.DayworkID).First(&day); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Reason not found"})
-		return
-	}
+	// if tx := entity.DB().Where("id = ?", dentist_schedule.DayworkID).First(&daywork); tx.RowsAffected == 0 {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Reason not found"})
+	// 	return
+	// }
 	// 10: ค้นหา doctask ด้วย id
-	if tx := entity.DB().Where("id = ?", dentist_schedule.ResponID).First(&respon); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", dentist_schedule.ResponID).First(&doctask); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "doctask not found"})
 		return
 	}
@@ -39,8 +39,8 @@ func CreateDentistSchedule(c *gin.Context) {
 
 	// 12: สร้าง dentist_schedule
 	wv := entity.Dentist_schedule{
-		Daywork: day,   
-		Doctask: respon, 
+		// Daywork: daywork,   
+		Doctask: doctask, 
 		Dentist: dentist,  
 		TimeWork: dentist_schedule.TimeWork, 
 		TimeEnd:  dentist_schedule.TimeEnd,  

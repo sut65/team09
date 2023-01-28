@@ -353,31 +353,31 @@ func SetupDatabase() {
 
 	//-------MedicalDevice------------
 	//---Type---
-// 	Type1 := Type{
-// 		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
-// 	}
-// 	db.Model(&Type{}).Create(&Type1)
+	Type1 := Type{
+		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
+	}
+	db.Model(&Type{}).Create(&Type1)
 
-// 	Type2 := Type{
-// 		Type_Name: "ทันตกรรมจัดฟัน",
-// 	}
-// 	db.Model(&Type{}).Create(&Type2)
+	Type2 := Type{
+		Type_Name: "ทันตกรรมจัดฟัน",
+	}
+	db.Model(&Type{}).Create(&Type2)
 
-// 	Type3 := Type{
-// 		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
-// 	}
-// 	db.Model(&Type{}).Create(&Type3)
+	Type3 := Type{
+		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
+	}
+	db.Model(&Type{}).Create(&Type3)
 
 	Type4 := Type{
 		Type_Name: "อุปกรณ์ทั่วไป",
 	}
 	db.Model(&Type{}).Create(&Type4)
 
-// 	//---Status---
-// 	Status1 := Status{
-// 		Status_Choice: "Sterile",
-// 	}
-// 	db.Model(&Status{}).Create(&Status1)
+	//---Status---
+	Status1 := Status{
+		Status_Choice: "Sterile",
+	}
+	db.Model(&Status{}).Create(&Status1)
 
 	Status2 := Status{
 		Status_Choice: "Non-Sterile",

@@ -230,7 +230,7 @@ async function submit() {
                                   <option aria-label="None" value="">
                                     กรุณาเลือกรายชื่อ
                                   </option>
-                                    {dayworks.map((item: DentistInterface) => (
+                                    {dentists.map((item: DentistInterface) => (
                                         <option value={item.ID} key={item.ID}>
                                             {item.FirstName}
                                         </option>
