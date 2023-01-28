@@ -456,6 +456,6 @@ type Room_Detail struct {
 	Room_Number   Room_Number `gorm:"references:id"`
 
 	//MedicialDeviceID ทำหน้าที่เป็น FK
-	MedicialDeviceID *uint
-	MedicialDevice   MedicalDevice `gorm:"references:id"`
+	MedicalDeviceID *uint
+	MedicalDevice   MedicalDevice `gorm:"references:id"`
 }
