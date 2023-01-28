@@ -51,7 +51,7 @@ function TreatmentUpdate() {
     const [number_of_treatment, setNumber_of_treatment] = React.useState(0);
     
 
-    const apiUrl = "http://localhost:8080";
+    const apiUrl = "http://localhost:3001";
     const requestOptions = {
         method: "GET",
         headers: {
@@ -478,7 +478,7 @@ function TreatmentUpdate() {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Button component={RouterLink} to="/treatment_grid" variant="contained">
+                        <Button component={RouterLink} to="/treatmentlistshow" variant="contained">
                             <div className="good-font-white">
                                 กลับ
                             </div>

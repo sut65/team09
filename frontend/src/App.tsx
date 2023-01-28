@@ -232,7 +232,7 @@ function App() {
                 <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
                 <Route path="/treatmentlistshow" element={<Treatment />} />
                 <Route path="/treatmentscreate" element={<TreatmentCreate />} />
-                <Route path="/treatmentupdate" element={<TreatmentUpdate />} />
+                <Route path="/treatmentsupdate/:id" element={<TreatmentUpdate />} />
               </Routes>
             </Container>
           </Box>
