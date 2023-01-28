@@ -16,16 +16,16 @@ import Button from '@mui/material/Button';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 //import Interface
-import {DayworkInterface } from "../../models/IDaywork";
-import {DoctaskInterface} from "../../models/IDoctask";
+import { WorkingdayInterface } from '../../models/IWorkingday';
+import { ResponsityInterface } from '../../models/IResponsity';
 import {DentistSceheduleInterface} from "../../models/IDentistScheduleInterface";
 import { DentistInterface } from '../../models/IDentist';
 
 import {
     GetDentistScehedules,
-    GetDoctasks,
+    GetResponsitys,
     DentistScehedules,
-    GetDayworks,
+    GetWorkingdays,
     GetDentists,
 } from "../../services/HttpClientService";
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -37,8 +37,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 function DentistScheduleCreate() {
     const [dentists, setDentists] = useState<DentistInterface []>([]);
-    const [dayworks, setDayworks] = useState<DayworkInterface []>([]);
-    const [doctasks, setDoctasks] = useState<DoctaskInterface []>([]);
+    const [workingdays, setWorkingdays] = useState<WorkingdayInterface  []>([]);
+    const [responsitys, setResponsitys] = useState<ResponsityInterface []>([]);
     const [dentist_schedule, setDentistScehedule] = useState<DentistSceheduleInterface>({
         TimeWork: new Date(),
         TimeEnd: new Date(),
@@ -66,11 +66,11 @@ function DentistScheduleCreate() {
         });
     };
 
-    const getDoctasks = async () => {
-        let res = await GetDoctasks();
-        dentist_schedule.ResponID = res.ID;
+    const getResponsitys = async () => {
+        let res = await GetResponsitys();
+        dentist_schedule.ResponsityID = res.ID;
         if (res) {
-            setDoctasks(res);
+            setResponsitys(res);
         }
     };
 
@@ -82,16 +82,16 @@ function DentistScheduleCreate() {
         }
     };
   
-    const getDayworks = async () => {
-        let res = await GetDayworks();
-        dentist_schedule.DayID = res.ID;
+    const getWorkingdays = async () => {
+        let res = await GetWorkingdays();
+        dentist_schedule.WorkingdayID = res.ID;
         if (res) {
-            setDayworks(res);
+            setWorkingdays(res);
         }
     };
     useEffect(() => {
-        getDayworks();
-        getDoctasks();
+        getResponsitys();
+        getWorkingdays();
         getDentists();
     }, []);
     
@@ -113,8 +113,8 @@ const convertType = (data: string | number | undefined) => {
 async function submit() {
     let data = {
         DentistID: convertType(dentist_schedule.DentistID),
-        ResponID: convertType(dentist_schedule.ResponID),
-        DayID: convertType(dentist_schedule.DayID),
+        ResponsityID: convertType(dentist_schedule.ResponsityID),
+        WorkingdayID: convertType(dentist_schedule.WorkingdayID),
         TimeWork: dentist_schedule.TimeWork,
         TimeEnd: dentist_schedule.TimeEnd,
     };
@@ -170,17 +170,17 @@ async function submit() {
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={dentist_schedule.ResponID + ""}
+                                    value={dentist_schedule.ResponsityID + ""}
                                     onChange={handleChange}
                                     label= "งานที่รับผิดชอบ"
                                     inputProps={{
-                                        name: "ResponID",
+                                        name: "ResponsityID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
                                     กรุณาเลือกงานที่รับผิดชอบ
                                   </option>
-                                    {doctasks.map((item: DoctaskInterface) => (
+                                    {responsitys.map((item: ResponsityInterface) => (
                                         <option value={item.ID} key={item.ID}>
                                             {item.Respon}
                                         </option>
@@ -195,17 +195,17 @@ async function submit() {
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={dentist_schedule.DayID + ""}
+                                    value={dentist_schedule.WorkingdayID + ""}
                                     onChange={handleChange}
                                     label= "วันเข้าทำงาน"
                                     inputProps={{
-                                        name: "DayID",
+                                        name: "WorkingdayID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
                                     กรุณาเลือกวันที่เข้าทำงาน
                                   </option>
-                                    {dayworks.map((item: DayworkInterface) => (
+                                    {workingdays.map((item: WorkingdayInterface) => (
                                         <option value={item.ID} key={item.ID}>
                                             {item.Day}
                                         </option>

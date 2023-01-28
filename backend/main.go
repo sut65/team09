@@ -135,18 +135,18 @@ func main() {
 	r.GET("/ttype/:id", medicaldevice.GetType)
 
 	//Daywork Routes
-	router.GET("/dayworks", docterschedule.ListDayworks)
-	router.GET("/daywork/:id", docterschedule.GetDaywork)
-	router.POST("/dayworks", docterschedule.CreateDaywork)
-	router.PATCH("/dayworks", docterschedule.UpdateDaywork)
-	router.DELETE("/dayworks/:id", docterschedule.DeleteDaywork)
+	router.GET("/workingdays", docterschedule.ListWorkingdays)
+	router.GET("/workingday/:id", docterschedule.GetWorkingday)
+	router.POST("/workingdays", docterschedule.CreateWorkingday)
+	router.PATCH("/workingdays", docterschedule.UpdateWorkingday)
+	router.DELETE("/workingdays/:id", docterschedule.DeleteWorkingday)
 
 	//Doctask Routes
-	router.GET("/doctasks", docterschedule.ListDoctasks)
-	router.GET("/doctask/:id", docterschedule.GetDoctask)
-	router.POST("/doctasks", docterschedule.CreateDoctask)
-	router.PATCH("/doctasks", docterschedule.UpdateDoctask)
-	router.DELETE("/doctasks/:id", docterschedule.DeleteDoctask)
+	router.GET("/responsitys", docterschedule.ListResponsitys)
+	router.GET("/responsity/:id", docterschedule.GetResponsity)
+	router.POST("/responsitys", docterschedule.CreateResponsity)
+	router.PATCH("/responsitys", docterschedule.UpdateResponsity)
+	router.DELETE("/responsitys/:id", docterschedule.DeleteResponsity)
 
 	//Dentist_Schedule
 	router.GET("/dentist_schedules", docterschedule.ListDentistSchedules)

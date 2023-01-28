@@ -1,14 +1,14 @@
-import { DayworkInterface } from "./IDaywork";
-import { DoctaskInterface } from "./IDoctask";
+import { WorkingdayInterface } from "./IWorkingday"; 
+import { ResponsityInterface } from "./IResponsity"; 
 import { DentistInterface } from "./IDentist";
 export interface DentistSceheduleInterface {
     ID?: number;
    
-    ResponID?: number;
-    Respon?: DoctaskInterface;
+    ResponsityID?: number;
+    Responsity?: ResponsityInterface;
 
-    DayID?: number;
-    Day?: DayworkInterface;
+    WorkingdayID?: number;
+    Workingday?: WorkingdayInterface;
 
     DentistID?: number;
 	  Dentist?:   DentistInterface;

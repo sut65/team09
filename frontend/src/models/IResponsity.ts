@@ -1,4 +1,4 @@
-export interface DoctaskInterface {
+export interface ResponsityInterface {
     ID: number,
     Respon?: string,
   }

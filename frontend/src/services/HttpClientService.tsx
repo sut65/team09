@@ -499,7 +499,7 @@ async function GetReasons() {
   
     return res;
   }
-  async function GetDayworks() {
+  async function GetWorkingdays() {
     const requestOptions = {
       method: "GET",
       headers: {
@@ -508,7 +508,7 @@ async function GetReasons() {
       },
     };
   
-    let res = await fetch(`${apiUrl}/dayworks`, requestOptions)
+    let res = await fetch(`${apiUrl}/workingdays`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -520,7 +520,7 @@ async function GetReasons() {
   
     return res;
   }
-  async function GetDoctasks() {
+  async function GetResponsitys() {
     const requestOptions = {
       method: "GET",
       headers: {
@@ -529,7 +529,7 @@ async function GetReasons() {
       },
     };
   
-    let res = await fetch(`${apiUrl}/doctasks`, requestOptions)
+    let res = await fetch(`${apiUrl}/responsitys`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -822,7 +822,7 @@ async function GetReasons() {
   export {
     GetPatientSchedules,
     GetDentistScehedules,
-    GetDoctasks,
+    GetWorkingdays,
     DentistScehedules,
 
     GetReasons,
@@ -835,7 +835,7 @@ async function GetReasons() {
     GetEmployee,
     CreateEmployee,
 
-    GetDayworks,
+    GetResponsitys,
     GetType, 
     GetStatus,
     GetMedicalDevice,
