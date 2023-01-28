@@ -8,8 +8,11 @@ import (
 	patienschedule "github.com/sut65/team09/controller/patienschedule"
 	patient "github.com/sut65/team09/controller/patient"
 	dentist "github.com/sut65/team09/controller/dentist"
-	controller "github.com/sut65/team09/controller/treatment"
+	treatment "github.com/sut65/team09/controller/treatment"
+	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
 	"github.com/sut65/team09/entity"
+	
+	
 )
 
 const PORT = "3001"
@@ -89,25 +92,32 @@ func main() {
 	router.DELETE("/reasons/:id", patienschedule.DeleteReason)
 
 	// Treatment Routes
-	r.GET("/treatments", controller.ListTreatmentShow)
-	r.GET("/treatments/:id", controller.GetTreatment)
-	r.POST("/treatments", controller.CreateTreatment)
-	r.PATCH("/treatments/:id", controller.UpdateTreatment)
-	r.DELETE("/treatments/:id", controller.DeleteTreatment)
+	r.GET("/treatments", treatment.ListTreatmentShow)
+	r.GET("/treatments/:id", treatment.GetTreatment)
+	r.POST("/treatments", treatment.CreateTreatment)
+	r.PATCH("/treatments/:id", treatment.UpdateTreatment)
+	r.DELETE("/treatments/:id", treatment.DeleteTreatment)
 
 	// Type of number of treatment Routes
-	r.GET("/type_of_number_of_treatments", controller.List_Type_of_number_of_treatment)
-	r.GET("/type_of_number_of_treatments/:id", controller.Get_Type_of_number_of_treatment)
-	r.POST("/type_of_number_of_treatments", controller.Create_Type_of_number_of_treatment)
-	r.PATCH("/type_of_number_of_treatments", controller.Update_Type_of_number_of_treatment)
-	r.DELETE("/type_of_number_of_treatments/:id", controller.Delete_Type_of_number_of_treatment)
+	r.GET("/type_of_number_of_treatments", treatment.List_Type_of_number_of_treatment)
+	r.GET("/type_of_number_of_treatments/:id", treatment.Get_Type_of_number_of_treatment)
+	r.POST("/type_of_number_of_treatments", treatment.Create_Type_of_number_of_treatment)
+	r.PATCH("/type_of_number_of_treatments", treatment.Update_Type_of_number_of_treatment)
+	r.DELETE("/type_of_number_of_treatments/:id", treatment.Delete_Type_of_number_of_treatment)
+
+	// Treatment Plan Routes
+	r.GET("/treatment_plans", treatment_plan.ListTreatment_plan_show)
+	r.GET("/treatment_plans/:id", treatment_plan.GetTreatment_plan)
+	r.POST("/treatment_plans", treatment_plan.CreateTreatment_plan) 
+	r.PATCH("/treatment_plans", treatment_plan.UpdateTreatment_plan)  
+	r.DELETE("/treatment_plans/:id", treatment_plan.DeleteTreatment_plan)  
 
 	// Type of treatment Routes
-	r.GET("/type_of_treatments", controller.List_Type_of_treatment)
-	r.GET("/type_of_treatments/:id", controller.Get_Type_of_treatment)
-	r.POST("/type_of_treatments", controller.Create_Type_of_treatment)
-	r.PATCH("/type_of_treatments", controller.Update_Type_of_treatment)
-	r.DELETE("/type_of_treatments/:id", controller.Delete_Type_of_treatment)
+	r.GET("/type_of_treatments", treatment.List_Type_of_treatment)
+	r.GET("/type_of_treatments/:id", treatment.Get_Type_of_treatment)
+	r.POST("/type_of_treatments", treatment.Create_Type_of_treatment)
+	r.PATCH("/type_of_treatments", treatment.Update_Type_of_treatment)
+	r.DELETE("/type_of_treatments/:id", treatment.Delete_Type_of_treatment)
 
 	//----medicaldevice-----
 	r.GET("/medicaldevices", medicaldevice.ListMedicalDevices)
