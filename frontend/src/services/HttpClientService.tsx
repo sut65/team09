@@ -5,6 +5,7 @@ import { EmployeeInterface } from "../models/IEmployee";
 import {DentistSceheduleInterface} from "../models/IDentistScheduleInterface";
 import { MedicalDeviceInterface } from "../models/IMedicaldevice";
 import { PatientInterface } from "../models/IPatient";
+import { DentistInterface } from "../models/IDentist";
 
 const apiUrl = "http://localhost:3001";
 
@@ -63,6 +64,7 @@ const apiUrl = "http://localhost:3001";
 
 //   return res;
 // }
+
 //---------------- patient -----------------
 //------------------------------------------
 async function GetSymptom() {
@@ -726,11 +728,103 @@ async function GetReasons() {
     return res;
   }
 
+  //------------------------------------------------------------------------
+  //--------------------------Dentist---------------------------------------
+  async function GetSpecializeds() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/specializeds`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function GetUniversitys() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/universitys`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function GetDentists() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/dentists`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function CreateDentists(data: DentistInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/dentists`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => { 
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
   export {
     GetPatientSchedules,
     GetDentistScehedules,
     GetDoctasks,
     DentistScehedules,
+
     GetReasons,
     PatientSchedules,
     GetRole,
@@ -740,6 +834,7 @@ async function GetReasons() {
     GetSubdistrict,
     GetEmployee,
     CreateEmployee,
+
     GetDayworks,
     GetType, 
     GetStatus,
@@ -747,13 +842,21 @@ async function GetReasons() {
     CreateMedicalDevice,
     GetPatient,
     CreatePatient,
+
     GetEmployeeByUID,
     GetSymptom,
     GetTreatment,
     CreateTreatment,
+
     GetTypeOfTreatment,
     CreateTypeOfTreatment,
     GetTypeOfNumberOfTreatment,
     CreateTypeOfNumberOfTreatment,
+
+    GetSpecializeds,
+    GetUniversitys,
+    GetDentists,
+    CreateDentists,
+
   };
 
