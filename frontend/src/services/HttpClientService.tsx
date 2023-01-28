@@ -727,28 +727,6 @@ async function GetReasons() {
   
     return res;
   }
-// ทำGET dentist มาเชื่อมกับ ระบบตารางแพทย์
-  async function GetDentists() {
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    };
-  
-    let res = await fetch(`${apiUrl}/dentists`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          return res.data;
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
 
   //------------------------------------------------------------------------
   //--------------------------Dentist---------------------------------------
