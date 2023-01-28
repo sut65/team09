@@ -7,6 +7,9 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { DentistSceheduleInterface } from "../../models/IDentistScheduleInterface";
 import { GetDentistScehedules } from "../../services/HttpClientService";
+import moment from "moment";
+import axios from 'axios';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function DentistSchedule() {
   const [dentist_schedule, setDentist_schedule] = useState<DentistSceheduleInterface[]>([]);
@@ -21,19 +24,44 @@ function DentistSchedule() {
         setDentist_schedule(res);
     } 
   };
+  const Delete = async (id: number) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/dentist_schedules/${id}`, {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              'Content-Type': 'application/json',
+          }
+      });
+
+      if (response.status === 200) {
+          console.log("dentist_schedules deleted successfully");
+          getDentist_schedules();
+      } else {
+          throw new Error("Failed to delete dentist_schedules ");
+      }
+  } catch (err) {
+      console.error(err);
+  }
+  };
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 60 },
-    { field: "DayworkID",headerName: "วันที่ทำงาน",width: 150, },
-    { field: "ResponID",headerName: "งานที่รับผิดชอบ",width: 250,},
-    { field: "DentistID",headerName: "ทันตแพทย์",width: 150,},
-    { field: "TimeWork", headerName: "เวลา", width: 100 },
-    { field: "TimeEnd", headerName: "ถึง'", width: 100 },
+    { field: "Workingday",headerName: "วัน",width: 100, valueFormatter: (params) => params.value.Day,},
+    { field: "Responsity",headerName: "งานที่รับผิดชอบ",width: 150,valueFormatter: (params) => params.value.Respon,},
+    { field: "Dentist",headerName: "ทันตแพทย์",width: 150,valueFormatter: (params) => params.value.FirstName,},
+    { field: "TimeWork", headerName: "เวลา", width: 200, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
+    { field: "TimeEnd", headerName: "ถึง", width: 200, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
+    {
+      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
+            <Button  onClick={() => Delete(row.ID)} size="small" variant="contained" color="error" >
+                Delete <DeleteForeverIcon />
+            </Button>
+    },
   ];
 
   return (
     <div>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Box
           display="flex"
           sx={{

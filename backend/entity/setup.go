@@ -58,9 +58,13 @@ func SetupDatabase() {
 		&Medicine_status{},
 		&Prescription{},
 		//DoctorSchedule
-		&Daywork{},
-		&Doctask{},
+		&Workingday{},
+		&Responsity{},
 		&Dentist_schedule{},
+		//Room
+		&Room_Number{},
+		&Category{},
+		&Room_Detail{},
 	)
 
 	db = database
@@ -329,9 +333,9 @@ func SetupDatabase() {
 		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
 		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
 	}
-	db.CreateInBatches(Ttype, 2)
-
-	var day = []Daywork{
+	db.CreateInBatches(Ttype , 2)
+	
+	var day = []Workingday{
 		{Day: "วันจันทร์"},
 		{Day: "วันอังคาร"},
 		{Day: "วันพุธ"},
@@ -339,7 +343,10 @@ func SetupDatabase() {
 	}
 	db.CreateInBatches(day, 4)
 
-	var task = []Doctask{
+	
+	
+
+	var task = []Responsity{
 		{Respon: "ตรวจผู้ป่วย"},
 		{Respon: "เข้าเวร"},
 		{Respon: "ตรวจสอบอุปกรณ์"},
@@ -392,6 +399,26 @@ func SetupDatabase() {
 		Record_Date: DateTimeA,
 	}
 	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
+
+	MedicalDevice2 := MedicalDevice{
+		Employee:    em2,
+		Type:        Type2,
+		Status:      Status2,
+		Device_Name: "เหล็กดัดฟัน",
+		Amount:      2,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice2)
+
+	MedicalDevice3 := MedicalDevice{
+		Employee:    em1,
+		Type:        Type4,
+		Status:      Status2,
+		Device_Name: "เครื่องขูด",
+		Amount:      1,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice3)
 
 	//--------ระบบจัดการข้อมูลแพทย์---------
 	//---Specialized---
@@ -662,4 +689,65 @@ func SetupDatabase() {
 		Type_of_number_of_treatment_name: "ด้าน",
 	}
 	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment3)
+
+	//------------------------------------------------------------------------
+	//---------------------------------Room-----------------------------------
+
+	//room_number
+	room_number1 := Room_Number{
+		Room_number: "001",
+	}
+	db.Model(&Room_Number{}).Create(&room_number1)
+
+	room_number2 := Room_Number{
+		Room_number: "002",
+	}
+	db.Model(&Room_Number{}).Create(&room_number2)
+
+	room_number3 := Room_Number{
+		Room_number: "003",
+	}
+	db.Model(&Room_Number{}).Create(&room_number3)
+
+	room_number4 := Room_Number{
+		Room_number: "004",
+	}
+	db.Model(&Room_Number{}).Create(&room_number4)
+
+	room_number5 := Room_Number{
+		Room_number: "005",
+	}
+	db.Model(&Room_Number{}).Create(&room_number5)
+
+	//category
+	category1 := Category{
+		Category_Name: "ห้องทันตกรรมทั่วไป",
+	}
+	db.Model(&Category{}).Create(&category1)
+
+	category2 := Category{
+		Category_Name: "ห้องเอ็กซ์เรย์",
+	}
+	db.Model(&Category{}).Create(&category2)
+
+	category3 := Category{
+		Category_Name: "ห้องเก็บเครื่องมือ",
+	}
+	db.Model(&Category{}).Create(&category3)
+
+
+	//room_detail
+	room_detail1 := Room_Detail{
+		Room_Number: room_number3,
+		Category: 	category1,
+		MedicalDevice: MedicalDevice1,
+	}
+	db.Model(&Room_Detail{}).Create(&room_detail1)
+
+	room_detail2 := Room_Detail{
+		Room_Number: room_number4,
+		Category: 	category3,
+		MedicalDevice: MedicalDevice3,
+	}
+	db.Model(&Room_Detail{}).Create(&room_detail2)
 }

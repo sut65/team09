@@ -2,19 +2,18 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	dentist "github.com/sut65/team09/controller/dentist"
 	docterschedule "github.com/sut65/team09/controller/docterschedule"
 	employee "github.com/sut65/team09/controller/employee"
 	medicaldevice "github.com/sut65/team09/controller/medicaldevice"
 	patienschedule "github.com/sut65/team09/controller/patienschedule"
 	patient "github.com/sut65/team09/controller/patient"
-	dentist "github.com/sut65/team09/controller/dentist"
-	treatment "github.com/sut65/team09/controller/treatment"
-	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
 	payment "github.com/sut65/team09/controller/payment"
 	prescription "github.com/sut65/team09/controller/prescription"
+	room "github.com/sut65/team09/controller/room"
+	treatment "github.com/sut65/team09/controller/treatment"
+	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
 	"github.com/sut65/team09/entity"
-	
-	
 )
 
 const PORT = "3001"
@@ -104,15 +103,15 @@ func main() {
 	r.GET("/type_of_number_of_treatments", treatment.List_Type_of_number_of_treatment)
 	r.GET("/type_of_number_of_treatments/:id", treatment.Get_Type_of_number_of_treatment)
 	r.POST("/type_of_number_of_treatments", treatment.Create_Type_of_number_of_treatment)
-	r.PATCH("/type_of_number_of_treatments", treatment.Update_Type_of_number_of_treatment) 
+	r.PATCH("/type_of_number_of_treatments", treatment.Update_Type_of_number_of_treatment)
 	r.DELETE("/type_of_number_of_treatments/:id", treatment.Delete_Type_of_number_of_treatment)
 
 	// Treatment Plan Routes
 	r.GET("/treatment_plans", treatment_plan.ListTreatment_plan_show)
 	r.GET("/treatment_plans/:id", treatment_plan.GetTreatment_plan)
-	r.POST("/treatment_plans", treatment_plan.CreateTreatment_plan) 
-	r.PATCH("/treatment_plans/:id", treatment_plan.UpdateTreatment_plan)  
-	r.DELETE("/treatment_plans/:id", treatment_plan.DeleteTreatment_plan)  
+	r.POST("/treatment_plans", treatment_plan.CreateTreatment_plan)
+	r.PATCH("/treatment_plans/:id", treatment_plan.UpdateTreatment_plan)
+	r.DELETE("/treatment_plans/:id", treatment_plan.DeleteTreatment_plan)
 
 	// Type of treatment Routes
 	r.GET("/type_of_treatments", treatment.List_Type_of_treatment)
@@ -135,18 +134,18 @@ func main() {
 	r.GET("/ttype/:id", medicaldevice.GetType)
 
 	//Daywork Routes
-	router.GET("/dayworks", docterschedule.ListDayworks)
-	router.GET("/daywork/:id", docterschedule.GetDaywork)
-	router.POST("/dayworks", docterschedule.CreateDaywork)
-	router.PATCH("/dayworks", docterschedule.UpdateDaywork)
-	router.DELETE("/dayworks/:id", docterschedule.DeleteDaywork)
+	router.GET("/workingdays", docterschedule.ListWorkingdays)
+	router.GET("/workingday/:id", docterschedule.GetWorkingday)
+	router.POST("/workingdays", docterschedule.CreateWorkingday)
+	router.PATCH("/workingdays", docterschedule.UpdateWorkingday)
+	router.DELETE("/workingdays/:id", docterschedule.DeleteWorkingday)
 
 	//Doctask Routes
-	router.GET("/doctasks", docterschedule.ListDoctasks)
-	router.GET("/doctask/:id", docterschedule.GetDoctask)
-	router.POST("/doctasks", docterschedule.CreateDoctask)
-	router.PATCH("/doctasks", docterschedule.UpdateDoctask)
-	router.DELETE("/doctasks/:id", docterschedule.DeleteDoctask)
+	router.GET("/responsitys", docterschedule.ListResponsitys)
+	router.GET("/responsity/:id", docterschedule.GetResponsity)
+	router.POST("/responsitys", docterschedule.CreateResponsity)
+	router.PATCH("/responsitys", docterschedule.UpdateResponsity)
+	router.DELETE("/responsitys/:id", docterschedule.DeleteResponsity)
 
 	//Dentist_Schedule
 	router.GET("/dentist_schedules", docterschedule.ListDentistSchedules)
@@ -176,6 +175,28 @@ func main() {
 	router.POST("/dentists", dentist.CreateDentist)
 	router.PATCH("/dentists", dentist.UpdateDentist)
 	router.DELETE("/dentist/:id", dentist.DeleteDentist)
+
+	//-------------Room-------------------
+	// Room_Number Routes
+	router.GET("/room_numbers", room.ListRoom_Detail)
+	router.GET("/room_number:id", room.GetRoom_Detail)
+	router.POST("/room_numbers", room.CreateRoom_Detail)
+	router.PATCH("/room_numbers", room.UpdateRoom_Detail)
+	router.DELETE("/room_number/:id", room.DeleteRoom_Detail)
+
+	// Category Routes
+	router.GET("/categories", room.ListCategory)
+	router.GET("/category:id", room.GetCategory)
+	router.POST("/categories", room.CreateCategory)
+	router.PATCH("/categories", room.UpdateCategory)
+	router.DELETE("/category/:id", room.DeleteCategory)
+
+	// Category Routes
+	router.GET("/room_details", room.ListRoom_Detail)
+	router.GET("/room_detail:id", room.GetRoom_Detail)
+	router.POST("/room_details", room.CreateRoom_Detail)
+	router.PATCH("/room_details", room.UpdateRoom_Detail)
+	router.DELETE("/room_detail/:id", room.DeleteRoom_Detail)
 
 	//---------Payment-------------
 	// Payment_status Routes

@@ -10,38 +10,35 @@ import (
 // POST /dentist_schedules
 func CreateDentistSchedule(c *gin.Context) {
 	var dentist_schedule entity.Dentist_schedule
-	var doctask entity.Doctask
-	// var daywork entity.Daywork
 	var dentist entity.Dentist
-
-	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร dentist_schedule
+	var workingday entity.Workingday
+	var responsity  entity.Responsity
+	
+	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร patien_schedule
 	if err := c.ShouldBindJSON(&dentist_schedule); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	// 9: ค้นหา daywork ด้วย id
-	// if tx := entity.DB().Where("id = ?", dentist_schedule.DayworkID).First(&daywork); tx.RowsAffected == 0 {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Reason not found"})
-	// 	return
-	// }
-	// 10: ค้นหา doctask ด้วย id
-	if tx := entity.DB().Where("id = ?", dentist_schedule.ResponID).First(&doctask); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "doctask not found"})
+	// 9: ค้นหา responsity ด้วย id
+	if tx := entity.DB().Where("id = ?", dentist_schedule.ResponsityID).First(&responsity); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Responsity not found"})
+		return
+	}
+	// 10: ค้นหา workingday ด้วย id
+	if tx := entity.DB().Where("id = ?", dentist_schedule.WorkingdayID).First(&workingday); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Workingday not found"})
 		return
 	}
 	// 11: ค้นหา dentist ด้วย id
 	if tx := entity.DB().Where("id = ?", dentist_schedule.DentistID).First(&dentist); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "dentist not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Dentist not found"})
 		return
 	}
-
-
 	// 12: สร้าง dentist_schedule
 	wv := entity.Dentist_schedule{
-		// Daywork: daywork,   
-		Doctask: doctask, 
-		Dentist: dentist,  
+		Dentist: dentist,
+		Responsity: responsity,
+		Workingday: workingday,
 		TimeWork: dentist_schedule.TimeWork, 
 		TimeEnd:  dentist_schedule.TimeEnd,  
 	}
@@ -70,7 +67,7 @@ func GetDentistSchedule(c *gin.Context) {
 // GET /dentist_schedules
 func ListDentistSchedules(c *gin.Context) {
 	var dentist_schedules []entity.Dentist_schedule
-	if err := entity.DB().Preload("Dentist").Preload("Daywork").Preload("Doctask").Raw("SELECT * FROM dentist_schedules").Find(&dentist_schedules).Error; err != nil {
+	if err := entity.DB().Preload("Dentist").Preload("Workingday").Preload("Responsity").Raw("SELECT * FROM dentist_schedules").Find(&dentist_schedules).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
