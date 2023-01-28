@@ -58,9 +58,9 @@ function Branch() {
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 70 },
 
-        { field: "dentist_name", headerName: "Dentist", width: 120 },
+        { field: "first_name", headerName: "Dentist", width: 120 },
 
-        { field: "patient_name", headerName: "Patient", width: 120 },
+        { field: "first_name", headerName: "Patient", width: 120 },
 
         { field: "order_of_treatment", headerName: "Order Of Treatment", width: 150 },
 

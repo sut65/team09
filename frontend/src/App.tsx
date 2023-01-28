@@ -52,6 +52,7 @@ import TreatmentCreate from "./components/treatment/TreatmentCreate";
 import TreatmentUpdate from "./components/treatment/TreatmentUpdate";
 
 import Treatment_plan from "./components/treatment_plan/Treatment_plan";
+import TreatmentPlanCreate from "./components/treatment_plan/TreatmentPlanCreate";
 
 
 // import Students from "./components/Student";
@@ -250,6 +251,7 @@ function App() {
                 <Route path="/treatmentscreate" element={<TreatmentCreate />} />
                 <Route path="/treatmentsupdate/:id" element={<TreatmentUpdate />} />
                 <Route path="/treatmentplanlistshow" element={<Treatment_plan />} />
+                <Route path="/treatment_plan_create" element={<TreatmentPlanCreate />} />
                 <Route path="/treatmentupdate" element={<TreatmentUpdate />} />
                 <Route path="/dentists" element={<Dentists />} />
                 <Route path="/dentist/create" element={<DentistCreate />} />
