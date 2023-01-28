@@ -58,8 +58,8 @@ func SetupDatabase() {
 		&Medicine_status{},
 		&Prescription{},
 		//DoctorSchedule
-		&Daywork{},
-		&Doctask{},
+		&Workingday{},
+		&Responsity{},
 		&Dentist_schedule{},
 	)
 
@@ -329,9 +329,9 @@ func SetupDatabase() {
 		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
 		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
 	}
-	db.CreateInBatches(Ttype, 2)
-
-	var day = []Daywork{
+	db.CreateInBatches(Ttype , 2)
+	
+	var day = []Workingday{
 		{Day: "วันจันทร์"},
 		{Day: "วันอังคาร"},
 		{Day: "วันพุธ"},
@@ -339,7 +339,10 @@ func SetupDatabase() {
 	}
 	db.CreateInBatches(day, 4)
 
-	var task = []Doctask{
+	
+	
+
+	var task = []Responsity{
 		{Respon: "ตรวจผู้ป่วย"},
 		{Respon: "เข้าเวร"},
 		{Respon: "ตรวจสอบอุปกรณ์"},

@@ -401,28 +401,30 @@ type Payment struct {
 }
 
 // ระบบจัดตารางงานแพทย์
-type Daywork struct {
+type Workingday struct {
 	gorm.Model
 	Day              string
-	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:DayworkID"`
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:WorkingdayID"`
 }
 
-type Doctask struct {
+type Responsity struct {
 	gorm.Model
 	Respon           string
-	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:ResponID"`
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:ResponsityID"`
 }
 
 type Dentist_schedule struct {
 	gorm.Model
-	DayworkID *uint
-	Daywork   Daywork `gorm:"references:id"`
+	
+	ResponsityID	*uint
+	Responsity	Responsity	`gorm:"references:id"`
 
-	ResponID *uint
-	Doctask  Doctask `gorm:"foreignKey:ID;references:ResponID"`
+	WorkingdayID	*uint
+	Workingday	Workingday	`gorm:"references:id"`
 
 	DentistID *uint
 	Dentist   Dentist `gorm:"references:id"`
+	
 	TimeWork  time.Time
 	TimeEnd   time.Time
 }

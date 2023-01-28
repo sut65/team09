@@ -7,7 +7,9 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { PatienSceheduleInterface } from "../../models/IPatienSchedule";
 import { GetPatientSchedules } from "../../services/HttpClientService";
-
+import moment from "moment";
+import axios from 'axios';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 function PatienScheduleHome() {
   const [patien_schedule, setPatien_schedule] = useState<PatienSceheduleInterface[]>([]);
 
@@ -22,14 +24,39 @@ function PatienScheduleHome() {
     getPatien_schedules();
   }, []);
 
+  const Delete = async (id: number) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/patien_schedules/${id}`, {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              'Content-Type': 'application/json',
+          }
+      });
+
+      if (response.status === 200) {
+          console.log("Patienschedule deleted successfully");
+          getPatien_schedules();
+      } else {
+          throw new Error("Failed to delete Patienschedule ");
+      }
+  } catch (err) {
+      console.error(err);
+  }
+  };
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 60 },
-    { field: "PatientID",headerName: "ชื่อ ผู้ป่วย",width: 150,},
-    { field: "EmployeeID",headerName: "แพทย์ที่รับผิดชอบ",width: 250,},
-    { field: "ReasonID",headerName: "หมายเหตุ",width: 150,},
-    { field: "Type_Of_TreatmentID", headerName: "ประเภทการรักษา", width: 100 ,},
-    { field: "Date_time", headerName: "วันที่และเวลา", width: 200 },
+    { field: "Patient",headerName: "ชื่อ ผู้ป่วย",width: 125,valueFormatter: (params) => params.value.FirstName,},
+    { field: "Employee",headerName: "แพทย์ที่รับผิดชอบ",width: 130,valueFormatter: (params) => params.value.FirstName,},
+    { field: "Reason",headerName: "หมายเหตุ",width: 150,valueFormatter: (params) => params.value.Method,},
+    { field: "Type_of_treatment", headerName: "ประเภทการรักษา", width: 200 ,valueFormatter: (params) => params.value.Type_of_treatment_name,},
+    { field: "Date_time", headerName: "วันที่และเวลา", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
+    {
+      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
+            <Button  onClick={() => Delete(row.ID)} size="small" variant="contained" color="error" >
+                Delete <DeleteForeverIcon />
+            </Button>
+    },
   ];
 
   return (
