@@ -64,7 +64,7 @@ function TreatmentUpdate() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:8080/treatments/${id}`)
+        fetch(`http://localhost:3001/treatments/${id}`)
             .then((response) => response.json())
             .then((res) => {
 
