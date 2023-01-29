@@ -288,7 +288,7 @@ function TreatmentCreate() {
                             gutterBottom
                         >
                             <div className="good-font">
-                                เพิ่มข้อมูลแผนการรักษา
+                            แก้ไขแผนการรักษา ID : {id}
                             </div>
                         </Typography>
                     </Box>
@@ -335,7 +335,7 @@ function TreatmentCreate() {
                             <p className="good-font">ลำดับการรักษา</p>
                             <TextField
                                 id="order_of_treatment"
-                                variant="outlined"
+                                variant="outlined" 
                                 type="number"
                                 size="medium"
                                 InputProps={{ inputProps: { min: 1 } }}
