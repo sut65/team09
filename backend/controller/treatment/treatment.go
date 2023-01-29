@@ -91,7 +91,7 @@ func ListTreatments(c *gin.Context) {
 func ListTreatmentShow(c *gin.Context) {
 	result := []map[string]interface{}{}
 	entity.DB().Table("treatments").
-		Select("treatments.id, dentists.first_name, patients.first_name, type_of_treatments.type_of_treatment_name, type_of_number_of_treatments.type_of_number_of_treatment_name, treatments.number_of_cavities, treatments.number_of_swollen_gums, treatments.number_of_treatment, treatments.other_teeth_problems, treatments.treatment_detail, treatments.treatment_time, treatments.treatment_code").
+		Select("treatments.id, dentists.first_name as dentist_first_name, patients.first_name as patient_first_name, type_of_treatments.type_of_treatment_name, type_of_number_of_treatments.type_of_number_of_treatment_name, treatments.number_of_cavities, treatments.number_of_swollen_gums, treatments.number_of_treatment, treatments.other_teeth_problems, treatments.treatment_detail, treatments.treatment_time, treatments.treatment_code").
 		Joins("left join dentists on dentists.id = treatments.dentist_id").
 		Joins("left join patients on patients.id = treatments.patient_id").
 		Joins("left join type_of_treatments on type_of_treatments.id = treatments.type_of_treatment_id").

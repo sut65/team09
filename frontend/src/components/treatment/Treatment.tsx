@@ -56,9 +56,9 @@ function Treatment(props: any){
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 70 },
 
-        { field: "first_name", headerName: "Dentist", width: 100 },
+        { field: "dentist_first_name", headerName: "Dentist", width: 100 },
 
-        { field: "patient_name", headerName: "Patient", width: 100 },
+        { field: "patient_first_name", headerName: "Patient", width: 100 },
 
         { field: "number_of_cavities", headerName: "Number of cavities", width: 130 },
 
