@@ -121,7 +121,7 @@ const menu = [
   { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
-  { name: "บันทึกการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
+  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
   { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,},
   { name: "จัดการข้อมูลแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,},
 
