@@ -262,7 +262,7 @@ function TreatmentCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ลำดับการรกัษา</p>
+                            <p className="good-font">ลำดับการรักษา</p>
                             <TextField
                                 id="order_of_treatment"
                                 variant="outlined"

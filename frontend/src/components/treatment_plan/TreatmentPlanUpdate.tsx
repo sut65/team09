@@ -63,7 +63,7 @@ function TreatmentCreate() {
 
     useEffect(() => {
         getDentist();
-        fetch(`http://localhost:8080/treatment_plans/${id}`)
+        fetch(`http://localhost:3001/treatment_plans/${id}`)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {
@@ -332,7 +332,7 @@ function TreatmentCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ลำดับการรกัษา</p>
+                            <p className="good-font">ลำดับการรักษา</p>
                             <TextField
                                 id="order_of_treatment"
                                 variant="outlined"
