@@ -277,7 +277,7 @@ function TreatmentUpdate() {
 
                         >
                             <div className="good-font">
-                                แก้ไขtreament ID : {id}
+                                แก้ไขการรักษา ID : {id}
                             </div>
                         </Typography>
                     </Box>

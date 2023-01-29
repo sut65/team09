@@ -115,7 +115,7 @@ function Treatment(props: any){
                             gutterBottom
                         >
                             <div className="good-font">
-                                สาขา
+                                การรักษา
                             </div>
                         </Typography>
                     </Box>
