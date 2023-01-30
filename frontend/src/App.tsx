@@ -126,7 +126,7 @@ const menu = [
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
   { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
   { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,},
-  { name: "สั่งจ่ายยา", icon: <MedicationIcon />, path: "/prescription" ,},
+  { name: "สั่งจ่ายยา", icon: <MedicationIcon />, path: "/prescriptions" ,},
   { name: "จัดการข้อมูลแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,},
 
 ];

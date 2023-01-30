@@ -49,7 +49,7 @@ function Prescriptions() {
     { field: "Medicine", headerName: "ราคา", width: 250,  valueFormatter: (params) => params.value.Medicine_price,},
     // { field: "Patient", headerName: "ชื่อ ทันตแพทย์", width: 250,  valueFormatter: (params) => params.value.FirstName,},
     // { field: "Patient", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
-    { field: "Medicine_status", headerName: "ชื่อ", width: 250,  valueFormatter: (params) => params.value.Medicine_status_name,},
+    { field: "Medicine_status", headerName: "สถานะ", width: 250,  valueFormatter: (params) => params.value.Medicine_status_name,},
     {
       field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
             <Button onClick={() => handleDelete(row.ID)} size="small" variant="contained" color="error" >
