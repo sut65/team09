@@ -750,4 +750,7 @@ func SetupDatabase() {
 		MedicalDevice: MedicalDevice3,
 	}
 	db.Model(&Room_Detail{}).Create(&room_detail2)
+
+	
 }
+

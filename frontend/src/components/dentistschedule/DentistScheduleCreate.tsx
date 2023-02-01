@@ -138,13 +138,14 @@ async function submit() {
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
                 <Alert onClose={handleClose} severity="success">
                 บันทึกข้อมูลสำเร็จ
                 </Alert>
                 </Snackbar>
-                <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}>
                 <Alert onClose={handleClose} severity="error">
                 บันทึกข้อมูลไม่สำเร็จ
                 </Alert>

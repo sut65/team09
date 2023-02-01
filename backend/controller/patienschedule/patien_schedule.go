@@ -2,7 +2,7 @@ package controller
 
 import (
 	"net/http"
-
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/sut65/team09/entity"
 )
@@ -42,6 +42,7 @@ func CreatePatienSchedule(c *gin.Context) {
 	if tx := entity.DB().Where("id = ?", patien_schedule.Type_of_treatmentID).First(&type_of_treatment); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "type_of_treatment not found"})
 		return
+	
 	}
 	// 12: สร้าง scholarship
 	wv := entity.Patien_schedule{
@@ -50,7 +51,11 @@ func CreatePatienSchedule(c *gin.Context) {
 		Reason: reason,       	
 		Type_of_treatment:	type_of_treatment,
 		Date_time:       patien_schedule.Date_time,
+	}
 
+	if _, err := govalidator.ValidateStruct(wv); err != nil{
+			c.JSON(http.StatusBadRequest, gin.H{"Patien_schedule": err.Error()})
+			return
 	}
 
 	// 13: บันทึก
