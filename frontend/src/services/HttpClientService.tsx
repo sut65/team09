@@ -582,9 +582,13 @@ async function GetReasons() {
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
-          return res.data;
+          return { status: true, message: res.data };
         } else {
-          return false;
+          console.log(res)
+          if(res.Patien_schedule === 'Datetime must be a future date'){
+            return {status: false, message: "Date time must be future"};
+          }
+           else{ return { status: false, message: res.error }};
         }
       });
   

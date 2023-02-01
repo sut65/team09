@@ -49,6 +49,7 @@ function PatientSchedule() {
         Date_time: new Date(),
     });
 
+    const [message, setAlertMessage] = React.useState("");
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
 
@@ -137,10 +138,12 @@ async function submit() {
         Date_time: patien_schedule.Date_time,
     };
     console.log(data);
-    let res = await PatientSchedules(data);
-    if (res) {
+    let res:any = await PatientSchedules(data);
+    if (res.status) {
+        setAlertMessage("บันทึกข้อมูลสำเร็จ");
         setSuccess(true);
     } else {
+        setAlertMessage(res.message);
         setError(true);
     }
 }
@@ -148,23 +151,22 @@ async function submit() {
 
 
     return (
-        <div>
-            <Box sx={{ flexGrow: 1 }}>
-            </Box>
             <Container maxWidth="lg">
             <Snackbar
+                id="success"
                 open={success}
-                autoHideDuration={6000}
+                autoHideDuration={3000}
                 onClose={handleClose}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
                 <Alert onClose={handleClose} severity="success">
-                บันทึกข้อมูลสำเร็จ
+                    {message}
                 </Alert>
                 </Snackbar>
-                <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar id="error" open={error} autoHideDuration={3000} onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}>
                 <Alert onClose={handleClose} severity="error">
-                บันทึกข้อมูลไม่สำเร็จ
+                    {message}
                 </Alert>
                 </Snackbar>
                 {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', width: '190vh' }} /> */}
@@ -349,7 +351,7 @@ async function submit() {
             
             </Container>
 
-        </div>
+        
 
     );
 }

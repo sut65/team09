@@ -2,7 +2,7 @@ package entity
 
 import (
 	"time"
-
+	"github.com/asaskevich/govalidator"
 	"gorm.io/gorm"
 )
 
@@ -82,9 +82,9 @@ type Employee struct {
 	RoleID *uint
 	Role   Role `gorm:"references:id"`
 
-	Patients       []Patient       `gorm:"foreignKey: EmployeeID"`
+	Patients []Patient `gorm:"foreignKey: EmployeeID"`
 	// Medical_device []MedicalDevice `gorm:"foreignKey:EmployeeID"`
-	Repairs        []Repair        `gorm:"foreignKey:EmployeeID"`
+	Repairs []Repair `gorm:"foreignKey:EmployeeID"`
 	//โยงกับระบบนัดผู้ป่วย
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:EmployeeID"`
 }
@@ -168,7 +168,7 @@ type MedicalDevice struct {
 	Amount      int
 	Record_Date time.Time
 
-	Repairs []Repair `gorm:"foreignKey:MedicalDeviceID"`
+	Repairs      []Repair      `gorm:"foreignKey:MedicalDeviceID"`
 	Room_Details []Room_Detail `gorm:"foreignKey:MedicalDeviceID"`
 }
 
@@ -197,7 +197,7 @@ type Repair struct {
 // ระบบนัดผู้ป่วย
 type Reason struct {
 	gorm.Model
-	Method          string
+	Method          string	`valid:"required~Method not blank"`
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:ReasonID"`
 }
 
@@ -205,18 +205,17 @@ type Patien_schedule struct {
 	gorm.Model
 
 	PatientID *uint
-	Patient   Patient `gorm:"references:id"`
+	Patient   Patient `gorm:"references:id" valid:"-"`
 
 	EmployeeID *uint
-	Employee   Employee `gorm:"references:id"`
+	Employee   Employee `gorm:"references:id" valid:"-"`
 
 	ReasonID *uint
-	Reason   Reason `gorm:"references:id"`
+	Reason   Reason `gorm:"references:id" valid:"-"`
 
 	Type_of_treatmentID *uint
-	Type_of_treatment   Type_of_treatment	`gorm:"references:id"`
-
-	Date_time           time.Time
+	Type_of_treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
+	Date_time           time.Time	`valid:"future~Datetime must be a future date"`
 }
 
 // -----ระบบจัดการข้อมูลทันตแพทย์-----
@@ -319,7 +318,7 @@ type Type_of_treatment struct {
 	Treatment_plan []Treatment_plan `gorm:"foreignkey:Type_Of_TreatmentID"`
 
 	//โยงกับระบบนัดผู้ป่วย
-	Patien_schedule 	[]Patien_schedule `gorm:"foreignKey:Type_of_treatmentID"`
+	Patien_schedule []Patien_schedule `gorm:"foreignKey:Type_of_treatmentID"`
 }
 
 type Type_of_number_of_treatment struct {
@@ -415,21 +414,21 @@ type Responsity struct {
 
 type Dentist_schedule struct {
 	gorm.Model
-	
-	ResponsityID	*uint
-	Responsity	Responsity	`gorm:"references:id"`
 
-	WorkingdayID	*uint
-	Workingday	Workingday	`gorm:"references:id"`
+	ResponsityID *uint
+	Responsity   Responsity `gorm:"references:id"`
+
+	WorkingdayID *uint
+	Workingday   Workingday `gorm:"references:id"`
 
 	DentistID *uint
 	Dentist   Dentist `gorm:"references:id"`
-	
-	TimeWork  time.Time
-	TimeEnd   time.Time
+
+	TimeWork time.Time
+	TimeEnd  time.Time
 }
 
-//ระบบจัดการห้อง
+// ระบบจัดการห้อง
 type Category struct {
 	gorm.Model
 	Category_Name string
@@ -449,7 +448,7 @@ type Room_Detail struct {
 
 	//CategoryID ทำหน้าที่เป็น FK
 	CategoryID *uint
-	Category   Category `gorm:"references:id"`
+	Category   Category `gorm:"references:id" `
 
 	//NumberID ทำหน้าที่เป็น FK
 	Room_NumberID *uint
@@ -458,4 +457,17 @@ type Room_Detail struct {
 	//MedicialDeviceID ทำหน้าที่เป็น FK
 	MedicalDeviceID *uint
 	MedicalDevice   MedicalDevice `gorm:"references:id"`
+}
+
+func init() {
+	govalidator.CustomTypeTagMap.Set("past", func(i interface{}, context interface{}) bool {
+		t := i.(time.Time)
+		now := time.Now()
+		return now.After(t)
+	})
+	govalidator.CustomTypeTagMap.Set("future", func(i interface{}, context interface{}) bool {
+		t := i.(time.Time)
+		now := time.Now()
+		return now.Before(time.Time(t))
+	})
 }
