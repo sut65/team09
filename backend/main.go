@@ -231,7 +231,7 @@ func main() {
 	// Prescription Routes
 	router.GET("/prescriptions", prescription.ListPrescriptions)
 	router.GET("/prescription/:id", prescription.GetPrescription)
-	router.POST("/prescription", prescription.CreatePrescription)
+	router.POST("/prescriptions", prescription.CreatePrescription)
 	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
 	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
