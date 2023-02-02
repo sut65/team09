@@ -4,26 +4,25 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { PrescriptionInterface } from "../../models/IPrescription";
+import { PaymentInterface } from "../../models/IPayment";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import axios from 'axios';
-import { GetPrescription } from "../../services/HttpClientService";
-import { ButtonGroup } from "@mui/material";
+import { GetPayment } from "../../services/HttpClientService";
 
-function Prescriptions() {
-  const [prescriptions, setPrescriptions] = useState<PrescriptionInterface[]>([]);
+function Payments() {
+  const [payments, setPayments] = useState<PaymentInterface[]>([]);
 
-  const getPrescriptions = async () => {
-    let res = await GetPrescription();
+  const getPayments = async () => {
+    let res = await GetPayment();
     if (res) {
-        setPrescriptions(res);
+        setPayments(res);
     }
   };
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/prescription/${id}`, {
+      const response = await axios.delete(`http://localhost:3001/employees/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
@@ -31,10 +30,10 @@ function Prescriptions() {
       });
 
       if (response.status === 200) {
-          console.log("Prescription deleted successfully");
-          getPrescriptions();
+          console.log("Payment deleted successfully");
+          getPayments();
       } else {
-          throw new Error("Failed to delete Prescription");
+          throw new Error("Failed to delete Payment");
       }
   } catch (err) {
       console.error(err);
@@ -42,32 +41,26 @@ function Prescriptions() {
   };
 
   const columns: GridColDef[] = [
-    { field: "ID", headerName: "ลำดับ", width: 50 },
-    { field: "Patient", headerName: "ชื่อ ผู้ป่วย", width: 250,  valueFormatter: (params) => params.value.FirstName,},
-    { field: "Patient", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
-    { field: "Patient", headerName: "เลขประจำตัวประชาชน", width: 250,  valueFormatter: (params) => params.value.Personal_id,},
-    { field: "Medicine", headerName: "ชื่อยา", width: 250,  valueFormatter: (params) => params.value.Medicine_name,},
-    { field: "Medicine", headerName: "ราคา", width: 250,  valueFormatter: (params) => params.value.Medicine_price,},
+    { field: "ID", headerName: "ลำดับ", width: 80 },
+    //{ field: "Patient", headerName: "ชื่อ ผู้ป่วย", width: 250,  valueFormatter: (params) => params.value.FirstName,},
+    //{ field: "Patient", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
+    { field: "Patient", headerName: "เลขประจำตัวประชาชน", width: 300,  valueFormatter: (params) => params.value.Personal_id,},
+    { field: "Total_price", headerName: "ราคารวม", width: 250,  valueFormatter: (params) => params.value.Total_price,},
+    //{ field: "Medicine", headerName: "ชื่อยา", width: 250,  valueFormatter: (params) => params.value.Medicine_name,},
+    //{ field: "Medicine", headerName: "ราคา", width: 250,  valueFormatter: (params) => params.value.Medicine_price,},
     // { field: "Patient", headerName: "ชื่อ ทันตแพทย์", width: 250,  valueFormatter: (params) => params.value.FirstName,},
     // { field: "Patient", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
-    { field: "Medicine_status", headerName: "สถานะ", width: 250,  valueFormatter: (params) => params.value.Medicine_status_name,},
+    { field: "Payment_status", headerName: "สถานะ", width: 300,  valueFormatter: (params) => params.value.Payment_status_name,},
     {
-      field: "action", headerName: "Action",width: 200, sortable: false, renderCell: ({ row }) =>
-      <ButtonGroup>
-                <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
-                    delete
-                </Button>
-                <Button component={RouterLink} to={`/prescriptionupdate/${row.id}`} variant="contained">
-                            <div className="good-font">
-                                update
-                            </div>
-                        </Button>
-            </ButtonGroup>
+      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
+            <Button onClick={() => handleDelete(row.ID)} size="small" variant="contained" color="error" >
+                delete
+            </Button>
     },
   ];
 
   useEffect(() => {
-    getPrescriptions();
+    getPayments();
   }, []);
 
   return (
@@ -86,7 +79,7 @@ function Prescriptions() {
               color="primary"
               gutterBottom
             >
-              ข้อมูลตารางการสั่งจ่ายยา
+              ข้อมูลตารางการชำระเงิน
             </Typography>
           </Box>
           <Box>
@@ -113,7 +106,7 @@ function Prescriptions() {
         
         <div style={{ height: 400, width: "100%", marginTop: "20px" }}>
           <DataGrid
-            rows={prescriptions}
+            rows={payments}
             getRowId={(row) => row.ID}
             columns={columns}
             pageSize={5}
@@ -125,4 +118,4 @@ function Prescriptions() {
   );
 }
 
-export default Prescriptions;
+export default Payments;
