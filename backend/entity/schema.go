@@ -293,13 +293,13 @@ type Prescription struct {
 	gorm.Model
 	DateTimePrescription time.Time
 	//PatientID 	ทำหน้าที่เป็น FK
-	PatientID *uint
+	PatientID *uint `valid:"required~Name cannot be blank"`
 	Patient   Patient
 	//DentistID 	ทำหน้าที่เป็น FK
 	DentistID *uint
 	Dentist   Dentist
 	//Medicine_statusID 	ทำหน้าที่เป็น FK
-	Medicine_statusID *uint
+	Medicine_statusID *uint `valid:"required~Medicine_status cannot be blank"`
 	Medicine_status   Medicine_status
 	//MedicineID 	ทำหน้าที่เป็น FK
 	MedicineID *uint

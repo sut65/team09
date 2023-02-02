@@ -824,6 +824,73 @@ async function GetReasons() {
     return res;
   }
 
+  async function GetMedicine() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/medicines`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function GetMedicine_status() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/medicine_statuses`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function CreatePrescription(data: PrescriptionInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/prescriptions`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return { status: true, message: res.data };
+      } else {
+        return { status: false, message: res.error };
+      }
+      });
+  
+    return res;
+  }
+
   async function GetPrescription() {
     const requestOptions = {
       method: "GET",
@@ -885,7 +952,10 @@ async function GetReasons() {
     GetDentists,
     CreateDentists,
 
+    GetMedicine,
+    GetMedicine_status,
     GetPrescription,
+    CreatePrescription,
 
   };
 
