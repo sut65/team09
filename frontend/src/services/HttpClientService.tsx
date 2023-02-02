@@ -913,6 +913,28 @@ async function GetReasons() {
     return res;
   }
 
+  async function GetPayment() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/payments`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
   export {
     GetPatientSchedules,
     GetDentistScehedules,
@@ -956,6 +978,8 @@ async function GetReasons() {
     GetMedicine_status,
     GetPrescription,
     CreatePrescription,
+
+    GetPayment
 
   };
 

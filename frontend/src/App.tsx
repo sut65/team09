@@ -17,6 +17,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
 import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
@@ -58,6 +59,8 @@ import TreatmentPlanUpdate from "./components/treatment_plan/TreatmentPlanUpdate
 
 import PrescriptionList from "./components/prescription/PrescriptionList";
 import PrescriptionCreate from "./components/prescription/PrescriptionCreate";
+
+import PaymentList from "./components/payment/PaymentList";
 
 
 
@@ -129,6 +132,7 @@ const menu = [
   { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,},
   { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" ,},
   { name: "จัดการข้อมูลแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,},
+  { name: "แจ้งยอดชำระ", icon: <PaymentsIcon />, path: "/payment" ,},
 
 ];
 
@@ -265,6 +269,7 @@ function App() {
                 <Route path="/dentist/create" element={<DentistCreate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
                 <Route path="/prescription/create" element={<PrescriptionCreate />} />
+                <Route path="/payment" element={<PaymentList />} />
               </Routes>
             </Container>
           </Box>
