@@ -335,24 +335,25 @@ type Type_of_number_of_treatment struct {
 type Treatment struct {
 	gorm.Model
 	//DentistID 	ทำหน้าที่เป็น FK
-	DentistID *uint
+	DentistID *uint 
+
 	Dentist   Dentist
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID              *uint
 	Patient                Patient
-	Number_of_cavities     int
-	Number_of_swollen_gums int
-	Other_teeth_problems   string
+	Number_of_cavities     int `json:"number_of_cavities" valid:"required~Number of cavities cannot be blank"`
+	Number_of_swollen_gums int `json:"number_of_swollen_gums" valid:"required~Number of swollen_gums cannot be blank"`
+	Other_teeth_problems   string `json:"Other_teeth_problems" valid:"required~Other teeth problems cannot be blank"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment
-	Number_of_treatment int
+	Number_of_treatment int `json:"number_of_treatment" valid:"required~Number of treatment cannot be blank"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
-	Type_Of_Number_Of_TreatmentID *uint
+	Type_Of_Number_Of_TreatmentID *uint 
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
-	Treatment_detail              string
-	Treatment_time                time.Time
-	Treatment_code                string
+	Treatment_detail              string `json:"treatment_detail" valid:"required~Treatment detail cannot be blank"`
+	Treatment_time                time.Time 
+	Treatment_code                string `json:"treatment_code" valid:"required~Treatment code cannot be blank"`
 }
 
 // ------ระบบจัดแผนการรักษา------//
