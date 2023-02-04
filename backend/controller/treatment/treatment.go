@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"github.com/sut65/team09/entity"
 	"github.com/gin-gonic/gin" 
+	"github.com/asaskevich/govalidator"
 )
 
 func CreateTreatment(c *gin.Context) {
@@ -14,6 +15,12 @@ func CreateTreatment(c *gin.Context) {
 	var type_of_number_of_treatments entity.Type_of_number_of_treatment
 
 	if err := c.ShouldBindJSON(&treatments); err != nil { 
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(treatments); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
