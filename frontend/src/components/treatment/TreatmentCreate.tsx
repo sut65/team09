@@ -16,7 +16,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 //import { GetCurrentAdmin } from "../services/HttpClientService"
-//import { TreatmentsInterface } from "../models/ITreatment";
 import { TreatmentsInterface } from "../../models/ITreatment";
 import { Type_of_treatments_Interface } from "../../models/IType_of_treatment"; 
 import { DentistInterface } from "../../models/IDentist"; 
@@ -41,6 +40,7 @@ function TreatmentCreate() {
     const [type_of_treatments, setType_of_treatments] = React.useState<Type_of_treatments_Interface[]>([]);
     const [type_of_number_of_treatments, setType_of_number_treatments] = React.useState<Type_of_number_of_treatment_Interface[]>([]);
     const [treatment, setTreatment] = React.useState<TreatmentsInterface>({Treatment_time: new Date(), });
+     const [message, setAlertMessage] = React.useState("");
     // const [other_teeth_problems, setTOther_teeth_problems] = React.useState<string>("");
     // const [treatment_detail, setTreatment_detail] = React.useState<string>("");
     // const [treatment_code, setTreatment_code] = React.useState<string>("");
@@ -192,22 +192,36 @@ function TreatmentCreate() {
             body: JSON.stringify(data),
         };
 
-        fetch(`${apiUrl}/treatments`, requestOptions)
+        let res = await fetch(`${apiUrl}/treatments`, requestOptions)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {
                     setSuccess(true);
                     setErrorMessage("")
+                    return { status: true, message: res.data };
                 } else {
                     setError(true);
                     setErrorMessage(res.error)
+                    return { status: false, message: res.error };
                 }
             });
+        
+            
+            if (res.status) {
+              setAlertMessage("บันทึกข้อมูลสำเร็จ");
+              setSuccess(true);
+            } else {
+              setAlertMessage(res.message);
+              setError(true);
+            }
+
     }
 
     return (
         <Container maxWidth="md">
             <Snackbar
+                id="success"
+              
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
@@ -215,18 +229,22 @@ function TreatmentCreate() {
             >
                 <Alert onClose={handleClose} severity="success">
                     <div className="good-font">
-                        บันทึกข้อมูลสำเร็จ
+                    {message}
                     </div>
                 </Alert>
             </Snackbar>
-            <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar 
+            id="error"
+            open={error}
+            autoHideDuration={6000} onClose={handleClose}>
+                
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
-                        บันทึกข้อมูลไม่สำเร็จ
+                    {message}
                     </div>
                 </Alert>
             </Snackbar>
-            <Paper>
+            <Paper> 
                 <Box
                     display="flex"
                     sx={{

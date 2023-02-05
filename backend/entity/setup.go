@@ -118,7 +118,7 @@ func SetupDatabase() {
 	province3 := Province{
 		Province_name: "Bangkok",
 	}
-	db.Model(&Province{}).Create(&province2)
+	db.Model(&Province{}).Create(&province3)
 
 	//district
 	district1 := District{
@@ -333,8 +333,8 @@ func SetupDatabase() {
 		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
 		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
 	}
-	db.CreateInBatches(Ttype , 2)
-	
+	db.CreateInBatches(Ttype, 2)
+
 	var day = []Workingday{
 		{Day: "วันจันทร์"},
 		{Day: "วันอังคาร"},
@@ -342,9 +342,6 @@ func SetupDatabase() {
 		{Day: "วันพฤหัสบดี"},
 	}
 	db.CreateInBatches(day, 4)
-
-	
-	
 
 	var task = []Responsity{
 		{Respon: "ตรวจผู้ป่วย"},
@@ -735,22 +732,19 @@ func SetupDatabase() {
 	}
 	db.Model(&Category{}).Create(&category3)
 
-
 	//room_detail
 	room_detail1 := Room_Detail{
-		Room_Number: room_number3,
-		Category: 	category1,
+		Room_Number:   room_number3,
+		Category:      category1,
 		MedicalDevice: MedicalDevice1,
 	}
 	db.Model(&Room_Detail{}).Create(&room_detail1)
 
 	room_detail2 := Room_Detail{
-		Room_Number: room_number4,
-		Category: 	category3,
+		Room_Number:   room_number4,
+		Category:      category3,
 		MedicalDevice: MedicalDevice3,
 	}
 	db.Model(&Room_Detail{}).Create(&room_detail2)
 
-	
 }
-

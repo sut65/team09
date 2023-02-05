@@ -230,6 +230,7 @@ async function GetProvince() {
 }  
 
 async function GetDistrict() {
+  let uid = localStorage.getItem("provinceId");
   const requestOptions = {
     method: "GET",
     headers: {
@@ -238,7 +239,7 @@ async function GetDistrict() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/district`, requestOptions)
+  let res = await fetch(`${apiUrl}/district/${uid}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -250,9 +251,11 @@ async function GetDistrict() {
 
   return res;
 }
+
   
 
 async function GetSubdistrict() {
+  let uid = localStorage.getItem("districtId");
   const requestOptions = {
     method: "GET",
     headers: {
@@ -261,7 +264,7 @@ async function GetSubdistrict() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/subdistricts`, requestOptions)
+  let res = await fetch(`${apiUrl}/subdistrict/${uid}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
