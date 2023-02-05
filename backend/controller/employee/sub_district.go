@@ -25,10 +25,10 @@ func CreateSubDistrict(c *gin.Context) {
 
 // GET /subdistrict/:id
 func GetSubDistrict(c *gin.Context) {
-	var subdistrict entity.Sub_district
+	var subdistrict []entity.Sub_district
 	id := c.Param("id")
-	if tx := entity.DB().Where("id = ?", id).First(&subdistrict); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "sub-distrct not found"})
+	if err := entity.DB().Raw("SELECT * FROM sub_districts WHERE district_id = ?", id).Find(&subdistrict).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 

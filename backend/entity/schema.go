@@ -2,6 +2,7 @@ package entity
 
 import (
 	"time"
+
 	"github.com/asaskevich/govalidator"
 	"gorm.io/gorm"
 )
@@ -197,7 +198,7 @@ type Repair struct {
 // ระบบนัดผู้ป่วย
 type Reason struct {
 	gorm.Model
-	Method          string	`valid:"required~Method not blank"`
+	Method          string            `valid:"required~Method not blank"`
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:ReasonID"`
 }
 
@@ -215,7 +216,7 @@ type Patien_schedule struct {
 
 	Type_of_treatmentID *uint
 	Type_of_treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Date_time           time.Time	`valid:"future~Datetime must be a future date"`
+	Date_time           time.Time         `valid:"future~Datetime must be a future date"`
 }
 
 // -----ระบบจัดการข้อมูลทันตแพทย์-----

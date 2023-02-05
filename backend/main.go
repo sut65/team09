@@ -58,14 +58,14 @@ func main() {
 	router.PATCH("/provinces", employee.UpdateProvince)
 	router.DELETE("/provinces/:id", employee.DeleteProvince)
 
-	router.GET("/district", employee.ListDistrict)
+	router.GET("/districts", employee.ListDistrict)
 	router.GET("/district/:id", employee.GetDistrict)
 	router.POST("/district", employee.CreateDistrict)
 	router.PATCH("/district", employee.UpdateDistrict)
 	router.DELETE("/district/:id", employee.DeleteDistrict)
 
 	router.GET("/subdistricts", employee.ListSubDistrict)
-	router.GET("/subdistricts/:id", employee.GetSubDistrict)
+	router.GET("/subdistrict/:id", employee.GetSubDistrict)
 	router.POST("/subdistrict", employee.CreateSubDistrict)
 	router.PATCH("/subdistrict", employee.UpdateSubDistrict)
 	router.DELETE("/subdistrict/:id", employee.DeleteSubDistrict)

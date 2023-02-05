@@ -25,10 +25,10 @@ func CreateDistrict(c *gin.Context) {
 
 // GET /district/:id
 func GetDistrict(c *gin.Context) {
-	var district entity.Province
+	var district []entity.District
 	id := c.Param("id")
-	if tx := entity.DB().Where("id = ?", id).First(&district); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "distrct not found"})
+	if err := entity.DB().Raw("SELECT * FROM districts WHERE province_id = ?", id).Find(&district).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -37,8 +37,10 @@ func GetDistrict(c *gin.Context) {
 
 // GET /district
 func ListDistrict(c *gin.Context) {
+	provinceID := c.Param("province_id")
+
 	var district []entity.District
-	if err := entity.DB().Raw("SELECT * FROM Districts").Scan(&district).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM Districts WHERE province_id = ?", provinceID).Scan(&district).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
