@@ -53,6 +53,8 @@ function PaitentCreate() {
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
   const [patient, setPatient] = useState<Partial<PatientInterface>>({});
+  const [provinceId, setProvinceId] = useState('');
+  const [districtId, setDistrictId] = useState('');
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -68,6 +70,42 @@ function PaitentCreate() {
     setSuccess(false);
     setError(false);
   };
+
+  //เพิ่มเมื่อมีการเปลี่ยนแปลงของจังหวัดส่ง id จังหวัดไปที่อ ำเภอ
+  const handleChangeProvince = (event: SelectChangeEvent) => {
+    setProvinceId(event.target.value);
+    console.log(event.target.value)
+    //เลือกใช้เพื่อส่งข้อมูลแบบ realtime
+    getDistrict();
+    //เพื่อบันทึกลง employee
+    const name = event.target.name as keyof typeof PaitentCreate;
+    setPatient({
+      ...patient,
+      [name]: event.target.value,
+    });
+  }
+  //เพิ่มเมื่อมีการเปลี่ยนแปลงของอำเภอส่ง id จังหวัดไปที่ตำบล
+  const handleChangeDistrict = (event: SelectChangeEvent) => {
+    setDistrictId(event.target.value);
+    console.log(event.target.value)
+    getSubdistrict();
+    const name = event.target.name as keyof typeof PaitentCreate;
+    setPatient({
+      ...patient,
+      [name]: event.target.value,
+    });
+  }
+
+  //set id provice ไปเก็บบน localstorage
+  const saveProvinceIdToLocalStorage = () => {
+    localStorage.setItem('provinceId', provinceId);
+    getDistrict();
+  };
+  const saveDistrictIdToLocalStorage = () => {
+    localStorage.setItem('districtId', districtId);
+    getSubdistrict();
+  };
+
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
     const name = event.target.name as keyof typeof PaitentCreate;
@@ -121,13 +159,13 @@ function PaitentCreate() {
     }
   };
 
-  const getEmployeeByUID = async ()=>{
-    let res = await GetEmployeeByUID();
-    patient.EmployeeID = res.ID;
-    if (res) {
-      setEmployee(res);
-    }
-  }
+  // const getEmployeeByUID = async ()=>{
+  //   let res = await GetEmployeeByUID();
+  //   patient.EmployeeID = res.ID;
+  //   if (res) {
+  //     setEmployee(res);
+  //   }
+  // }
 
 
   useEffect(() => {
@@ -136,7 +174,7 @@ function PaitentCreate() {
     getProvince();
     getDistrict();
     getSubdistrict();
-    getEmployeeByUID();
+    // getEmployeeByUID();
   }, []);
 
   const convertType = (data: string | number | undefined) => {
@@ -360,7 +398,8 @@ function PaitentCreate() {
               <Select
                 native
                 value={patient.ProvinceID + ""}
-                onChange={handleChange}
+                onChange={handleChangeProvince}
+                onClick={saveProvinceIdToLocalStorage}
                 inputProps={{
                   name: "ProvinceID",
                 }}
@@ -374,6 +413,7 @@ function PaitentCreate() {
                   </option>
                 ))}
               </Select>
+              {provinceId && <div>Selected province id: {provinceId}</div>}
             </FormControl>
         </Grid>
 
@@ -383,7 +423,8 @@ function PaitentCreate() {
               <Select
                 native
                 value={patient.DistrictID + ""}
-                onChange={handleChange}
+                onChange={handleChangeDistrict}
+                onClick={saveDistrictIdToLocalStorage}
                 inputProps={{
                   name: "DistrictID",
                 }}
