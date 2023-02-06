@@ -40,6 +40,15 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+const apiUrl = "http://localhost:3001";
+const requestOptions = {
+    method: "GET",
+    headers: {
+        //Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json"
+    },
+};
+
 function EmployeeCreate() {
   const [gender, setGender] = useState<GenderInterface[]>([]);
   const [role, setRole] = useState<RoleInterface[]>([]);
@@ -49,11 +58,55 @@ function EmployeeCreate() {
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
   const [provinceId, setProvinceId] = useState('');
   const [districtId, setDistrictId] = useState('');
+  //เพิ่มเพื่อรับข้อมูลมาโชว์ตอนอัพเดต
+  const [employee_number, setEmployee_number] = React.useState<string>("");
+  const [personal, setPersonal] = React.useState<string>("");
+  const [fn, setfn] = React.useState<string>("");
+  const [ln, setLn] = React.useState<string>("");
+  const [pass, setPass] = React.useState<string>("");
+  const [phone, setPhone] = React.useState<string>("");
+  const [house, setHouse] = React.useState<string>("");
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
   const { id } = useParams();
+  useEffect(() => {
+    getEmployee();
+    fetch(`http://localhost:3001/employee/${id}`)
+        .then((response) => response.json())
+        .then((res) => {
+            if (res.data) {
+                console.log("Employee number : ")
+                console.log(res.data.Employee_number)
+                setEmployee_number(res.data.Employee_number.toString());
+
+                console.log("Personal : ")
+                console.log(res.data.Personal_id)
+                setPersonal(res.data.Personal_id.toString());
+
+                console.log("FirstName : ")
+                console.log(res.data.FirstName)
+                setfn(res.data.FirstName.toString());
+
+                console.log("LastName : ")
+                console.log(res.data.LastName)
+                setLn(res.data.LastName.toString());
+
+                setPass(res.data.Password.toString());
+
+                console.log("Phone : ")
+                console.log(res.data.Phone)
+                setPhone(res.data.Phone.toString());
+
+                console.log("House_no : ")
+                console.log(res.data.House_no )
+                setHouse(res.data.House_no .toString());
+
+            }
+        }
+        )
+}, [id])
 
    //เปิดปิดตัว alert
     const handleClose = (
@@ -149,7 +202,15 @@ function EmployeeCreate() {
     }
   };
 
+  const getEmployee = async () => {
+    let res = await GetEmployee();
+    if (res) {
+      setEmployee(res);
+    }
+  };
+
   useEffect(() => {
+    getEmployee();
     getGender();
     getRole();
     getProvince();
@@ -179,15 +240,26 @@ function EmployeeCreate() {
       DistrictID: convertType(employee.DistrictID),
       Sub_districtID: convertType(employee.Sub_districtID),
     };
-    console.log(data);
+    console.log(JSON.stringify(data))
 
-    let res = await CreateEmployee(data);
-    console.log(res);
-    if (res) { 
-      setSuccess(true);
-    } else {
-      setError(true);
-    }
+    const requestOptions = {
+        method: "PATCH",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+    };
+
+    fetch(`${apiUrl}/employees/${id}`, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+            if (res.data) {
+                setSuccess(true);
+            } else {
+                setError(true);
+            }
+        });
   }
 
   return (
@@ -244,7 +316,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสพนักงาน"
-                value={employee.Employee_number || ""}
+                value={employee.Employee_number || "" || employee_number}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -259,7 +331,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกบัตรประชาชน"
-                value={employee.Personal_id || ""}
+                value={employee.Personal_id || "" || personal}
                 onChange={handleInputChange}
                 inputProps={{maxLength :13}}
               />
@@ -275,7 +347,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกชื่อ"
-                value={employee.FirstName || ""}
+                value={employee.FirstName || "" || fn}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -290,7 +362,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกนามสกุล"
-                value={employee.LastName || ""}
+                value={employee.LastName || "" || ln}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -305,7 +377,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสผ่าน"
-                value={employee.Password || ""}
+                value={employee.Password?.replace(/./g, "*") || "" || pass.replace(/./g, "*")}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -320,7 +392,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                value={employee.Phone || ""}
+                value={employee.Phone || "" || phone}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -335,7 +407,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกที่อยู่"
-                value={employee.House_no || ""}
+                value={employee.House_no || "" || house}
                 onChange={handleInputChange}
               />
             </FormControl>

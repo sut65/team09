@@ -73,7 +73,7 @@ func main() {
 	router.GET("/employees", employee.ListEmployee)
 	router.GET("/employee/:id", employee.GetEmployee)
 	router.POST("/employees", employee.CreateEmployee)
-	router.PATCH("/employees", employee.UpdateEmployee)
+	router.PATCH("/employees/:id", employee.UpdateEmployee)
 	router.DELETE("/employees/:id", employee.DeleteEmployee)
 
 	//------------------------------------

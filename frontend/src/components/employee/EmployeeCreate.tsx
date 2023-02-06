@@ -301,7 +301,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสผ่าน"
-                value={employee.Password || ""}
+                value={employee.Password?.replace(/./g, "*") || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
