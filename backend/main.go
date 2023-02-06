@@ -10,6 +10,7 @@ import (
 	patient "github.com/sut65/team09/controller/patient"
 	payment "github.com/sut65/team09/controller/payment"
 	prescription "github.com/sut65/team09/controller/prescription"
+	repair "github.com/sut65/team09/controller/repair"
 	room "github.com/sut65/team09/controller/room"
 	treatment "github.com/sut65/team09/controller/treatment"
 	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
@@ -235,6 +236,16 @@ func main() {
 	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
 	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
+	//----Repair-----
+	r.GET("/repairs", repair.ListRepairs)
+	r.GET("/repair/:id", repair.GetRepair)
+	r.POST("/repairs", repair.CreateRepair)
+	r.PATCH("/repair", repair.UpdateRepairs)
+	r.DELETE("/repair/:id", repair.DeleteRepair)
+
+	r.GET("/damagelevels", repair.ListDamageLevels)
+	r.GET("/damagelevel/:id", repair.GetDamageLevel)
+
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)
 	// r.POST("/users", user_controller.CreateUser)
@@ -261,7 +272,7 @@ func main() {
 
 	// Run the server
 
-	r.Run() 
+	r.Run()
 
 }
 
