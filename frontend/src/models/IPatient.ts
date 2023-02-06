@@ -15,6 +15,7 @@ export interface PatientInterface {
     Underlying_disease?: string,
 	Drug_alergy?:       string,
 	House_no?:          string,
+	Symptom_name?:      string,
 	SymptomID?:    	    number,
 	Symptom?:    		SymptomInterface,  
 	GenderID?:        	number,    

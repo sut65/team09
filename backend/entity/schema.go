@@ -93,8 +93,8 @@ type Employee struct {
 // -----ระบบผู้ป่วย--------
 type Symptom struct {
 	gorm.Model
-	Symptom_name string
-	Patients     []Patient `gorm:"foreignKey: SymptomID"`
+	Symptom_choice string
+	Patients       []Patient `gorm:"foreignKey: SymptomID"`
 }
 
 type Patient struct {
@@ -125,9 +125,10 @@ type Patient struct {
 	GenderID *uint
 	Gender   Gender `gorm:"references:id"`
 
-	//RoleID ทำหน้าที่เป็น FK
-	SymptomID *uint
-	Symptom   Symptom `gorm:"references:id"`
+	//SymptomID ทำหน้าที่เป็น FK
+	SymptomID    *uint
+	Symptom      Symptom `gorm:"references:id"`
+	Symptom_name string
 
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`

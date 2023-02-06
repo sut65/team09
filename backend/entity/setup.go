@@ -232,17 +232,17 @@ func SetupDatabase() {
 	//----------- ผู้ป่วย --------
 	//symptom
 	symp1 := Symptom{
-		Symptom_name: "have a toothache",
+		Symptom_choice: "มีอาการเบื้องต้น",
 	}
 	db.Model(&Symptom{}).Create(&symp1)
 
 	symp2 := Symptom{
-		Symptom_name: "gum pain",
+		Symptom_choice: "ไม่มีอาการเบื้องต้น",
 	}
 	db.Model(&Symptom{}).Create(&symp2)
 
 	symp3 := Symptom{
-		Symptom_name: "Other",
+		Symptom_choice: "อื่นๆ",
 	}
 	db.Model(&Symptom{}).Create(&symp3)
 
@@ -266,7 +266,8 @@ func SetupDatabase() {
 		GenderID:           new(uint),
 		Gender:             gender2,
 		SymptomID:          new(uint),
-		Symptom:            symp1,
+		Symptom:            symp2,
+		Symptom_name:       "-",
 		EmployeeID:         new(uint),
 		Employee:           em1,
 	}
@@ -291,7 +292,8 @@ func SetupDatabase() {
 		GenderID:           new(uint),
 		Gender:             gender1,
 		SymptomID:          new(uint),
-		Symptom:            symp2,
+		Symptom:            symp1,
+		Symptom_name:       "ปวดฟัน",
 		// EmployeeID:         new(uint),
 		Employee: em1,
 	}
