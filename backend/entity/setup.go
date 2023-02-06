@@ -69,6 +69,15 @@ func SetupDatabase() {
 
 	db = database
 
+
+	password1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
+	password2, err := bcrypt.GenerateFromPassword([]byte("5678"), 14)
+	password3, err := bcrypt.GenerateFromPassword([]byte("12123"), 14)
+	password4, err := bcrypt.GenerateFromPassword([]byte("abcde00"), 14)
+	password5, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+	password6, err := bcrypt.GenerateFromPassword([]byte("0001111"), 14)
+	password7, err := bcrypt.GenerateFromPassword([]byte("www"), 14)
+
 	method1 := Reason{
 		Method: "อยากโดนเข็ม",
 	}
@@ -180,13 +189,7 @@ func SetupDatabase() {
 	db.Model(&Sub_district{}).Create(&subdistrict3)
 
 	//employee
-	password1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
-	password2, err := bcrypt.GenerateFromPassword([]byte("5678"), 14)
-	password3, err := bcrypt.GenerateFromPassword([]byte("12123"), 14)
-	password4, err := bcrypt.GenerateFromPassword([]byte("abcde00"), 14)
-	password5, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
-	password6, err := bcrypt.GenerateFromPassword([]byte("0001111"), 14)
-	password7, err := bcrypt.GenerateFromPassword([]byte("www"), 14)
+	
 
 	em1 := Employee{
 		Employee_number: "B0000001",
@@ -298,125 +301,7 @@ func SetupDatabase() {
 	db.Model(&Patient{}).Create(&patient2)
 
 	///////////////ข้อมูล ทดสอบ///////////
-	Dentist1 := Dentist{
-		FirstName: "หมอเทวดา",
-	}
-	db.Model(&Dentist{}).Create(&Dentist1)
-
-	///////////////ข้อมูลใน entity Medicine///////////
-	Medicine1 := Medicine{
-		Medicine_name:  "แก้ปวด",
-		Medicine_price: 100,
-	}
-	db.Model(&Medicine{}).Create(&Medicine1)
-
-	///////////////ข้อมูลใน entity Medicine_status///////////
-	Medicine_status1 := Medicine_status{
-		Medicine_status_name: "รับยาแล้ว",
-	}
-	db.Model(&Medicine_status{}).Create(&Medicine_status1)
-
-	///////////////ข้อมูลใน entity Prescription///////////
-	DateTimePrescriptionA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
-	//DateTimePrescriptionB := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
-	Prescription1 := Prescription{
-		Medicine:             Medicine1,
-		Medicine_status:      Medicine_status1,
-		Patient:              patient1,
-		Dentist:              Dentist1,
-		DateTimePrescription: DateTimePrescriptionA,
-	}
-	db.Model(&Prescription{}).Create(&Prescription1)
-
-	//จำลองข้อมูลระบบจัดตารางงานแพทย์
-	var Ttype = []Type_of_treatment{
-		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
-		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
-	}
-	db.CreateInBatches(Ttype, 2)
-
-	var day = []Workingday{
-		{Day: "วันจันทร์"},
-		{Day: "วันอังคาร"},
-		{Day: "วันพุธ"},
-		{Day: "วันพฤหัสบดี"},
-	}
-	db.CreateInBatches(day, 4)
-
-	var task = []Responsity{
-		{Respon: "ตรวจผู้ป่วย"},
-		{Respon: "เข้าเวร"},
-		{Respon: "ตรวจสอบอุปกรณ์"},
-		{Respon: "ทำการรักษา"},
-	}
-	db.CreateInBatches(task, 4)
-
-	//-------MedicalDevice------------
-	//---Type---
-	Type1 := Type{
-		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
-	}
-	db.Model(&Type{}).Create(&Type1)
-
-	Type2 := Type{
-		Type_Name: "ทันตกรรมจัดฟัน",
-	}
-	db.Model(&Type{}).Create(&Type2)
-
-	Type3 := Type{
-		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
-	}
-	db.Model(&Type{}).Create(&Type3)
-
-	Type4 := Type{
-		Type_Name: "อุปกรณ์ทั่วไป",
-	}
-	db.Model(&Type{}).Create(&Type4)
-
-	//---Status---
-	Status1 := Status{
-		Status_Choice: "Sterile",
-	}
-	db.Model(&Status{}).Create(&Status1)
-
-	Status2 := Status{
-		Status_Choice: "Non-Sterile",
-	}
-	db.Model(&Status{}).Create(&Status2)
-
-	//----ตารางหลัก-----
-	DateTimeA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
-
-	MedicalDevice1 := MedicalDevice{
-		Employee:    em1,
-		Type:        Type4,
-		Status:      Status2,
-		Device_Name: "เก้าอี้ทำฟัน",
-		Amount:      1,
-		Record_Date: DateTimeA,
-	}
-	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
-
-	MedicalDevice2 := MedicalDevice{
-		Employee:    em2,
-		Type:        Type2,
-		Status:      Status2,
-		Device_Name: "เหล็กดัดฟัน",
-		Amount:      2,
-		Record_Date: DateTimeA,
-	}
-	db.Model(&MedicalDevice{}).Create(&MedicalDevice2)
-
-	MedicalDevice3 := MedicalDevice{
-		Employee:    em1,
-		Type:        Type4,
-		Status:      Status2,
-		Device_Name: "เครื่องขูด",
-		Amount:      1,
-		Record_Date: DateTimeA,
-	}
-	db.Model(&MedicalDevice{}).Create(&MedicalDevice3)
-
+	
 	//--------ระบบจัดการข้อมูลแพทย์---------
 	//---Specialized---
 	specialized1 := Specialized{
@@ -585,6 +470,121 @@ func SetupDatabase() {
 		Province:    province1,
 	}
 	db.Model(&Dentist{}).Create(&dentist5)
+
+	///////////////ข้อมูลใน entity Medicine///////////
+	Medicine1 := Medicine{
+		Medicine_name:  "แก้ปวด",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine1)
+
+	///////////////ข้อมูลใน entity Medicine_status///////////
+	Medicine_status1 := Medicine_status{
+		Medicine_status_name: "รับยาแล้ว",
+	}
+	db.Model(&Medicine_status{}).Create(&Medicine_status1)
+
+	///////////////ข้อมูลใน entity Prescription///////////
+	DateTimePrescriptionA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+	//DateTimePrescriptionB := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+	Prescription1 := Prescription{
+		Medicine:             Medicine1,
+		Medicine_status:      Medicine_status1,
+		Patient:              patient1,
+		Dentist:              dentist1,
+		DateTimePrescription: DateTimePrescriptionA,
+	}
+	db.Model(&Prescription{}).Create(&Prescription1)
+
+	//จำลองข้อมูลระบบจัดตารางงานแพทย์
+	var Ttype = []Type_of_treatment{
+		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
+		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
+	}
+	db.CreateInBatches(Ttype, 2)
+
+	var day = []Workingday{
+		{Day: "วันจันทร์"},
+		{Day: "วันอังคาร"},
+		{Day: "วันพุธ"},
+		{Day: "วันพฤหัสบดี"},
+	}
+	db.CreateInBatches(day, 4)
+
+	var task = []Responsity{
+		{Respon: "ตรวจผู้ป่วย"},
+		{Respon: "เข้าเวร"},
+		{Respon: "ตรวจสอบอุปกรณ์"},
+		{Respon: "ทำการรักษา"},
+	}
+	db.CreateInBatches(task, 4)
+
+	//-------MedicalDevice------------
+	//---Type---
+	Type1 := Type{
+		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
+	}
+	db.Model(&Type{}).Create(&Type1)
+
+	Type2 := Type{
+		Type_Name: "ทันตกรรมจัดฟัน",
+	}
+	db.Model(&Type{}).Create(&Type2)
+
+	Type3 := Type{
+		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
+	}
+	db.Model(&Type{}).Create(&Type3)
+
+	Type4 := Type{
+		Type_Name: "อุปกรณ์ทั่วไป",
+	}
+	db.Model(&Type{}).Create(&Type4)
+
+	//---Status---
+	Status1 := Status{
+		Status_Choice: "Sterile",
+	}
+	db.Model(&Status{}).Create(&Status1)
+
+	Status2 := Status{
+		Status_Choice: "Non-Sterile",
+	}
+	db.Model(&Status{}).Create(&Status2)
+
+	//----ตารางหลัก-----
+	DateTimeA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+
+	MedicalDevice1 := MedicalDevice{
+		Employee:    em1,
+		Type:        Type4,
+		Status:      Status2,
+		Device_Name: "เก้าอี้ทำฟัน",
+		Amount:      1,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
+
+	MedicalDevice2 := MedicalDevice{
+		Employee:    em2,
+		Type:        Type2,
+		Status:      Status2,
+		Device_Name: "เหล็กดัดฟัน",
+		Amount:      2,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice2)
+
+	MedicalDevice3 := MedicalDevice{
+		Employee:    em1,
+		Type:        Type4,
+		Status:      Status2,
+		Device_Name: "เครื่องขูด",
+		Amount:      1,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice3)
+
 
 	//Type of treatment
 	Type_of_treatment1 := Type_of_treatment{

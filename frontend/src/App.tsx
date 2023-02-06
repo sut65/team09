@@ -47,6 +47,9 @@ import PatientCreate from "./components/patient/PatientCreate";
 import Dentists from "./components/dentist/DentistsList"; 
 import DentistCreate from "./components/dentist/DentistCreate";
 
+import Room_Details from "./components/room/Room_DetailList";
+import Room_DetailCreate from "./components/room/Room_DetailCreate";
+
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 
@@ -133,6 +136,7 @@ const menu = [
   { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,},
   { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" ,},
   { name: "จัดการข้อมูลแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,},
+  { name: "จัดการข้อมูลห้อง", icon: <BuildCircleIcon />, path: "/room_details" ,},
   { name: "แจ้งยอดชำระ", icon: <PaymentsIcon />, path: "/payment" ,},
 
 ];
@@ -269,6 +273,8 @@ function App() {
                 <Route path="/treatmentplan_update/:id" element={<TreatmentPlanUpdate />} />         
                 <Route path="/dentists" element={<Dentists />} />
                 <Route path="/dentist/create" element={<DentistCreate />} />
+                <Route path="/room_details" element={<Room_Details />} />
+                <Route path="/room_detail/create" element={<Room_DetailCreate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
                 <Route path="/prescription/create" element={<PrescriptionCreate />} />
                 <Route path="/payment" element={<PaymentList />} />

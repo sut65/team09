@@ -16,7 +16,7 @@ import (
 	"github.com/sut65/team09/entity"
 )
 
-const PORT = "3001"
+//const PORT = "8080"
 
 func main() {
 
@@ -261,7 +261,7 @@ func main() {
 
 	// Run the server
 
-	r.Run("localhost: " + PORT)
+	r.Run() 
 
 }
 
