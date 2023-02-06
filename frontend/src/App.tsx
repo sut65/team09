@@ -30,6 +30,7 @@ import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 // import Home from "./components/Home";
 import EmployeeList from "./components/employee/EmployeeList";
 import EmployeeCreate from "./components/employee/EmployeeCreate";
+import EmployeeUpdate from "./components/employee/EmployeeUpdate";
 
 import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
 import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleHome";
@@ -252,6 +253,7 @@ function App() {
                 <Route path="/patients/create" element={<PatientCreate />} />
                 <Route path="/employees" element={<EmployeeList />} />
                 <Route path="/employee/create" element={<EmployeeCreate />} />
+                <Route path="/employee_update/:id" element={<EmployeeUpdate />} />
                 <Route path="/PatientSchedule/create" element={<PatientSchedule />} />
                 <Route path="/PatientSchedule/home" element={<PatientScheduleHome />} />
                 <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
