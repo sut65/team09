@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/sut65/team09/entity"
 )
@@ -16,6 +17,11 @@ func CreateMedicalDevice(c *gin.Context) {
 
 	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร medicaldevice
 	if err := c.ShouldBindJSON(&medicaldevice); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if _, err := govalidator.ValidateStruct(medicaldevice); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
