@@ -6,9 +6,10 @@ import {DentistSceheduleInterface} from "../models/IDentistScheduleInterface";
 import { MedicalDeviceInterface } from "../models/IMedicaldevice";
 import { PatientInterface } from "../models/IPatient";
 import { DentistInterface } from "../models/IDentist";
+import { Room_DetailInterface } from "../models/IRoom_Detail";
 import { PrescriptionInterface } from "../models/IPrescription";
 
-const apiUrl = "http://localhost:3001";
+const apiUrl = "http://localhost:8080";
 
 
 
@@ -827,6 +828,96 @@ async function GetReasons() {
     return res;
   }
 
+  //-----------------------------------Room_Detail--------------------------------
+  async function GetRoom_Number() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/room_numbers`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function GetRoom_Detail() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/room_details`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function CreateRoom_Details(data: Room_DetailInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/room_details`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => { 
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function GetCategory() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/categories`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
   async function GetMedicine() {
     const requestOptions = {
       method: "GET",
@@ -976,6 +1067,11 @@ async function GetReasons() {
     GetUniversitys,
     GetDentists,
     CreateDentists,
+
+    GetRoom_Number,
+    GetCategory,
+    GetRoom_Detail,
+    CreateRoom_Details,
 
     GetMedicine,
     GetMedicine_status,

@@ -67,13 +67,13 @@ function Dentists() {
             </Button>
           </Box>
         </Box>
-        <div style={{ height: 800, width: "120%", marginTop: "20px" }}>
+        <div style={{ height: 400, width: "100%", marginTop: "20px" }}>
           <DataGrid
             rows={dentists}
             getRowId={(row) => row.ID}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
           />
         </div>
       </Container>
