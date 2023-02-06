@@ -43,7 +43,6 @@ func SetupDatabase() {
 		//Patien_schedule
 		&Reason{},
 		&Patien_schedule{},
-		&Repair{},
 		//Dentist
 		&Specialized{},
 		&University{},
@@ -68,7 +67,6 @@ func SetupDatabase() {
 	)
 
 	db = database
-
 
 	password1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
 	password2, err := bcrypt.GenerateFromPassword([]byte("5678"), 14)
@@ -189,7 +187,6 @@ func SetupDatabase() {
 	db.Model(&Sub_district{}).Create(&subdistrict3)
 
 	//employee
-	
 
 	em1 := Employee{
 		Employee_number: "B0000001",
@@ -235,17 +232,17 @@ func SetupDatabase() {
 	//----------- ผู้ป่วย --------
 	//symptom
 	symp1 := Symptom{
-		Symptom_name: "have a toothache",
+		Symptom_choice: "มีอาการเบื้องต้น",
 	}
 	db.Model(&Symptom{}).Create(&symp1)
 
 	symp2 := Symptom{
-		Symptom_name: "gum pain",
+		Symptom_choice: "ไม่มีอาการเบื้องต้น",
 	}
 	db.Model(&Symptom{}).Create(&symp2)
 
 	symp3 := Symptom{
-		Symptom_name: "Other",
+		Symptom_choice: "อื่นๆ",
 	}
 	db.Model(&Symptom{}).Create(&symp3)
 
@@ -269,7 +266,8 @@ func SetupDatabase() {
 		GenderID:           new(uint),
 		Gender:             gender2,
 		SymptomID:          new(uint),
-		Symptom:            symp1,
+		Symptom:            symp2,
+		Symptom_name:       "-",
 		EmployeeID:         new(uint),
 		Employee:           em1,
 	}
@@ -294,14 +292,15 @@ func SetupDatabase() {
 		GenderID:           new(uint),
 		Gender:             gender1,
 		SymptomID:          new(uint),
-		Symptom:            symp2,
+		Symptom:            symp1,
+		Symptom_name:       "ปวดฟัน",
 		// EmployeeID:         new(uint),
 		Employee: em1,
 	}
 	db.Model(&Patient{}).Create(&patient2)
 
 	///////////////ข้อมูล ทดสอบ///////////
-	
+
 	//--------ระบบจัดการข้อมูลแพทย์---------
 	//---Specialized---
 	specialized1 := Specialized{
@@ -585,7 +584,6 @@ func SetupDatabase() {
 	}
 	db.Model(&MedicalDevice{}).Create(&MedicalDevice3)
 
-
 	//Type of treatment
 	Type_of_treatment1 := Type_of_treatment{
 		Type_of_treatment_name: "รักษารากฟัน(ฟันหน้า)",
@@ -747,4 +745,32 @@ func SetupDatabase() {
 	}
 	db.Model(&Room_Detail{}).Create(&room_detail2)
 
+	//----------Repair---------------
+	//damagelevel
+	damageLevel1 := DamageLevel{
+		Damage_Choice: "เสียหายหนัก",
+	}
+	db.Model(&DamageLevel{}).Create(&damageLevel1)
+
+	damageLevel2 := DamageLevel{
+		Damage_Choice: "เสียหายปานกลาง",
+	}
+	db.Model(&DamageLevel{}).Create(&damageLevel2)
+
+	damageLevel3 := DamageLevel{
+		Damage_Choice: "เสียหายเล็กน้อย",
+	}
+	db.Model(&DamageLevel{}).Create(&damageLevel3)
+
+	//Repair
+	RepairDateTime := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+
+	repair1 := Repair{
+		Employee:       em1,
+		MedicalDevice:  MedicalDevice1,
+		DamageLevel:    damageLevel3,
+		Repair_Note:    "หลอดไฟไม่ทำงาน",
+		Date_Of_Repair: RepairDateTime,
+	}
+	db.Model(&Repair{}).Create(&repair1)
 }

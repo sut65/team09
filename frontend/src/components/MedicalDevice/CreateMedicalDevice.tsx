@@ -40,6 +40,7 @@ function MedicalDevice() {
   const [success, setSuccess] = useState(false);
   const [date, setDate] = useState<Date | null>(new Date());
   const [error, setError] = useState(false);
+  const [message, setAlertMessage] = React.useState("");
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -85,15 +86,15 @@ function MedicalDevice() {
   };
 
   //ทดสอบข้อมูล
-  // const fetchEmployees = async () => {
-  //   let res = await GetEmployee();
-  //   res && setEmployee(res);
-  // };
+  const fetchEmployees = async () => {
+    let res = await GetEmployee();
+    res && setEmployee(res);
+  };
 
   // insert data to db
   const submit = async () => {
     let data = {
-      //EmployeeID: convertType(medicaldevice.EmployeeID),
+      EmployeeID: convertType(medicaldevice.EmployeeID),
       TypeID: convertType(medicaldevice.TypeID),
       StatusID: convertType(medicaldevice.StatusID),
       Device_Name: medicaldevice.Device_Name,
@@ -104,14 +105,20 @@ function MedicalDevice() {
     console.log("data", data)
 
     let res = await CreateMedicalDevice(data);
-    res ? setSuccess(true) : setError(true);
-    window.location.href = "/MedicalDevice"
+    if (res.status) {
+      setAlertMessage("บันทึกข้อมูลสำเร็จ");
+      setSuccess(true);
+    } else {
+      setAlertMessage(res.message);
+      setError(true);
+    }
+    // window.location.href = "/MedicalDevice"
   };
 
   useEffect(() => {
     fetchTypes();
     fetchStatuses();
-    //fetchEmployees();
+    fetchEmployees();
     //fetchEmployeeID();
   }, []);
 
@@ -130,24 +137,26 @@ function MedicalDevice() {
           }}
         >
           <Snackbar
+            id="success"
             open={success}
             autoHideDuration={6000}
             onClose={handleClose}
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           >
             <Alert onClose={handleClose} severity="success">
-              บันทึกข้อมูลสำเร็จ
+              {message}
             </Alert>
           </Snackbar>
 
           <Snackbar
+            id="error"
             open={error}
             autoHideDuration={6000}
             onClose={handleClose}
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           >
             <Alert onClose={handleClose} severity="error">
-              บันทึกข้อมูลไม่สำเร็จ
+              {message}
             </Alert>
           </Snackbar>
 
@@ -160,7 +169,7 @@ function MedicalDevice() {
           <hr style={{ width: "400px", opacity: "0.5" }} />
           
           {/*Employee ID รอดึงข้อมูลจากผูู้ login*/ }
-          {/* <Box
+          <Box
             sx={{
               display: "flex",
               mt: 2,
@@ -188,7 +197,7 @@ function MedicalDevice() {
                 ))}
               </Select>
             </Box>
-          </Box> */}
+          </Box>
 
           {/*Type ID*/}
           <Box

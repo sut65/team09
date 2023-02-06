@@ -34,7 +34,8 @@ function Patient() {
     { field: "District", headerName: "อำเภอ", width: 250,  valueFormatter: (params) => params.value.District_name,},
     { field: "Province", headerName: "จังหวัด", width: 250,  valueFormatter: (params) => params.value.Province_name,},
     { field: "Gender", headerName: "เพศ", width: 100 , valueFormatter: (params) => params.value.Gender_name,},       
-    { field: "Symptom", headerName: "อาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_name,},
+    { field: "Symptom", headerName: "อาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_choice,},
+    { field: "Symptom_name", headerName: "รายละเอียดอาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_name,},
   ];
 
   useEffect(() => {

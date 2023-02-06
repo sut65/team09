@@ -93,8 +93,8 @@ type Employee struct {
 // -----ระบบผู้ป่วย--------
 type Symptom struct {
 	gorm.Model
-	Symptom_name string
-	Patients     []Patient `gorm:"foreignKey: SymptomID"`
+	Symptom_choice string
+	Patients       []Patient `gorm:"foreignKey: SymptomID"`
 }
 
 type Patient struct {
@@ -125,9 +125,10 @@ type Patient struct {
 	GenderID *uint
 	Gender   Gender `gorm:"references:id"`
 
-	//RoleID ทำหน้าที่เป็น FK
-	SymptomID *uint
-	Symptom   Symptom `gorm:"references:id"`
+	//SymptomID ทำหน้าที่เป็น FK
+	SymptomID    *uint
+	Symptom      Symptom `gorm:"references:id"`
+	Symptom_name string
 
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
@@ -165,8 +166,8 @@ type MedicalDevice struct {
 	StatusID *uint
 	Status   Status
 
-	Device_Name string
-	Amount      int
+	Device_Name string `json:"Device_Name" valid:"required~Device_Name cannot be blank"`
+	Amount      int    `json:"amount" valid:"range(0|1000)"`
 	Record_Date time.Time
 
 	Repairs      []Repair      `gorm:"foreignKey:MedicalDeviceID"`
@@ -187,11 +188,12 @@ type Repair struct {
 	Employee   Employee
 
 	MedicalDeviceID *uint
-	// MedicalDevice   MedicalDevice
+	MedicalDevice   MedicalDevice
 
 	DamageLevelID *uint
 	DamageLevel   DamageLevel
 
+	Repair_Note    string
 	Date_Of_Repair time.Time
 }
 
@@ -336,24 +338,24 @@ type Type_of_number_of_treatment struct {
 type Treatment struct {
 	gorm.Model
 	//DentistID 	ทำหน้าที่เป็น FK
-	DentistID *uint 
+	DentistID *uint
 
-	Dentist   Dentist
+	Dentist Dentist
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID              *uint
 	Patient                Patient
-	Number_of_cavities     int `json:"number_of_cavities" valid:"required~Number of cavities cannot be blank"`
-	Number_of_swollen_gums int `json:"number_of_swollen_gums" valid:"required~Number of swollen_gums cannot be blank"`
+	Number_of_cavities     int    `json:"number_of_cavities" valid:"required~Number of cavities cannot be blank"`
+	Number_of_swollen_gums int    `json:"number_of_swollen_gums" valid:"required~Number of swollen_gums cannot be blank"`
 	Other_teeth_problems   string `json:"Other_teeth_problems" valid:"required~Other teeth problems cannot be blank"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment
 	Number_of_treatment int `json:"number_of_treatment" valid:"required~Number of treatment cannot be blank"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
-	Type_Of_Number_Of_TreatmentID *uint 
+	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
 	Treatment_detail              string `json:"treatment_detail" valid:"required~Treatment detail cannot be blank"`
-	Treatment_time                time.Time 
+	Treatment_time                time.Time
 	Treatment_code                string `json:"treatment_code" valid:"required~Treatment code cannot be blank"`
 }
 
