@@ -136,33 +136,71 @@ func DeleteEmployee(c *gin.Context) {
 // PATCH /employees
 
 func UpdateEmployee(c *gin.Context) {
-
+	id := c.Param("id")
 	var employee entity.Employee
+	var gender entity.Gender
+	var role entity.Role
+	var province entity.Province
+	var district entity.District
+	var sub_district entity.Sub_district
 
 	if err := c.ShouldBindJSON(&employee); err != nil {
-
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-
 		return
-
 	}
 
-	if tx := entity.DB().Where("id = ?", employee.ID).First(&employee); tx.RowsAffected == 0 {
-
-		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
-
+	if tx := entity.DB().Where("id = ?", employee.GenderID).First(&gender); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "gender not found"})
 		return
-
 	}
 
-	if err := entity.DB().Save(&employee).Error; err != nil {
+	if tx := entity.DB().Where("id = ?", employee.RoleID).First(&role); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "role not found"})
+		return
+	}
 
+	if tx := entity.DB().Where("id = ?", employee.ProvinceID).First(&province); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "province not found"})
+		return
+	}
+
+	if tx := entity.DB().Where("id = ?", employee.DistrictID).First(&district); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "district not found"})
+		return
+	}
+
+	if tx := entity.DB().Where("id = ?", employee.Sub_districtID).First(&sub_district); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "sub-district not found"})
+		return
+	}
+
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte(employee.Password), 14)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
+		return
+	}
+
+	employee.Password = string(hashPassword)
+
+	emp := entity.Employee{
+		FirstName:       employee.FirstName,
+		LastName:        employee.LastName,
+		Employee_number: employee.Employee_number,
+		Personal_id:     employee.Personal_id,
+		Password:        string(hashPassword),
+		Phone:           employee.Phone,
+		House_no:        employee.House_no,
+		Gender:          gender,
+		Province:        province,
+		District:        district,
+		Sub_district:    sub_district,
+		Role:            role,
+	}
+
+	if err := entity.DB().Where("id = ?", id).Updates(&employee).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-
 		return
-
 	}
-
-	c.JSON(http.StatusOK, gin.H{"data": employee})
+	c.JSON(http.StatusOK, gin.H{"data": emp})
 
 }
