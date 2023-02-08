@@ -49,6 +49,7 @@ func CreatePatienSchedule(c *gin.Context) {
 		Patient:         patien,     
 		Employee:    employee,          
 		Reason: reason,       	
+		Patien_Number: patien_schedule.Patien_Number,
 		Type_of_treatment:	type_of_treatment,
 		Date_time:       patien_schedule.Date_time,
 	}
@@ -103,15 +104,47 @@ func DeletePatienSchedule(c *gin.Context) {
 func UpdatePatienSchedules(c *gin.Context) {
 
 	var patien_schedule entity.Patien_schedule
+	id := c.Param("id")
+	var reason entity.Reason
+	var patien entity.Patient
+	var employee entity.Employee
+	var type_of_treatment entity.Type_of_treatment
+
 	if err := c.ShouldBindJSON(&patien_schedule); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if tx := entity.DB().Where("id = ?", patien_schedule.ID).First(&patien_schedule); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "patien_schedule not found"})
+	if tx := entity.DB().Where("id = ?", patien_schedule.ReasonID).First(&reason); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ReasonID not found"})
 		return
 	}
-	if err := entity.DB().Save(&patien_schedule).Error; err != nil {
+	if tx := entity.DB().Where("id = ?", patien_schedule.PatientID).First(&patien); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "PatientID not found"})
+		return
+	}
+	if tx := entity.DB().Where("id = ?", patien_schedule.EmployeeID).First(&employee); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "EmployeeID not found"})
+		return
+	}
+	if tx := entity.DB().Where("id = ?", patien_schedule.Type_of_treatmentID).First(&type_of_treatment); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Type_of_treatmentID not found"})
+		return
+	}
+	wv := entity.Patien_schedule{
+		Patient:         patien,     
+		Employee:    employee,          
+		Reason: reason,       	
+		Patien_Number: patien_schedule.Patien_Number,
+		Type_of_treatment:	type_of_treatment,
+		Date_time:       patien_schedule.Date_time,
+	}
+
+	if _, err := govalidator.ValidateStruct(wv); err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"Patien_schedule": err.Error()})
+		return
+	}
+
+	if err := entity.DB().Where("id = ?", id).Updates(&wv).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

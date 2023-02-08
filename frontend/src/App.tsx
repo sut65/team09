@@ -35,6 +35,7 @@ import EmployeeUpdate from "./components/employee/EmployeeUpdate";
 
 import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
 import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleHome";
+import PatientScheduleUpdate from "./components/patienschedulcompo/PatientScheduleUpdate";
 
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
 import DentistSchedule from "./components/dentistschedule/DentistSchedule";
@@ -264,6 +265,7 @@ function App() {
                 <Route path="/employee_update/:id" element={<EmployeeUpdate />} />
                 <Route path="/PatientSchedule/create" element={<PatientSchedule />} />
                 <Route path="/PatientSchedule/home" element={<PatientScheduleHome />} />
+                <Route path="/PatientSchedule/Update/:id" element={<PatientScheduleUpdate />} />
                 <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
                 <Route path="/DentistSchedule/home" element={<DentistSchedule />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
@@ -280,13 +282,13 @@ function App() {
                 <Route path="/room_details" element={<Room_Details />} />
                 <Route path="/room_detail/create" element={<Room_DetailCreate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
-                <Route path="/prescription/create" element={<PrescriptionCreate />} />
                 <Route path="/payment" element={<PaymentList />} />
                 <Route path="/Repair/create" element={<CreateRepair />} />
                 <Route path="/Repair" element={<RepairList />} />
               </Routes>
+                
             </Container>
-          </Box>
+        </Box>
         </Box>
       </ThemeProvider>
     </Router>

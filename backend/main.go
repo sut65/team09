@@ -83,7 +83,7 @@ func main() {
 	router.GET("/patien_schedules", patienschedule.ListPatienSchedules)
 	router.GET("/patien_schedules/:id", patienschedule.GetPatienSchedule)
 	router.POST("/patien_schedules", patienschedule.CreatePatienSchedule)
-	router.PATCH("/patien_schedules", patienschedule.UpdatePatienSchedules)
+	router.PATCH("/patien_schedules/:id", patienschedule.UpdatePatienSchedules)
 	router.DELETE("/patien_schedules/:id", patienschedule.DeletePatienSchedule)
 
 	// Reason Routes

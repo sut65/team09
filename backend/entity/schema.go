@@ -216,6 +216,8 @@ type Patien_schedule struct {
 	ReasonID *uint
 	Reason   Reason `gorm:"references:id" valid:"-"`
 
+	Patien_Number string	`valid:"matches(\\d{10}$)~Number must be Interger and 10 number"`
+
 	Type_of_treatmentID *uint
 	Type_of_treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
 	Date_time           time.Time         `valid:"future~Datetime must be a future date"`

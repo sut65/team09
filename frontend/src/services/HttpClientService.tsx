@@ -592,10 +592,37 @@ async function GetReasons() {
           console.log(res)
           if(res.Patien_schedule === 'Datetime must be a future date'){
             return {status: false, message: "Date time must be future"};
+          }else if(res.Patien_schedule === 'Number must be Interger and 10 number'){
+            return {status: false, message: res.Patien_schedule};
           }
+           
            else{ return { status: false, message: res.error }};
         }
       });
+  
+    return res;
+  }
+  async function PatientSchedulesUpdate(data: PatienSceheduleInterface,) {
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+  };
+  
+    let res = await fetch(`${apiUrl}/patien_schedules/:id`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      
+        if (res.data) {
+          console.log(res)
+           return{status: true, message: res.data};
+        } else {
+            return{status: false, message: res.error};
+        }
+    });
   
     return res;
   }
@@ -1104,6 +1131,7 @@ async function GetReasons() {
     GetWorkingdays,
     DentistScehedules,
 
+    PatientSchedulesUpdate,
     GetReasons,
     PatientSchedules,
     GetRole,

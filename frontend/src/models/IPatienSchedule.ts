@@ -5,7 +5,7 @@ import { PatientInterface } from "./IPatient"
 
 export interface PatienSceheduleInterface {
     ID?: number;
-   
+       
     PatientID?: number;
     Patient?:   PatientInterface;
 
@@ -17,6 +17,8 @@ export interface PatienSceheduleInterface {
 
     Type_Of_TreatmentID?: number,
    	Type_Of_Treatment?:   Type_of_treatments_Interface;
+
+    Patien_Number: string | null;
 
     Date_time: Date | null;
     
