@@ -28,8 +28,8 @@ import {
   GetRole,
   GetGender,
   GetProvince,
-  GetDistrict,
-  GetSubdistrict,
+  // GetDistrict,
+  // GetSubdistrict,
   CreateEmployee,
 } from "../../services/HttpClientService";
 
@@ -56,14 +56,14 @@ function EmployeeCreate() {
   const [district, setDistrict] = React.useState<DistrictInterface[]>([]);
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
-  const [provinceId, setProvinceId] = useState('');
-  const [districtId, setDistrictId] = useState('');
+  const [provinceId, setProvinceId] = useState('0');
+  const [districtId, setDistrictId] = useState('0');
   //เพิ่มเพื่อรับข้อมูลมาโชว์ตอนอัพเดต
   const [employee_number, setEmployee_number] = React.useState<string>("");
   const [personal, setPersonal] = React.useState<string>("");
-  const [fn, setfn] = React.useState<string>("");
-  const [ln, setLn] = React.useState<string>("");
-  const [pass, setPass] = React.useState<string>("");
+  const [firstname, setfn] = React.useState<string>("");
+  const [lastname, setLn] = React.useState<string>("");
+  const [password, setPass] = React.useState<string>("");
   const [phone, setPhone] = React.useState<string>("");
   const [house, setHouse] = React.useState<string>("");
 
@@ -140,6 +140,12 @@ function EmployeeCreate() {
       [name]: event.target.value,
     });
     }
+    // เรียกเพื่อให่ส่ง id แบบ real time
+    const clickChang = () => {
+      getDistrict();
+      getSubdistrict();
+    }
+
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
     const name = event.target.name as keyof typeof EmployeeCreate;
@@ -156,15 +162,6 @@ function EmployeeCreate() {
     const id = event.target.id as keyof typeof employee;
     const { value } = event.target;
     setEmployee({ ...employee, [id]: value });
-  };
-
-  const saveProvinceIdToLocalStorage = () => {
-    localStorage.setItem('provinceId', provinceId);
-    getDistrict();
-  };
-  const saveDistrictIdToLocalStorage = () => {
-    localStorage.setItem('districtId', districtId);
-    getSubdistrict();
   };
   
   const getGender = async () => {
@@ -189,17 +186,30 @@ function EmployeeCreate() {
   };
 
   const getDistrict = async () => {
-    let res = await GetDistrict();
-    if (res) {
-      setDistrict(res);
-    }
+    let id = provinceId
+    fetch(`${apiUrl}/district/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return setDistrict(res.data);
+        } else {
+          return false;
+        }
+      });
   };
 
   const getSubdistrict = async () => {
-    let res = await GetSubdistrict();
-    if (res) {
-      setSubdistrict(res);
-    }
+    let id = districtId
+    fetch(`${apiUrl}/subdistrict/${id}`)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return setSubdistrict(res.data);
+        } else {
+          return false;
+        }
+      });
+  
   };
 
   const getEmployee = async () => {
@@ -227,13 +237,13 @@ function EmployeeCreate() {
   
   async function submit() {
     let data = {
-      Employee_number: employee.Employee_number,
-      FirstName: employee.FirstName,
-      LastName: employee.LastName,
-      Personal_id: employee.Personal_id,
-      Password: employee.Password,
-      Phone: employee.Phone,
-      House_no: employee.House_no,
+      Employee_number: employee_number,
+      FirstName: firstname,
+      LastName: lastname,
+      Personal_id: personal,
+      Password: password,
+      Phone: phone,
+      House_no: house,
       RoleID: convertType(employee.RoleID),
       GenderID: convertType(employee.GenderID),
       ProvinceID: convertType(employee.ProvinceID),
@@ -316,8 +326,8 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสพนักงาน"
-                value={employee.Employee_number || "" || employee_number}
-                onChange={handleInputChange}
+                value={employee_number}
+                onChange={(event) => setEmployee_number(event.target.value)}
               />
             </FormControl>
         </Grid>
@@ -331,8 +341,8 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกบัตรประชาชน"
-                value={employee.Personal_id || "" || personal}
-                onChange={handleInputChange}
+                value={personal}
+                onChange={(event) => setPersonal(event.target.value)}
                 inputProps={{maxLength :13}}
               />
             </FormControl>
@@ -347,8 +357,8 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกชื่อ"
-                value={employee.FirstName || "" || fn}
-                onChange={handleInputChange}
+                value={firstname}
+                onChange={(event) => setfn(event.target.value)}
               />
             </FormControl>
           </Grid>
@@ -362,8 +372,8 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกนามสกุล"
-                value={employee.LastName || "" || ln}
-                onChange={handleInputChange}
+                value={lastname}
+                onChange={(event) => setLn(event.target.value)}
               />
             </FormControl>
         </Grid>
@@ -377,8 +387,8 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสผ่าน"
-                value={employee.Password?.replace(/./g, "*") || "" || pass.replace(/./g, "*")}
-                onChange={handleInputChange}
+                value={password.replace(/./g, "*")}
+                onChange={(event) => setPass(event.target.value)}
               />
             </FormControl>
         </Grid>
@@ -392,8 +402,8 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                value={employee.Phone || "" || phone}
-                onChange={handleInputChange}
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
               />
             </FormControl>
         </Grid>
@@ -407,8 +417,8 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกที่อยู่"
-                value={employee.House_no || "" || house}
-                onChange={handleInputChange}
+                value={house}
+                onChange={(event) => setHouse(event.target.value)}
               />
             </FormControl>
         </Grid>
@@ -420,12 +430,12 @@ function EmployeeCreate() {
                 native
                 value={employee.ProvinceID + ""}
                 onChange={handleChangeProvince}
-                onClick={saveProvinceIdToLocalStorage}
+                onClick={clickChang}
                 inputProps={{
                   name: "ProvinceID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกจังหวัด
                 </option>
                 {province.map((item: ProvinceInterface) => (
@@ -445,12 +455,12 @@ function EmployeeCreate() {
                 native
                 value={employee.DistrictID + ""}
                 onChange={handleChangeDistrict}
-                onClick={saveDistrictIdToLocalStorage}
+                onClick={clickChang}
                 inputProps={{
                   name: "DistrictID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกอำเภอ
                 </option>
                 {district.map((item: DistrictInterface) => (
@@ -473,7 +483,7 @@ function EmployeeCreate() {
                   name: "Sub_districtID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกตำบล
                 </option>
                 {subdistrict.map((item: Sub_districtInterface) => (

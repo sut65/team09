@@ -29,11 +29,10 @@ import {
   CreatePatient,
   GetSymptom,
   GetEmployee,
-  GetRole,
   GetGender,
   GetProvince,
-  GetDistrict,
-  GetSubdistrict,
+//   GetDistrict,
+//   GetSubdistrict,
   CreateEmployee,
   GetEmployeeByUID,
 } from "../../services/HttpClientService";
@@ -53,12 +52,21 @@ function PaitentCreate() {
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
   const [patient, setPatient] = useState<Partial<PatientInterface>>({});
-  const [provinceId, setProvinceId] = useState('');
-  const [districtId, setDistrictId] = useState('');
+  const [provinceId, setProvinceId] = useState('1');
+  const [districtId, setDistrictId] = useState('1');
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false)
+
+  const apiUrl = "http://localhost:8080";
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
 
    //เปิดปิดตัว alert
   const handleClose = (
@@ -85,6 +93,12 @@ function PaitentCreate() {
       [name]: event.target.value,
     });
   }
+
+  const clickChang = () => {
+    getDistrict();
+    getSubdistrict();
+  }
+
   //เพิ่มเมื่อมีการเปลี่ยนแปลงของอำเภอส่ง id จังหวัดไปที่ตำบล
   const handleChangeDistrict = (event: SelectChangeEvent) => {
     setDistrictId(event.target.value);
@@ -96,16 +110,6 @@ function PaitentCreate() {
       [name]: event.target.value,
     });
   }
-
-  //set id provice ไปเก็บบน localstorage
-  const saveProvinceIdToLocalStorage = () => {
-    localStorage.setItem('provinceId', provinceId);
-    getDistrict();
-  };
-  const saveDistrictIdToLocalStorage = () => {
-    localStorage.setItem('districtId', districtId);
-    getSubdistrict();
-  };
   
   const openChange = (event: SelectChangeEvent) => {
     console.log(event.target.value)
@@ -162,17 +166,30 @@ function PaitentCreate() {
   };
 
   const getDistrict = async () => {
-    let res = await GetDistrict();
-    if (res) {
-      setDistrict(res);
-    }
+    let id = provinceId
+    fetch(`${apiUrl}/district/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return setDistrict(res.data);
+        } else {
+          return false;
+        }
+      });
   };
 
   const getSubdistrict = async () => {
-    let res = await GetSubdistrict();
-    if (res) {
-      setSubdistrict(res);
-    }
+    let id = districtId
+    fetch(`${apiUrl}/subdistrict/${id}`)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return setSubdistrict(res.data);
+        } else {
+          return false;
+        }
+      });
+  
   };
 
   // const getEmployeeByUID = async ()=>{
@@ -427,12 +444,12 @@ function PaitentCreate() {
                 native
                 value={patient.ProvinceID + ""}
                 onChange={handleChangeProvince}
-                onClick={saveProvinceIdToLocalStorage}
+                onClick={clickChang}
                 inputProps={{
                   name: "ProvinceID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกจังหวัด
                 </option>
                 {province.map((item: ProvinceInterface) => (
@@ -452,12 +469,12 @@ function PaitentCreate() {
                 native
                 value={patient.DistrictID + ""}
                 onChange={handleChangeDistrict}
-                onClick={saveDistrictIdToLocalStorage}
+                onClick={clickChang}
                 inputProps={{
                   name: "DistrictID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกอำเภอ
                 </option>
                 {district.map((item: DistrictInterface) => (
@@ -480,7 +497,7 @@ function PaitentCreate() {
                   name: "Sub_districtID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกตำบล
                 </option>
                 {subdistrict.map((item: Sub_districtInterface) => (

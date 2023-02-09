@@ -40,7 +40,7 @@ import PatientScheduleUpdate from "./components/patienschedulcompo/PatientSchedu
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
 import DentistSchedule from "./components/dentistschedule/DentistSchedule";
 
-import CreateMedicalDevice from "./components/MedicalDevice/CreateMedicalDevice";
+import CreateMedicalDevice from "./components/MedicalDevice/CreateMedicalDevice"
 import MedicalDeviceList from "./components/MedicalDevice/MedicalDeviceList";
 
 import PatientList from "./components/patient/PatientList";

@@ -231,53 +231,53 @@ async function GetProvince() {
   return res;
 }  
 
-async function GetDistrict() {
-  let uid = localStorage.getItem("provinceId");
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-    },
-  };
+// async function GetDistrict() {
+//   let uid = localStorage.getItem("provinceId");
+//   const requestOptions = {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       "Content-Type": "application/json",
+//     },
+//   };
 
-  let res = await fetch(`${apiUrl}/district/${uid}`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+//   let res = await fetch(`${apiUrl}/district/${uid}`, requestOptions)
+//     .then((response) => response.json())
+//     .then((res) => {
+//       if (res.data) {
+//         return res.data;
+//       } else {
+//         return false;
+//       }
+//     });
 
-  return res;
-}
+//   return res;
+// }
 
   
 
-async function GetSubdistrict() {
-  let uid = localStorage.getItem("districtId");
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-    },
-  };
+// async function GetSubdistrict() {
+//   let uid = localStorage.getItem("districtId");
+//   const requestOptions = {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       "Content-Type": "application/json",
+//     },
+//   };
 
-  let res = await fetch(`${apiUrl}/subdistrict/${uid}`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+//   let res = await fetch(`${apiUrl}/subdistrict/${uid}`, requestOptions)
+//     .then((response) => response.json())
+//     .then((res) => {
+//       if (res.data) {
+//         return res.data;
+//       } else {
+//         return false;
+//       }
+//     });
 
-  return res;
-}
+//   return res;
+// }
 
 async function GetEmployee() {
   const requestOptions = {
@@ -1137,8 +1137,8 @@ async function GetReasons() {
     GetRole,
     GetGender,
     GetProvince,
-    GetDistrict,
-    GetSubdistrict,
+    // GetDistrict,
+    // GetSubdistrict,
     GetEmployee,
     CreateEmployee,
 
