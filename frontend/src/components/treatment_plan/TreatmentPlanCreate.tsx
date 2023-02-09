@@ -40,7 +40,7 @@ function TreatmentCreate() {
     const [type_of_number_of_treatments, setType_of_number_treatments] = React.useState<Type_of_number_of_treatment_Interface[]>([]);
     const [treatment_plan, setTreatmentPlan] = React.useState<TreatmentsPlanInterface>({ Treatment_time: new Date(), });
 
-    const apiUrl = "http://localhost:3001";
+    const apiUrl = "http://localhost:8080";
     const requestOptions = {
         method: "GET",
         headers: {

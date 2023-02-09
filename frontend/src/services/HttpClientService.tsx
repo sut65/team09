@@ -8,6 +8,7 @@ import { PatientInterface } from "../models/IPatient";
 import { DentistInterface } from "../models/IDentist";
 import { Room_DetailInterface } from "../models/IRoom_Detail";
 import { PrescriptionInterface } from "../models/IPrescription";
+import { RepairInterface } from "../models/IRepair";
 
 const apiUrl = "http://localhost:8080";
 
@@ -230,53 +231,53 @@ async function GetProvince() {
   return res;
 }  
 
-async function GetDistrict() {
-  let uid = localStorage.getItem("provinceId");
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-    },
-  };
+// async function GetDistrict() {
+//   let uid = localStorage.getItem("provinceId");
+//   const requestOptions = {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       "Content-Type": "application/json",
+//     },
+//   };
 
-  let res = await fetch(`${apiUrl}/district/${uid}`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+//   let res = await fetch(`${apiUrl}/district/${uid}`, requestOptions)
+//     .then((response) => response.json())
+//     .then((res) => {
+//       if (res.data) {
+//         return res.data;
+//       } else {
+//         return false;
+//       }
+//     });
 
-  return res;
-}
+//   return res;
+// }
 
   
 
-async function GetSubdistrict() {
-  let uid = localStorage.getItem("districtId");
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-    },
-  };
+// async function GetSubdistrict() {
+//   let uid = localStorage.getItem("districtId");
+//   const requestOptions = {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       "Content-Type": "application/json",
+//     },
+//   };
 
-  let res = await fetch(`${apiUrl}/subdistrict/${uid}`, requestOptions)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return false;
-      }
-    });
+//   let res = await fetch(`${apiUrl}/subdistrict/${uid}`, requestOptions)
+//     .then((response) => response.json())
+//     .then((res) => {
+//       if (res.data) {
+//         return res.data;
+//       } else {
+//         return false;
+//       }
+//     });
 
-  return res;
-}
+//   return res;
+// }
 
 async function GetEmployee() {
   const requestOptions = {
@@ -591,10 +592,37 @@ async function GetReasons() {
           console.log(res)
           if(res.Patien_schedule === 'Datetime must be a future date'){
             return {status: false, message: "Date time must be future"};
+          }else if(res.Patien_schedule === 'Number must be Interger and 10 number'){
+            return {status: false, message: res.Patien_schedule};
           }
+           
            else{ return { status: false, message: res.error }};
         }
       });
+  
+    return res;
+  }
+  async function PatientSchedulesUpdate(data: PatienSceheduleInterface,) {
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+  };
+  
+    let res = await fetch(`${apiUrl}/patien_schedules/:id`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      
+        if (res.data) {
+          console.log(res)
+           return{status: true, message: res.data};
+        } else {
+            return{status: false, message: res.error};
+        }
+    });
   
     return res;
   }
@@ -1029,19 +1057,88 @@ async function GetReasons() {
     return res;
   }
 
+  //-------------Repair------------------------
+  async function GetDamageLevel() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/damagelevels`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+  async function GetRepair() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/repairs`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+  async function CreateRepair(data: RepairInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/repairs`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return { status: true, message: res.data };
+        } else {
+          return { status: false, message: res.error };
+        }
+      });
+  
+    return res;
+  }
+
   export {
     GetPatientSchedules,
     GetDentistScehedules,
     GetWorkingdays,
     DentistScehedules,
 
+    PatientSchedulesUpdate,
     GetReasons,
     PatientSchedules,
     GetRole,
     GetGender,
     GetProvince,
-    GetDistrict,
-    GetSubdistrict,
+    // GetDistrict,
+    // GetSubdistrict,
     GetEmployee,
     CreateEmployee,
 
@@ -1078,7 +1175,11 @@ async function GetReasons() {
     GetPrescription,
     CreatePrescription,
 
-    GetPayment
+    GetPayment,
+
+    GetDamageLevel,
+    GetRepair,
+    CreateRepair,
 
   };
 

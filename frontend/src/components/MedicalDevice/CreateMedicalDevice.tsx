@@ -19,7 +19,7 @@ import {
   GetType,
   GetStatus,
   CreateMedicalDevice,
-  GetEmployee
+  GetEmployee // teast
 } from '../../services/HttpClientService';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -33,7 +33,7 @@ function MedicalDevice() {
   const [medicaldevice, setMedicalDevice] = useState<MedicalDeviceInterface>({});
   const [type, setType] = useState<TypeInterface[]>([]);
   const [status, setStatus] = useState<StatusInterface[]>([]);
-  const [employee, setEmployee] = useState<EmployeeInterface[]>([]);
+  const [employee, setEmployee] = useState<EmployeeInterface[]>([]); //.ใช้ทดสอบสร้างตาราง
   const [amount, setAmount] = useState<number>(0);
   const [device_name, setDevice_Name] = useState<string>("");
   // const [admin, setAdmin] = useState<Partial<AdminInterface>>({ Name: "" });
@@ -316,7 +316,7 @@ function MedicalDevice() {
           </Box>
 
           {/* Date */}
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -341,7 +341,7 @@ function MedicalDevice() {
                 />
               </LocalizationProvider>
             </Box>
-          </Box>
+          </Box> */}
 
           {/* Btn submit and back */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>

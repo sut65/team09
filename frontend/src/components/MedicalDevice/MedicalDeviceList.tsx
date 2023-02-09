@@ -27,7 +27,7 @@ function MedicalDeviceList() {
 
   const Delete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/medicaldevice/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/medicaldevice/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',

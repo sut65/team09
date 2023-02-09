@@ -158,7 +158,7 @@ type Status struct {
 type MedicalDevice struct {
 	gorm.Model
 	EmployeeID *uint
-	Employee   Employee
+	Employee   Employee `valid:"-"`
 
 	TypeID *uint
 	Type   Type
@@ -185,10 +185,10 @@ type DamageLevel struct {
 type Repair struct {
 	gorm.Model
 	EmployeeID *uint
-	Employee   Employee
+	Employee   Employee `valid:"-"`
 
 	MedicalDeviceID *uint
-	MedicalDevice   MedicalDevice
+	MedicalDevice   MedicalDevice `valid:"-"`
 
 	DamageLevelID *uint
 	DamageLevel   DamageLevel
@@ -215,6 +215,8 @@ type Patien_schedule struct {
 
 	ReasonID *uint
 	Reason   Reason `gorm:"references:id" valid:"-"`
+
+	Patien_Number string	`valid:"matches(\\d{10}$)~Number must be Interger and 10 number"`
 
 	Type_of_treatmentID *uint
 	Type_of_treatment   Type_of_treatment `gorm:"references:id" valid:"-"`

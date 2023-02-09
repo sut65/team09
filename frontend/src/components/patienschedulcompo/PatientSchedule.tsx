@@ -46,6 +46,7 @@ function PatientSchedule() {
     const [reasons, setReasons] = useState<ReasonInterface[]>([]);
     const [type_of_treatmentses, setType_of_treatmentses] = useState<Type_of_treatments_Interface[]>([]);
     const [patien_schedule, setPatienSchedule] = useState<PatienSceheduleInterface>({
+        Patien_Number: "",
         Date_time: new Date(),
     });
 
@@ -136,6 +137,7 @@ async function submit() {
         ReasonID: convertType(patien_schedule.ReasonID),
         Type_Of_TreatmentID: convertType(patien_schedule.Type_Of_TreatmentID),
         Date_time: patien_schedule.Date_time,
+        Patien_Number: patien_schedule.Patien_Number,
     };
     console.log(data);
     let res:any = await PatientSchedules(data);
@@ -147,7 +149,14 @@ async function submit() {
         setError(true);
     }
 }
+const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name as keyof typeof patien_schedule;
+    setPatienSchedule({
+        ...patien_schedule,
+        [name]: event.target.value,
+    });
 
+};
 
 
     return (
@@ -308,8 +317,28 @@ async function submit() {
                                     ))}
                                 </Select>
                             </FormControl>
+                                        
+                       
                         </Grid>
-                        <Grid xs={3.25} sx={{ padding: 1.3 }}>
+                        <Grid xs={4.75} sx={{ padding: 1.3 }}>
+                        <TextField fullWidth id="patien_number" type="string" label="Patien Number" variant="outlined"
+                                onChange={handleChangeTextField} 
+                                defaultValue="กรุณากรอกเบอร์โทร"
+                                inputProps={{
+                                    maxLength: 10,
+                                    pattern: '[0-9]*',
+                                    name: "Patien_Number",
+                                }}
+                            />
+                            
+                            
+                        </Grid>
+                        <Grid xs={1.25} sx={{ padding: 1.3 }}>
+                       
+                        
+                        </Grid>
+                        
+                        <Grid xs={9.25} sx={{ padding: 1.3 }} >
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateTimePicker 
                             renderInput={(props) => <TextField {...props} />}
@@ -329,13 +358,6 @@ async function submit() {
                         <Button sx={{ paddingY: 1.7, }} fullWidth variant="outlined" size="large" onClick={submit}>
                                 บันทึกข้อมูล
                             </Button>
-                        
-                        </Grid>
-                     
-                        <Grid xs={6}>
-                       
-                        </Grid>
-                        <Grid xs={6}>
                         
                         </Grid>
                         <Grid xs={3}>

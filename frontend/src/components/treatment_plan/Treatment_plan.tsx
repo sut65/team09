@@ -14,7 +14,7 @@ function Branch() {
     const [treatment_plan, setTreatment_plan] = React.useState<TreatmentsPlanInterface[]>([]);
 
     const getBranch = async () => {
-        const apiUrl = "http://localhost:3001/treatment_plans";
+        const apiUrl = "http://localhost:8080/treatment_plans";
         const requestOptions = {
             method: "GET",
             headers: {
@@ -36,7 +36,7 @@ function Branch() {
 
     const handleDelete = async (id: number) => {
         try {
-            const response = await axios.delete(`http://localhost:3001/treatment_plans/${id}`, {
+            const response = await axios.delete(`http://localhost:8080/treatment_plans/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                     'Content-Type': 'application/json',

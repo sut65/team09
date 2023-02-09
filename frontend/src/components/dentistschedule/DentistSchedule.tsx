@@ -26,7 +26,7 @@ function DentistSchedule() {
   };
   const Delete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/dentist_schedules/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/dentist_schedules/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',

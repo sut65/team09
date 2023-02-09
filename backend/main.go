@@ -17,7 +17,7 @@ import (
 	"github.com/sut65/team09/entity"
 )
 
-//const PORT = "8080"
+const PORT = "8080"
 
 func main() {
 
@@ -81,9 +81,9 @@ func main() {
 
 	// patien_schedule Routes
 	router.GET("/patien_schedules", patienschedule.ListPatienSchedules)
-	router.GET("/patien_schedules/:id", patienschedule.GetPatienSchedule)
+	router.GET("/patien_schedules/id", patienschedule.GetPatienSchedule)
 	router.POST("/patien_schedules", patienschedule.CreatePatienSchedule)
-	router.PATCH("/patien_schedules", patienschedule.UpdatePatienSchedules)
+	router.PATCH("/patien_schedules/:id", patienschedule.UpdatePatienSchedules)
 	router.DELETE("/patien_schedules/:id", patienschedule.DeletePatienSchedule)
 
 	// Reason Routes
@@ -272,7 +272,7 @@ func main() {
 
 	// Run the server
 
-	r.Run()
+	r.Run("localhost: " + PORT)
 
 }
 

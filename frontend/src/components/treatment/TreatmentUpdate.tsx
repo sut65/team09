@@ -51,7 +51,7 @@ function TreatmentUpdate() {
     const [number_of_treatment, setNumber_of_treatment] = React.useState(0);
 
 
-    const apiUrl = "http://localhost:3001";
+    const apiUrl = "http://localhost:8080";
     const requestOptions = {
         method: "GET",
         headers: {
@@ -64,7 +64,7 @@ function TreatmentUpdate() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3001/treatments/${id}`)
+        fetch(`http://localhost:8080/treatments/${id}`)
             .then((response) => response.json())
             .then((res) => {
 

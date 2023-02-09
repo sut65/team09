@@ -45,7 +45,7 @@ function TreatmentCreate() {
     // const [treatment_detail, setTreatment_detail] = React.useState<string>("");
     // const [treatment_code, setTreatment_code] = React.useState<string>("");
 
-    const apiUrl = "http://localhost:3001";
+    const apiUrl = "http://localhost:8080";
     const requestOptions = {
         method: "GET",
         headers: {
