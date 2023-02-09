@@ -12,7 +12,7 @@ import { ButtonGroup } from "@mui/material";
 function Treatment(props: any){
     const [treatment, setTreatment] = React.useState<TreatmentsInterface[]>([]);
     const getTreatment = async () => {
-        const apiUrl = "http://localhost:3001/treatments";
+        const apiUrl = "http://localhost:8080/treatments";
         const requestOptions = {
             method: "GET",
             headers: {
@@ -34,7 +34,7 @@ function Treatment(props: any){
 
     const handleDelete = async (id: number) => {
         try {
-            const response = await axios.delete(`http://localhost:3001/treatments/${id}`, {
+            const response = await axios.delete(`http://localhost:8080/treatments/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                     'Content-Type': 'application/json',

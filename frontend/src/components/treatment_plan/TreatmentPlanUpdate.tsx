@@ -50,7 +50,7 @@ function TreatmentCreate() {
 
 
 
-    const apiUrl = "http://localhost:3001";
+    const apiUrl = "http://localhost:8080";
     const requestOptions = {
         method: "GET",
         headers: {
@@ -63,7 +63,7 @@ function TreatmentCreate() {
 
     useEffect(() => {
         getDentist();
-        fetch(`http://localhost:3001/treatment_plans/${id}`)
+        fetch(`http://localhost:8080/treatment_plans/${id}`)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {

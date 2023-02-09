@@ -22,7 +22,7 @@ function Payments() {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/employees/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/employees/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',

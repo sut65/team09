@@ -325,8 +325,9 @@ const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
                                 onChange={handleChangeTextField} 
                                 defaultValue="กรุณากรอกเบอร์โทร"
                                 inputProps={{
+                                    maxLength: 10,
+                                    pattern: '[0-9]*',
                                     name: "Patien_Number",
-                                    pattern: '[0-9]*'
                                 }}
                             />
                             

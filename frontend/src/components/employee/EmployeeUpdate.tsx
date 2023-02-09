@@ -40,7 +40,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const apiUrl = "http://localhost:3001";
+const apiUrl = "http://localhost:8080";
 const requestOptions = {
     method: "GET",
     headers: {
@@ -73,7 +73,7 @@ function EmployeeCreate() {
   const { id } = useParams();
   useEffect(() => {
     getEmployee();
-    fetch(`http://localhost:3001/employee/${id}`)
+    fetch(`http://localhost:8080/employee/${id}`)
         .then((response) => response.json())
         .then((res) => {
             if (res.data) {

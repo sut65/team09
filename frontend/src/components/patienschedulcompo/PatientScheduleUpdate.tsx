@@ -40,7 +40,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  const apiUrl = "http://localhost:3001";
+  const apiUrl = "http://localhost:8080";
   const requestOptions = {
       method: "GET",
       headers: {
@@ -76,22 +76,23 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     const { id } = useParams();
   useEffect(() => {
     GetPatientSchedules();
-    fetch(`http://localhost:3001/patien_schedules/${id}`)
+    fetch(`http://localhost:8080/patien_schedules/${id}`)
         .then((response) => response.json())
         .then((res) => {
             if (res.data) {
 
                 console.log("Patient : ")
                 console.log(res.data.PatientID)
-                setPatient(res.data.patient.toString());
+                setPatient(res.data.PatientID);
+                console.log(patient)
 
                 console.log("Employee : ")
                 console.log(res.data.EmployeeID)
-                setEmployee(res.data.employee.toString());
+                setEmployee(res.data.employee);
 
                 console.log("Reason : ")
                 console.log(res.data.reason)
-                setReason(res.data.reason.toString());
+                setReason(res.data.reason);
 
                 console.log("Number : ")
                 console.log(res.data.Patien_Number)
@@ -99,11 +100,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
                 console.log("Type : ")
                 console.log(res.data.Type_of_treatmentID)
-                setType(res.data.PType_of_treatmentID.toString());
+                setType(res.data.PType_of_treatmentID);
 
                 console.log("Datetime : ")
                 console.log(res.data.Date_time )
-                setDate(res.data.Date_time .toString());
+                setDate(res.data.Date_time );
 
             }
         }
@@ -279,6 +280,7 @@ return (
                             label= "ชื่อ-สกุล"
                             inputProps={{
                                 name: "PatientID",
+                                
                             }}
                         >
                           <option aria-label="None" value="">
@@ -383,7 +385,7 @@ return (
                             }}
                         >
                           <option aria-label="None" value="">
-                            กรุณาเลือกประภทการรักษา
+                            กรุณาเลือกประเภทการรักษา   
                           </option>
                             {type_of_treatmentses.map((item: Type_of_treatments_Interface) => (
                                 <option value={item.ID} key={item.ID}>
@@ -401,6 +403,7 @@ return (
                         defaultValue="กรุณากรอกเบอร์โทร"
                         inputProps={{
                             maxLength :10,
+                            pattern: '[0-9]*',
                             name: "Patien_Number",
                         }}
                     />

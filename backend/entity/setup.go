@@ -773,4 +773,14 @@ func SetupDatabase() {
 		Date_Of_Repair: RepairDateTime,
 	}
 	db.Model(&Repair{}).Create(&repair1)
+
+	var re = []Reason{
+		{Method: "อยากเจอแพทย์"},
+		{Method: "ช่องปากต้องการรักษา"},
+		{Method: "อาการสาหัส"},
+		{Method: "ปวดใจว่าปวดแล้วปวดฟันดันซ้ำเติม"},
+	}
+	db.CreateInBatches(re, 4)
+
 }
+

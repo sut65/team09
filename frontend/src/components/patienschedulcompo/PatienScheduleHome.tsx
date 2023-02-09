@@ -28,7 +28,7 @@ function PatienScheduleHome() {
 
   const Delete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/patien_schedules/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/patien_schedules/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
