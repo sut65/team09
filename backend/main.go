@@ -10,13 +10,14 @@ import (
 	patient "github.com/sut65/team09/controller/patient"
 	payment "github.com/sut65/team09/controller/payment"
 	prescription "github.com/sut65/team09/controller/prescription"
+	repair "github.com/sut65/team09/controller/repair"
 	room "github.com/sut65/team09/controller/room"
 	treatment "github.com/sut65/team09/controller/treatment"
 	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
 	"github.com/sut65/team09/entity"
 )
 
-const PORT = "3001"
+const PORT = "8080"
 
 func main() {
 
@@ -58,14 +59,14 @@ func main() {
 	router.PATCH("/provinces", employee.UpdateProvince)
 	router.DELETE("/provinces/:id", employee.DeleteProvince)
 
-	router.GET("/district", employee.ListDistrict)
+	router.GET("/districts", employee.ListDistrict)
 	router.GET("/district/:id", employee.GetDistrict)
 	router.POST("/district", employee.CreateDistrict)
 	router.PATCH("/district", employee.UpdateDistrict)
 	router.DELETE("/district/:id", employee.DeleteDistrict)
 
 	router.GET("/subdistricts", employee.ListSubDistrict)
-	router.GET("/subdistricts/:id", employee.GetSubDistrict)
+	router.GET("/subdistrict/:id", employee.GetSubDistrict)
 	router.POST("/subdistrict", employee.CreateSubDistrict)
 	router.PATCH("/subdistrict", employee.UpdateSubDistrict)
 	router.DELETE("/subdistrict/:id", employee.DeleteSubDistrict)
@@ -73,16 +74,16 @@ func main() {
 	router.GET("/employees", employee.ListEmployee)
 	router.GET("/employee/:id", employee.GetEmployee)
 	router.POST("/employees", employee.CreateEmployee)
-	router.PATCH("/employees", employee.UpdateEmployee)
+	router.PATCH("/employees/:id", employee.UpdateEmployee)
 	router.DELETE("/employees/:id", employee.DeleteEmployee)
 
 	//------------------------------------
 
 	// patien_schedule Routes
 	router.GET("/patien_schedules", patienschedule.ListPatienSchedules)
-	router.GET("/patien_schedules/:id", patienschedule.GetPatienSchedule)
+	router.GET("/patien_schedules/id", patienschedule.GetPatienSchedule)
 	router.POST("/patien_schedules", patienschedule.CreatePatienSchedule)
-	router.PATCH("/patien_schedules", patienschedule.UpdatePatienSchedules)
+	router.PATCH("/patien_schedules/:id", patienschedule.UpdatePatienSchedules)
 	router.DELETE("/patien_schedules/:id", patienschedule.DeletePatienSchedule)
 
 	// Reason Routes
@@ -231,9 +232,19 @@ func main() {
 	// Prescription Routes
 	router.GET("/prescriptions", prescription.ListPrescriptions)
 	router.GET("/prescription/:id", prescription.GetPrescription)
-	router.POST("/prescription", prescription.CreatePrescription)
+	router.POST("/prescriptions", prescription.CreatePrescription)
 	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
 	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+
+	//----Repair-----
+	r.GET("/repairs", repair.ListRepairs)
+	r.GET("/repair/:id", repair.GetRepair)
+	r.POST("/repairs", repair.CreateRepair)
+	r.PATCH("/repair", repair.UpdateRepairs)
+	r.DELETE("/repair/:id", repair.DeleteRepair)
+
+	r.GET("/damagelevels", repair.ListDamageLevels)
+	r.GET("/damagelevel/:id", repair.GetDamageLevel)
 
 	// // login User Route
 	// r.POST("/login/user", login_controller.LoginUser)

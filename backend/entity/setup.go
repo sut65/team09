@@ -43,7 +43,6 @@ func SetupDatabase() {
 		//Patien_schedule
 		&Reason{},
 		&Patien_schedule{},
-		&Repair{},
 		//Dentist
 		&Specialized{},
 		&University{},
@@ -68,6 +67,14 @@ func SetupDatabase() {
 	)
 
 	db = database
+
+	password1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
+	password2, err := bcrypt.GenerateFromPassword([]byte("5678"), 14)
+	password3, err := bcrypt.GenerateFromPassword([]byte("12123"), 14)
+	password4, err := bcrypt.GenerateFromPassword([]byte("abcde00"), 14)
+	password5, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+	password6, err := bcrypt.GenerateFromPassword([]byte("0001111"), 14)
+	password7, err := bcrypt.GenerateFromPassword([]byte("www"), 14)
 
 	method1 := Reason{
 		Method: "อยากโดนเข็ม",
@@ -118,7 +125,7 @@ func SetupDatabase() {
 	province3 := Province{
 		Province_name: "Bangkok",
 	}
-	db.Model(&Province{}).Create(&province2)
+	db.Model(&Province{}).Create(&province3)
 
 	//district
 	district1 := District{
@@ -180,13 +187,6 @@ func SetupDatabase() {
 	db.Model(&Sub_district{}).Create(&subdistrict3)
 
 	//employee
-	password1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
-	password2, err := bcrypt.GenerateFromPassword([]byte("5678"), 14)
-	password3, err := bcrypt.GenerateFromPassword([]byte("12123"), 14)
-	password4, err := bcrypt.GenerateFromPassword([]byte("abcde00"), 14)
-	password5, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
-	password6, err := bcrypt.GenerateFromPassword([]byte("0001111"), 14)
-	password7, err := bcrypt.GenerateFromPassword([]byte("www"), 14)
 
 	em1 := Employee{
 		Employee_number: "B0000001",
@@ -232,17 +232,17 @@ func SetupDatabase() {
 	//----------- ผู้ป่วย --------
 	//symptom
 	symp1 := Symptom{
-		Symptom_name: "have a toothache",
+		Symptom_choice: "มีอาการเบื้องต้น",
 	}
 	db.Model(&Symptom{}).Create(&symp1)
 
 	symp2 := Symptom{
-		Symptom_name: "gum pain",
+		Symptom_choice: "ไม่มีอาการเบื้องต้น",
 	}
 	db.Model(&Symptom{}).Create(&symp2)
 
 	symp3 := Symptom{
-		Symptom_name: "Other",
+		Symptom_choice: "อื่นๆ",
 	}
 	db.Model(&Symptom{}).Create(&symp3)
 
@@ -266,7 +266,8 @@ func SetupDatabase() {
 		GenderID:           new(uint),
 		Gender:             gender2,
 		SymptomID:          new(uint),
-		Symptom:            symp1,
+		Symptom:            symp2,
+		Symptom_name:       "-",
 		EmployeeID:         new(uint),
 		Employee:           em1,
 	}
@@ -291,134 +292,14 @@ func SetupDatabase() {
 		GenderID:           new(uint),
 		Gender:             gender1,
 		SymptomID:          new(uint),
-		Symptom:            symp2,
+		Symptom:            symp1,
+		Symptom_name:       "ปวดฟัน",
 		// EmployeeID:         new(uint),
 		Employee: em1,
 	}
 	db.Model(&Patient{}).Create(&patient2)
 
 	///////////////ข้อมูล ทดสอบ///////////
-	Dentist1 := Dentist{
-		FirstName: "หมอเทวดา",
-	}
-	db.Model(&Dentist{}).Create(&Dentist1)
-
-	///////////////ข้อมูลใน entity Medicine///////////
-	Medicine1 := Medicine{
-		Medicine_name:  "แก้ปวด",
-		Medicine_price: 100,
-	}
-	db.Model(&Medicine{}).Create(&Medicine1)
-
-	///////////////ข้อมูลใน entity Medicine_status///////////
-	Medicine_status1 := Medicine_status{
-		Medicine_status_name: "รับยาแล้ว",
-	}
-	db.Model(&Medicine_status{}).Create(&Medicine_status1)
-
-	///////////////ข้อมูลใน entity Prescription///////////
-	DateTimePrescriptionA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
-	//DateTimePrescriptionB := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
-	Prescription1 := Prescription{
-		Medicine:             Medicine1,
-		Medicine_status:      Medicine_status1,
-		Patient:              patient1,
-		Dentist:              Dentist1,
-		DateTimePrescription: DateTimePrescriptionA,
-	}
-	db.Model(&Prescription{}).Create(&Prescription1)
-
-	//จำลองข้อมูลระบบจัดตารางงานแพทย์
-	var Ttype = []Type_of_treatment{
-		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
-		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
-	}
-	db.CreateInBatches(Ttype , 2)
-	
-	var day = []Workingday{
-		{Day: "วันจันทร์"},
-		{Day: "วันอังคาร"},
-		{Day: "วันพุธ"},
-		{Day: "วันพฤหัสบดี"},
-	}
-	db.CreateInBatches(day, 4)
-
-	
-	
-
-	var task = []Responsity{
-		{Respon: "ตรวจผู้ป่วย"},
-		{Respon: "เข้าเวร"},
-		{Respon: "ตรวจสอบอุปกรณ์"},
-		{Respon: "ทำการรักษา"},
-	}
-	db.CreateInBatches(task, 4)
-
-	//-------MedicalDevice------------
-	//---Type---
-	Type1 := Type{
-		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
-	}
-	db.Model(&Type{}).Create(&Type1)
-
-	Type2 := Type{
-		Type_Name: "ทันตกรรมจัดฟัน",
-	}
-	db.Model(&Type{}).Create(&Type2)
-
-	Type3 := Type{
-		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
-	}
-	db.Model(&Type{}).Create(&Type3)
-
-	Type4 := Type{
-		Type_Name: "อุปกรณ์ทั่วไป",
-	}
-	db.Model(&Type{}).Create(&Type4)
-
-	//---Status---
-	Status1 := Status{
-		Status_Choice: "Sterile",
-	}
-	db.Model(&Status{}).Create(&Status1)
-
-	Status2 := Status{
-		Status_Choice: "Non-Sterile",
-	}
-	db.Model(&Status{}).Create(&Status2)
-
-	//----ตารางหลัก-----
-	DateTimeA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
-
-	MedicalDevice1 := MedicalDevice{
-		Employee:    em1,
-		Type:        Type4,
-		Status:      Status2,
-		Device_Name: "เก้าอี้ทำฟัน",
-		Amount:      1,
-		Record_Date: DateTimeA,
-	}
-	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
-
-	MedicalDevice2 := MedicalDevice{
-		Employee:    em2,
-		Type:        Type2,
-		Status:      Status2,
-		Device_Name: "เหล็กดัดฟัน",
-		Amount:      2,
-		Record_Date: DateTimeA,
-	}
-	db.Model(&MedicalDevice{}).Create(&MedicalDevice2)
-
-	MedicalDevice3 := MedicalDevice{
-		Employee:    em1,
-		Type:        Type4,
-		Status:      Status2,
-		Device_Name: "เครื่องขูด",
-		Amount:      1,
-		Record_Date: DateTimeA,
-	}
-	db.Model(&MedicalDevice{}).Create(&MedicalDevice3)
 
 	//--------ระบบจัดการข้อมูลแพทย์---------
 	//---Specialized---
@@ -589,6 +470,120 @@ func SetupDatabase() {
 	}
 	db.Model(&Dentist{}).Create(&dentist5)
 
+	///////////////ข้อมูลใน entity Medicine///////////
+	Medicine1 := Medicine{
+		Medicine_name:  "แก้ปวด",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine1)
+
+	///////////////ข้อมูลใน entity Medicine_status///////////
+	Medicine_status1 := Medicine_status{
+		Medicine_status_name: "รับยาแล้ว",
+	}
+	db.Model(&Medicine_status{}).Create(&Medicine_status1)
+
+	///////////////ข้อมูลใน entity Prescription///////////
+	DateTimePrescriptionA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+	//DateTimePrescriptionB := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+	Prescription1 := Prescription{
+		Medicine:             Medicine1,
+		Medicine_status:      Medicine_status1,
+		Patient:              patient1,
+		Dentist:              dentist1,
+		DateTimePrescription: DateTimePrescriptionA,
+	}
+	db.Model(&Prescription{}).Create(&Prescription1)
+
+	//จำลองข้อมูลระบบจัดตารางงานแพทย์
+	var Ttype = []Type_of_treatment{
+		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
+		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
+	}
+	db.CreateInBatches(Ttype, 2)
+
+	var day = []Workingday{
+		{Day: "วันจันทร์"},
+		{Day: "วันอังคาร"},
+		{Day: "วันพุธ"},
+		{Day: "วันพฤหัสบดี"},
+	}
+	db.CreateInBatches(day, 4)
+
+	var task = []Responsity{
+		{Respon: "ตรวจผู้ป่วย"},
+		{Respon: "เข้าเวร"},
+		{Respon: "ตรวจสอบอุปกรณ์"},
+		{Respon: "ทำการรักษา"},
+	}
+	db.CreateInBatches(task, 4)
+
+	//-------MedicalDevice------------
+	//---Type---
+	Type1 := Type{
+		Type_Name: "วัสดุและอุปกรณ์สำหรับพิมพ์ฟัน",
+	}
+	db.Model(&Type{}).Create(&Type1)
+
+	Type2 := Type{
+		Type_Name: "ทันตกรรมจัดฟัน",
+	}
+	db.Model(&Type{}).Create(&Type2)
+
+	Type3 := Type{
+		Type_Name: "วัสดุสิ้นเปลืองทางทันตกรรม",
+	}
+	db.Model(&Type{}).Create(&Type3)
+
+	Type4 := Type{
+		Type_Name: "อุปกรณ์ทั่วไป",
+	}
+	db.Model(&Type{}).Create(&Type4)
+
+	//---Status---
+	Status1 := Status{
+		Status_Choice: "Sterile",
+	}
+	db.Model(&Status{}).Create(&Status1)
+
+	Status2 := Status{
+		Status_Choice: "Non-Sterile",
+	}
+	db.Model(&Status{}).Create(&Status2)
+
+	//----ตารางหลัก-----
+	DateTimeA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+
+	MedicalDevice1 := MedicalDevice{
+		Employee:    em1,
+		Type:        Type4,
+		Status:      Status2,
+		Device_Name: "เก้าอี้ทำฟัน",
+		Amount:      1,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice1)
+
+	MedicalDevice2 := MedicalDevice{
+		Employee:    em2,
+		Type:        Type2,
+		Status:      Status2,
+		Device_Name: "เหล็กดัดฟัน",
+		Amount:      2,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice2)
+
+	MedicalDevice3 := MedicalDevice{
+		Employee:    em1,
+		Type:        Type4,
+		Status:      Status2,
+		Device_Name: "เครื่องขูด",
+		Amount:      1,
+		Record_Date: DateTimeA,
+	}
+	db.Model(&MedicalDevice{}).Create(&MedicalDevice3)
+
 	//Type of treatment
 	Type_of_treatment1 := Type_of_treatment{
 		Type_of_treatment_name: "รักษารากฟัน(ฟันหน้า)",
@@ -735,22 +730,57 @@ func SetupDatabase() {
 	}
 	db.Model(&Category{}).Create(&category3)
 
-
 	//room_detail
 	room_detail1 := Room_Detail{
-		Room_Number: room_number3,
-		Category: 	category1,
+		Room_Number:   room_number3,
+		Category:      category1,
 		MedicalDevice: MedicalDevice1,
 	}
 	db.Model(&Room_Detail{}).Create(&room_detail1)
 
 	room_detail2 := Room_Detail{
-		Room_Number: room_number4,
-		Category: 	category3,
+		Room_Number:   room_number4,
+		Category:      category3,
 		MedicalDevice: MedicalDevice3,
 	}
 	db.Model(&Room_Detail{}).Create(&room_detail2)
 
-	
+	//----------Repair---------------
+	//damagelevel
+	damageLevel1 := DamageLevel{
+		Damage_Choice: "เสียหายหนัก",
+	}
+	db.Model(&DamageLevel{}).Create(&damageLevel1)
+
+	damageLevel2 := DamageLevel{
+		Damage_Choice: "เสียหายปานกลาง",
+	}
+	db.Model(&DamageLevel{}).Create(&damageLevel2)
+
+	damageLevel3 := DamageLevel{
+		Damage_Choice: "เสียหายเล็กน้อย",
+	}
+	db.Model(&DamageLevel{}).Create(&damageLevel3)
+
+	//Repair
+	RepairDateTime := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+
+	repair1 := Repair{
+		Employee:       em1,
+		MedicalDevice:  MedicalDevice1,
+		DamageLevel:    damageLevel3,
+		Repair_Note:    "หลอดไฟไม่ทำงาน",
+		Date_Of_Repair: RepairDateTime,
+	}
+	db.Model(&Repair{}).Create(&repair1)
+
+	var re = []Reason{
+		{Method: "อยากเจอแพทย์"},
+		{Method: "ช่องปากต้องการรักษา"},
+		{Method: "อาการสาหัส"},
+		{Method: "ปวดใจว่าปวดแล้วปวดฟันดันซ้ำเติม"},
+	}
+	db.CreateInBatches(re, 4)
+
 }
 

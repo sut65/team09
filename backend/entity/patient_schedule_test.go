@@ -1,14 +1,16 @@
 package entity
 
 import (
-	"time"
 	"testing"
+	"time"
 	"github.com/asaskevich/govalidator"
 	. "github.com/onsi/gomega"
 )
+
 func TestReasonMethodNotBlank(t *testing.T) {
 	g := NewGomegaWithT(t)
 	ra := Reason{
+
 		Method: "", //ผิด
 	}
 	// ตรวจสอบด้วย govalidator
@@ -20,15 +22,35 @@ func TestReasonMethodNotBlank(t *testing.T) {
 	// err.Error ต้องมี error message แสดงออกมา
 	g.Expect(err.Error()).To(Equal("Method not blank"))
 }
+
 // ตรวจสอบ past and future
 func TestWatchTimeMustBeInThePast(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	ps := Patien_schedule{
-		Date_time: time.Now().Add(24 - time.Hour),
+		Patien_Number: "0123456789",
+		Date_time:     time.Now().Add(24 - time.Hour), //ผิด
 	}
 	ok, err := govalidator.ValidateStruct(ps)
 	g.Expect(ok).ToNot(BeTrue())
 	g.Expect(err).ToNot(BeNil())
 	g.Expect(err.Error()).To(Equal("Datetime must be a future date"))
 }
+
+
+func TestNumbermustbeInterger(t *testing.T) {
+	g := NewGomegaWithT(t)
+
+	
+	
+	
+		ps := Patien_schedule{
+			Patien_Number: "CX", //ผิด
+			Date_time:     time.Now().Add(24 * time.Hour),
+		}
+		ok, err := govalidator.ValidateStruct(ps)
+		g.Expect(ok).ToNot(BeTrue())
+		g.Expect(err).ToNot(BeNil())
+		g.Expect(err.Error()).To(Equal("Number must be Interger and 10 number"))
+	}
+

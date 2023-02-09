@@ -53,9 +53,12 @@ function PaitentCreate() {
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
   const [patient, setPatient] = useState<Partial<PatientInterface>>({});
+  const [provinceId, setProvinceId] = useState('');
+  const [districtId, setDistrictId] = useState('');
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [open, setOpen] = useState(false)
 
    //เปิดปิดตัว alert
   const handleClose = (
@@ -67,6 +70,57 @@ function PaitentCreate() {
     }
     setSuccess(false);
     setError(false);
+  };
+
+  //เพิ่มเมื่อมีการเปลี่ยนแปลงของจังหวัดส่ง id จังหวัดไปที่อ ำเภอ
+  const handleChangeProvince = (event: SelectChangeEvent) => {
+    setProvinceId(event.target.value);
+    console.log(event.target.value)
+    //เลือกใช้เพื่อส่งข้อมูลแบบ realtime
+    getDistrict();
+    //เพื่อบันทึกลง employee
+    const name = event.target.name as keyof typeof PaitentCreate;
+    setPatient({
+      ...patient,
+      [name]: event.target.value,
+    });
+  }
+  //เพิ่มเมื่อมีการเปลี่ยนแปลงของอำเภอส่ง id จังหวัดไปที่ตำบล
+  const handleChangeDistrict = (event: SelectChangeEvent) => {
+    setDistrictId(event.target.value);
+    console.log(event.target.value)
+    getSubdistrict();
+    const name = event.target.name as keyof typeof PaitentCreate;
+    setPatient({
+      ...patient,
+      [name]: event.target.value,
+    });
+  }
+
+  //set id provice ไปเก็บบน localstorage
+  const saveProvinceIdToLocalStorage = () => {
+    localStorage.setItem('provinceId', provinceId);
+    getDistrict();
+  };
+  const saveDistrictIdToLocalStorage = () => {
+    localStorage.setItem('districtId', districtId);
+    getSubdistrict();
+  };
+  
+  const openChange = (event: SelectChangeEvent) => {
+    console.log(event.target.value)
+    const value = event.target.value;
+    if (value === "1" || value === "3") {
+      setOpen(true);
+    } else if (value === "2") {
+      setOpen(false);
+    }
+    console.log(open)
+    const name = event.target.name as keyof typeof PaitentCreate;
+    setPatient({
+      ...patient,
+      [name]: event.target.value,
+    });
   };
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
@@ -121,13 +175,13 @@ function PaitentCreate() {
     }
   };
 
-  const getEmployeeByUID = async ()=>{
-    let res = await GetEmployeeByUID();
-    patient.EmployeeID = res.ID;
-    if (res) {
-      setEmployee(res);
-    }
-  }
+  // const getEmployeeByUID = async ()=>{
+  //   let res = await GetEmployeeByUID();
+  //   patient.EmployeeID = res.ID;
+  //   if (res) {
+  //     setEmployee(res);
+  //   }
+  // }
 
 
   useEffect(() => {
@@ -136,7 +190,7 @@ function PaitentCreate() {
     getProvince();
     getDistrict();
     getSubdistrict();
-    getEmployeeByUID();
+    // getEmployeeByUID();
   }, []);
 
   const convertType = (data: string | number | undefined) => {
@@ -151,6 +205,7 @@ function PaitentCreate() {
       FirstName: patient.FirstName,
       LastName: patient.LastName,
       Personal_id: patient.Personal_id,
+      Symptom_name: patient.Symptom_name || "-",
       Old: convertType(patient.Old),
       Weight: convertType(patient.Weight),
       Height: convertType(patient.Height),
@@ -164,7 +219,6 @@ function PaitentCreate() {
       Sub_districtID: convertType(patient.Sub_districtID),
       EmployeeID: convertType(patient.EmployeeID),
     };
-    console.log(data);
 
     let res = await CreatePatient(data);
     console.log(res);
@@ -270,8 +324,12 @@ function PaitentCreate() {
               <TextField
                 id="Old"
                 variant="outlined"
-                type="string"
+                type="number"
                 size="medium"
+                InputProps={{ inputProps: { min: 1 } }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 placeholder="กรุณากรอกอายุ"
                 value={patient.Old || ""}
                 onChange={handleInputChange}
@@ -285,8 +343,12 @@ function PaitentCreate() {
               <TextField
                 id="Weight"
                 variant="outlined"
-                type="string"
+                type="number"
                 size="medium"
+                InputProps={{ inputProps: { min: 1 } }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 placeholder="กรุณากรอกน้ำหนัก"
                 value={patient.Weight || ""}
                 onChange={handleInputChange}
@@ -300,8 +362,12 @@ function PaitentCreate() {
               <TextField
                 id="Height"
                 variant="outlined"
-                type="string"
+                type="number"
                 size="medium"
+                InputProps={{ inputProps: { min: 1 } }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 placeholder="กรุณากรอกส่วนสูง"
                 value={patient.Height || ""}
                 onChange={handleInputChange}
@@ -360,7 +426,8 @@ function PaitentCreate() {
               <Select
                 native
                 value={patient.ProvinceID + ""}
-                onChange={handleChange}
+                onChange={handleChangeProvince}
+                onClick={saveProvinceIdToLocalStorage}
                 inputProps={{
                   name: "ProvinceID",
                 }}
@@ -374,6 +441,7 @@ function PaitentCreate() {
                   </option>
                 ))}
               </Select>
+              {provinceId && <div>Selected province id: {provinceId}</div>}
             </FormControl>
         </Grid>
 
@@ -383,7 +451,8 @@ function PaitentCreate() {
               <Select
                 native
                 value={patient.DistrictID + ""}
-                onChange={handleChange}
+                onChange={handleChangeDistrict}
+                onClick={saveDistrictIdToLocalStorage}
                 inputProps={{
                   name: "DistrictID",
                 }}
@@ -453,22 +522,39 @@ function PaitentCreate() {
               <Select
                 native
                 value={patient.SymptomID + ""}
-                onChange={handleChange}
+                onChange={openChange}
                 inputProps={{
                   name: "SymptomID",
                 }}
               >
-                <option aria-label="None" value="">
+              <option aria-label="None" value="">
                   กรุณาเลือกอาการเบื้องต้น
-                </option>
+              </option>
                 {symptom.map((item: SymptomInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Symptom_name}
+                    {item.Symptom_choice}
                   </option>
                 ))}
               </Select>
             </FormControl>
           </Grid>
+          {/* {ถ้า open เป็นจริงถึงทำ */}
+          {open && (
+              <Grid item xs={12} >
+              <p>รายละเอียดเพิ่มเติม</p>
+                <FormControl fullWidth variant="outlined">
+                  <TextField
+                    id="Symptom_name"
+                    variant="outlined"
+                    type="string"
+                    size="medium"
+                    placeholder="กรุณากรอกรายละเอียด"
+                    value={patient.Symptom_name || ""}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+              </Grid>
+          )}
 
           <Grid item xs={12}>
             <Button

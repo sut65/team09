@@ -2,6 +2,7 @@ package entity
 
 import (
 	"time"
+
 	"github.com/asaskevich/govalidator"
 	"gorm.io/gorm"
 )
@@ -92,8 +93,8 @@ type Employee struct {
 // -----ระบบผู้ป่วย--------
 type Symptom struct {
 	gorm.Model
-	Symptom_name string
-	Patients     []Patient `gorm:"foreignKey: SymptomID"`
+	Symptom_choice string
+	Patients       []Patient `gorm:"foreignKey: SymptomID"`
 }
 
 type Patient struct {
@@ -124,9 +125,10 @@ type Patient struct {
 	GenderID *uint
 	Gender   Gender `gorm:"references:id"`
 
-	//RoleID ทำหน้าที่เป็น FK
-	SymptomID *uint
-	Symptom   Symptom `gorm:"references:id"`
+	//SymptomID ทำหน้าที่เป็น FK
+	SymptomID    *uint
+	Symptom      Symptom `gorm:"references:id"`
+	Symptom_name string
 
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
@@ -156,7 +158,7 @@ type Status struct {
 type MedicalDevice struct {
 	gorm.Model
 	EmployeeID *uint
-	Employee   Employee
+	Employee   Employee `valid:"-"`
 
 	TypeID *uint
 	Type   Type
@@ -164,8 +166,8 @@ type MedicalDevice struct {
 	StatusID *uint
 	Status   Status
 
-	Device_Name string
-	Amount      int
+	Device_Name string `json:"Device_Name" valid:"required~Device_Name cannot be blank"`
+	Amount      int    `json:"amount" valid:"range(0|1000)"`
 	Record_Date time.Time
 
 	Repairs      []Repair      `gorm:"foreignKey:MedicalDeviceID"`
@@ -183,21 +185,22 @@ type DamageLevel struct {
 type Repair struct {
 	gorm.Model
 	EmployeeID *uint
-	Employee   Employee
+	Employee   Employee `valid:"-"`
 
 	MedicalDeviceID *uint
-	// MedicalDevice   MedicalDevice
+	MedicalDevice   MedicalDevice `valid:"-"`
 
 	DamageLevelID *uint
 	DamageLevel   DamageLevel
 
+	Repair_Note    string
 	Date_Of_Repair time.Time
 }
 
 // ระบบนัดผู้ป่วย
 type Reason struct {
 	gorm.Model
-	Method          string	`valid:"required~Method not blank"`
+	Method          string            `valid:"required~Method not blank"`
 	Patien_schedule []Patien_schedule `gorm:"foreignKey:ReasonID"`
 }
 
@@ -213,9 +216,11 @@ type Patien_schedule struct {
 	ReasonID *uint
 	Reason   Reason `gorm:"references:id" valid:"-"`
 
+	Patien_Number string	`valid:"matches(\\d{10}$)~Number must be Interger and 10 number"`
+
 	Type_of_treatmentID *uint
 	Type_of_treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Date_time           time.Time	`valid:"future~Datetime must be a future date"`
+	Date_time           time.Time         `valid:"future~Datetime must be a future date"`
 }
 
 // -----ระบบจัดการข้อมูลทันตแพทย์-----
@@ -293,13 +298,13 @@ type Prescription struct {
 	gorm.Model
 	DateTimePrescription time.Time
 	//PatientID 	ทำหน้าที่เป็น FK
-	PatientID *uint
+	PatientID *uint `valid:"required~Name cannot be blank"`
 	Patient   Patient
 	//DentistID 	ทำหน้าที่เป็น FK
 	DentistID *uint
 	Dentist   Dentist
 	//Medicine_statusID 	ทำหน้าที่เป็น FK
-	Medicine_statusID *uint
+	Medicine_statusID *uint `valid:"required~Medicine_status cannot be blank"`
 	Medicine_status   Medicine_status
 	//MedicineID 	ทำหน้าที่เป็น FK
 	MedicineID *uint
@@ -336,23 +341,24 @@ type Treatment struct {
 	gorm.Model
 	//DentistID 	ทำหน้าที่เป็น FK
 	DentistID *uint
-	Dentist   Dentist
+
+	Dentist Dentist
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID              *uint
 	Patient                Patient
-	Number_of_cavities     int
-	Number_of_swollen_gums int
-	Other_teeth_problems   string
+	Number_of_cavities     int    `json:"number_of_cavities" valid:"required~Number of cavities cannot be blank"`
+	Number_of_swollen_gums int    `json:"number_of_swollen_gums" valid:"required~Number of swollen_gums cannot be blank"`
+	Other_teeth_problems   string `json:"Other_teeth_problems" valid:"required~Other teeth problems cannot be blank"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment
-	Number_of_treatment int
+	Number_of_treatment int `json:"number_of_treatment" valid:"required~Number of treatment cannot be blank"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
-	Treatment_detail              string
+	Treatment_detail              string `json:"treatment_detail" valid:"required~Treatment detail cannot be blank"`
 	Treatment_time                time.Time
-	Treatment_code                string
+	Treatment_code                string `json:"treatment_code" valid:"required~Treatment code cannot be blank"`
 }
 
 // ------ระบบจัดแผนการรักษา------//

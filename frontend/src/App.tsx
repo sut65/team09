@@ -16,7 +16,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
-import MedicationIcon from '@mui/icons-material/Medication';
+import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
@@ -25,25 +26,31 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import HandymanIcon from '@mui/icons-material/Handyman';
 
 // import Home from "./components/Home";
 import EmployeeList from "./components/employee/EmployeeList";
 import EmployeeCreate from "./components/employee/EmployeeCreate";
+import EmployeeUpdate from "./components/employee/EmployeeUpdate";
 
 import PatientSchedule from "./components/patienschedulcompo/PatientSchedule";
 import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleHome";
+import PatientScheduleUpdate from "./components/patienschedulcompo/PatientScheduleUpdate";
 
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
 import DentistSchedule from "./components/dentistschedule/DentistSchedule";
 
-import CreateMedicalDevice from "./components/MedialDevice/CreateMedicalDevice";
-import MedicalDeviceList from "./components/MedialDevice/MedicalDeviceList";
+import CreateMedicalDevice from "./components/MedicalDevice/CreateMedicalDevice";
+import MedicalDeviceList from "./components/MedicalDevice/MedicalDeviceList";
 
 import PatientList from "./components/patient/PatientList";
 import PatientCreate from "./components/patient/PatientCreate";
 
 import Dentists from "./components/dentist/DentistsList"; 
 import DentistCreate from "./components/dentist/DentistCreate";
+
+import Room_Details from "./components/room/Room_DetailList";
+import Room_DetailCreate from "./components/room/Room_DetailCreate";
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
@@ -57,7 +64,12 @@ import TreatmentPlanCreate from "./components/treatment_plan/TreatmentPlanCreate
 import TreatmentPlanUpdate from "./components/treatment_plan/TreatmentPlanUpdate";
 
 import PrescriptionList from "./components/prescription/PrescriptionList";
+import PrescriptionCreate from "./components/prescription/PrescriptionCreate";
 
+import PaymentList from "./components/payment/PaymentList";
+
+import CreateRepair from "./components/repair/CreateRepair"
+import RepairList from "./components/repair/RepairList";
 
 
 // import Students from "./components/Student";
@@ -122,12 +134,15 @@ const menu = [
   { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" ,},
   { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,},
   { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
+  { name: "แจ้งซ่อมเครื่องมือแพทย์", icon: <HandymanIcon />, path: "/Repair" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
   { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
   { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,},
-  { name: "สั่งจ่ายยา", icon: <MedicationIcon />, path: "/prescriptions" ,},
+  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" ,},
   { name: "จัดการข้อมูลแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,},
+  { name: "จัดการข้อมูลห้อง", icon: <BuildCircleIcon />, path: "/room_details" ,},
+  { name: "แจ้งยอดชำระ", icon: <PaymentsIcon />, path: "/payment" ,},
 
 ];
 
@@ -247,8 +262,10 @@ function App() {
                 <Route path="/patients/create" element={<PatientCreate />} />
                 <Route path="/employees" element={<EmployeeList />} />
                 <Route path="/employee/create" element={<EmployeeCreate />} />
+                <Route path="/employee_update/:id" element={<EmployeeUpdate />} />
                 <Route path="/PatientSchedule/create" element={<PatientSchedule />} />
                 <Route path="/PatientSchedule/home" element={<PatientScheduleHome />} />
+                <Route path="/PatientSchedule/Update/:id" element={<PatientScheduleUpdate />} />
                 <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
                 <Route path="/DentistSchedule/home" element={<DentistSchedule />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
@@ -262,10 +279,13 @@ function App() {
                 <Route path="/treatmentplan_update/:id" element={<TreatmentPlanUpdate />} />         
                 <Route path="/dentists" element={<Dentists />} />
                 <Route path="/dentist/create" element={<DentistCreate />} />
+                <Route path="/room_details" element={<Room_Details />} />
+                <Route path="/room_detail/create" element={<Room_DetailCreate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
-              </Routes>
+                <Route path="/payment" element={<PaymentList />} />
+            </Routes>
             </Container>
-          </Box>
+        </Box>
         </Box>
       </ThemeProvider>
     </Router>

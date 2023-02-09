@@ -36,7 +36,7 @@ func CreateRoom_Detail(c *gin.Context) {
 	}
 
 	// 10: ค้นหา medicialdevice ด้วย id
-	if tx := entity.DB().Where("id = ?", room_detail.MedicalDevice).First(&md); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", room_detail.MedicalDeviceID).First(&md); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "medicaldevice not found"})
 		return
 	}

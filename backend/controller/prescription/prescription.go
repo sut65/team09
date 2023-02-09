@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"github.com/asaskevich/govalidator"
+	
 	"github.com/sut65/team09/entity"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +19,12 @@ func CreatePrescription(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&prescription); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error not access": err.Error()})
+		return
+	}
+
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(prescription); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 

@@ -23,7 +23,7 @@ function Employees() {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/employees/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/employees/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
@@ -56,10 +56,19 @@ function Employees() {
     { field: "Gender", headerName: "เพศ", width: 100 , valueFormatter: (params) => params.value.Gender_name,},       
     { field: "Role", headerName: "บทบาท", width: 250,  valueFormatter: (params) => params.value.Role_name,},
     {
-      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
-            <Button onClick={() => handleDelete(row.ID)} size="small" variant="contained" color="error" >
-                delete
-            </Button>
+      field: "action", headerName: "Action",width: 250, sortable: false, renderCell: ({ row }) =>
+      <ButtonGroup>
+        <Stack spacing={2} direction="row">
+          <Button onClick={() => handleDelete(row.ID)} variant="contained" color="error">
+                  delete
+          </Button>
+          <Button component={RouterLink} to={`/employee_update/${row.ID}`} variant="contained">
+              <div className="good-font">
+                  update
+              </div>
+          </Button>
+        </Stack>
+      </ButtonGroup>
     },
   ];
 
@@ -88,14 +97,6 @@ function Employees() {
           </Box>
           <Box>
           <Stack spacing={2} direction="row">
-            <Button
-                component={RouterLink}
-                to=""
-                variant="contained"
-                color="primary"
-                >
-                แก้ไขข้อมูล
-            </Button>
             <Button
                 component={RouterLink}
                 to="/employee/create"

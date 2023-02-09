@@ -54,10 +54,10 @@ func CreatePatient(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "sub-district not found"})
 		return
 	}
-	if tx := entity.DB().Where("id = ?", patient.EmployeeID).First(&employee); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
-		return
-	}
+	// if tx := entity.DB().Where("id = ?", patient.EmployeeID).First(&employee); tx.RowsAffected == 0 {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
+	// 	return
+	// }
 
 	// // เข้ารหัสลับจากบัตรประชาชนที่ Admin กรอกข้อมูล
 	// hashPassword, err := bcrypt.GenerateFromPassword([]byte(patient.Password), 14)
@@ -80,12 +80,12 @@ func CreatePatient(c *gin.Context) {
 		Drug_alergy:        patient.Drug_alergy,
 		House_no:           patient.House_no,
 		Symptom:            symptom,
+		Symptom_name:       patient.Symptom_name,
 		Gender:             gender,
-
-		Province:     province,
-		District:     district,
-		Sub_district: sub_district,
-		Employee:     employee,
+		Province:           province,
+		District:           district,
+		Sub_district:       sub_district,
+		Employee:           employee,
 	}
 	// 13: บันทึก
 	if err := entity.DB().Create(&pt).Error; err != nil {

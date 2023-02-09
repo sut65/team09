@@ -47,21 +47,44 @@ function EmployeeCreate() {
   const [district, setDistrict] = React.useState<DistrictInterface[]>([]);
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
+  const [provinceId, setProvinceId] = useState('');
+  const [districtId, setDistrictId] = useState('');
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
    //เปิดปิดตัว alert
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
+    const handleClose = (
+      event?: React.SyntheticEvent | Event,
+      reason?: string
+    ) => {
+      if (reason === "clickaway") {
+        return;
+      }
+      setSuccess(false);
+      setError(false);
+    };
+
+    const handleChangeProvince = (event: SelectChangeEvent) => {
+      setProvinceId(event.target.value);
+      console.log(event.target.value)
+      getDistrict();
+      const name = event.target.name as keyof typeof EmployeeCreate;
+      setEmployee({
+      ...employee,
+      [name]: event.target.value,
+    });
     }
-    setSuccess(false);
-    setError(false);
-  };
+    const handleChangeDistrict = (event: SelectChangeEvent) => {
+      setDistrictId(event.target.value);
+      console.log(event.target.value)
+      getSubdistrict();
+      const name = event.target.name as keyof typeof EmployeeCreate;
+      setEmployee({
+      ...employee,
+      [name]: event.target.value,
+    });
+    }
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
     const name = event.target.name as keyof typeof EmployeeCreate;
@@ -78,6 +101,15 @@ function EmployeeCreate() {
     const id = event.target.id as keyof typeof employee;
     const { value } = event.target;
     setEmployee({ ...employee, [id]: value });
+  };
+
+  const saveProvinceIdToLocalStorage = () => {
+    localStorage.setItem('provinceId', provinceId);
+    getDistrict();
+  };
+  const saveDistrictIdToLocalStorage = () => {
+    localStorage.setItem('districtId', districtId);
+    getSubdistrict();
   };
   
   const getGender = async () => {
@@ -269,7 +301,7 @@ function EmployeeCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสผ่าน"
-                value={employee.Password || ""}
+                value={employee.Password?.replace(/./g, "*") || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -311,7 +343,8 @@ function EmployeeCreate() {
               <Select
                 native
                 value={employee.ProvinceID + ""}
-                onChange={handleChange}
+                onChange={handleChangeProvince}
+                onClick={saveProvinceIdToLocalStorage}
                 inputProps={{
                   name: "ProvinceID",
                 }}
@@ -325,6 +358,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
+              {provinceId && <div>Selected province id: {provinceId}</div>}
             </FormControl>
         </Grid>
 
@@ -334,7 +368,8 @@ function EmployeeCreate() {
               <Select
                 native
                 value={employee.DistrictID + ""}
-                onChange={handleChange}
+                onChange={handleChangeDistrict}
+                onClick={saveDistrictIdToLocalStorage}
                 inputProps={{
                   name: "DistrictID",
                 }}

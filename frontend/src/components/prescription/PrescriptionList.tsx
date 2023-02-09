@@ -9,6 +9,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import axios from 'axios';
 import { GetPrescription } from "../../services/HttpClientService";
+import { ButtonGroup } from "@mui/material";
 
 function Prescriptions() {
   const [prescriptions, setPrescriptions] = useState<PrescriptionInterface[]>([]);
@@ -22,7 +23,7 @@ function Prescriptions() {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/employees/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/prescription/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
@@ -51,10 +52,17 @@ function Prescriptions() {
     // { field: "Patient", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
     { field: "Medicine_status", headerName: "สถานะ", width: 250,  valueFormatter: (params) => params.value.Medicine_status_name,},
     {
-      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
-            <Button onClick={() => handleDelete(row.ID)} size="small" variant="contained" color="error" >
-                delete
-            </Button>
+      field: "action", headerName: "Action",width: 200, sortable: false, renderCell: ({ row }) =>
+      <ButtonGroup>
+                <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
+                    delete
+                </Button>
+                <Button component={RouterLink} to={`/prescriptionupdate/${row.id}`} variant="contained">
+                            <div className="good-font">
+                                update
+                            </div>
+                        </Button>
+            </ButtonGroup>
     },
   ];
 
@@ -64,7 +72,7 @@ function Prescriptions() {
 
   return (
     <div>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Box
           display="flex"
           sx={{
@@ -93,7 +101,7 @@ function Prescriptions() {
             </Button>
             <Button
                 component={RouterLink}
-                to="/employee/create"
+                to="/prescription/create"
                 variant="contained"
                 color="success"
                 >

@@ -75,7 +75,7 @@ func GetPayment(c *gin.Context) {
 func ListPayments(c *gin.Context) {
 	var payments []entity.Payment
 
-	if err := entity.DB().Preload("Patient").Preload("Employee").Preload("Payment_status").Raw("SELECT * FROM prescriptions").Scan(&payments).Error; err != nil {
+	if err := entity.DB().Preload("Patient").Preload("Employee").Preload("Payment_status").Raw("SELECT * FROM prescriptions").Find(&payments).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
