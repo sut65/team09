@@ -158,7 +158,7 @@ type Status struct {
 type MedicalDevice struct {
 	gorm.Model
 	EmployeeID *uint
-	Employee   Employee
+	Employee   Employee `valid:"-"`
 
 	TypeID *uint
 	Type   Type
@@ -185,10 +185,10 @@ type DamageLevel struct {
 type Repair struct {
 	gorm.Model
 	EmployeeID *uint
-	Employee   Employee
+	Employee   Employee `valid:"-"`
 
 	MedicalDeviceID *uint
-	MedicalDevice   MedicalDevice
+	MedicalDevice   MedicalDevice `valid:"-"`
 
 	DamageLevelID *uint
 	DamageLevel   DamageLevel

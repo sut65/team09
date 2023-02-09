@@ -220,8 +220,8 @@ function TreatmentCreate() {
             Number_of_treatment: typeof treatment_plan.number_of_treatment === "string" ? parseInt(treatment_plan.number_of_treatment) : 0,
 
             Type_Of_Number_Of_TreatmentID: convertType(treatment_plan.Type_Of_Number_Of_TreatmentID),
-            Treatment_detail: treatment_plan.treatment_detail ?? "",
-            Treatment_explain: treatment_plan.treatment_explain ?? "",
+            Treatment_detail: treatment_detail ?? "",
+            Treatment_explain: treatment_explain ?? "",
 
             Treatment_time: treatment_plan.Treatment_time,
 
@@ -408,8 +408,8 @@ function TreatmentCreate() {
                                 variant="outlined"
                                 type="string"
                                 size="medium"
-                                value={treatment_plan.treatment_detail || "" || treatment_detail}
-                                onChange={handleInputChange}
+                                value={treatment_detail}
+                                onChange={(event) => setTreatment_detail(event.target.value)}
                             />
                         </FormControl>
                     </Grid>
@@ -422,8 +422,8 @@ function TreatmentCreate() {
                                 variant="outlined"
                                 type="string"
                                 size="medium"
-                                value={treatment_plan.treatment_explain || "" || treatment_explain}
-                                onChange={handleInputChange}
+                                value={treatment_explain}
+                                onChange={(event) => setTreatment_explain(event.target.value)}
                             />
                         </FormControl>
                     </Grid>
