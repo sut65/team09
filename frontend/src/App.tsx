@@ -26,6 +26,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import HandymanIcon from '@mui/icons-material/Handyman';
 
 // import Home from "./components/Home";
 import EmployeeList from "./components/employee/EmployeeList";
@@ -38,8 +39,8 @@ import PatientScheduleHome from "./components/patienschedulcompo/PatienScheduleH
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
 import DentistSchedule from "./components/dentistschedule/DentistSchedule";
 
-import CreateMedicalDevice from "./components/MedialDevice/CreateMedicalDevice";
-import MedicalDeviceList from "./components/MedialDevice/MedicalDeviceList";
+import CreateMedicalDevice from "./components/MedicalDevice/CreateMedicalDevice";
+import MedicalDeviceList from "./components/MedicalDevice/MedicalDeviceList";
 
 import PatientList from "./components/patient/PatientList";
 import PatientCreate from "./components/patient/PatientCreate";
@@ -66,6 +67,8 @@ import PrescriptionCreate from "./components/prescription/PrescriptionCreate";
 
 import PaymentList from "./components/payment/PaymentList";
 
+import CreateRepair from "./components/repair/CreateRepair"
+import RepairList from "./components/repair/RepairList";
 
 
 // import Students from "./components/Student";
@@ -130,6 +133,7 @@ const menu = [
   { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" ,},
   { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,},
   { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
+  { name: "แจ้งซ่อมเครื่องมือแพทย์", icon: <HandymanIcon />, path: "/Repair" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
   { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
@@ -278,6 +282,8 @@ function App() {
                 <Route path="/prescription" element={<PrescriptionList />} />
                 <Route path="/prescription/create" element={<PrescriptionCreate />} />
                 <Route path="/payment" element={<PaymentList />} />
+                <Route path="/Repair/create" element={<CreateRepair />} />
+                <Route path="/Repair" element={<RepairList />} />
               </Routes>
             </Container>
           </Box>

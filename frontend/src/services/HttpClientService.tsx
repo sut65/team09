@@ -8,6 +8,7 @@ import { PatientInterface } from "../models/IPatient";
 import { DentistInterface } from "../models/IDentist";
 import { Room_DetailInterface } from "../models/IRoom_Detail";
 import { PrescriptionInterface } from "../models/IPrescription";
+import { RepairInterface } from "../models/IRepair";
 
 const apiUrl = "http://localhost:8080";
 
@@ -1029,6 +1030,74 @@ async function GetReasons() {
     return res;
   }
 
+  //-------------Repair------------------------
+  async function GetDamageLevel() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/damagelevels`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+  async function GetRepair() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/repairs`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+  async function CreateRepair(data: RepairInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/repairs`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return { status: true, message: res.data };
+        } else {
+          return { status: false, message: res.error };
+        }
+      });
+  
+    return res;
+  }
+
   export {
     GetPatientSchedules,
     GetDentistScehedules,
@@ -1078,7 +1147,11 @@ async function GetReasons() {
     GetPrescription,
     CreatePrescription,
 
-    GetPayment
+    GetPayment,
+
+    GetDamageLevel,
+    GetRepair,
+    CreateRepair,
 
   };
 

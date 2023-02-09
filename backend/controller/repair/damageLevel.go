@@ -22,7 +22,7 @@ func GetDamageLevel(c *gin.Context) {
 
 // GET /damagelevels
 func ListDamageLevels(c *gin.Context) {
-	var damagelevels []entity.Status
+	var damagelevels []entity.DamageLevel
 
 	if err := entity.DB().Raw("SELECT * FROM damage_levels").Scan(&damagelevels).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
