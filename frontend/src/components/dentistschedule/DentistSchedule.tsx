@@ -9,6 +9,8 @@ import { DentistSceheduleInterface } from "../../models/IDentistScheduleInterfac
 import { GetDentistScehedules } from "../../services/HttpClientService";
 import moment from "moment";
 import axios from 'axios';
+import { ButtonGroup } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function DentistSchedule() {
@@ -49,13 +51,24 @@ function DentistSchedule() {
     { field: "Workingday",headerName: "วัน",width: 100, valueFormatter: (params) => params.value.Day,},
     { field: "Responsity",headerName: "งานที่รับผิดชอบ",width: 150,valueFormatter: (params) => params.value.Respon,},
     { field: "Dentist",headerName: "ทันตแพทย์",width: 150,valueFormatter: (params) => params.value.FirstName,},
-    { field: "TimeWork", headerName: "เวลา", width: 200, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
-    { field: "TimeEnd", headerName: "ถึง", width: 200, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
+    { field: "Room_Number", headerName: "ห้องตรวจ", width: 150,valueFormatter: (params) => params.value.Room_number, },
+    { field: "Job_description", headerName: "รายละเอียดงาน", width: 150 },
+    { field: "TimeWork", headerName: "เวลา", width: 180, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
+    { field: "TimeEnd", headerName: "ถึง", width: 180, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
     {
-      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
-            <Button  onClick={() => Delete(row.ID)} size="small" variant="contained" color="error" >
-                Delete <DeleteForeverIcon />
-            </Button>
+      field: "action", headerName: "Action",width: 250, sortable: false, renderCell: ({ row }) =>
+      <ButtonGroup>
+      <Stack spacing={2} direction="row">
+        <Button onClick={() => Delete(row.ID)} variant="contained" color="error">
+                delete
+        </Button>
+        <Button component={RouterLink} to={`/DentistSchedule/Update/${row.ID}`} variant="contained">
+            <div className="good-font">
+                update
+            </div>
+        </Button>
+      </Stack>
+    </ButtonGroup>      
     },
   ];
 

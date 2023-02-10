@@ -62,7 +62,6 @@ function PatientScheduleUpdate() {
     });
 
 
-    // const [patient, setPatient] = React.useState<number>(0);
     const [employee, setEmployee] = React.useState<string>("");
     const [reason, setReason] = React.useState<string>("");
     const [number, setNumber] = React.useState<string>("");

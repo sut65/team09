@@ -69,9 +69,6 @@ function PatienScheduleHome() {
           </Button>
         </Stack>
       </ButtonGroup>      
-          // <Button  onClick={() => Delete(row.ID)} size="small" variant="contained" color="error" >
-            //     Delete <DeleteForeverIcon />
-            // </Button>
 
             
     },

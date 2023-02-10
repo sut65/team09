@@ -422,16 +422,21 @@ type Dentist_schedule struct {
 	gorm.Model
 
 	ResponsityID *uint
-	Responsity   Responsity `gorm:"references:id"`
+	Responsity   Responsity `gorm:"references:id" valid:"-"`
 
 	WorkingdayID *uint
-	Workingday   Workingday `gorm:"references:id"`
+	Workingday   Workingday `gorm:"references:id" valid:"-"`
 
 	DentistID *uint
-	Dentist   Dentist `gorm:"references:id"`
+	Dentist   Dentist `gorm:"references:id" valid:"-"`
 
-	TimeWork time.Time
-	TimeEnd  time.Time
+	Room_NumberID *uint
+	Room_Number   Room_Number `gorm:"references:id" valid:"-"`
+
+	Job_description  string `valid:"required~Job description cannot be blank"`
+
+	TimeWork time.Time `valid:"past~TimeWork must be a past date"`
+	TimeEnd  time.Time  `valid:"future~TimeEnd must be a future date"`
 }
 
 // ระบบจัดการห้อง
@@ -447,6 +452,7 @@ type Room_Number struct {
 	Room_number string
 
 	Room_Details []Room_Detail `gorm:"foreignKey:Room_NumberID"`
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:Room_NumberID"`
 }
 
 type Room_Detail struct {

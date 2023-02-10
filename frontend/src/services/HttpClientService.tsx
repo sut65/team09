@@ -563,9 +563,10 @@ async function GetReasons() {
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
-          return res.data;
+          return { status: true, message: res.data };
         } else {
-          return false;
+          console.log(res)
+           return { status: false, message: res.error };
         }
       });
   
@@ -1125,6 +1126,31 @@ async function GetReasons() {
     return res;
   }
 
+  async function DentistSchedulesUpdate(data: DentistSceheduleInterface,) {
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+  };
+  
+    let res = await fetch(`${apiUrl}/dentist_schedules/:id`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      
+        if (res.data) {
+          console.log(res)
+           return{status: true, message: res.data};
+        } else {
+            return{status: false, message: res.error};
+        }
+    });
+  
+    return res;
+  }
+
   export {
     GetPatientSchedules,
     GetDentistScehedules,
@@ -1181,5 +1207,6 @@ async function GetReasons() {
     GetRepair,
     CreateRepair,
 
+    DentistSchedulesUpdate,
   };
 
