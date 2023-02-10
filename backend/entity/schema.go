@@ -346,19 +346,19 @@ type Treatment struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID              *uint
 	Patient                Patient
-	Number_of_cavities     int    `json:"number_of_cavities" valid:"required~Number of cavities cannot be blank"`
-	Number_of_swollen_gums int    `json:"number_of_swollen_gums" valid:"required~Number of swollen_gums cannot be blank"`
-	Other_teeth_problems   string `json:"Other_teeth_problems" valid:"required~Other teeth problems cannot be blank"`
+	Number_of_cavities int `valid:"range(0|50)~Number of cavities cannot be negative"`
+	Number_of_swollen_gums int `valid:"range(0|50)~Number of swollen gums cannot be negative"`
+	Other_teeth_problems   string `valid:"required~Other teeth problems cannot be blank"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment
-	Number_of_treatment int `json:"number_of_treatment" valid:"required~Number of treatment cannot be blank"`
+	Number_of_treatment int `valid:"range(0|50)~Number of treatment cannot be negative"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
-	Treatment_detail              string `json:"treatment_detail" valid:"required~Treatment detail cannot be blank"`
-	Treatment_time                time.Time
-	Treatment_code                string `json:"treatment_code" valid:"required~Treatment code cannot be blank"`
+	Treatment_detail              string `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"`
+	Treatment_time                time.Time `valid:"past~Treatment time must be a past date"`
+	Treatment_code                string `valid:"matches(^[T]\\d{7}$), required~Treatment code cannot be blank"`
 }
 
 // ------ระบบจัดแผนการรักษา------//
