@@ -152,7 +152,7 @@ func main() {
 	router.GET("/dentist_schedules", docterschedule.ListDentistSchedules)
 	router.GET("/dentist_schedules/:id", docterschedule.GetDentistSchedule)
 	router.POST("/dentist_schedules", docterschedule.CreateDentistSchedule)
-	router.PATCH("/dentist_schedules", docterschedule.UpdateDentistSchedules)
+	router.PATCH("/dentist_schedules/:id", docterschedule.UpdateDentistSchedules)
 	router.DELETE("/dentist_schedules/:id", docterschedule.DeleteDentistSchedule)
 
 	//-------------Dentist-------------------
@@ -180,7 +180,7 @@ func main() {
 	//-------------Room-------------------
 	// Room_Number Routes
 	router.GET("/room_numbers", room.ListRoom_Detail)
-	router.GET("/room_number:id", room.GetRoom_Detail)
+	router.GET("/room_number/:id", room.GetRoom_Detail)
 	router.POST("/room_numbers", room.CreateRoom_Detail)
 	router.PATCH("/room_numbers", room.UpdateRoom_Detail)
 	router.DELETE("/room_number/:id", room.DeleteRoom_Detail)

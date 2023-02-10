@@ -39,6 +39,7 @@ import PatientScheduleUpdate from "./components/patienschedulcompo/PatientSchedu
 
 import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleCreate";
 import DentistSchedule from "./components/dentistschedule/DentistSchedule";
+import DentistScheduleUpdate from "./components/dentistschedule/DentistScheduleUpdate";
 
 import CreateMedicalDevice from "./components/MedicalDevice/CreateMedicalDevice"
 import MedicalDeviceList from "./components/MedicalDevice/MedicalDeviceList";
@@ -270,6 +271,7 @@ function App() {
                 <Route path="/PatientSchedule/Update/:id" element={<PatientScheduleUpdate />} />
                 <Route path="/DentistSchedule/create" element={<DentistScheduleCreate />} />
                 <Route path="/DentistSchedule/home" element={<DentistSchedule />} />
+                <Route path="/DentistSchedule/Update/:id" element={<DentistScheduleUpdate />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
                 <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
                 <Route path="/treatmentlistshow" element={<Treatment />} />

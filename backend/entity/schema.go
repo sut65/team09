@@ -370,16 +370,16 @@ type Treatment_plan struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID          *uint
 	Patient            Patient
-	Order_of_treatment int
+	Order_of_treatment int	`valid:"range(0|50)~Order of treatment cannot be negative"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment
-	Number_of_treatment int
+	Number_of_treatment int	`valid:"range(0|50)~Number of treatment cannot be negative"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment
-	Treatment_detail              string
-	Treatment_explain             string
+	Treatment_detail              string `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"` 
+	Treatment_explain             string `valid:"required~Treatment explain cannot be blank, stringlength(6|100)~Treatment explain must consist of 6 or more characters"`
 	Treatment_time                time.Time
 }
 
@@ -422,16 +422,21 @@ type Dentist_schedule struct {
 	gorm.Model
 
 	ResponsityID *uint
-	Responsity   Responsity `gorm:"references:id"`
+	Responsity   Responsity `gorm:"references:id" valid:"-"`
 
 	WorkingdayID *uint
-	Workingday   Workingday `gorm:"references:id"`
+	Workingday   Workingday `gorm:"references:id" valid:"-"`
 
 	DentistID *uint
-	Dentist   Dentist `gorm:"references:id"`
+	Dentist   Dentist `gorm:"references:id" valid:"-"`
 
-	TimeWork time.Time
-	TimeEnd  time.Time
+	Room_NumberID *uint
+	Room_Number   Room_Number `gorm:"references:id" valid:"-"`
+
+	Job_description  string `valid:"required~Job description cannot be blank"`
+
+	TimeWork time.Time `valid:"past~TimeWork must be a past date"`
+	TimeEnd  time.Time  `valid:"future~TimeEnd must be a future date"`
 }
 
 // ระบบจัดการห้อง
@@ -447,6 +452,7 @@ type Room_Number struct {
 	Room_number string
 
 	Room_Details []Room_Detail `gorm:"foreignKey:Room_NumberID"`
+	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:Room_NumberID"`
 }
 
 type Room_Detail struct {

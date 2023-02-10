@@ -20,6 +20,7 @@ import { WorkingdayInterface } from '../../models/IWorkingday';
 import { ResponsityInterface } from '../../models/IResponsity';
 import {DentistSceheduleInterface} from "../../models/IDentistScheduleInterface";
 import { DentistInterface } from '../../models/IDentist';
+import { Room_NumberInterface } from '../../models/IRoom_Number';
 
 import {
     GetDentistScehedules,
@@ -27,6 +28,7 @@ import {
     DentistScehedules,
     GetWorkingdays,
     GetDentists,
+    GetRoom_Number,
 } from "../../services/HttpClientService";
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -39,11 +41,14 @@ function DentistScheduleCreate() {
     const [dentists, setDentists] = useState<DentistInterface []>([]);
     const [workingdays, setWorkingdays] = useState<WorkingdayInterface  []>([]);
     const [responsitys, setResponsitys] = useState<ResponsityInterface []>([]);
+    const [room_number, setRoomnumber] = useState<Room_NumberInterface []>([]);
     const [dentist_schedule, setDentistScehedule] = useState<DentistSceheduleInterface>({
+        Job_description: "",
         TimeWork: new Date(),
         TimeEnd: new Date(),
     });
 
+    const [message, setAlertMessage] = React.useState("");
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
 
@@ -81,6 +86,13 @@ function DentistScheduleCreate() {
             setDentists(res);
         }
     };
+    const getRoom_Number = async () => {
+        let res = await GetRoom_Number();
+        dentist_schedule.Room_NumberID = res.ID;
+        if (res) {
+            setRoomnumber(res);
+        }
+    };
   
     const getWorkingdays = async () => {
         let res = await GetWorkingdays();
@@ -93,6 +105,7 @@ function DentistScheduleCreate() {
         getResponsitys();
         getWorkingdays();
         getDentists();
+        getRoom_Number();
     }, []);
     
 const Item = styled(Paper)(({ theme }) => ({
@@ -115,17 +128,29 @@ async function submit() {
         DentistID: convertType(dentist_schedule.DentistID),
         ResponsityID: convertType(dentist_schedule.ResponsityID),
         WorkingdayID: convertType(dentist_schedule.WorkingdayID),
+        Room_NumberID: convertType(dentist_schedule.Room_NumberID),
+        Job_description: dentist_schedule.Job_description,
         TimeWork: dentist_schedule.TimeWork,
         TimeEnd: dentist_schedule.TimeEnd,
     };
     console.log(data);
-    let res = await DentistScehedules(data);
-    if (res) {
+    let res:any = await DentistScehedules(data);
+    if (res.status) {
+        setAlertMessage("บันทึกข้อมูลสำเร็จ");
         setSuccess(true);
     } else {
+        setAlertMessage(res.message);
         setError(true);
     }
 }
+const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name as keyof typeof dentist_schedule;
+    setDentistScehedule({
+        ...dentist_schedule,
+        [name]: event.target.value,
+    });
+
+};
 
 
 
@@ -141,13 +166,13 @@ async function submit() {
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
                 <Alert onClose={handleClose} severity="success">
-                บันทึกข้อมูลสำเร็จ
+                 {message}
                 </Alert>
                 </Snackbar>
                 <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}>
                 <Alert onClose={handleClose} severity="error">
-                บันทึกข้อมูลไม่สำเร็จ
+                {message}
                 </Alert>
                 </Snackbar>
                 {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', width: '190vh' }} /> */}
@@ -240,10 +265,38 @@ async function submit() {
                             </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">ห้องตรวจ</InputLabel>
+                                <Select
+                                    native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={dentist_schedule.Room_NumberID + ""}
+                                    onChange={handleChange}
+                                    label= "ห้องตรวจ"
+                                    inputProps={{
+                                        name: "Room_NumberID",
+                                    }}
+                                >
+                                  <option aria-label="None" value="">
+                                    กรุณาเลือกห้องตรวจ
+                                  </option>
+                                    {room_number.map((item: Room_NumberInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.ID}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        
+                        <TextField fullWidth id="Job_description" type="string" label="Job description" variant="outlined"
+                                onChange={handleChangeTextField} 
+                                defaultValue="กรุณากรอกรายละเอียดงาน"
+                                inputProps={{
+                                    name: "Job_description",
+                                }}
+                            />
                         </Grid>
                         <Grid xs={3} sx={{ padding: 1.3 }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
