@@ -55,10 +55,10 @@ type Sub_district struct {
 
 type Employee struct {
 	gorm.Model
-	Employee_number string `gorm:"uniqueIndex"`
+	Employee_number string `gorm:"uniqueIndex" valid:"matches(^[E]\\d{7}$)"`
 	FirstName       string
 	LastName        string
-	Personal_id     string `gorm:"uniqueIndex"`
+	Personal_id     string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)"`
 	Password        string `gorm:"uniqueIndex"`
 	Phone           string
 	House_no        string
@@ -216,7 +216,7 @@ type Patien_schedule struct {
 	ReasonID *uint
 	Reason   Reason `gorm:"references:id" valid:"-"`
 
-	Patien_Number string	`valid:"matches(\\d{10}$)~Number must be Interger and 10 number"`
+	Patien_Number string `valid:"matches(\\d{10}$)~Number must be Interger and 10 number"`
 
 	Type_of_treatmentID *uint
 	Type_of_treatment   Type_of_treatment `gorm:"references:id" valid:"-"`

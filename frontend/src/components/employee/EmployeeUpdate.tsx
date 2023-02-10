@@ -69,6 +69,7 @@ function EmployeeCreate() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [message, setAlertMessage] = React.useState("");
 
   const { id } = useParams();
   useEffect(() => {
@@ -261,37 +262,48 @@ function EmployeeCreate() {
         body: JSON.stringify(data),
     };
 
-    fetch(`${apiUrl}/employees/${id}`, requestOptions)
+    let res = await fetch(`${apiUrl}/employees/${id}`, requestOptions)
         .then((response) => response.json())
         .then((res) => {
-            if (res.data) {
-                setSuccess(true);
-            } else {
-                setError(true);
-            }
+          if (res.data) {
+            return { status: true, message: res.data };
+          } else {
+            return { status: false, message: res.error };
+          }
         });
+        if (res.status) {
+          setAlertMessage("บันทึกข้อมูลสำเร็จ");
+          setSuccess(true);
+        } else {
+          setAlertMessage(res.message);
+          setError(true);
+        }
+
+        
   }
 
   return (
     <Container maxWidth="md">
       <Snackbar
+        id="success"
         open={success}
         autoHideDuration={3000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="success">
-            อัปเดตข้อมูลสำเร็จ
+            {message}
         </Alert>
       </Snackbar>
       <Snackbar
+        id="error"
         open={error}
         autoHideDuration={6000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="error">
-            อัปเดตข้อมูลไม่สำเร็จ
+            {message}
         </Alert>
       </Snackbar>
       <Paper>
@@ -436,7 +448,7 @@ function EmployeeCreate() {
                 }}
               >
                 <option aria-label="None" value="0">
-                  กรุณาเลือกจังหวัด
+                    กรุณาเลือกจังหวัด
                 </option>
                 {province.map((item: ProvinceInterface) => (
                   <option value={item.ID} key={item.ID}>
