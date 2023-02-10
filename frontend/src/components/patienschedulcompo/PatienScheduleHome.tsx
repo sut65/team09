@@ -54,7 +54,7 @@ function PatienScheduleHome() {
     { field: "Patien_Number", headerName: "เบอร์โทรผู้ป่วย", width: 150 },
     { field: "Type_of_treatment", headerName: "ประเภทการรักษา", width: 200 ,valueFormatter: (params) => params.value.Type_of_treatment_name,},
 
-    { field: "Date_time", headerName: "วันที่และเวลา", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
+    { field: "Date_time", headerName: "วันที่และเวลา", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm ') },
     {
       field: "action", headerName: "Action",width: 250  , sortable: false, renderCell: ({ row }) =>
       <ButtonGroup>

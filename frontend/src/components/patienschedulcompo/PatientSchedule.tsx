@@ -357,8 +357,7 @@ const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
                         <Grid xs={2.75} sx={{ padding: 1.3 }}>
                         <Button sx={{ paddingY: 1.7, }} fullWidth variant="outlined" size="large" onClick={submit}>
                                 บันทึกข้อมูล
-                            </Button>
-                        
+                            </Button>              
                         </Grid>
                         <Grid xs={3}>
                         
