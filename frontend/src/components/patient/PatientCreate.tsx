@@ -52,8 +52,8 @@ function PaitentCreate() {
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
   const [patient, setPatient] = useState<Partial<PatientInterface>>({});
-  const [provinceId, setProvinceId] = useState('1');
-  const [districtId, setDistrictId] = useState('1');
+  const [provinceId, setProvinceId] = useState('0');
+  const [districtId, setDistrictId] = useState('0');
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);

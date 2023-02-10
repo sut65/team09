@@ -45,6 +45,7 @@ import MedicalDeviceList from "./components/MedicalDevice/MedicalDeviceList";
 
 import PatientList from "./components/patient/PatientList";
 import PatientCreate from "./components/patient/PatientCreate";
+import PatientUpdate from "./components/patient/PatientUpdate";
 
 import Dentists from "./components/dentist/DentistsList"; 
 import DentistCreate from "./components/dentist/DentistCreate";
@@ -260,6 +261,7 @@ function App() {
                 {/* <Route path="/" element={<Home />} /> */}
                 <Route path="/patients" element={<PatientList />} />
                 <Route path="/patients/create" element={<PatientCreate />} />
+                <Route path="/patients_update/:id" element={<PatientUpdate />} />
                 <Route path="/employees" element={<EmployeeList />} />
                 <Route path="/employee/create" element={<EmployeeCreate />} />
                 <Route path="/employee_update/:id" element={<EmployeeUpdate />} />
