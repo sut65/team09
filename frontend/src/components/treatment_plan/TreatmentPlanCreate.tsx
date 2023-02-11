@@ -30,7 +30,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function TreatmentCreate() {
+function TreatmentPlanCreate() {
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [message, setAlertMessage] = React.useState("");
@@ -64,7 +64,7 @@ function TreatmentCreate() {
     const handleInputChange = (
         event: React.ChangeEvent<{ id?: string; value: any }>
     ) => {
-        const id = event.target.id as keyof typeof TreatmentCreate;
+        const id = event.target.id as keyof typeof TreatmentPlanCreate;
         const { value } = event.target;
         setTreatmentPlan({ ...treatment_plan, [id]: value });
     };
@@ -212,7 +212,8 @@ function TreatmentCreate() {
                 id="error"
                 open={error}
                 autoHideDuration={6000}
-                onClose={handleClose}>
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
                         {message}
@@ -415,4 +416,4 @@ function TreatmentCreate() {
     );
 }
 
-export default TreatmentCreate;
+export default TreatmentPlanCreate;

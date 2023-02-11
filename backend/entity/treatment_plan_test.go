@@ -12,7 +12,7 @@ import (
 func TestTreatmentPlan(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	t.Run("Check Order of treatment cannot be negative", func(t *testing.T) {
+	t.Run("Check Order of treatment cannot be negative or too much", func(t *testing.T) {
 		treatmentplan := Treatment_plan{
 			Order_of_treatment: -1,
 			Number_of_treatment: 1,
@@ -25,10 +25,10 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Order of treatment cannot be negative"))
+		g.Expect(err.Error()).To(Equal("Order of treatment cannot be negative or too much"))
 	})
 
-	t.Run("Check Number of treatment cannot be negative", func(t *testing.T) {
+	t.Run("Check Number of treatment cannot be negative or too much", func(t *testing.T) {
 		treatmentplan := Treatment_plan{
 			Order_of_treatment: 1,
 			Number_of_treatment: -1,
@@ -41,7 +41,7 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Number of treatment cannot be negative"))
+		g.Expect(err.Error()).To(Equal("Number of treatment cannot be negative or too much"))
 	})
 
 	t.Run("Check Treatment detail must consist of 6 or more characters", func(t *testing.T) {
