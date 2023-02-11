@@ -64,6 +64,9 @@ func SetupDatabase() {
 		&Room_Number{},
 		&Category{},
 		&Room_Detail{},
+		//Payment
+		&Payment_status{},
+		&Payment{},
 	)
 
 	db = database
@@ -1250,5 +1253,48 @@ func SetupDatabase() {
 		{Method: "ปวดใจว่าปวดแล้วปวดฟันดันซ้ำเติม"},
 	}
 	db.CreateInBatches(re, 4)
+
+	///////////////ข้อมูลใน entity Payment_status///////////
+	Payment_status1 := Payment_status{
+		Payment_status_name: "ชำระแล้ว",
+	}
+	db.Model(&Payment_status{}).Create(&Payment_status1)
+
+	Payment_status2 := Payment_status{
+		Payment_status_name: "ยังไม่ได้ชำระ",
+	}
+	db.Model(&Payment_status{}).Create(&Payment_status2)
+
+	///////////////ข้อมูลใน entity Prescription///////////
+	DateTimePaymentA := time.Date(2022, time.September, 1, 13, 23, 44, 0, time.Local)
+	DateTimePaymentB := time.Date(2022, time.September, 6, 13, 55, 26, 0, time.Local)
+	DateTimePaymentC := time.Date(2022, time.September, 8, 25, 22, 33, 0, time.Local)
+
+	Payment1 := Payment{
+		Total_price:          1500,
+		Payment_status:       Payment_status1,
+		Patient:              patient1,
+		Employee:             em2,
+		DateTimePayment: DateTimePaymentA,
+	}
+	db.Model(&Payment{}).Create(&Payment1)
+
+	Payment2 := Payment{
+		Total_price:          2500,
+		Payment_status:       Payment_status1,
+		Patient:              patient2,
+		Employee:             em1,
+		DateTimePayment: DateTimePaymentB,
+	}
+	db.Model(&Payment{}).Create(&Payment2)
+
+	Payment3 := Payment{
+		Total_price:          500,
+		Payment_status:       Payment_status2,
+		Patient:              patient1,
+		Employee:             em2,
+		DateTimePayment: DateTimePaymentC,
+	}
+	db.Model(&Payment{}).Create(&Payment3)
 
 }
