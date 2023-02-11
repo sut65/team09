@@ -47,6 +47,10 @@ function TreatmentCreate() {
     const [order_of_treatment, setOrder_of_treatment] = React.useState(0);
     const [treatment_detail, setTreatment_detail] = React.useState<string>("");
     const [treatment_explain, setTreatment_explain] = React.useState<string>("");
+    const [dentistname, setDentistName] = React.useState("");
+    const [patientname, setPatientName] = React.useState("");
+    const [typeoftreatmentname, setTypeOfTreatmentName] = React.useState("");
+    const [typeofnumberoftreatmentname, setTypeOfNumberOfTreatmentName] = React.useState("");
 
 
 
@@ -67,40 +71,52 @@ function TreatmentCreate() {
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {
-                    console.log("Order_of_treatment")
-
-                    console.log(res.data.Order_of_treatment)
-                    console.log("Order_of_treatment")
                     setOrder_of_treatment(res.data.Order_of_treatment.toString());
-                    
-                    
-                    console.log("res.data")
-                    const dataString = JSON.stringify(res.data);
-                    console.log(dataString);
-                    console.log("res.data")
-
-                    console.log("Order_of_treatment")
-                    console.log(res.data.Order_of_treatment)
-                    console.log("Order_of_treatment")
                     setOrder_of_treatment(res.data.Order_of_treatment.toString());
-
-                    console.log("Number_of_treatment")
-                    console.log(res.data.Number_of_treatment)
-                    console.log("Number_of_treatment")
                     setNumber_of_treatment(res.data.Number_of_treatment.toString());
-
-                    console.log("Treatment_detail")
-                    console.log(res.data.Treatment_detail)
-                    console.log("Treatment_detail")
                     setTreatment_detail(res.data.Treatment_detail.toString());
-
-                    console.log("Treatment_explain")
-                    console.log(res.data.Treatment_explain)
-                    console.log("Treatment_explain")
                     setTreatment_explain(res.data.Treatment_explain.toString());
-
-
                 }
+
+                fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setDentistName(res.data.FirstName)
+                            treatment_plan.DentistID = res.data.ID
+                        }
+                    }
+                    )
+
+                fetch(`http://localhost:8080/patients/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setPatientName(res.data.FirstName)
+                            treatment_plan.PatientID = res.data.ID
+                        }
+                    }
+                    )
+
+                fetch(`http://localhost:8080/type_of_treatments/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setTypeOfTreatmentName(res.data.Type_of_treatment_name)
+                            treatment_plan.Type_Of_TreatmentID = res.data.ID
+                        }
+                    }
+                    )
+
+                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setTypeOfNumberOfTreatmentName(res.data.Type_of_number_of_treatment_name)
+                            treatment_plan.Type_Of_Number_Of_TreatmentID = res.data.ID
+                        }
+                    }
+                    )
             }
             )
     }, [id])
@@ -296,37 +312,53 @@ function TreatmentCreate() {
                 <Divider />
                 <Grid container spacing={3} sx={{ padding: 2 }}>
 
-                    <Grid item xs={6}>
+                <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ทันตเเพทย์</p>
-                            <Autocomplete
-                                disablePortal
-                                id="DentistID"
-                                getOptionLabel={(item: DentistInterface) => `${item.FirstName}`}
-                                options={dentist}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment_plan.DentistID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกทันตเเพทย์" />}
-                            />
+                            <p className="good-font">ทันตแพทย์</p>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment_plan.DentistID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "DentistID",
+                                }}
+                            >
+                                <option aria-label="None" value={dentistname}>
+                                    {dentistname}
+                                </option>
+                                {dentist.map((item: DentistInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.FirstName}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ผู้ป่วย</p>
-                            <Autocomplete
-                                disablePortal
-                                id="PatientID"
-                                getOptionLabel={(item: PatientInterface) => `${item.FirstName}`}
-                                options={patient}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment_plan.PatientID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกผู้ป่วย" />}
-                            />
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment_plan.PatientID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "PatientID",
+                                }}
+                            >
+                                <option aria-label="None" value={patientname}>
+                                    {patientname}
+                                </option>
+                                {patient.map((item: PatientInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.FirstName}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
@@ -351,17 +383,25 @@ function TreatmentCreate() {
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ประเภทการรักษา</p>
-                            <Autocomplete
-                                disablePortal
-                                id="Type_Of_TreatmentID"
-                                getOptionLabel={(item: Type_of_treatments_Interface) => `${item.Type_of_treatment_name}`}
-                                options={type_of_treatments}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment_plan.Type_Of_TreatmentID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกประเภทการรักษา" />}
-                            />
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment_plan.Type_Of_TreatmentID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "Type_of_treatmentsID",
+                                }}
+                            >
+                                <option aria-label="None" value={typeoftreatmentname}>
+                                    {typeoftreatmentname}
+                                </option>
+                                {type_of_treatments.map((item: Type_of_treatments_Interface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Type_of_treatment_name}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
@@ -386,17 +426,25 @@ function TreatmentCreate() {
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ซี่ ด้าน หรือ ฟิล์ม</p>
-                            <Autocomplete
-                                disablePortal
-                                id="Type_Of_Number_Of_TreatmentID"
-                                getOptionLabel={(item: Type_of_number_of_treatment_Interface) => `${item.Type_of_number_of_treatment_name}`}
-                                options={type_of_number_of_treatments}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment_plan.Type_Of_Number_Of_TreatmentID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกซี่ ฟัน หรือ ฟิล์ม" />}
-                            />
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment_plan.Type_Of_Number_Of_TreatmentID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "Type_Of_Number_Of_TreatmentID",
+                                }}
+                            >
+                                <option aria-label="None" value={typeofnumberoftreatmentname}>
+                                    {typeofnumberoftreatmentname}
+                                </option>
+                                {type_of_number_of_treatments.map((item: Type_of_number_of_treatment_Interface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Type_of_number_of_treatment_name}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
