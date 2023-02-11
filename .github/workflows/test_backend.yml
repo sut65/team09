@@ -8,7 +8,7 @@ on:
       
 jobs:
   test_backend:
-  run-on: ubantu-lastest
+  runs-on: ubuntu-latest
   step:
   - name: Checkout
     uses: actions/checkout@v3
