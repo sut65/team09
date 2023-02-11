@@ -70,6 +70,7 @@ function PaitentCreate() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false)
+  const [message, setAlertMessage] = React.useState("");
 
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
@@ -287,37 +288,46 @@ function PaitentCreate() {
         body: JSON.stringify(data),
     };
 
-    fetch(`${apiUrl}/patients/${id}`, requestOptions)
+    let res = await fetch(`${apiUrl}/patients/${id}`, requestOptions)
         .then((response) => response.json())
         .then((res) => {
-            if (res.data) {
-                setSuccess(true);
-            } else {
-                setError(true);
-            }
+          if (res.data) {
+            return { status: true, message: res.data };
+          } else {
+            return { status: false, message: res.error };
+          }
         });
+        if (res.status) {
+          setAlertMessage("อัพเดตข้อมูลสำเร็จ");
+          setSuccess(true);
+        } else {
+          setAlertMessage(res.message);
+          setError(true);
+        }
   }
 
   return (
     <Container maxWidth="md">
       <Snackbar
+        id="success"
         open={success}
         autoHideDuration={3000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="success">
-            อัปเดตข้อมูลสำเร็จ
+            {message}
         </Alert>
       </Snackbar>
       <Snackbar
+        id="error"  
         open={error}
         autoHideDuration={6000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="error">
-            อัปเดตข้อมูลไม่สำเร็จ
+            {message}
         </Alert>
       </Snackbar>
       <Paper>
@@ -334,7 +344,7 @@ function PaitentCreate() {
               color="primary"
               gutterBottom
             >
-              สร้างข้อมูลผู้ป่วย
+              แก้ไขข้อมูลู้ป่วย ID : {id}
             </Typography>
           </Box>
         </Box>

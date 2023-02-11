@@ -16,11 +16,11 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-import { TreatmentsPlanInterface } from "../../models/ITreatment_plan"; 
-import { Type_of_treatments_Interface } from "../../models/IType_of_treatment"; 
-import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment"; 
-import { DentistInterface } from "../../models/IDentist"; 
-import { PatientInterface } from "../../models/IPatient"; 
+import { TreatmentsPlanInterface } from "../../models/ITreatment_plan";
+import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
+import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
+import { DentistInterface } from "../../models/IDentist";
+import { PatientInterface } from "../../models/IPatient";
 import { DatePicker } from "@mui/x-date-pickers";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -33,6 +33,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 function TreatmentCreate() {
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
+    const [message, setAlertMessage] = React.useState("");
     const [errorMessage, setErrorMessage] = React.useState("");
     const [dentist, setADentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
@@ -169,22 +170,33 @@ function TreatmentCreate() {
             body: JSON.stringify(data),
         };
 
-        fetch(`${apiUrl}/treatment_plans`, requestOptions)
+        let res = await fetch(`${apiUrl}/treatment_plans`, requestOptions)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {
                     setSuccess(true);
                     setErrorMessage("")
+                    return { status: true, message: res.data };
                 } else {
                     setError(true);
                     setErrorMessage(res.error)
+                    return { status: false, message: res.error };
                 }
             });
+
+        if (res.status) {
+            setAlertMessage("บันทึกข้อมูลสำเร็จ");
+            setSuccess(true);
+        } else {
+            setAlertMessage(res.message);
+            setError(true);
+        }
     }
 
     return (
         <Container maxWidth="md">
             <Snackbar
+                id="success"
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
@@ -192,14 +204,18 @@ function TreatmentCreate() {
             >
                 <Alert onClose={handleClose} severity="success">
                     <div className="good-font">
-                        บันทึกข้อมูลสำเร็จ
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
-            <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar
+                id="error"
+                open={error}
+                autoHideDuration={6000}
+                onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
-                        บันทึกข้อมูลไม่สำเร็จ
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
