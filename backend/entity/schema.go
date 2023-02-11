@@ -99,12 +99,12 @@ type Symptom struct {
 
 type Patient struct {
 	gorm.Model
-	FirstName          string
-	LastName           string
-	Personal_id        string `gorm:"uniqueIndex"`
-	Old                uint8
-	Weight             uint8
-	Height             uint8
+	FirstName          string `valid:"required~FirstName can't be blank"`
+	LastName           string `valid:"required~LastName can't be blank"`
+	Personal_id        string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)"`
+	Old                int    `valid:"range(0|150)~Old cannot be negative"`
+	Weight             int    `valid:"range(0|300)~Weight cannot be negative"`
+	Height             int    `valid:"range(0|300)~Height cannot be negative"`
 	Underlying_disease string
 	Drug_alergy        string
 	House_no           string
@@ -245,8 +245,8 @@ type Dentist struct {
 	LastName     string `valid:"required~LastName cannot be blank"`
 	Personal_id  string `gorm:"uniqueIndex"  valid:"required~Personal_id cannot be blank"`
 	Email        string `gorm:"uniqueIndex"  valid:"email~รูปแบบ Email ไม่ถูกต้อง,required~รูปแบบ Email ไม่ถูกต้อง"`
-	Password     string	`valid:"required~Password cannot be blank"`
-	Age          int	`valid:"range(10|100)~Age is not in range 10 to 100"`
+	Password     string `valid:"required~Password cannot be blank"`
+	Age          int    `valid:"range(10|100)~Age is not in range 10 to 100"`
 	Phone_Number string `gorm:"uniqueIndex"`
 
 	//GenderID ทำหน้าที่เป็น FK
@@ -341,23 +341,23 @@ type Treatment struct {
 	gorm.Model
 	//DentistID 	ทำหน้าที่เป็น FK
 	DentistID *uint
-	Dentist Dentist `gorm:"references:id" valid:"-"`
+	Dentist   Dentist `gorm:"references:id" valid:"-"`
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID              *uint
 	Patient                Patient `gorm:"references:id" valid:"-"`
-	Number_of_cavities int `valid:"range(0|50)~Number of cavities cannot be negative"`
-	Number_of_swollen_gums int `valid:"range(0|50)~Number of swollen gums cannot be negative"`
-	Other_teeth_problems   string `valid:"required~Other teeth problems cannot be blank"`
+	Number_of_cavities     int     `valid:"range(0|50)~Number of cavities cannot be negative"`
+	Number_of_swollen_gums int     `valid:"range(0|50)~Number of swollen gums cannot be negative"`
+	Other_teeth_problems   string  `valid:"required~Other teeth problems cannot be blank"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Number_of_treatment int `valid:"range(0|50)~Number of treatment cannot be negative"`
+	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment `gorm:"references:id" valid:"-"`
-	Treatment_detail              string `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"`
-	Treatment_time                time.Time `valid:"past~Treatment time must be a past date"`
-	Treatment_code                string `valid:"matches(^[T]\\d{7}$), required~Treatment code cannot be blank"`
+	Treatment_detail              string                      `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"`
+	Treatment_time                time.Time                   `valid:"past~Treatment time must be a past date"`
+	Treatment_code                string                      `valid:"matches(^[T]\\d{7}$), required~Treatment code cannot be blank"`
 }
 
 // ------ระบบจัดแผนการรักษา------//
@@ -369,16 +369,16 @@ type Treatment_plan struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID          *uint
 	Patient            Patient `gorm:"references:id" valid:"-"`
-	Order_of_treatment int	`valid:"range(0|50)~Order of treatment cannot be negative"`
+	Order_of_treatment int     `valid:"range(0|50)~Order of treatment cannot be negative"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Number_of_treatment int	`valid:"range(0|50)~Number of treatment cannot be negative"`
+	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment `gorm:"references:id" valid:"-"`
-	Treatment_detail              string `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"` 
-	Treatment_explain             string `valid:"required~Treatment explain cannot be blank, stringlength(6|100)~Treatment explain must consist of 6 or more characters"`
+	Treatment_detail              string                      `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"`
+	Treatment_explain             string                      `valid:"required~Treatment explain cannot be blank, stringlength(6|100)~Treatment explain must consist of 6 or more characters"`
 	Treatment_time                time.Time
 }
 
@@ -432,10 +432,10 @@ type Dentist_schedule struct {
 	Room_NumberID *uint
 	Room_Number   Room_Number `gorm:"references:id" valid:"-"`
 
-	Job_description  string `valid:"required~Job description cannot be blank"`
+	Job_description string `valid:"required~Job description cannot be blank"`
 
 	TimeWork time.Time `valid:"past~TimeWork must be a past date"`
-	TimeEnd  time.Time  `valid:"future~TimeEnd must be a future date"`
+	TimeEnd  time.Time `valid:"future~TimeEnd must be a future date"`
 }
 
 // ระบบจัดการห้อง
@@ -450,13 +450,12 @@ type Room_Number struct {
 	gorm.Model
 	Room_number string
 
-	Room_Details []Room_Detail `gorm:"foreignKey:Room_NumberID"`
+	Room_Details     []Room_Detail      `gorm:"foreignKey:Room_NumberID"`
 	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:Room_NumberID"`
 }
 
 type Room_Detail struct {
 	gorm.Model
-
 
 	//CategoryID ทำหน้าที่เป็น FK
 	CategoryID *uint
