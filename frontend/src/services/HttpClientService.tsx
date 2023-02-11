@@ -824,8 +824,10 @@ async function GetReasons() {
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
+          // console.log(res.data)
           return res.data;
         } else {
+          // console.log(res.data)
           return false;
         }
       });
@@ -844,6 +846,30 @@ async function GetReasons() {
     };
   
     let res = await fetch(`${apiUrl}/dentists`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => { 
+        if (res.data) {
+          return { status: true, message: res.data };
+        } else {
+          return { status: false, message: res.error };
+        }
+      });
+  
+    return res;
+  }
+
+
+  async function UpdateDentists(data: DentistInterface) {
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/dentists/:id`, requestOptions)
       .then((response) => response.json())
       .then((res) => { 
         if (res.data) {
@@ -916,14 +942,16 @@ async function GetReasons() {
       .then((response) => response.json())
       .then((res) => { 
         if (res.data) {
-          return res.data;
+          return { status: true, message: res.data };
         } else {
-          return false;
+          return { status: false, message: res.error };
         }
       });
   
     return res;
   }
+
+
 
   async function GetCategory() {
     const requestOptions = {
@@ -1190,6 +1218,7 @@ async function GetReasons() {
     GetUniversitys,
     GetDentists,
     CreateDentists,
+    UpdateDentists,
 
     GetRoom_Number,
     GetCategory,

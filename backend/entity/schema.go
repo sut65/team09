@@ -460,6 +460,7 @@ type Room_Number struct {
 
 type Room_Detail struct {
 	gorm.Model
+	Note string	`valid:"stringlength(1|50)~ห้ามพิมพ์เกิน 50 ตัวอักษร, required~หมายเหตุห้ามเป็นช่องว่าง"`
 
 	//CategoryID ทำหน้าที่เป็น FK
 	CategoryID *uint
@@ -471,7 +472,7 @@ type Room_Detail struct {
 
 	//MedicialDeviceID ทำหน้าที่เป็น FK
 	MedicalDeviceID *uint
-	MedicalDevice   MedicalDevice `gorm:"references:id"`
+	MedicalDevice   MedicalDevice `gorm:"references:id"  valid:"-" `
 }
 
 func init() {

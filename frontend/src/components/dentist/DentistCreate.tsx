@@ -46,6 +46,7 @@ function DentistCreate() {
   const [specialized, setSpecializeds] = useState<SpecializedInterface[]>([]);
   const [university, setUniversitys] = useState<UniversityInterface[]>([]);
   const [role, setRoles] = useState<RoleInterface[]>([]);
+  const [roleID, setRoleID] = useState(3);
   const [province, setProvinces] = React.useState<ProvinceInterface[]>([]);
   const [dentist, setDentists] = useState<Partial<DentistInterface>>({});
 
@@ -166,6 +167,7 @@ function DentistCreate() {
   return (
     <Container maxWidth="md">
       <Snackbar
+        id="success"
         open={success}
         autoHideDuration={3000}
         onClose={handleClose}
@@ -176,6 +178,7 @@ function DentistCreate() {
         </Alert>
       </Snackbar>
       <Snackbar
+        id="error"
         open={error}
         autoHideDuration={6000}
         onClose={handleClose}
@@ -242,7 +245,7 @@ function DentistCreate() {
               <TextField
                 id="Age"
                 variant="outlined"
-                type="string"
+                type="number"
                 size="medium"
                 placeholder="กรุณากรอกอายุ"
                 InputProps={{ inputProps: { min: 1 , max: 100}}}

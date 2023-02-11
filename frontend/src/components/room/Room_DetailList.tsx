@@ -23,7 +23,8 @@ function Room_Details () {
       { field: "ID", headerName: "ลำดับ", width: 50 },
       { field: "Room_Number", headerName: "หมายเลขห้อง", width: 220,  valueFormatter: (params) => params.value.Room_number,},
       { field: "Category", headerName: "ประเภทห้อง", width: 200 , valueFormatter: (params) => params.value.Category_Name,},  
-      { field: "MedicalDevice", headerName: "เครื่องมือ", width: 150 , valueFormatter: (params) => params.value.Device_Name,},    
+      { field: "MedicalDevice", headerName: "เครื่องมือ", width: 150 , valueFormatter: (params) => params.value.Device_Name,},
+      { field: "Note", headerName: "หมายเหตุ", width: 150 }    
          
          
     ];

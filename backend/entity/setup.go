@@ -1167,6 +1167,7 @@ func SetupDatabase() {
 
 	//room_detail
 	room_detail1 := Room_Detail{
+		Note:          "เพิ่มอุปกรณ์",
 		Room_Number:   room_number3,
 		Category:      category1,
 		MedicalDevice: MedicalDevice1,
@@ -1174,6 +1175,7 @@ func SetupDatabase() {
 	db.Model(&Room_Detail{}).Create(&room_detail1)
 
 	room_detail2 := Room_Detail{
+		Note:          "เพิ่มอุปกรณ์",
 		Room_Number:   room_number4,
 		Category:      category3,
 		MedicalDevice: MedicalDevice3,

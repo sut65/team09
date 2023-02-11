@@ -38,6 +38,8 @@ function Room_DetailCreate() {
     const [category, setCategory] = useState<CategoryInterface[]>([]);
     const [medicaldevice, setMedicaldevice] = useState<MedicalDeviceInterface[]>([]);
     const [room_detail, setRoom_detail] = useState<Partial<Room_DetailInterface>>({});
+
+    const [message, setAlertMessage] = React.useState("");
   
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -107,6 +109,8 @@ function Room_DetailCreate() {
 
       async function submit() {
         let data = {
+            Note: room_detail.Note,
+
             Room_numberID: convertType(room_detail.Room_NumberID),
             CategoryID: convertType(room_detail.CategoryID),
             MedicalDeviceID: convertType(room_detail.MedicalDeviceID),
@@ -116,9 +120,11 @@ function Room_DetailCreate() {
     
           let res = await CreateRoom_Details(data);
           console.log(res);
-          if (res) { 
+          if (res.status) { 
+            setAlertMessage("บันทึกข้อมูลสำเร็จ");
             setSuccess(true);
           } else {
+            setAlertMessage(res.message);
             setError(true);
           }
       }
@@ -133,7 +139,7 @@ function Room_DetailCreate() {
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
           >
             <Alert onClose={handleClose} severity="success">
-              บันทึกข้อมูลสำเร็จ
+             {message}
             </Alert>
           </Snackbar>
           <Snackbar
@@ -143,7 +149,7 @@ function Room_DetailCreate() {
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
           >
             <Alert onClose={handleClose} severity="error">
-              บันทึกข้อมูลไม่สำเร็จ
+             {message}
             </Alert>
           </Snackbar>
           <Paper  sx ={{ bgcolor :"#E3E3E3"}}>
@@ -236,6 +242,21 @@ function Room_DetailCreate() {
                       </option>
                     ))}
                   </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={6}>
+                <p>หมายเหตุ</p>
+                <FormControl fullWidth variant="outlined">
+                  <TextField
+                    id="Note"
+                    variant="outlined"
+                    type="string"
+                    size="medium"
+                    placeholder="หมายเหตุ"
+                    value={room_detail.Note || ""}
+                    onChange={handleInputChange}
+                  />
                 </FormControl>
               </Grid>
     

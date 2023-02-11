@@ -5,6 +5,8 @@ import { MedicalDeviceInterface } from "./IMedicaldevice";
 export interface Room_DetailInterface {
     ID?: number,
     
+    Note?:                  string,
+    
     Room_NumberID?:        	number,    
 	Room_number?:        	Room_NumberInterface,
     CategoryID?:            number,
