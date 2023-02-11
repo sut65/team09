@@ -121,6 +121,13 @@ func UpdateTreatment_plan(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(treatment_plans); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	
 	if tx := entity.DB().Where("id = ?", treatment_plans.Type_Of_TreatmentID).First(&type_of_treatments); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "type_of_treatments not found"})
 		return

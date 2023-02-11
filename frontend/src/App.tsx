@@ -50,6 +50,7 @@ import PatientUpdate from "./components/patient/PatientUpdate";
 
 import Dentists from "./components/dentist/DentistsList"; 
 import DentistCreate from "./components/dentist/DentistCreate";
+import DentistUpdate from "./components/dentist/DentistUpdate";
 
 import Room_Details from "./components/room/Room_DetailList";
 import Room_DetailCreate from "./components/room/Room_DetailCreate";
@@ -152,7 +153,7 @@ function App() {
   const [token, setToken] = useState<String>("");
   const [open, setOpen] = React.useState(true);
   //รับ Position
-  const [position, setPosition] = useState<String | null>("");
+  /* const [position, setPosition] = useState<String | null>("");  */
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -164,7 +165,7 @@ function App() {
 
     if (token) {
       setToken(token);
-      setPosition(position);
+      /*setPosition(position); */
     }
   }, []);
 
@@ -283,10 +284,13 @@ function App() {
                 <Route path="/treatmentplan_update/:id" element={<TreatmentPlanUpdate />} />         
                 <Route path="/dentists" element={<Dentists />} />
                 <Route path="/dentist/create" element={<DentistCreate />} />
+                <Route path="/dentist_update/:id" element={<DentistUpdate />} />
                 <Route path="/room_details" element={<Room_Details />} />
                 <Route path="/room_detail/create" element={<Room_DetailCreate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
                 <Route path="/payment" element={<PaymentList />} />
+                <Route path="/Repair/create" element={<CreateRepair />} />
+                <Route path="/Repair" element={<RepairList />} />
             </Routes>
             </Container>
         </Box>

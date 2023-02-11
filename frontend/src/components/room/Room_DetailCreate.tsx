@@ -74,6 +74,7 @@ function Room_DetailCreate() {
       const getRoom_Numbers = async () => {
         let res = await GetRoom_Number();
         if (res) {
+          console.log(res)
           setRoom_Number(res);
         }
       };
@@ -106,7 +107,7 @@ function Room_DetailCreate() {
 
       async function submit() {
         let data = {
-            Room_numberID: convertType(room_detail.Room_numberID),
+            Room_numberID: convertType(room_detail.Room_NumberID),
             CategoryID: convertType(room_detail.CategoryID),
             MedicalDeviceID: convertType(room_detail.MedicalDeviceID),
           };
@@ -172,10 +173,10 @@ function Room_DetailCreate() {
                   <p>หมายเลขห้อง</p>
                   <Select
                     native
-                    value={room_detail.Room_numberID + ""}
+                    value={room_detail.Room_NumberID + ""}
                     onChange={handleChange}
                     inputProps={{
-                      name: "Room_numberID",
+                      name: "Room_NumberID",
                     }}
                   >
                     <option aria-label="None" value="">
