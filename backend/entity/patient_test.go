@@ -119,7 +119,7 @@ func TestPatient(t *testing.T) {
 		personal := "12345678910" //ผิด
 		patient := Patient{
 			FirstName:          "Ayato",
-			LastName:           "",
+			LastName:           "gfhg",
 			Personal_id:        personal,
 			Old:                20,
 			Weight:             56,
