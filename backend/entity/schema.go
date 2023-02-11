@@ -193,8 +193,8 @@ type Repair struct {
 	DamageLevelID *uint
 	DamageLevel   DamageLevel
 
-	Repair_Note    string
-	Date_Of_Repair time.Time
+	Repair_Note    string    `valid:"required~Repair_Note cannot be blank, stringlength(0|50)~Repair_Note must not exceed 50 characters"`
+	Date_Of_Repair time.Time `valid:"current~Date_Of_Repair must be a current date"`
 }
 
 // ระบบนัดผู้ป่วย
