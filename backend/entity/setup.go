@@ -1120,6 +1120,38 @@ func SetupDatabase() {
 	}
 	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment3)
 
+	//---------------------------------- ตารางหลัก treatment ---------------------------------
+	treatment1 := Treatment{
+		Dentist: dentist1,
+		Patient: patient1,
+		Number_of_cavities: 1,
+		Number_of_swollen_gums: 1,
+		Other_teeth_problems: "มีหินปูน",
+		Type_Of_Treatment: Type_of_treatment8,
+		Number_of_treatment: 1,
+		Type_Of_Number_Of_Treatment: Type_of_number_of_treatment1,
+		Treatment_detail: "ถอนฟัน1ซี่ ซ้ายบน",
+		Treatment_time: time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
+		Treatment_code: "T8906834",
+		
+	}
+	db.Model(&Treatment{}).Create(&treatment1)
+
+	//---------------------------------- ตารางหลัก treatment plan ---------------------------------
+	treatment_plan1 := Treatment_plan{
+		Dentist: dentist1,
+		Patient: patient1,
+		Order_of_treatment: 1,
+		Type_Of_Treatment: Type_of_treatment8,
+		Number_of_treatment: 1,
+		Type_Of_Number_Of_Treatment: Type_of_number_of_treatment1,
+		Treatment_detail: "ถอนฟัน1ซี่ ซ้ายบน",
+		Treatment_explain: "ถอนฟันก่อนทำการจัดฟัน",
+		Treatment_time: time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
+		
+	}
+	db.Model(&Treatment_plan{}).Create(&treatment_plan1)
+
 	//------------------------------------------------------------------------
 	//---------------------------------Room-----------------------------------
 
