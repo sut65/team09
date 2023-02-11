@@ -289,6 +289,8 @@ function App() {
                 <Route path="/room_detail/create" element={<Room_DetailCreate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
                 <Route path="/payment" element={<PaymentList />} />
+                <Route path="/Repair/create" element={<CreateRepair />} />
+                <Route path="/Repair" element={<RepairList />} />
             </Routes>
             </Container>
         </Box>

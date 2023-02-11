@@ -47,6 +47,6 @@ func TestMedicalDevice(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("must be a current date"))
+		g.Expect(err.Error()).To(Equal("Record_Date must be a current date"))
 	})
 }

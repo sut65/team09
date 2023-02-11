@@ -113,24 +113,25 @@ func SetupDatabase() {
 
 	//province
 	province1 := Province{
-		Province_name: "Chiang Rai",
+		Province_name: "ปทุมธานี",
 	}
 	db.Model(&Province{}).Create(&province1)
 
 	province2 := Province{
-		Province_name: "Chiang Mai",
+		Province_name: "อ่างทอง",
 	}
 	db.Model(&Province{}).Create(&province2)
 
 	province3 := Province{
-		Province_name: "Bangkok",
+		Province_name: "สมุทรปราการ",
 	}
 	db.Model(&Province{}).Create(&province3)
 
 	//district
+	//ปทุม
 	district1 := District{
 		Model:         gorm.Model{},
-		District_name: "Chiang Saen",
+		District_name: "เมืองปทุมธานี",
 		ProvinceID:    new(uint),
 		Province:      province1,
 		Sub_districts: []Sub_district{},
@@ -139,57 +140,491 @@ func SetupDatabase() {
 
 	district2 := District{
 		Model:         gorm.Model{},
-		District_name: "Chiang Dao",
+		District_name: "คลองหลวง",
 		ProvinceID:    new(uint),
-		Province:      province2,
+		Province:      province1,
 		Sub_districts: []Sub_district{},
 	}
 	db.Model(&District{}).Create(&district2)
 
 	district3 := District{
 		Model:         gorm.Model{},
-		District_name: "Omkoi",
+		District_name: "ธัญบุรี",
 		ProvinceID:    new(uint),
-		Province:      province2,
+		Province:      province1,
 		Sub_districts: []Sub_district{},
 	}
 	db.Model(&District{}).Create(&district3)
 
-	//sub_district
+	district4 := District{
+		Model:         gorm.Model{},
+		District_name: "ลำลูกกา",
+		ProvinceID:    new(uint),
+		Province:      province1,
+	}
+	db.Model(&District{}).Create(&district4)
+
+	//อ่างทอง
+	district5 := District{
+		Model:         gorm.Model{},
+		District_name: "สามโก้",
+		ProvinceID:    new(uint),
+		Province:      province2,
+	}
+	db.Model(&District{}).Create(&district5)
+
+	district6 := District{
+		Model:         gorm.Model{},
+		District_name: "ป่าโมก",
+		ProvinceID:    new(uint),
+		Province:      province2,
+	}
+	db.Model(&District{}).Create(&district6)
+
+	//สมุทรปราการ
+	district7 := District{
+		Model:         gorm.Model{},
+		District_name: "บางพลี",
+		ProvinceID:    new(uint),
+		Province:      province3,
+	}
+	db.Model(&District{}).Create(&district7)
+
+	district8 := District{
+		Model:         gorm.Model{},
+		District_name: "พระสมุทรเจดีย์",
+		ProvinceID:    new(uint),
+		Province:      province3,
+	}
+	db.Model(&District{}).Create(&district8)
+
+	//sub_district --ปทุม
 	subdistrict1 := Sub_district{
 		Model:             gorm.Model{},
-		Sub_district_name: "Wiang",
+		Sub_district_name: "บางปรอก",
 		DistrictID:        new(uint),
 		District:          district1,
-		Employees:         []Employee{},
-		Patients:          []Patient{},
 	}
 	db.Model(&Sub_district{}).Create(&subdistrict1)
 
 	subdistrict2 := Sub_district{
 		Model:             gorm.Model{},
-		Sub_district_name: "Mon Chong",
+		Sub_district_name: "บ้านใหม่",
 		DistrictID:        new(uint),
-		District:          district2,
-		Employees:         []Employee{},
-		Patients:          []Patient{},
+		District:          district1,
 	}
 	db.Model(&Sub_district{}).Create(&subdistrict2)
 
 	subdistrict3 := Sub_district{
 		Model:             gorm.Model{},
-		Sub_district_name: "Yang Piang",
+		Sub_district_name: "บ้านกลาง",
 		DistrictID:        new(uint),
-		District:          district2,
-		Employees:         []Employee{},
-		Patients:          []Patient{},
+		District:          district1,
 	}
 	db.Model(&Sub_district{}).Create(&subdistrict3)
 
-	//employee
+	subdistrict4 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บ้านฉาง",
+		DistrictID:        new(uint),
+		District:          district1,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict4)
 
+	subdistrict5 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บ้านกระแชง",
+		DistrictID:        new(uint),
+		District:          district1,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict5)
+
+	subdistrict6 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางขะแยง",
+		DistrictID:        new(uint),
+		District:          district1,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict6)
+
+	subdistrict7 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางคูวัด",
+		DistrictID:        new(uint),
+		District:          district1,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict7)
+
+	//2
+	subdistrict8 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คลองหนึ่ง",
+		DistrictID:        new(uint),
+		District:          district2,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict8)
+
+	subdistrict9 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คลองสอง",
+		DistrictID:        new(uint),
+		District:          district2,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict9)
+
+	subdistrict10 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คลองสาม",
+		DistrictID:        new(uint),
+		District:          district2,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict10)
+
+	subdistrict11 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คลองสี่",
+		DistrictID:        new(uint),
+		District:          district2,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict11)
+
+	subdistrict12 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คลองห้า",
+		DistrictID:        new(uint),
+		District:          district2,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict12)
+
+	subdistrict13 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คลองหก",
+		DistrictID:        new(uint),
+		District:          district2,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict13)
+
+	subdistrict14 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คลองเจ็ด",
+		DistrictID:        new(uint),
+		District:          district2,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict14)
+
+	//3
+	subdistrict15 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ประชาธิปัตย์",
+		DistrictID:        new(uint),
+		District:          district3,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict15)
+
+	subdistrict16 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บึงยี่โถ",
+		DistrictID:        new(uint),
+		District:          district3,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict16)
+
+	subdistrict17 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "รังสิต",
+		DistrictID:        new(uint),
+		District:          district3,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict17)
+
+	subdistrict18 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ลำผักกูด",
+		DistrictID:        new(uint),
+		District:          district3,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict18)
+
+	subdistrict19 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บึงสนั่น",
+		DistrictID:        new(uint),
+		District:          district3,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict19)
+
+	subdistrict20 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บึงน้ำรักษ์",
+		DistrictID:        new(uint),
+		District:          district3,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict20)
+
+	//4
+	subdistrict21 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "คูคต",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict21)
+
+	subdistrict22 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ลาดสวาย",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict22)
+
+	subdistrict23 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บึงคำพร้อย",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict23)
+
+	subdistrict24 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ลำลูกกา",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict24)
+
+	subdistrict25 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บึงทองหลาง",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict25)
+
+	subdistrict26 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ลำไทร",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict26)
+
+	subdistrict27 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บึงคอไห",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict27)
+
+	subdistrict28 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "พืชอุดม",
+		DistrictID:        new(uint),
+		District:          district4,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict28)
+
+	// --อ่างทอง 5
+	subdistrict29 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "สามโก้",
+		DistrictID:        new(uint),
+		District:          district5,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict29)
+
+	subdistrict30 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ราษฎรพัฒนา",
+		DistrictID:        new(uint),
+		District:          district5,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict30)
+
+	subdistrict31 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "อบทม",
+		DistrictID:        new(uint),
+		District:          district5,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict31)
+
+	subdistrict32 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "โพธิ์ม่วงพันธ์",
+		DistrictID:        new(uint),
+		District:          district5,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict32)
+
+	subdistrict33 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "มงคลธรรมนิมิต",
+		DistrictID:        new(uint),
+		District:          district5,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict33)
+
+	//6
+	subdistrict34 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางปลากด",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict34)
+
+	subdistrict35 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ป่าโมก",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict35)
+
+	subdistrict36 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "สายทอง",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict36)
+
+	subdistrict37 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "โรงช้าง",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict37)
+
+	subdistrict38 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางเสด็จ",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict38)
+
+	subdistrict39 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "นรสิงห์",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict39)
+
+	subdistrict40 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "เอกราช",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict40)
+
+	subdistrict41 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "โผงเผง",
+		DistrictID:        new(uint),
+		District:          district6,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict41)
+
+	//7
+	subdistrict42 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางพลีใหญ่",
+		DistrictID:        new(uint),
+		District:          district7,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict42)
+
+	subdistrict43 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางแก้ว",
+		DistrictID:        new(uint),
+		District:          district7,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict43)
+
+	subdistrict44 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางปลา",
+		DistrictID:        new(uint),
+		District:          district7,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict44)
+
+	subdistrict45 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บางโฉลง",
+		DistrictID:        new(uint),
+		District:          district7,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict45)
+
+	subdistrict46 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ราชาเทวะ",
+		DistrictID:        new(uint),
+		District:          district7,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict46)
+
+	subdistrict47 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "หนองปรือ",
+		DistrictID:        new(uint),
+		District:          district7,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict47)
+
+	//8
+	subdistrict48 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "นาเกลือ",
+		DistrictID:        new(uint),
+		District:          district8,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict48)
+
+	subdistrict49 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "บ้านคลองสวน",
+		DistrictID:        new(uint),
+		District:          district8,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict49)
+
+	subdistrict50 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "แหลมฟ้าผ่า",
+		DistrictID:        new(uint),
+		District:          district8,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict50)
+
+	subdistrict51 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ปากคลองบางปลากด",
+		DistrictID:        new(uint),
+		District:          district8,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict51)
+
+	subdistrict52 := Sub_district{
+		Model:             gorm.Model{},
+		Sub_district_name: "ในคลองบางปลากด",
+		DistrictID:        new(uint),
+		District:          district8,
+	}
+	db.Model(&Sub_district{}).Create(&subdistrict52)
+
+	//employee
 	em1 := Employee{
-		Employee_number: "B0000001",
+		Employee_number: "E0000001",
 		FirstName:       "Ayato",
 		LastName:        "Mitoma",
 		Personal_id:     "1163388945367",
@@ -197,9 +632,9 @@ func SetupDatabase() {
 		Phone:           "0986542781",
 		House_no:        "10/a",
 		Sub_districtID:  new(uint),
-		Sub_district:    subdistrict3,
+		Sub_district:    subdistrict2,
 		DistrictID:      new(uint),
-		District:        district2,
+		District:        district1,
 		ProvinceID:      new(uint),
 		Province:        province1,
 		GenderID:        new(uint),
@@ -210,7 +645,7 @@ func SetupDatabase() {
 	db.Model(&Employee{}).Create(&em1)
 
 	em2 := Employee{
-		Employee_number: "B0000002",
+		Employee_number: "E0000002",
 		FirstName:       "Kamiki",
 		LastName:        "Jisaru",
 		Personal_id:     "1290033526782",
@@ -218,9 +653,9 @@ func SetupDatabase() {
 		Phone:           "0890241627",
 		House_no:        "90",
 		Sub_districtID:  new(uint),
-		Sub_district:    subdistrict1,
+		Sub_district:    subdistrict33,
 		DistrictID:      new(uint),
-		District:        district3,
+		District:        district5,
 		ProvinceID:      new(uint),
 		Province:        province2,
 		GenderID:        new(uint),
@@ -258,11 +693,11 @@ func SetupDatabase() {
 		Drug_alergy:        "-",
 		House_no:           "112",
 		Sub_districtID:     new(uint),
-		Sub_district:       subdistrict1,
+		Sub_district:       subdistrict52,
 		DistrictID:         new(uint),
-		District:           district3,
+		District:           district8,
 		ProvinceID:         new(uint),
-		Province:           province2,
+		Province:           province3,
 		GenderID:           new(uint),
 		Gender:             gender2,
 		SymptomID:          new(uint),
@@ -284,11 +719,11 @@ func SetupDatabase() {
 		Drug_alergy:        "-",
 		House_no:           "56",
 		Sub_districtID:     new(uint),
-		Sub_district:       subdistrict1,
+		Sub_district:       subdistrict24,
 		DistrictID:         new(uint),
-		District:           district3,
+		District:           district4,
 		ProvinceID:         new(uint),
-		Province:           province2,
+		Province:           province1,
 		GenderID:           new(uint),
 		Gender:             gender1,
 		SymptomID:          new(uint),
@@ -783,4 +1218,3 @@ func SetupDatabase() {
 	db.CreateInBatches(re, 4)
 
 }
-

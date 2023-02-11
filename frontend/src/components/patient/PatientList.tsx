@@ -70,24 +70,14 @@ function Patient() {
             </Typography>
           </Box>
           <Box>
-          <Stack spacing={2} direction="row">
-            <Button
-                component={RouterLink}
-                to=""
-                variant="contained"
-                color="primary"
-                >
-                แก้ไขข้อมูล
-            </Button>
-            <Button
+          <Button
                 component={RouterLink}
                 to="/patients/create"
                 variant="contained"
                 color="success"
                 >
                 สร้างข้อมูล
-            </Button>
-         </Stack>
+          </Button>
           </Box>
         </Box>
         

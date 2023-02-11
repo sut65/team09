@@ -36,7 +36,7 @@ import {
     const [medicaldevice, setMedicalDevice] = useState<MedicalDeviceInterface[]>([]);
     // const [admin, setAdmin] = useState<Partial<AdminInterface>>({ Name: "" });
     const [success, setSuccess] = useState(false);
-    const [date] = useState<Date | null>(new Date());
+    const [date, setDate] = useState<Date | null>(new Date());
     const [error, setError] = useState(false);
     const [message, setAlertMessage] = React.useState("");
   
@@ -283,7 +283,7 @@ import {
               </Box>
     
               {/* Date */}
-              {/* <Box
+              <Box
                 sx={{
                   display: "flex",
                   flexDirection: "column",
@@ -300,7 +300,7 @@ import {
                         required
                         fullWidth
                         {...props} />}
-                      label="TimeStamp"
+                      label="Date_Of_Repair"
                       value={date}
                       onChange={(newValue) => {
                         setDate(newValue);
@@ -308,7 +308,7 @@ import {
                     />
                   </LocalizationProvider>
                 </Box>
-              </Box> */}
+              </Box>
     
               {/* Btn submit and back */}
               <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
