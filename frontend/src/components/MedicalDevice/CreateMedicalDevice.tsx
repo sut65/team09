@@ -316,7 +316,7 @@ function MedicalDevice() {
           </Box>
 
           {/* Date */}
-          {/* <Box
+          <Box
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -341,7 +341,7 @@ function MedicalDevice() {
                 />
               </LocalizationProvider>
             </Box>
-          </Box> */}
+          </Box>
 
           {/* Btn submit and back */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>

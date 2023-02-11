@@ -166,9 +166,9 @@ type MedicalDevice struct {
 	StatusID *uint
 	Status   Status
 
-	Device_Name string `json:"Device_Name" valid:"required~Device_Name cannot be blank"`
-	Amount      int    `json:"amount" valid:"range(0|1000)"`
-	Record_Date time.Time
+	Device_Name string    `valid:"required~Device_Name cannot be blank"`
+	Amount      int       `valid:"range(1|1000)~Amount is invalid"`
+	Record_Date time.Time `valid:"current~Record_Date must be a current date"`
 
 	Repairs      []Repair      `gorm:"foreignKey:MedicalDeviceID"`
 	Room_Details []Room_Detail `gorm:"foreignKey:MedicalDeviceID"`
@@ -481,5 +481,11 @@ func init() {
 		t := i.(time.Time)
 		now := time.Now()
 		return now.Before(time.Time(t))
+	})
+	govalidator.CustomTypeTagMap.Set("current", func(i interface{}, context interface{}) bool {
+		t := i.(time.Time)
+		now := time.Now().Add(time.Minute * -10)
+		return t.After(now) && t.Before(time.Now().Add(time.Minute*+1))
+		// t(ค่าที่รับ)ต้องมีค่าเวลาหลังเวลาปัจจุบันไม่เกิน 10 นาที(ต้องบันทึกข้อมูลภายใน 10 นาที), t ต้องมีค่าก่อนเวลาปัจจุบันได้ไม่เกิน 1 นาที
 	})
 }
