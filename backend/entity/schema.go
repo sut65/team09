@@ -372,11 +372,11 @@ type Treatment_plan struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID          *uint
 	Patient            Patient `gorm:"references:id" valid:"-"`
-	Order_of_treatment int     `valid:"range(0|50)~Order of treatment cannot be negative"`
+	Order_of_treatment int     `valid:"range(0|50)~Order of treatment cannot be negative or too much"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative"`
+	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative or too much"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment `gorm:"references:id" valid:"-"`
