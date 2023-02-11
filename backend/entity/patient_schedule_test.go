@@ -54,3 +54,18 @@ func TestNumbermustbeInterger(t *testing.T) {
 		g.Expect(err.Error()).To(Equal("Number must be Interger and 10 number"))
 	}
 
+	func TestNumberCannotbeblank(t *testing.T) {
+		g := NewGomegaWithT(t)
+	
+		
+		
+		
+			ps := Patien_schedule{
+				Patien_Number: "", //ผิด
+				Date_time:     time.Now().Add(24 * time.Hour),
+			}
+			ok, err := govalidator.ValidateStruct(ps)
+			g.Expect(ok).ToNot(BeTrue())
+			g.Expect(err).ToNot(BeNil())
+			g.Expect(err.Error()).To(Equal("Number cannot be blank"))
+		}

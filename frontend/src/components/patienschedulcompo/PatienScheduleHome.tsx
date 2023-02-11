@@ -12,8 +12,39 @@ import axios from 'axios';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { ButtonGroup } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+
+
 function PatienScheduleHome() {
   const [patien_schedule, setPatien_schedule] = useState<PatienSceheduleInterface[]>([]);
+  const [message, setAlertMessage] = React.useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+ 
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+        return;
+    }
+  
+    setSuccess(false);
+    setError(false);
+  };
+
 
   const getPatien_schedules = async () => {
     let res = await GetPatientSchedules();
@@ -36,10 +67,13 @@ function PatienScheduleHome() {
       });
 
       if (response.status === 200) {
-          console.log("Patienschedule deleted successfully");
+          console.log("deleted successfully");
           getPatien_schedules();
+          setSuccess(true);
+          setAlertMessage("Deleted successfully");
       } else {
-          throw new Error("Failed to delete Patienschedule ");
+         setError(true);
+         setAlertMessage("Deleted unsuccessfully");
       }
   } catch (err) {
       console.error(err);
@@ -53,20 +87,18 @@ function PatienScheduleHome() {
     { field: "Reason",headerName: "หมายเหตุ",width: 150,valueFormatter: (params) => params.value.Method,},
     { field: "Patien_Number", headerName: "เบอร์โทรผู้ป่วย", width: 150 },
     { field: "Type_of_treatment", headerName: "ประเภทการรักษา", width: 200 ,valueFormatter: (params) => params.value.Type_of_treatment_name,},
-
+    { field: "Room_Number", headerName: "ห้องตรวจ", width: 150,valueFormatter: (params) => params.value.Room_number, },
     { field: "Date_time", headerName: "วันที่และเวลา", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm ') },
     {
       field: "action", headerName: "Action",width: 250  , sortable: false, renderCell: ({ row }) =>
       <ButtonGroup>
         <Stack spacing={2} direction="row">
-          <Button onClick={() => Delete(row.ID)} variant="contained" color="error">
-                  delete
-          </Button>
-          <Button component={RouterLink} to={`/PatientSchedule/Update/${row.ID}`} variant="contained">
-              <div className="good-font">
-                  update
-              </div>
-          </Button>
+          <IconButton aria-label="delete" onClick={() => Delete(row.ID)}>
+           <DeleteIcon />
+           </IconButton>
+           <IconButton aria-label="edit" component={RouterLink} to={`/PatientSchedule/Update/${row.ID}`} >
+              <EditIcon/>
+              </IconButton>
         </Stack>
       </ButtonGroup>      
 
@@ -77,6 +109,23 @@ function PatienScheduleHome() {
   return (
     <div>
       <Container maxWidth="lg">
+      <Snackbar
+                id="success"
+                open={success}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                <Alert onClose={handleClose} severity="success">
+                    {message}
+                </Alert>
+                </Snackbar>
+                <Snackbar id="error" open={error} autoHideDuration={3000} onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+                <Alert onClose={handleClose} severity="error">
+                    {message}
+                </Alert>
+                </Snackbar>
         <Box
           display="flex"
           sx={{

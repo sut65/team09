@@ -17,12 +17,14 @@ import Button from '@mui/material/Button';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
+
 //import Interface
 import { ReasonInterface } from "../../models/IReason";
 import { PatienSceheduleInterface } from "../../models/IPatienSchedule";
 import { EmployeeInterface } from "../../models/IEmployee";
 import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { PatientInterface } from "../../models/IPatient";
+import { Room_NumberInterface } from '../../models/IRoom_Number';
 
 import {
     GetPatientSchedules,
@@ -32,6 +34,7 @@ import {
     GetReasons,
     PatientSchedulesUpdate,
     PatientSchedules,
+    GetRoom_Number,
 } from "../../services/HttpClientService";
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -55,6 +58,7 @@ function PatientScheduleUpdate() {
     const [patients, setPatients] = useState<PatientInterface[]>([]);
     const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
     const [reasons, setReasons] = useState<ReasonInterface[]>([]);
+    const [room_number, setRoomnumber] = useState<Room_NumberInterface []>([]);
     const [type_of_treatmentses, setType_of_treatmentses] = useState<Type_of_treatments_Interface[]>([]);
     const [patien_schedule, setPatienSchedule] = useState<PatienSceheduleInterface>({
         Patien_Number: "",
@@ -67,6 +71,7 @@ function PatientScheduleUpdate() {
     const [number, setNumber] = React.useState<string>("");
     const [type, setType] = React.useState<string>("");
     const [date, setDate] = React.useState<string>("");
+    const [room, setRoom] = React.useState<string>("");
 
     const [patientname, setPatientName] = React.useState<string>("");
 
@@ -93,7 +98,7 @@ function PatientScheduleUpdate() {
                         }
                     }
                     )
-                    fetch(`http://localhost:8080/employee/${res.data.EmployeeID}`)
+                fetch(`http://localhost:8080/employee/${res.data.EmployeeID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -103,19 +108,29 @@ function PatientScheduleUpdate() {
                         }
                     }
                     )
-                 
-                    fetch(`http://localhost:8080/reason/${res.data.ReasonID}`)
+
+                fetch(`http://localhost:8080/reason/${res.data.ReasonID}`)
                     .then((response) => response.json())
                     .then((res) => {
-                        if (res.data) {               
+                        if (res.data) {
                             setReason(res.data.Method)
                             patien_schedule.ReasonID = res.data.ID
 
                         }
                     }
                     )
-                   
-                    fetch(`http://localhost:8080/type_of_treatments/${res.data.Type_of_treatmentID}`)
+                fetch(`http://localhost:8080/room_number/${res.data.Room_NumberID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setRoom(res.data.Room_number)
+                            patien_schedule.Room_NumberID = res.data.ID
+
+                        }
+                    }
+                    )
+
+                fetch(`http://localhost:8080/type_of_treatments/${res.data.Type_of_treatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -125,8 +140,8 @@ function PatientScheduleUpdate() {
                         }
                     }
                     )
-                    
-                   
+
+
 
             }
             )
@@ -169,6 +184,14 @@ function PatientScheduleUpdate() {
         }
     };
 
+    const getRoom_Number = async () => {
+        let res = await GetRoom_Number();
+        patien_schedule.Room_NumberID = res.ID;
+        if (res) {
+            setRoomnumber(res);
+        }
+    };
+
     const getEmployees = async () => {
         let res = await GetEmployee();
         patien_schedule.EmployeeID = res.ID;
@@ -189,6 +212,7 @@ function PatientScheduleUpdate() {
         getEmployees();
         getPatients();
         getType_of_treatmentses();
+        getRoom_Number();
     }, []);
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -219,6 +243,7 @@ function PatientScheduleUpdate() {
             EmployeeID: convertType(patien_schedule.EmployeeID),
             ReasonID: convertType(patien_schedule.ReasonID),
             Type_Of_TreatmentID: convertType(patien_schedule.Type_Of_TreatmentID),
+            Room_NumberID: convertType(patien_schedule.Room_NumberID),
             Date_time: patien_schedule.Date_time,
             Patien_Number: patien_schedule.Patien_Number,
         };
@@ -305,7 +330,7 @@ function PatientScheduleUpdate() {
                                 }}
                             >
                                 <option aria-label="None" value={patientname}>
-                                {patientname}
+                                    {patientname}
                                 </option>
                                 {patients.map((item: PatientInterface) => (
                                     <option value={item.ID} key={item.ID}>
@@ -355,7 +380,7 @@ function PatientScheduleUpdate() {
                                     name: "ReasonID",
                                 }}
                             >
-                                <option aria-label="None" value="">
+                                <option aria-label="None" value={reason}>
                                     {reason}
                                 </option>
                                 {reasons.map((item: ReasonInterface) => (
@@ -367,29 +392,29 @@ function PatientScheduleUpdate() {
                         </FormControl>
                     </Grid>
                     <Grid xs={6} sx={{ padding: 1.3 }}>
-                        {/* <FormControl sx = {{width: 400}}>
-                <InputLabel id="demo-simple-select-label">นัดไปห้องตรวจ</InputLabel>
-                        <Select
-                            native
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={patien_schedule.ReasonID + ""}
-                            onChange={handleChange}
-                            label= "Reason"
-                            inputProps={{
-                                name: "ReasonID",
-                            }}
-                        >
-                          <option aria-label="None" value="">
-                            กรุณาเลือกห้องตรวจ
-                          </option>
-                            {reasons.map((item: ReasonInterface) => (
-                                <option value={item.ID} key={item.ID}>
-                                    {item.Method}
-                                </option>
-                            ))}
-                        </Select>
-                    </FormControl> */}
+                    <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">ห้องตรวจ</InputLabel>
+                                <Select
+                                    native
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={patien_schedule.Room_NumberID + ""}
+                                    onChange={handleChange}
+                                    label= "ห้องตรวจ"
+                                    inputProps={{
+                                        name: "Room_NumberID",
+                                    }}
+                                >
+                                  <option aria-label="None" value="">
+                                    {room}
+                                  </option>
+                                    {room_number.map((item: Room_NumberInterface) => (
+                                        <option value={item.ID} key={item.ID}>
+                                            {item.ID}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </FormControl>
                     </Grid>
                     <Grid xs={6} sx={{ padding: 1.3 }}>
                         <FormControl sx={{ width: 400 }}>

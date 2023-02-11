@@ -13,6 +13,7 @@ func CreatePatienSchedule(c *gin.Context) {
 	var reason entity.Reason
 	var patien entity.Patient
 	var employee entity.Employee
+	var room_number	 entity.Room_Number
 	var type_of_treatment entity.Type_of_treatment
 
 	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร patien_schedule
@@ -44,6 +45,10 @@ func CreatePatienSchedule(c *gin.Context) {
 		return
 	
 	}
+	if tx := entity.DB().Where("id = ?", patien_schedule.Room_NumberID).First(&room_number); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Room_number not found"})
+		return
+	}
 	// 12: สร้าง scholarship
 	wv := entity.Patien_schedule{
 		Patient:         patien,     
@@ -51,11 +56,12 @@ func CreatePatienSchedule(c *gin.Context) {
 		Reason: reason,       	
 		Patien_Number: patien_schedule.Patien_Number,
 		Type_of_treatment:	type_of_treatment,
+		Room_Number: room_number,
 		Date_time:       patien_schedule.Date_time,
 	}
 
 	if _, err := govalidator.ValidateStruct(wv); err != nil{
-			c.JSON(http.StatusBadRequest, gin.H{"Patien_schedule": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 	}
 
@@ -82,7 +88,7 @@ func GetPatienSchedule(c *gin.Context) {
 // GET /patien_schedules
 func ListPatienSchedules(c *gin.Context) {
 	var patien_schedules []entity.Patien_schedule
-	if err := entity.DB().Preload("Patient").Preload("Employee").Preload("Reason").Preload("Type_of_treatment",).Raw("SELECT * FROM patien_schedules").Find(&patien_schedules).Error; err != nil {
+	if err := entity.DB().Preload("Patient").Preload("Employee").Preload("Room_Number").Preload("Reason").Preload("Type_of_treatment",).Raw("SELECT * FROM patien_schedules").Find(&patien_schedules).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -108,6 +114,7 @@ func UpdatePatienSchedules(c *gin.Context) {
 	var reason entity.Reason
 	var patien entity.Patient
 	var employee entity.Employee
+	var room_number	 entity.Room_Number
 	var type_of_treatment entity.Type_of_treatment
 
 	if err := c.ShouldBindJSON(&patien_schedule); err != nil {
@@ -130,17 +137,22 @@ func UpdatePatienSchedules(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Type_of_treatmentID not found"})
 		return
 	}
+	if tx := entity.DB().Where("id = ?", patien_schedule.Room_NumberID).First(&room_number); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Room_number not found"})
+		return
+	}
 	wv := entity.Patien_schedule{
 		Patient:         patien,     
 		Employee:    employee,          
 		Reason: reason,       	
 		Patien_Number: patien_schedule.Patien_Number,
 		Type_of_treatment:	type_of_treatment,
+		Room_Number: room_number,
 		Date_time:       patien_schedule.Date_time,
 	}
 
 	if _, err := govalidator.ValidateStruct(wv); err != nil{
-		c.JSON(http.StatusBadRequest, gin.H{"Patien_schedule": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 

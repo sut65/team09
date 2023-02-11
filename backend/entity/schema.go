@@ -216,7 +216,10 @@ type Patien_schedule struct {
 	ReasonID *uint
 	Reason   Reason `gorm:"references:id" valid:"-"`
 
-	Patien_Number string `valid:"matches(\\d{10}$)~Number must be Interger and 10 number"`
+	Patien_Number string `valid:"matches(\\d{10}$)~Number must be Interger and 10 number,required~Number cannot be blank"`
+
+	Room_NumberID *uint
+	Room_Number   Room_Number `gorm:"references:id" valid:"-"`
 
 	Type_of_treatmentID *uint
 	Type_of_treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
@@ -452,6 +455,7 @@ type Room_Number struct {
 
 	Room_Details     []Room_Detail      `gorm:"foreignKey:Room_NumberID"`
 	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:Room_NumberID"`
+	Patien_schedule []Patien_schedule `gorm:"foreignKey:Room_NumberID"`
 }
 
 type Room_Detail struct {
