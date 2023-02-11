@@ -39,12 +39,12 @@ func CreateTreatment(c *gin.Context) {
 
 
 	if tx := entity.DB().Where("id = ?", treatments.Type_Of_TreatmentID).First(&type_of_treatments); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "room not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "type of treatment not found"})
 		return
 	}
 
 	if tx := entity.DB().Where("id = ?", treatments.Type_Of_Number_Of_TreatmentID).First(&type_of_number_of_treatments); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "room not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Type of numberr of treatment not found"})
 		return
 	}
 
@@ -71,12 +71,7 @@ func CreateTreatment(c *gin.Context) {
 func GetTreatment(c *gin.Context) {
 	var treatments entity.Treatment
 	id := c.Param("id")
-	// 1.)) if err := entity.DB().Raw("SELECT * FROM treatments WHERE id = ?", id).Scan(&treatments).Error; err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	// 	return
-	// }
-
-	 if err := entity.DB().Raw("SELECT treatments.*, dentists.* FROM treatments JOIN dentists ON treatments.dentist_id = dentists.id WHERE treatments.id = ?", id).Scan(&treatments).Error; err != nil {
+		if err := entity.DB().Raw("SELECT * FROM treatments WHERE id = ?", id).Scan(&treatments).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
