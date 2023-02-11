@@ -12,6 +12,8 @@ func TestFirstNameNotBlank(t *testing.T) {
 	fn := Dentist{
 		FirstName: "", //ผิด
 		LastName:  "DDD",
+		Personal_id: "1267453897342",
+		Email:     "ss@gmail.com",
 		Password:  "3fdww",
 	}
 	// ตรวจสอบด้วย govalidator
@@ -28,8 +30,10 @@ func TestLastNameNotBlank(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	ln := Dentist{
-		FirstName: "esaw",
+		FirstName: "rdss", 
 		LastName:  "", //ผิด
+		Personal_id: "1267453897342",
+		Email:     "ss@gmail.com",
 		Password:  "3fdww",
 	}
 	ok, err := govalidator.ValidateStruct(ln)
@@ -42,9 +46,11 @@ func TestPasswordNotBlank(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	pass := Dentist{
-		FirstName: "esaw",
-		LastName:  "jpkok",
-		Password:  "", //ผิด
+		FirstName: "rdss", 
+		LastName:  "dssa", 
+		Personal_id: "1267453897342",
+		Email:     "ss@gmail.com",
+		Password:  "",//ผิด
 	}
 	ok, err := govalidator.ValidateStruct(pass)
 	g.Expect(ok).ToNot(BeTrue())
@@ -58,8 +64,11 @@ func TestAgeRangeBetween_0_to_100(t *testing.T) {
 	pass := Dentist{
 		FirstName: "esaw",
 		LastName:  "jpkok",
+		Personal_id: "1267453897342",
+		Email:     "ss@gmail.com",
 		Password:  "fdgfgd",
 		Age:       101, //ผิด
+		
 	}
 	ok, err := govalidator.ValidateStruct(pass)
 	g.Expect(ok).ToNot(BeTrue())
