@@ -28,10 +28,12 @@ import {
     GetProvince,
     CreateDentists,
     GetDentists,
+    UpdateDentists,
   
   } from "../../services/HttpClientService";
   import { DentistInterface } from "../../models/IDentist";
 import Autocomplete from "@mui/material/Autocomplete";
+import InputLabel from "@mui/material/InputLabel";
 
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -42,12 +44,22 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 
   function DentistUpdate() {
-    const [gender, setGenders] = useState<GenderInterface[]>([]);
-    const [specialized, setSpecializeds] = useState<SpecializedInterface[]>([]);
-    const [university, setUniversitys] = useState<UniversityInterface[]>([]);
-    const [role, setRoles] = useState<RoleInterface[]>([]);
-    const [province, setProvinces] = React.useState<ProvinceInterface[]>([]);
-    const [dentist, setDentists] = useState<Partial<DentistInterface>>({});
+    const [genders, setGenders] = useState<GenderInterface[]>([]);
+    const [specializeds, setSpecializeds] = useState<SpecializedInterface[]>([]);
+    const [universitys, setUniversitys] = useState<UniversityInterface[]>([]);
+    const [roles, setRoles] = useState<RoleInterface[]>([]);
+    const [provinces, setProvinces] = React.useState<ProvinceInterface[]>([]);
+    const [dentist, setDentists] = useState<DentistInterface>({});
+
+    //const [dentists, setDentist] = useState<DentistInterface>({}); useState<Partial<DentistInterface>>({});
+
+    const [gender, setGender] = useState<string>("");
+    const [specialized, setSpecialized] = useState<string>("");
+    const [university, setUniversity] = useState<string>("");
+    const [role, setRole] = useState<string>("");
+    const [province, setProvince] = useState<string>("");
+
+
 
     const [firstname, setFirstname] = useState<string>("");
     const [lastname, setLastname] = useState<string>("");
@@ -56,6 +68,8 @@ import Autocomplete from "@mui/material/Autocomplete";
     const [password, setPassword] = useState<string>("");
     const [age, setAge] = useState(0);
     const [phone_number, setPhone_number] = useState<string>("");
+
+    const [message, setAlertMessage] = React.useState("");
   
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -79,8 +93,6 @@ import Autocomplete from "@mui/material/Autocomplete";
           .then((res) => {
 
               if (res.data) {
-                  console.log("Dentist FS : ")
-                  console.log(res.data.FirstName)
                   setFirstname(res.data.FirstName.toString());
 
                   setLastname(res.data.LastName.toString());
@@ -102,6 +114,62 @@ import Autocomplete from "@mui/material/Autocomplete";
                   // console.log("House_no : ")
                   // console.log(res.data.House_no )
                   setPhone_number(res.data.Phone_Number .toString());
+
+                  fetch(`${apiUrl}/gender/${res.data.GenderID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setGender(res.data.Gender_name)
+                            dentist.GenderID = res.data.ID
+
+                            
+                        }
+                    }
+                  )
+
+                  fetch(`${apiUrl}/specialized/${res.data.SpecializedID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setSpecialized(res.data.Specialized_Name)
+                            dentist.SpecializedID = res.data.ID
+
+                        }
+                    }
+                  )
+
+                  fetch(`${apiUrl}/university/${res.data.UniversityID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setUniversity(res.data.University_Name)
+                            dentist.UniversityID = res.data.ID
+
+                        }
+                    }
+                  )
+
+                  fetch(`${apiUrl}/province/${res.data.ProvinceID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setProvince(res.data.Province_name)
+                            dentist.ProvinceID = res.data.ID
+
+                        }
+                    }
+                  )
+
+                  fetch(`${apiUrl}/roles/${res.data.RoleID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setRole(res.data.Role_name)
+                            dentist.RoleID = res.data.ID
+
+                        }
+                    }
+                  )
 
                   const dataString = JSON.stringify(res.data);
                   console.log(dataString)
@@ -215,10 +283,22 @@ import Autocomplete from "@mui/material/Autocomplete";
         UniversityID: convertType(dentist.UniversityID),
         RoleID:     convertType(dentist.RoleID),
         ProvinceID: convertType(dentist.ProvinceID),
+
+        
       };
       console.log(data);
-  
-      const requestOptions = {
+      console.log(dentist.GenderID);
+      console.log(dentist.SpecializedID);
+      let res: any = await UpdateDentists(data);
+        if (res.status) {
+            setAlertMessage("อัพเดตข้อมูลสำเร็จ");
+            setSuccess(true);
+        } else {
+            setAlertMessage(res.message);
+            setError(true);
+        }
+        console.log(JSON.stringify(data))
+    const requestOptions = {
         method: "PATCH",
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -230,34 +310,37 @@ import Autocomplete from "@mui/material/Autocomplete";
     fetch(`${apiUrl}/dentists/${id}`, requestOptions)
         .then((response) => response.json())
         .then((res) => {
-            if (res.data) {
-                setSuccess(true);
+            console.log(res)
+            if (res) {
+                return { status: false, message: res.Dentist };
             } else {
-                setError(true);
+                return { status: false, message: res.error };
             }
         });
-    }
+      }
   
     return (
       <Container maxWidth="md">
         <Snackbar
+          id="success"
           open={success}
           autoHideDuration={3000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <Alert onClose={handleClose} severity="success">
-            อัปเดตข้อมูลสำเร็จ
+           {message}
           </Alert>
         </Snackbar>
         <Snackbar
+          id="error"
           open={error}
           autoHideDuration={6000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <Alert onClose={handleClose} severity="error">
-            อัปเดตข้อมูลไม่สำเร็จ
+            {message}  
           </Alert>
         </Snackbar>
         <Paper  sx ={{ bgcolor :"#E3E3E3"}}>
@@ -321,7 +404,7 @@ import Autocomplete from "@mui/material/Autocomplete";
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกอายุ"
-                  InputProps={{ inputProps: { min: 1 , max: 100}}}
+                  InputProps={{ inputProps: {max: 100}}}
                   InputLabelProps={{
                   shrink: true,
                   }}
@@ -411,97 +494,136 @@ import Autocomplete from "@mui/material/Autocomplete";
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                  <p className="good-font">เพศ</p>
-                    <Autocomplete
-                      disablePortal
-                      id="GenderID"
-                      getOptionLabel={(item: GenderInterface) => `${item.Gender_name}`}
-                      options={gender}
-                      sx={{ width: 'auto' }}
-                      isOptionEqualToValue={(option, value) =>
-                          option.ID === value.ID}
-                      onChange={(e, value) => { dentist.GenderID = value?.ID }}
-                      renderInput={(params) => <TextField {...params} label="เลือกเพศ" />}
-                    />
+                <InputLabel id="demo-simple-select-label">เพศ</InputLabel>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dentist.GenderID + ""}
+                                onChange={handleChange}
+                                label="เพศ"
+                                inputProps={{
+                                    name: "GenderID",
+                                }}
+                            >
+                                <option aria-label="None" value="">
+                                    {gender}
+                                </option>
+                                {genders.map((item: GenderInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Gender_name}
+                                    </option>
+                                ))}
+                            </Select>
                 </FormControl>
             </Grid>
 
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                  <p className="good-font">สาขา</p>
-                    <Autocomplete
-                      disablePortal
-                      id="SpecializedID"
-                      getOptionLabel={(item: SpecializedInterface) => `${item.Specialized_Name}`}
-                      options={specialized}
-                      sx={{ width: 'auto' }}
-                      isOptionEqualToValue={(option, value) =>
-                          option.ID === value.ID}
-                      onChange={(e, value) => { dentist.SpecializedID = value?.ID }}
-                      renderInput={(params) => <TextField {...params} label="เลือกสาขา" />}
-                    />
+                <InputLabel id="demo-simple-select-label">สาขา</InputLabel>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dentist.SpecializedID + ""}
+                                onChange={handleChange}
+                                label="สาขา"
+                                inputProps={{
+                                    name: "SpecializedID",
+                                }}
+                            >
+                                <option aria-label="None" value="">
+                                    {specialized}
+                                </option>
+                                {specializeds.map((item: SpecializedInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Specialized_Name}
+                                    </option>
+                                ))}
+                            </Select>
                 </FormControl>
             </Grid>
 
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                  <p className="good-font">มหาวิทยาลัย</p>
-                    <Autocomplete
-                      disablePortal
-                      id="UniversityID"
-                      getOptionLabel={(item: UniversityInterface) => `${item.University_Name}`}
-                      options={university}
-                      sx={{ width: 'auto' }}
-                      isOptionEqualToValue={(option, value) =>
-                          option.ID === value.ID}
-                      onChange={(e, value) => { dentist.UniversityID = value?.ID }}
-                      renderInput={(params) => <TextField {...params} label="เลือกมหาวิทยาลัย" />}
-                    />
+                <InputLabel id="demo-simple-select-label">มหาวิทยาลัย</InputLabel>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dentist.UniversityID + ""}
+                                onChange={handleChange}
+                                label="มหาวิทยาลัย"
+                                inputProps={{
+                                    name: "UniversityID",
+                                }}
+                            >
+                                <option aria-label="None" value="">
+                                    {university}
+                                </option>
+                                {universitys.map((item: UniversityInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.University_Name}
+                                    </option>
+                                ))}
+                            </Select>
                 </FormControl>
             </Grid>
 
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                  <p className="good-font">จังหวัด</p>
-                    <Autocomplete
-                      disablePortal
-                      id="ProvinceID"
-                      getOptionLabel={(item: ProvinceInterface) => `${item.Province_name}`}
-                      options={province}
-                      sx={{ width: 'auto' }}
-                      isOptionEqualToValue={(option, value) =>
-                          option.ID === value.ID}
-                      onChange={(e, value) => { dentist.ProvinceID = value?.ID }}
-                      renderInput={(params) => <TextField {...params} label="เลือกจังหวัด" />}
-                    />
+                <InputLabel id="demo-simple-select-label">จังหวัด</InputLabel>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dentist.ProvinceID + ""}
+                                onChange={handleChange}
+                                label="เลือกจังหวัด"
+                                inputProps={{
+                                    name: "ProvinceID",
+                                }}
+                            >
+                                <option aria-label="None" value="">
+                                    {province}
+                                </option>
+                                {provinces.map((item: ProvinceInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Province_name}
+                                    </option>
+                                ))}
+                            </Select>
                 </FormControl>
             </Grid>
             
   
             <Grid item xs={6}>
-              <FormControl fullWidth variant="outlined">
-                <p>บทบาท</p>
-                <Select
-                  native
-                  value={dentist.RoleID + ""}
-                  onChange={handleChange}
-                  inputProps={{
-                    name: "RoleID",
-                  }}
-                >
-                  <option aria-label="None" value="">
-                    กรุณาเลือกบทบาท
-                  </option>
-                  {role.map((item: RoleInterface) => (
-                    <option value={item.ID} key={item.ID}>
-                      {item.Role_name}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
+                <FormControl fullWidth variant="outlined">
+                <InputLabel id="demo-simple-select-label">บทบาท</InputLabel>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dentist.RoleID + ""}
+                                onChange={handleChange}
+                                label="เลือกบทบาท"
+                                inputProps={{
+                                    name: "RoleID",
+                                }}
+                            >
+                                <option aria-label="None" value="">
+                                    {role}
+                                </option>
+                                {roles.map((item: RoleInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Role_name}
+                                    </option>
+                                ))}
+                            </Select>
+                </FormControl>
             </Grid>
   
             <Grid item xs={12}>

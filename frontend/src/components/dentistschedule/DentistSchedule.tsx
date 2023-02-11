@@ -11,10 +11,38 @@ import moment from "moment";
 import axios from 'axios';
 import { ButtonGroup } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 function DentistSchedule() {
   const [dentist_schedule, setDentist_schedule] = useState<DentistSceheduleInterface[]>([]);
+  const [message, setAlertMessage] = React.useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+        return;
+    }
+  
+    setSuccess(false);
+    setError(false);
+  };
+
 
   useEffect(() => {
     getDentist_schedules();
@@ -36,11 +64,14 @@ function DentistSchedule() {
       });
 
       if (response.status === 200) {
-          console.log("dentist_schedules deleted successfully");
-          getDentist_schedules();
-      } else {
-          throw new Error("Failed to delete dentist_schedules ");
-      }
+        console.log("deleted successfully");
+        getDentist_schedules();
+        setSuccess(true);
+        setAlertMessage("Deleted successfully");
+    } else {
+       setError(true);
+       setAlertMessage("Deleted unsuccessfully");
+    }
   } catch (err) {
       console.error(err);
   }
@@ -59,14 +90,12 @@ function DentistSchedule() {
       field: "action", headerName: "Action",width: 250, sortable: false, renderCell: ({ row }) =>
       <ButtonGroup>
       <Stack spacing={2} direction="row">
-        <Button onClick={() => Delete(row.ID)} variant="contained" color="error">
-                delete
-        </Button>
-        <Button component={RouterLink} to={`/DentistSchedule/Update/${row.ID}`} variant="contained">
-            <div className="good-font">
-                update
-            </div>
-        </Button>
+      <IconButton aria-label="delete" onClick={() => Delete(row.ID)} >
+      <DeleteIcon />
+           </IconButton>
+        <IconButton aria-label="edit" component={RouterLink} to={`/DentistSchedule/Update/${row.ID}`} >
+        <EditIcon/>
+              </IconButton>
       </Stack>
     </ButtonGroup>      
     },
@@ -75,6 +104,23 @@ function DentistSchedule() {
   return (
     <div>
       <Container maxWidth="lg">
+      <Snackbar
+                id="success"
+                open={success}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                <Alert onClose={handleClose} severity="success">
+                    {message}
+                </Alert>
+                </Snackbar>
+                <Snackbar id="error" open={error} autoHideDuration={3000} onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+                <Alert onClose={handleClose} severity="error">
+                    {message}
+                </Alert>
+                </Snackbar>
         <Box
           display="flex"
           sx={{

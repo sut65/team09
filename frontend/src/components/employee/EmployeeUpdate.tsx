@@ -272,7 +272,7 @@ function EmployeeCreate() {
           }
         });
         if (res.status) {
-          setAlertMessage("บันทึกข้อมูลสำเร็จ");
+          setAlertMessage("อัพเดตข้อมูลสำเร็จ");
           setSuccess(true);
         } else {
           setAlertMessage(res.message);

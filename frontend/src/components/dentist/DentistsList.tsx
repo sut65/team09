@@ -15,14 +15,18 @@ function Dentists() {
 
   const getDentists = async () => {
     let res = await GetDentists();
-    if (res.data) { console.log(res)
-      setDentists(res.data);
+    if (res) { 
+      console.log(res)
+      setDentists(res);
+    }
+    else {
+      console.log(res)
     }
   };
 
   const handleDelete = async (id: number) => {
     try {
-        const response = await axios.delete(`http://localhost:8080/dentists/${id}`, {
+        const response = await axios.delete(`http://localhost:8080/dentist/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 'Content-Type': 'application/json',

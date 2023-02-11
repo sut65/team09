@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/sut65/team09/entity"
-
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 
 	"net/http"
@@ -44,10 +44,16 @@ func CreateRoom_Detail(c *gin.Context) {
 	// 12: สร้าง room_detail
 	wv := entity.Room_Detail{
 
+		Note:           room_detail.Note,
 		Category:       category,       // โยงความสัมพันธ์กับ Entity category
 		Room_Number:    room_number,    // โยงความสัมพันธ์กับ Entity room_number
 		MedicalDevice:  md, // โยงความสัมพันธ์กับ Entity medicaldevice
 
+	}
+
+	if _, err := govalidator.ValidateStruct(wv); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	// 13: บันทึก

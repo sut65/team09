@@ -66,6 +66,7 @@ function RepairList() {
       width: 150,
       valueFormatter: (params) => params.value.Damage_Choice,
     },
+    { field: "Repair_Note", headerName: "หมายเหตุ", width: 210 },
     { field: "Date_Of_Repair", headerName: "วันที่ เวลาตอนบันทึกข้อมูล", width: 250, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm') },
     {
       field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>

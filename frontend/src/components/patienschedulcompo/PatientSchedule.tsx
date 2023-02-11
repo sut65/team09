@@ -22,6 +22,7 @@ import {PatienSceheduleInterface} from "../../models/IPatienSchedule";
 import { EmployeeInterface } from "../../models/IEmployee";
 import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { PatientInterface } from "../../models/IPatient";
+import { Room_NumberInterface } from '../../models/IRoom_Number';
 
 import {
     GetPatientSchedules,
@@ -30,6 +31,7 @@ import {
     GetPatient,
     GetReasons,
     PatientSchedules,
+    GetRoom_Number,
 } from "../../services/HttpClientService";
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -44,6 +46,7 @@ function PatientSchedule() {
     const [patients, setPatients] = useState<PatientInterface[]>([]);
     const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
     const [reasons, setReasons] = useState<ReasonInterface[]>([]);
+    const [room_number, setRoomnumber] = useState<Room_NumberInterface []>([]);
     const [type_of_treatmentses, setType_of_treatmentses] = useState<Type_of_treatments_Interface[]>([]);
     const [patien_schedule, setPatienSchedule] = useState<PatienSceheduleInterface>({
         Patien_Number: "",
@@ -81,7 +84,13 @@ function PatientSchedule() {
             setReasons(res);
         }
     };
-
+    const getRoom_Number = async () => {
+        let res = await GetRoom_Number();
+        patien_schedule.Room_NumberID = res.ID;
+        if (res) {
+            setRoomnumber(res);
+        }
+    };
     const getType_of_treatmentses = async () => {
         let res = await GetTypeOfTreatment();
         patien_schedule.Type_Of_TreatmentID = res.ID;
@@ -110,6 +119,7 @@ function PatientSchedule() {
         getEmployees();
         getPatients();
         getType_of_treatmentses();
+        getRoom_Number();
     }, []);
 
 
@@ -136,6 +146,7 @@ async function submit() {
         EmployeeID: convertType(patien_schedule.EmployeeID),
         ReasonID: convertType(patien_schedule.ReasonID),
         Type_Of_TreatmentID: convertType(patien_schedule.Type_Of_TreatmentID),
+        Room_NumberID: convertType(patien_schedule.Room_NumberID),
         Date_time: patien_schedule.Date_time,
         Patien_Number: patien_schedule.Patien_Number,
     };
@@ -269,29 +280,29 @@ const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
                             </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
-                        {/* <FormControl sx = {{width: 400}}>
-                        <InputLabel id="demo-simple-select-label">นัดไปห้องตรวจ</InputLabel>
+                        <FormControl sx = {{width: 400}}>
+                        <InputLabel id="demo-simple-select-label">ห้องตรวจ</InputLabel>
                                 <Select
                                     native
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={patien_schedule.ReasonID + ""}
+                                    value={patien_schedule.Room_NumberID + ""}
                                     onChange={handleChange}
-                                    label= "Reason"
+                                    label= "ห้องตรวจ"
                                     inputProps={{
-                                        name: "ReasonID",
+                                        name: "Room_NumberID",
                                     }}
                                 >
                                   <option aria-label="None" value="">
                                     กรุณาเลือกห้องตรวจ
                                   </option>
-                                    {reasons.map((item: ReasonInterface) => (
+                                    {room_number.map((item: Room_NumberInterface) => (
                                         <option value={item.ID} key={item.ID}>
-                                            {item.Method}
+                                            {item.ID}
                                         </option>
                                     ))}
                                 </Select>
-                            </FormControl> */}
+                            </FormControl>
                         </Grid>
                         <Grid xs={6}  sx={{ padding: 1.3 }}>
                         <FormControl sx = {{width: 400}}>
