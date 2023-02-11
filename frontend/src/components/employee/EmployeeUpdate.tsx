@@ -73,7 +73,7 @@ function EmployeeCreate() {
   const { id } = useParams();
   useEffect(() => {
     getEmployee();
-    fetch(`http://localhost:3001/employee/${id}`)
+    fetch(`http://localhost:8080/employee/${id}`)
         .then((response) => response.json())
         .then((res) => {
             if (res.data) {

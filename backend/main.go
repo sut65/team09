@@ -173,16 +173,16 @@ func main() {
 	router.GET("/dentists", dentist.ListDentist)
 	router.GET("/dentist/:id", dentist.GetDentist)
 	router.POST("/dentists", dentist.CreateDentist)
-	router.PATCH("/dentists", dentist.UpdateDentist)
+	router.PATCH("/dentists/:id", dentist.UpdateDentist)
 	router.DELETE("/dentist/:id", dentist.DeleteDentist)
 
 	//-------------Room-------------------
 	// Room_Number Routes
-	router.GET("/room_numbers", room.ListRoom_Detail)
-	router.GET("/room_number:id", room.GetRoom_Detail)
-	router.POST("/room_numbers", room.CreateRoom_Detail)
-	router.PATCH("/room_numbers", room.UpdateRoom_Detail)
-	router.DELETE("/room_number/:id", room.DeleteRoom_Detail)
+	router.GET("/room_numbers", room.ListRoom_Number)
+	router.GET("/room_number:id", room.GetRoom_Number)
+	router.POST("/room_numbers", room.CreateRoom_Number)
+	router.PATCH("/room_numbers", room.UpdateRoom_Number)
+	router.DELETE("/room_number/:id", room.DeleteRoom_Number)
 
 	// Category Routes
 	router.GET("/categories", room.ListCategory)
@@ -261,7 +261,7 @@ func main() {
 
 	// Run the server
 
-	r.Run() 
+	r.Run()  //("0.0.0.0:3001")
 
 }
 

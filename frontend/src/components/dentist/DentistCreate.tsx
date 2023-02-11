@@ -49,6 +49,8 @@ function DentistCreate() {
   const [province, setProvinces] = React.useState<ProvinceInterface[]>([]);
   const [dentist, setDentists] = useState<Partial<DentistInterface>>({});
 
+  const [message, setAlertMessage] = React.useState("");
+
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -152,9 +154,11 @@ function DentistCreate() {
 
     let res = await CreateDentists(data);
     console.log(res);
-    if (res) { 
+    if (res.status) { 
+      setAlertMessage("บันทึกข้อมูลสำเร็จ");
       setSuccess(true);
     } else {
+      setAlertMessage(res.message);
       setError(true);
     }
   }
@@ -168,7 +172,7 @@ function DentistCreate() {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="success">
-          บันทึกข้อมูลสำเร็จ
+          {message}
         </Alert>
       </Snackbar>
       <Snackbar
@@ -178,7 +182,7 @@ function DentistCreate() {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="error">
-          บันทึกข้อมูลไม่สำเร็จ
+          {message}
         </Alert>
       </Snackbar>
       <Paper  sx ={{ bgcolor :"#E3E3E3"}}>
@@ -241,8 +245,18 @@ function DentistCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกอายุ"
+                InputProps={{ inputProps: { min: 1 , max: 100}}}
+                  InputLabelProps={{
+                  shrink: true,
+                  }}
                 value={dentist.Age || ""}
                 onChange={handleInputChange}
+                onKeyPress={(e) => {
+                  if (!/[0-9]/.test(e.key)){
+                    e.preventDefault()
+                  }
+                }}
+                inputProps={{maxLength :10}}
               />
             </FormControl>
           </Grid>
@@ -313,7 +327,7 @@ function DentistCreate() {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกรหัสผ่าน"
-                value={dentist.Password || ""}
+                value={dentist.Password?.replace(/./g, "*") || "" }
                 onChange={handleInputChange}
               />
             </FormControl>

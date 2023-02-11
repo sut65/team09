@@ -237,12 +237,12 @@ type University struct {
 type Dentist struct {
 	gorm.Model
 
-	FirstName    string
-	LastName     string
-	Personal_id  string `gorm:"uniqueIndex"`
-	Email        string `gorm:"uniqueIndex"`
-	Password     string
-	Age          int
+	FirstName    string `valid:"required~FirstName cannot be blank"`
+	LastName     string `valid:"required~LastName cannot be blank"`
+	Personal_id  string `gorm:"uniqueIndex"  valid:"required~Personal_id cannot be blank"`
+	Email        string `gorm:"uniqueIndex"  valid:"email~รูปแบบ Email ไม่ถูกต้อง,required~รูปแบบ Email ไม่ถูกต้อง"`
+	Password     string	`valid:"required~Password cannot be blank"`
+	Age          int	`valid:"range(10|100)~Age is not in range 10 to 100"`
 	Phone_Number string `gorm:"uniqueIndex"`
 
 	//GenderID ทำหน้าที่เป็น FK
@@ -447,6 +447,7 @@ type Room_Number struct {
 
 type Room_Detail struct {
 	gorm.Model
+
 
 	//CategoryID ทำหน้าที่เป็น FK
 	CategoryID *uint
