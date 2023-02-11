@@ -228,13 +228,13 @@ function TreatmentUpdate() {
             PatientID: convertType(treatment.PatientID),
             Number_of_cavities: typeof treatment.number_of_cavities === "string" ? parseInt(treatment.number_of_cavities) : 0,
             Number_of_swollen_gums: typeof treatment.number_of_swollen_gums === "string" ? parseInt(treatment.number_of_swollen_gums) : 0,
-            Other_teeth_problems: treatment.other_teeth_problems ?? "",
+            Other_teeth_problems: other_teeth_problems ?? "",
             Type_Of_TreatmentID: convertType(treatment.Type_of_treatmentsID),
             Number_of_treatment: typeof treatment.number_of_treatment === "string" ? parseInt(treatment.number_of_treatment) : 0,
             Type_Of_Number_Of_TreatmentID: convertType(treatment.Type_Of_Number_Of_TreatmentID),
-            Treatment_detail: treatment.treatment_detail ?? "",
+            Treatment_detail: treatment_detail ?? "",
             Treatment_time: treatment.Treatment_time,
-            Treatment_code: treatment.treatment_code ?? "",
+            Treatment_code: treatment_code ?? "",
         };
 
         console.log(data)
@@ -419,8 +419,8 @@ function TreatmentUpdate() {
                                 variant="outlined"
                                 type="string"
                                 size="medium"
-                                value={treatment.other_teeth_problems || "" || other_teeth_problems}
-                                onChange={handleInputChange}
+                                value={other_teeth_problems}
+                                onChange={(event) => setOther_teeth_problems(event.target.value)}
                             />
                         </FormControl>
                     </Grid>
@@ -502,11 +502,8 @@ function TreatmentUpdate() {
                                 variant="outlined"
                                 type="string"
                                 size="medium"
-                                value={treatment.treatment_detail || "" || treatment_detail}
-                                onChange={handleInputChange}
-                                defaultValue={treatment_detail}
-
-
+                                value={treatment_detail}
+                                onChange={(event) => setTreatment_detail(event.target.value)}
                             />
                         </FormControl>
                     </Grid>
@@ -537,8 +534,8 @@ function TreatmentUpdate() {
                                 variant="outlined"
                                 type="string"
                                 size="medium"
-                                value={treatment.treatment_code || "" || treatment_code}
-                                onChange={handleInputChange}
+                                value={treatment_code}
+                                onChange={(event) => setTreatment_code(event.target.value)}
                             />
                         </FormControl>
                     </Grid>
