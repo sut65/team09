@@ -47,8 +47,8 @@ function PrescriptionCreate() {
     const [prescription, setPrescription] = useState<Partial<PrescriptionInterface>>({});
     const [message, setAlertMessage] = React.useState("");
 
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
 
    //เปิดปิดตัว alert
   const handleClose = (
