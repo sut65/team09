@@ -37,9 +37,13 @@ function TreatmentUpdate() {
     const [errorMessage, setErrorMessage] = React.useState("");
 
     const [dentist, setADentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
+    const [dentistname, setDentistName] = React.useState("");
 
+    const [typeoftreatmentname, setTypeOfTreatmentName] = React.useState("");
+    const [typeofnumberoftreatmentname, setTypeOfNumberOfTreatmentName] = React.useState("");
 
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
+    const [patientname, setPatientName] = React.useState("");
     const [type_of_treatments, setType_of_treatments] = React.useState<Type_of_treatments_Interface[]>([]);
     const [type_of_number_of_treatments, setType_of_number_treatments] = React.useState<Type_of_number_of_treatment_Interface[]>([]);
     const [treatment, setTreatment] = React.useState<TreatmentsInterface>({ Treatment_time: new Date(), });
@@ -67,39 +71,57 @@ function TreatmentUpdate() {
         fetch(`http://localhost:8080/treatments/${id}`)
             .then((response) => response.json())
             .then((res) => {
-
-
-
                 if (res.data) {
-                    console.log("gt")
-                    console.log(res.data.Treatment_code)
                     setTreatment_code(res.data.Treatment_code.toString());
-                    console.log(res.data.Treatment_detail)
                     setTreatment_detail(res.data.Treatment_detail.toString());
-                    console.log(res.data.Other_teeth_problems)
                     setOther_teeth_problems(res.data.Other_teeth_problems.toString());
-                    console.log(res.data.Number_of_cavities)
-                    console.log(res.data.Number_of_swollen_gums)
-                    console.log(res.data.Number_of_treatment)
                     setNumber_of_cavities(res.data.Number_of_cavities.toString());
                     setNumber_of_swollen_gums(res.data.Number_of_swollen_gums.toString());
                     setNumber_of_treatment(res.data.Number_of_treatment.toString());
-                    console.log(res.data.DentistID)
-                    console.log("id forenkey")
-                    console.log("af set")
-                    console.log(treatment_code)
-                    console.log("af set")
-                    console.log("gt")
-                    console.log("treatment +id")
-                    const dataString = JSON.stringify(res.data);
-                    console.log(dataString);
-                    console.log("treatment +id")
                 }
+
+                fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setDentistName(res.data.FirstName)
+                            treatment.DentistID = res.data.ID
+                        }
+                    }
+                    )
+
+                fetch(`http://localhost:8080/patients/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setPatientName(res.data.FirstName)
+                            treatment.PatientID = res.data.ID
+                        }
+                    }
+                    )
+
+                fetch(`http://localhost:8080/type_of_treatments/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setTypeOfTreatmentName(res.data.Type_of_treatment_name)
+                            treatment.Type_of_treatmentsID = res.data.ID
+                        }
+                    }
+                    )
+
+                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.PatientID}`)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.data) {
+                            setTypeOfNumberOfTreatmentName(res.data.Type_of_number_of_treatment_name)
+                            treatment.Type_Of_Number_Of_TreatmentID = res.data.ID
+                        }
+                    }
+                    )
             }
             )
     }, [id])
-
-
 
     const handleClose = (
         event?: React.SyntheticEvent | Event,
@@ -120,12 +142,21 @@ function TreatmentUpdate() {
         setTreatment({ ...treatment, [id]: value });
     };
 
+    // const handleChange = (event: SelectChangeEvent) => {
+    //     const name = event.target.name as keyof typeof treatment;
+    //     setTreatment({
+    //         ...treatment,
+    //         [name]: event.target.value,
+    //     });
+    // };
+
     const handleChange = (event: SelectChangeEvent) => {
         const name = event.target.name as keyof typeof treatment;
         setTreatment({
             ...treatment,
             [name]: event.target.value,
         });
+        console.log(treatment)
     };
 
     const getPatient = async () => {
@@ -178,12 +209,7 @@ function TreatmentUpdate() {
             });
     };
 
-
-    // const value = parseInt(treatmentID!)
-    // console.log("treatment by use Params id is"+treatmentID)
-
     useEffect(() => {
-        //alert(id)
         getDentist();
         getPatient();
         getType_of_treatment();
@@ -199,17 +225,12 @@ function TreatmentUpdate() {
         let data = {
             DentistID: convertType(treatment.DentistID),
             PatientID: convertType(treatment.PatientID),
-
             Number_of_cavities: typeof treatment.number_of_cavities === "string" ? parseInt(treatment.number_of_cavities) : 0,
             Number_of_swollen_gums: typeof treatment.number_of_swollen_gums === "string" ? parseInt(treatment.number_of_swollen_gums) : 0,
             Other_teeth_problems: treatment.other_teeth_problems ?? "",
             Type_Of_TreatmentID: convertType(treatment.Type_of_treatmentsID),
             Number_of_treatment: typeof treatment.number_of_treatment === "string" ? parseInt(treatment.number_of_treatment) : 0,
-
             Type_Of_Number_Of_TreatmentID: convertType(treatment.Type_Of_Number_Of_TreatmentID),
-
-
-
             Treatment_detail: treatment.treatment_detail ?? "",
             Treatment_time: treatment.Treatment_time,
             Treatment_code: treatment.treatment_code ?? "",
@@ -285,24 +306,28 @@ function TreatmentUpdate() {
                 <Divider />
                 <Grid container spacing={3} sx={{ padding: 2 }}>
 
-
-
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ทันตเเพทย์</p>
-                            <Autocomplete
-                                disablePortal
-                                id="DentistID"
-                                getOptionLabel={(item: DentistInterface) => `${item.FirstName}`}
-                                options={dentist}
-                                //defaultValue={{ ID: 2 ,Dentist_name: "moyong"}}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment.DentistID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกทันตเเพทย์" />}
-
-                            />
+                            <p className="good-font">ทันตแพทย์</p>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment.DentistID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "DentistID",
+                                }}
+                            >
+                                <option aria-label="None" value={dentistname}>
+                                    {dentistname}
+                                </option>
+                                {dentist.map((item: DentistInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.FirstName}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
@@ -310,17 +335,25 @@ function TreatmentUpdate() {
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ผู้ป่วย</p>
-                            <Autocomplete
-                                disablePortal
-                                id="PatientID"
-                                getOptionLabel={(item: PatientInterface) => `${item.FirstName}`}
-                                options={patient}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment.PatientID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกผู้ป่วย" />}
-                            />
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment.PatientID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "PatientID",
+                                }}
+                            >
+                                <option aria-label="None" value={patientname}>
+                                    {patientname}
+                                </option>
+                                {patient.map((item: PatientInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.FirstName}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
@@ -377,18 +410,25 @@ function TreatmentUpdate() {
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ประเภทการรักษา</p>
-                            <Autocomplete
-                                disablePortal
-                                id="Type_Of_TreatmentID"
-                                getOptionLabel={(item: Type_of_treatments_Interface) => `${item.Type_of_treatment_name}`}
-
-                                options={type_of_treatments}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment.Type_of_treatmentsID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกประเภทการรักษา" />}
-                            />
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment.Type_of_treatmentsID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "Type_of_treatmentsID",
+                                }}
+                            >
+                                <option aria-label="None" value={typeoftreatmentname}>
+                                    {typeoftreatmentname}
+                                </option>
+                                {type_of_treatments.map((item: Type_of_treatments_Interface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Type_of_treatment_name}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
@@ -414,17 +454,25 @@ function TreatmentUpdate() {
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ซี่ ด้าน หรือ ฟิล์ม</p>
-                            <Autocomplete
-                                disablePortal
-                                id="Type_Of_Number_Of_TreatmentID"
-                                getOptionLabel={(item: Type_of_number_of_treatment_Interface) => `${item.Type_of_number_of_treatment_name}`}
-                                options={type_of_number_of_treatments}
-                                sx={{ width: 'auto' }}
-                                isOptionEqualToValue={(option, value) =>
-                                    option.ID === value.ID}
-                                onChange={(e, value) => { treatment.Type_Of_Number_Of_TreatmentID = value?.ID }}
-                                renderInput={(params) => <TextField {...params} label="เลือกซี่ ฟัน หรือ ฟิล์ม" />}
-                            />
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={treatment.Type_Of_Number_Of_TreatmentID + ""}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: "Type_Of_Number_Of_TreatmentID",
+                                }}
+                            >
+                                <option aria-label="None" value={typeofnumberoftreatmentname}>
+                                    {typeofnumberoftreatmentname}
+                                </option>
+                                {type_of_number_of_treatments.map((item: Type_of_number_of_treatment_Interface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Type_of_number_of_treatment_name}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Grid>
 
