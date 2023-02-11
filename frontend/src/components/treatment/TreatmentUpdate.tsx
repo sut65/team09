@@ -35,6 +35,7 @@ function TreatmentUpdate() {
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
+    const [message, setAlertMessage] = React.useState("");
 
     const [dentist, setADentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
     const [dentistname, setDentistName] = React.useState("");
@@ -49,7 +50,7 @@ function TreatmentUpdate() {
     const [treatment, setTreatment] = React.useState<TreatmentsInterface>({ Treatment_time: new Date(), });
     const [treatment_detail, setTreatment_detail] = React.useState<string>("");
     const [treatment_code, setTreatment_code] = React.useState<string>("");
-    const [other_teeth_problems, setOther_teeth_problems] = React.useState<string>("");
+    const [other_teeth_problems, setOther_teeth_problems] = React.useState<string>("p");
     const [number_of_cavities, setNumber_of_cavities] = React.useState(0);
     const [number_of_swollen_gums, setNumber_of_swollen_gums] = React.useState(0);
     const [number_of_treatment, setNumber_of_treatment] = React.useState(0);
@@ -247,23 +248,36 @@ function TreatmentUpdate() {
             body: JSON.stringify(data),
         };
 
-        fetch(`${apiUrl}/treatments/${id}`, requestOptions)
+
+        let res = await fetch(`${apiUrl}/treatments/${id}`, requestOptions)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {
                     setSuccess(true);
                     setErrorMessage("")
+                    return { status: true, message: res.data };
                 } else {
                     setError(true);
                     setErrorMessage(res.error)
+                    return { status: false, message: res.error };
                 }
             });
+
+
+        if (res.status) {
+            setAlertMessage("อัปเดตข้อมูลสำเร็จ");
+            setSuccess(true);
+        } else {
+            setAlertMessage(res.message);
+            setError(true);
+        }
     }
 
 
     return (
         <Container maxWidth="md">
             <Snackbar
+                id="success"
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
@@ -271,14 +285,18 @@ function TreatmentUpdate() {
             >
                 <Alert onClose={handleClose} severity="success">
                     <div className="good-font">
-                        อัปเดตข้อมูลสำเร็จ
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
-            <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar
+                id="error"
+                open={error}
+                autoHideDuration={6000}
+                onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
-                        อัปเดตข้อมูลไม่สำเร็จ
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
