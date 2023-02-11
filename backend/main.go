@@ -61,12 +61,14 @@ func main() {
 
 	router.GET("/districts", employee.ListDistrict)
 	router.GET("/district/:id", employee.GetDistrict)
+	router.GET("/district_by/:id", employee.GetDistrictbyID) //เพิ่ม
 	router.POST("/district", employee.CreateDistrict)
 	router.PATCH("/district", employee.UpdateDistrict)
 	router.DELETE("/district/:id", employee.DeleteDistrict)
 
 	router.GET("/subdistricts", employee.ListSubDistrict)
 	router.GET("/subdistrict/:id", employee.GetSubDistrict)
+	router.GET("/subdistrict_by/:id", employee.GetSubDistrictbyID) //เพิ่ม
 	router.POST("/subdistrict", employee.CreateSubDistrict)
 	router.PATCH("/subdistrict", employee.UpdateSubDistrict)
 	router.DELETE("/subdistrict/:id", employee.DeleteSubDistrict)
@@ -272,7 +274,7 @@ func main() {
 
 	// Run the server
 
-	r.Run()  //("0.0.0.0:3001")
+	r.Run() //("0.0.0.0:3001")
 
 }
 

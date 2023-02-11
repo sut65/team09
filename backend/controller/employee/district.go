@@ -23,7 +23,19 @@ func CreateDistrict(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"data": district})
 }
 
-// GET /district/:id
+// get district ของตารางตัวเอง #เพิ่มมา
+func GetDistrictbyID(c *gin.Context) {
+	var district entity.District
+	id := c.Param("id")
+	if tx := entity.DB().Where("id = ?", id).First(&district); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "district not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": district})
+}
+
+// GET /district/:id = province
 func GetDistrict(c *gin.Context) {
 	var district []entity.District
 	id := c.Param("id")
