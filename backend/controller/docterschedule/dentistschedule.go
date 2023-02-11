@@ -2,7 +2,7 @@ package controller
 
 import (
 	"net/http"
-
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/sut65/team09/entity"
 )
@@ -13,6 +13,7 @@ func CreateDentistSchedule(c *gin.Context) {
 	var dentist entity.Dentist
 	var workingday entity.Workingday
 	var responsity  entity.Responsity
+	var room_number	 entity.Room_Number
 	
 	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร patien_schedule
 	if err := c.ShouldBindJSON(&dentist_schedule); err != nil {
@@ -34,15 +35,25 @@ func CreateDentistSchedule(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Dentist not found"})
 		return
 	}
+	if tx := entity.DB().Where("id = ?", dentist_schedule.Room_NumberID).First(&room_number); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Room number not found"})
+		return
+	}
 	// 12: สร้าง dentist_schedule
 	wv := entity.Dentist_schedule{
 		Dentist: dentist,
 		Responsity: responsity,
 		Workingday: workingday,
+		Job_description: dentist_schedule.Job_description,
+		Room_Number: room_number,
 		TimeWork: dentist_schedule.TimeWork, 
 		TimeEnd:  dentist_schedule.TimeEnd,  
 	}
 
+	if _, err := govalidator.ValidateStruct(wv); err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+}
 
 	// 13: บันทึก
 	if err := entity.DB().Create(&wv).Error; err != nil {
@@ -67,7 +78,7 @@ func GetDentistSchedule(c *gin.Context) {
 // GET /dentist_schedules
 func ListDentistSchedules(c *gin.Context) {
 	var dentist_schedules []entity.Dentist_schedule
-	if err := entity.DB().Preload("Dentist").Preload("Workingday").Preload("Responsity").Raw("SELECT * FROM dentist_schedules").Find(&dentist_schedules).Error; err != nil {
+	if err := entity.DB().Preload("Dentist").Preload("Workingday").Preload("Room_Number").Preload("Responsity").Raw("SELECT * FROM dentist_schedules").Find(&dentist_schedules).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -87,17 +98,49 @@ func DeleteDentistSchedule(c *gin.Context) {
 
 // PATCH /dentist_schedules
 func UpdateDentistSchedules(c *gin.Context) {
-
 	var dentist_schedule entity.Dentist_schedule
+	id := c.Param("id")
+	var dentist entity.Dentist
+	var workingday entity.Workingday
+	var responsity  entity.Responsity
+	var room_number	 entity.Room_Number
+	
+
 	if err := c.ShouldBindJSON(&dentist_schedule); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if tx := entity.DB().Where("id = ?", dentist_schedule.ID).First(&dentist_schedule); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "dentist_schedule not found"})
+	if tx := entity.DB().Where("id = ?", dentist_schedule.ResponsityID).First(&responsity); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Responsity not found"})
 		return
 	}
-	if err := entity.DB().Save(&dentist_schedule).Error; err != nil {
+	if tx := entity.DB().Where("id = ?", dentist_schedule.WorkingdayID).First(&workingday); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Workingday not found"})
+		return
+	}
+	if tx := entity.DB().Where("id = ?", dentist_schedule.DentistID).First(&dentist); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Dentist not found"})
+		return
+	}
+	if tx := entity.DB().Where("id = ?", dentist_schedule.Room_NumberID).First(&room_number); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Room number not found"})
+		return
+	}
+	wv := entity.Dentist_schedule{
+		Dentist: dentist,
+		Responsity: responsity,
+		Workingday: workingday,
+		Job_description: dentist_schedule.Job_description,
+		Room_Number: room_number,
+		TimeWork: dentist_schedule.TimeWork, 
+		TimeEnd:  dentist_schedule.TimeEnd,  
+	}
+	if _, err := govalidator.ValidateStruct(wv); err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := entity.DB().Where("id = ?", id).Updates(&wv).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

@@ -10,6 +10,8 @@ import { GetPatientSchedules } from "../../services/HttpClientService";
 import moment from "moment";
 import axios from 'axios';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { ButtonGroup } from "@mui/material";
+import Stack from "@mui/material/Stack";
 function PatienScheduleHome() {
   const [patien_schedule, setPatien_schedule] = useState<PatienSceheduleInterface[]>([]);
 
@@ -26,7 +28,7 @@ function PatienScheduleHome() {
 
   const Delete = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/patien_schedules/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/patien_schedules/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
@@ -49,13 +51,26 @@ function PatienScheduleHome() {
     { field: "Patient",headerName: "ชื่อ ผู้ป่วย",width: 125,valueFormatter: (params) => params.value.FirstName,},
     { field: "Employee",headerName: "แพทย์ที่รับผิดชอบ",width: 130,valueFormatter: (params) => params.value.FirstName,},
     { field: "Reason",headerName: "หมายเหตุ",width: 150,valueFormatter: (params) => params.value.Method,},
+    { field: "Patien_Number", headerName: "เบอร์โทรผู้ป่วย", width: 150 },
     { field: "Type_of_treatment", headerName: "ประเภทการรักษา", width: 200 ,valueFormatter: (params) => params.value.Type_of_treatment_name,},
-    { field: "Date_time", headerName: "วันที่และเวลา", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
+
+    { field: "Date_time", headerName: "วันที่และเวลา", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm ') },
     {
-      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
-            <Button  onClick={() => Delete(row.ID)} size="small" variant="contained" color="error" >
-                Delete <DeleteForeverIcon />
-            </Button>
+      field: "action", headerName: "Action",width: 250  , sortable: false, renderCell: ({ row }) =>
+      <ButtonGroup>
+        <Stack spacing={2} direction="row">
+          <Button onClick={() => Delete(row.ID)} variant="contained" color="error">
+                  delete
+          </Button>
+          <Button component={RouterLink} to={`/PatientSchedule/Update/${row.ID}`} variant="contained">
+              <div className="good-font">
+                  update
+              </div>
+          </Button>
+        </Stack>
+      </ButtonGroup>      
+
+            
     },
   ];
 
@@ -102,6 +117,7 @@ function PatienScheduleHome() {
       </Container>
     </div>
   );
-}
+        }
+      
 
 export default PatienScheduleHome;

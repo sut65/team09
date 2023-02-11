@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import Container from "@mui/material/Container";
@@ -28,8 +28,8 @@ import {
   GetRole,
   GetGender,
   GetProvince,
-  GetDistrict,
-  GetSubdistrict,
+  // GetDistrict,
+  // GetSubdistrict,
   CreateEmployee,
 } from "../../services/HttpClientService";
 
@@ -47,11 +47,22 @@ function EmployeeCreate() {
   const [district, setDistrict] = React.useState<DistrictInterface[]>([]);
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
-  const [provinceId, setProvinceId] = useState('');
-  const [districtId, setDistrictId] = useState('');
+  const [provinceId, setProvinceId] = useState('0');
+  const [districtId, setDistrictId] = useState('0');
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [message, setAlertMessage] = React.useState("");
+
+  const apiUrl = "http://localhost:8080";
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
+  
 
    //เปิดปิดตัว alert
     const handleClose = (
@@ -85,6 +96,12 @@ function EmployeeCreate() {
       [name]: event.target.value,
     });
     }
+
+    const clickChang = () => {
+      getDistrict();
+      getSubdistrict();
+    }
+
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
     const name = event.target.name as keyof typeof EmployeeCreate;
@@ -101,15 +118,6 @@ function EmployeeCreate() {
     const id = event.target.id as keyof typeof employee;
     const { value } = event.target;
     setEmployee({ ...employee, [id]: value });
-  };
-
-  const saveProvinceIdToLocalStorage = () => {
-    localStorage.setItem('provinceId', provinceId);
-    getDistrict();
-  };
-  const saveDistrictIdToLocalStorage = () => {
-    localStorage.setItem('districtId', districtId);
-    getSubdistrict();
   };
   
   const getGender = async () => {
@@ -134,17 +142,30 @@ function EmployeeCreate() {
   };
 
   const getDistrict = async () => {
-    let res = await GetDistrict();
-    if (res) {
-      setDistrict(res);
-    }
+    let id = provinceId
+    fetch(`${apiUrl}/district/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return setDistrict(res.data);
+        } else {
+          return false;
+        }
+      });
   };
 
   const getSubdistrict = async () => {
-    let res = await GetSubdistrict();
-    if (res) {
-      setSubdistrict(res);
-    }
+    let id = districtId
+    fetch(`${apiUrl}/subdistrict/${id}`)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return setSubdistrict(res.data);
+        } else {
+          return false;
+        }
+      });
+  
   };
 
   useEffect(() => {
@@ -160,8 +181,6 @@ function EmployeeCreate() {
     return val;
   };
 
-
-  
   async function submit() {
     let data = {
       Employee_number: employee.Employee_number,
@@ -181,9 +200,11 @@ function EmployeeCreate() {
 
     let res = await CreateEmployee(data);
     console.log(res);
-    if (res) { 
+    if (res.status) {
+      setAlertMessage("บันทึกข้อมูลสำเร็จ");
       setSuccess(true);
     } else {
+      setAlertMessage(res.message);
       setError(true);
     }
   }
@@ -191,23 +212,25 @@ function EmployeeCreate() {
   return (
     <Container maxWidth="md">
       <Snackbar
+        id="success"
         open={success}
         autoHideDuration={3000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="success">
-          บันทึกข้อมูลสำเร็จ
+            {message}
         </Alert>
       </Snackbar>
       <Snackbar
+        id="error"
         open={error}
         autoHideDuration={6000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="error">
-          บันทึกข้อมูลไม่สำเร็จ
+            {message}
         </Alert>
       </Snackbar>
       <Paper>
@@ -344,12 +367,12 @@ function EmployeeCreate() {
                 native
                 value={employee.ProvinceID + ""}
                 onChange={handleChangeProvince}
-                onClick={saveProvinceIdToLocalStorage}
+                onClick={clickChang}
                 inputProps={{
                   name: "ProvinceID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกจังหวัด
                 </option>
                 {province.map((item: ProvinceInterface) => (
@@ -369,12 +392,12 @@ function EmployeeCreate() {
                 native
                 value={employee.DistrictID + ""}
                 onChange={handleChangeDistrict}
-                onClick={saveDistrictIdToLocalStorage}
+                onClick={clickChang}
                 inputProps={{
                   name: "DistrictID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกอำเภอ
                 </option>
                 {district.map((item: DistrictInterface) => (
@@ -383,6 +406,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
+              {districtId && <div>Selected district id: {districtId}</div>}
             </FormControl>
         </Grid>
 
@@ -397,7 +421,7 @@ function EmployeeCreate() {
                   name: "Sub_districtID",
                 }}
               >
-                <option aria-label="None" value="">
+                <option aria-label="None" value="0">
                   กรุณาเลือกตำบล
                 </option>
                 {subdistrict.map((item: Sub_districtInterface) => (

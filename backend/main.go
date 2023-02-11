@@ -17,7 +17,7 @@ import (
 	"github.com/sut65/team09/entity"
 )
 
-//const PORT = "8080"
+const PORT = "8080"
 
 func main() {
 
@@ -37,7 +37,7 @@ func main() {
 	router.GET("/patients", patient.ListPatient)
 	router.GET("/patients/:id", patient.GetPatient)
 	router.POST("/patients", patient.CreatePatient)
-	router.PATCH("/patients", patient.UpdatePatient)
+	router.PATCH("/patients/:id", patient.UpdatePatient)
 	router.DELETE("/patients/:id", patient.DeletePatient)
 
 	//---------Employee-------------
@@ -83,7 +83,7 @@ func main() {
 	router.GET("/patien_schedules", patienschedule.ListPatienSchedules)
 	router.GET("/patien_schedules/:id", patienschedule.GetPatienSchedule)
 	router.POST("/patien_schedules", patienschedule.CreatePatienSchedule)
-	router.PATCH("/patien_schedules", patienschedule.UpdatePatienSchedules)
+	router.PATCH("/patien_schedules/:id", patienschedule.UpdatePatienSchedules)
 	router.DELETE("/patien_schedules/:id", patienschedule.DeletePatienSchedule)
 
 	// Reason Routes
@@ -152,7 +152,7 @@ func main() {
 	router.GET("/dentist_schedules", docterschedule.ListDentistSchedules)
 	router.GET("/dentist_schedules/:id", docterschedule.GetDentistSchedule)
 	router.POST("/dentist_schedules", docterschedule.CreateDentistSchedule)
-	router.PATCH("/dentist_schedules", docterschedule.UpdateDentistSchedules)
+	router.PATCH("/dentist_schedules/:id", docterschedule.UpdateDentistSchedules)
 	router.DELETE("/dentist_schedules/:id", docterschedule.DeleteDentistSchedule)
 
 	//-------------Dentist-------------------
@@ -174,16 +174,16 @@ func main() {
 	router.GET("/dentists", dentist.ListDentist)
 	router.GET("/dentist/:id", dentist.GetDentist)
 	router.POST("/dentists", dentist.CreateDentist)
-	router.PATCH("/dentists", dentist.UpdateDentist)
+	router.PATCH("/dentists/:id", dentist.UpdateDentist)
 	router.DELETE("/dentist/:id", dentist.DeleteDentist)
 
 	//-------------Room-------------------
 	// Room_Number Routes
-	router.GET("/room_numbers", room.ListRoom_Detail)
-	router.GET("/room_number:id", room.GetRoom_Detail)
-	router.POST("/room_numbers", room.CreateRoom_Detail)
-	router.PATCH("/room_numbers", room.UpdateRoom_Detail)
-	router.DELETE("/room_number/:id", room.DeleteRoom_Detail)
+	router.GET("/room_numbers", room.ListRoom_Number)
+	router.GET("/room_number:id", room.GetRoom_Number)
+	router.POST("/room_numbers", room.CreateRoom_Number)
+	router.PATCH("/room_numbers", room.UpdateRoom_Number)
+	router.DELETE("/room_number/:id", room.DeleteRoom_Number)
 
 	// Category Routes
 	router.GET("/categories", room.ListCategory)
@@ -272,7 +272,7 @@ func main() {
 
 	// Run the server
 
-	r.Run()
+	r.Run()  //("0.0.0.0:3001")
 
 }
 
