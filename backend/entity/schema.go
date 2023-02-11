@@ -348,13 +348,13 @@ type Treatment struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID              *uint
 	Patient                Patient `gorm:"references:id" valid:"-"`
-	Number_of_cavities     int     `valid:"range(0|50)~Number of cavities cannot be negative"`
-	Number_of_swollen_gums int     `valid:"range(0|50)~Number of swollen gums cannot be negative"`
+	Number_of_cavities     int     `valid:"range(0|50)~Number of cavities cannot be negative or too much"`
+	Number_of_swollen_gums int     `valid:"range(0|50)~Number of swollen gums cannot be negative or too much"`
 	Other_teeth_problems   string  `valid:"required~Other teeth problems cannot be blank"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative"`
+	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative or too much"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment `gorm:"references:id" valid:"-"`
