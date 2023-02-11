@@ -1125,8 +1125,8 @@ func SetupDatabase() {
 
 	//---------------------------------- ตารางหลัก treatment ---------------------------------
 	treatment1 := Treatment{
-		Dentist: dentist1,
-		Patient: patient1,
+		Dentist: dentist2,
+		Patient: patient2,
 		Number_of_cavities: 1,
 		Number_of_swollen_gums: 1,
 		Other_teeth_problems: "มีหินปูน",
@@ -1142,8 +1142,8 @@ func SetupDatabase() {
 
 	//---------------------------------- ตารางหลัก treatment plan ---------------------------------
 	treatment_plan1 := Treatment_plan{
-		Dentist: dentist1,
-		Patient: patient1,
+		Dentist: dentist2,
+		Patient: patient2,
 		Order_of_treatment: 1,
 		Type_Of_Treatment: Type_of_treatment8,
 		Number_of_treatment: 1,
