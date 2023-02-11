@@ -205,16 +205,13 @@ func main() {
 	// Payment_status Routes
 	router.GET("/payment_statuses", payment.ListPayment_statuses)
 	router.GET("/payment_status/:id", payment.GetPayment_status)
-	//router.POST("/payment_statuses", payment.CreatePayment_status)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// Payment Routes
 	router.GET("/payments", payment.ListPayments)
 	router.GET("/payment/:id", payment.GetPayment)
 	router.POST("/payments", payment.CreatePayment)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+	router.PATCH("/update-payment", payment.UpdatePayment)
+	router.DELETE("/delete-payment/:id", payment.DeletePayment)
 
 	//---------Prescription-------------
 	// Medicine_status Routes
