@@ -18,11 +18,11 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useParams } from "react-router-dom";
 
 //import { GetCurrentAdmin } from "../services/HttpClientService"
-import { TreatmentsInterface } from "../../models/ITreatment"; 
-import { Type_of_treatments_Interface } from "../../models/IType_of_treatment"; 
-import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment"; 
-import { DentistInterface } from "../../models/IDentist"; 
-import { PatientInterface } from "../../models/IPatient"; 
+import { TreatmentsInterface } from "../../models/ITreatment";
+import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
+import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
+import { DentistInterface } from "../../models/IDentist";
+import { PatientInterface } from "../../models/IPatient";
 import { DatePicker } from "@mui/x-date-pickers";
 import { TreatmentsPlanInterface } from "../../models/ITreatment_plan";
 
@@ -37,6 +37,7 @@ function TreatmentCreate() {
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
+    const [message, setAlertMessage] = React.useState("");
 
     const [dentist, setADentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
@@ -255,22 +256,33 @@ function TreatmentCreate() {
             body: JSON.stringify(data),
         };
 
-        fetch(`${apiUrl}/treatment_plans/${id}`, requestOptions)
+        let res = await fetch(`${apiUrl}/treatment_plans/${id}`, requestOptions)
             .then((response) => response.json())
             .then((res) => {
                 if (res.data) {
                     setSuccess(true);
                     setErrorMessage("")
+                    return { status: true, message: res.data };
                 } else {
                     setError(true);
                     setErrorMessage(res.error)
+                    return { status: false, message: res.error };
                 }
             });
+
+        if (res.status) {
+            setAlertMessage("อัปเดตข้อมูลสำเร็จ");
+            setSuccess(true);
+        } else {
+            setAlertMessage(res.message);
+            setError(true);
+        }
     }
 
     return (
         <Container maxWidth="md">
             <Snackbar
+                id="success"
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
@@ -278,14 +290,17 @@ function TreatmentCreate() {
             >
                 <Alert onClose={handleClose} severity="success">
                     <div className="good-font">
-                        อัปเดตข้อมูลสำเร็จ
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
-            <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar id="error"
+                open={error}
+                autoHideDuration={6000}
+                onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
-                        อัปเดตข้อมูลไม่สำเร็จ
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
@@ -304,7 +319,7 @@ function TreatmentCreate() {
                             gutterBottom
                         >
                             <div className="good-font">
-                            แก้ไขแผนการรักษา ID : {id}
+                                แก้ไขแผนการรักษา ID : {id}
                             </div>
                         </Typography>
                     </Box>
@@ -312,7 +327,7 @@ function TreatmentCreate() {
                 <Divider />
                 <Grid container spacing={3} sx={{ padding: 2 }}>
 
-                <Grid item xs={6}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ทันตแพทย์</p>
                             <Select
@@ -367,7 +382,7 @@ function TreatmentCreate() {
                             <p className="good-font">ลำดับการรักษา</p>
                             <TextField
                                 id="order_of_treatment"
-                                variant="outlined" 
+                                variant="outlined"
                                 type="number"
                                 size="medium"
                                 InputProps={{ inputProps: { min: 1 } }}
