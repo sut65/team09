@@ -217,23 +217,17 @@ func main() {
 	// Medicine_status Routes
 	router.GET("/medicine_statuses", prescription.ListMedicine_statuses)
 	router.GET("/medicine_status/:id", prescription.GetMedicine_status)
-	//router.POST("/payment_statuses", payment.CreatePayment_status)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// Medicine Routes
 	router.GET("/medicines", prescription.ListMedicines)
 	router.GET("/medicine/:id", prescription.GetMedicine)
-	//router.POST("/payment_statuses", payment.CreatePayment_status)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// Prescription Routes
 	router.GET("/prescriptions", prescription.ListPrescriptions)
-	router.GET("/prescription/:id", prescription.GetPrescription)
+ 	router.GET("/prescription/:id", prescription.GetPrescription)
 	router.POST("/prescriptions", prescription.CreatePrescription)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+	router.PATCH("/update-prescription", prescription.UpdatePrescription)
+	router.DELETE("/delete-prescription/:id", prescription.DeletePrescription)
 
 	//----Repair-----
 	r.GET("/repairs", repair.ListRepairs)
