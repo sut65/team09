@@ -359,7 +359,7 @@ useEffect(() => {
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">จำนวน</p>
                             <TextField
-                                id="Qty"
+                                id="qty"
                                 variant="outlined"
                                 type="number"
                                 size="medium"
