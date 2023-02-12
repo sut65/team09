@@ -1065,6 +1065,53 @@ async function GetReasons() {
     return res;
   }
 
+  const UpdatePrescription = async (data: PrescriptionInterface) => {
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/update-prescription`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return { status: true, message: res.data };
+        } else {
+          return { status: false, message: res.error };
+        }
+      });
+  
+    return res;
+  };
+
+  async function GetPrescriptionByID() {
+    let id = localStorage.getItem("id");
+    const requestOptions = {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        },
+    };
+  
+    let res = await fetch(`${apiUrl}/prescription/${id}`, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+            if (res.data) {
+                console.log(res.data);
+                return res.data;
+            } else {
+                return false;
+            }
+        });
+  
+    return res;
+  }
+
   async function GetPayment_status() {
     const requestOptions = {
       method: "GET",
@@ -1275,6 +1322,8 @@ async function GetReasons() {
     GetMedicine_status,
     GetPrescription,
     CreatePrescription,
+    UpdatePrescription,
+    GetPrescriptionByID,
 
     GetPayment_status,
     GetPayment,

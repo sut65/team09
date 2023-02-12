@@ -12,9 +12,9 @@ import Snackbar from "@mui/material/Snackbar";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-//import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-//import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-//import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { DentistInterface } from "../../models/IDentist"; 
 import { PatientInterface } from "../../models/IPatient";
@@ -44,7 +44,7 @@ function PrescriptionCreate() {
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
     const [medicine, setMedicine] = React.useState<MedicineInterface[]>([]);
     const [medicine_status, setMedicine_status] = React.useState<Medicine_statusInterface[]>([]);
-    const [prescription, setPrescription] = useState<Partial<PrescriptionInterface>>({});
+    const [prescription, setPrescription] = React.useState<PrescriptionInterface>({ DateTimePrescription: new Date(), });
     const [message, setAlertMessage] = React.useState("");
 
     const [success, setSuccess] = useState(false);
@@ -127,7 +127,9 @@ function PrescriptionCreate() {
         PatientID: convertType(prescription.PatientID),
         MedicineID: convertType(prescription.MedicineID),
         Medicine_statusID: convertType(prescription.Medicine_statusID),
-        DateTimePrescription: new Date(),
+        Qty: typeof prescription.Qty === "string" ? parseInt(prescription.Qty) : 0,
+        Detail: prescription.Details ?? "",
+        DateTimePrescription: prescription.DateTimePrescription,
     };
     console.log(data);
 
@@ -256,6 +258,36 @@ function PrescriptionCreate() {
             </FormControl>
           </Grid>
 
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+              <p className="good-font">จำนวน</p>
+              <TextField
+                id="Qty"
+                variant="outlined"
+                type="number"
+                size="medium"
+                value={prescription.Qty || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}></Grid>
+
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+              <p className="good-font">รายละเอียด</p>
+              <TextField
+                id="Details"
+                variant="outlined"
+                type="string"
+                size="medium"
+                value={prescription.Details || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}></Grid>
+
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
@@ -277,6 +309,24 @@ function PrescriptionCreate() {
                   </option>
                 ))}
               </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+              <p className="good-font">เวลาการสั่งจ่าย</p>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  value={prescription.DateTimePrescription}
+                  onChange={(newValue) => {
+                    setPrescription({
+                      ...prescription,
+                      DateTimePrescription: newValue,
+                    });
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
             </FormControl>
           </Grid>
 

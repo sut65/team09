@@ -55,7 +55,7 @@ function Prescriptions() {
           <Button onClick={() => handleDelete1(row.ID)} variant="contained" color="error">
               <DeleteForeverIcon />
           </Button>
-          <Button component={RouterLink} to={`/prescriptionupdate/${row.ID}`} variant="contained" color="info">
+          <Button component={RouterLink} to={`/prescription/update/${row.ID}`} variant="contained" color="info">
             <div className="good-font">
               <EditIcon />
             </div>

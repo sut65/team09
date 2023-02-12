@@ -68,6 +68,7 @@ import TreatmentPlanUpdate from "./components/treatment_plan/TreatmentPlanUpdate
 
 import PrescriptionList from "./components/prescription/PrescriptionList";
 import PrescriptionCreate from "./components/prescription/PrescriptionCreate";
+import PrescriptionUpdate from "./components/prescription/PrescriptionUpdate";
 
 import PaymentList from "./components/payment/PaymentList";
 import PaymentCreate from "./components/payment/PaymentCreate";
@@ -289,6 +290,8 @@ function App() {
                 <Route path="/room_details" element={<Room_Details />} />
                 <Route path="/room_detail/create" element={<Room_DetailCreate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
+                <Route path="/prescription/create" element={<PrescriptionCreate />} />
+                <Route path="/prescription/update/:id" element={<PrescriptionUpdate />} />
                 <Route path="/payment" element={<PaymentList />} />
                 <Route path="/Repair/create" element={<CreateRepair />} />
                 <Route path="/Repair" element={<RepairList />} />

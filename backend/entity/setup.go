@@ -998,6 +998,8 @@ func SetupDatabase() {
 	DateTimePrescriptionC := time.Date(2022, time.September, 8, 25, 22, 33, 0, time.Local)
 
 	Prescription1 := Prescription{
+		Qty:				  2,	     			 	
+		Details:			  "รับประทานหลังอาหาร",
 		Medicine:             Medicine1,
 		Medicine_status:      Medicine_status1,
 		Patient:              patient1,
@@ -1007,6 +1009,8 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription1)
 
 	Prescription2 := Prescription{
+		Qty:				  10,	     			 	
+		Details:			  "รับประทานวันละ 1 เม็ด",
 		Medicine:             Medicine12,
 		Medicine_status:      Medicine_status2,
 		Patient:              patient2,
@@ -1016,6 +1020,8 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription2)
 
 	Prescription3 := Prescription{
+		Qty:				  5,	     			 	
+		Details:			  "ทานยาแล้วอาจรู้สึกง่วงซึม",
 		Medicine:             Medicine2,
 		Medicine_status:      Medicine_status2,
 		Patient:              patient2,
