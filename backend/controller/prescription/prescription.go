@@ -53,7 +53,9 @@ func CreatePrescription(c *gin.Context) {
 		Dentist:              	dentist,
 		Medicine:				medicine,
 		Medicine_status:       	medicine_status,
-		//DateTimePrescription: prescription.DateTimePrescription,
+		Qty:					prescription.Qty,
+		Details:				prescription.Details,
+		DateTimePrescription: prescription.DateTimePrescription,
 	}
 
 	if err := entity.DB().Create(&p_create1).Error; err != nil {
@@ -138,6 +140,8 @@ func UpdatePrescription(c *gin.Context) {
 		Dentist:              	dentist,
 		Medicine:				medicine,
 		Medicine_status:       	medicine_status,
+		Qty:					prescription.Qty,
+		Details:				prescription.Details,
 		DateTimePrescription: prescription.DateTimePrescription,
 	}
 

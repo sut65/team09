@@ -18,5 +18,7 @@ export interface PrescriptionInterface {
     Medicine_statusID?: number,
     Medicine_status?: Medicine_statusInterface,
 
-    DateTimePrescription?: Date,
+    Qty?: number,
+	Details?: string,
+    DateTimePrescription?: Date | null,
 }
