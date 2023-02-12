@@ -236,7 +236,9 @@ function TreatmentCreate() {
             <Snackbar 
             id="error"
             open={error}
-            autoHideDuration={6000} onClose={handleClose}>
+            autoHideDuration={6000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
                 
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
@@ -449,9 +451,6 @@ function TreatmentCreate() {
                             />
                         </FormControl>
                     </Grid>
-
-
-                    
 
                     <Grid item xs={12}>
                         <Button component={RouterLink} to="/treatmentlistshow" variant="contained">

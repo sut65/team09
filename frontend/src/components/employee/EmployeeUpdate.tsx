@@ -66,6 +66,17 @@ function EmployeeCreate() {
   const [password, setPass] = React.useState<string>("");
   const [phone, setPhone] = React.useState<string>("");
   const [house, setHouse] = React.useState<string>("");
+  //combobox
+  const [provinceName, setPname] = React.useState<string>("");
+  const [districtName, setDname] = React.useState<string>("");
+  const [subdistrictName, setSname] = React.useState<string>("");
+  const [genName, setGname] = React.useState<string>("");
+  const [roleName, setRname] = React.useState<string>("");
+  const [pid, setPid] = React.useState<string>("");
+  const [did, setDid] = React.useState<string>("");
+  const [sid, setSid] = React.useState<string>("");
+  const [gid, setGid] = React.useState<string>("");
+  const [rid, setRid] = React.useState<string>("");
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -73,41 +84,72 @@ function EmployeeCreate() {
 
   const { id } = useParams();
   useEffect(() => {
-    getEmployee();
+    GetEmployee();
+    // clickChang();
     fetch(`http://localhost:8080/employee/${id}`)
         .then((response) => response.json())
         .then((res) => {
             if (res.data) {
-                console.log("Employee number : ")
-                console.log(res.data.Employee_number)
                 setEmployee_number(res.data.Employee_number.toString());
-
-                console.log("Personal : ")
-                console.log(res.data.Personal_id)
                 setPersonal(res.data.Personal_id.toString());
-
-                console.log("FirstName : ")
-                console.log(res.data.FirstName)
                 setfn(res.data.FirstName.toString());
-
-                console.log("LastName : ")
-                console.log(res.data.LastName)
                 setLn(res.data.LastName.toString());
-
                 setPass(res.data.Password.toString());
-
-                console.log("Phone : ")
-                console.log(res.data.Phone)
                 setPhone(res.data.Phone.toString());
-
-                console.log("House_no : ")
-                console.log(res.data.House_no )
                 setHouse(res.data.House_no .toString());
-
             }
-        }
-        )
-}, [id])
+            fetch(`http://localhost:8080/province/${res.data.ProvinceID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setPname(res.data.Province_name)
+                        setPid(res.data.ID)
+                        employee.ProvinceID = res.data.ID
+                        console.log("province : "+employee.ProvinceID)
+                    }
+             })
+             fetch(`http://localhost:8080/district_by/${res.data.DistrictID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setDname(res.data.District_name)
+                        setDid(res.data.ID)
+                        employee.DistrictID = res.data.ID
+                        console.log("district : "+employee.DistrictID)
+                    }
+                })
+            fetch(`http://localhost:8080/subdistrict_by/${res.data.Sub_districtID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setSname(res.data.Sub_district_name)
+                        setSid(res.data.ID)
+                        employee.Sub_districtID = res.data.ID
+                        console.log("sub_district : "+employee.Sub_districtID)
+                    }
+              })
+            fetch(`http://localhost:8080/gender/${res.data.GenderID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setGname(res.data.Gender_name)
+                        setGid(res.data.ID)
+                        employee.GenderID = res.data.ID
+                        console.log("gender : "+employee.GenderID)
+                    }
+                })
+            fetch(`http://localhost:8080/roles/${res.data.RoleID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setRname(res.data.Role_name)
+                        setRid(res.data.ID)
+                        employee.RoleID = res.data.ID
+                        console.log("role : "+employee.RoleID)
+                    }
+                })
+      })
+  }, [id])
 
    //เปิดปิดตัว alert
     const handleClose = (
@@ -235,8 +277,13 @@ function EmployeeCreate() {
   };
 
 
-  
+ 
   async function submit() {
+    employee.ProvinceID = Number(pid);
+    employee.DistrictID = Number(did);
+    employee.Sub_districtID = Number(sid);
+    employee.GenderID = Number(gid);
+    employee.RoleID = Number(rid);
     let data = {
       Employee_number: employee_number,
       FirstName: firstname,
@@ -251,7 +298,7 @@ function EmployeeCreate() {
       DistrictID: convertType(employee.DistrictID),
       Sub_districtID: convertType(employee.Sub_districtID),
     };
-    console.log(JSON.stringify(data))
+    console.log(data)
 
     const requestOptions = {
         method: "PATCH",
@@ -447,8 +494,8 @@ function EmployeeCreate() {
                   name: "ProvinceID",
                 }}
               >
-                <option aria-label="None" value="0">
-                    กรุณาเลือกจังหวัด
+                <option aria-label="None" value={provinceName}>
+                      {provinceName}
                 </option>
                 {province.map((item: ProvinceInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -456,7 +503,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
-              {provinceId && <div>Selected province id: {provinceId}</div>}
+              {pid && <div>Selected province id: {pid}</div>}
             </FormControl>
         </Grid>
 
@@ -472,8 +519,8 @@ function EmployeeCreate() {
                   name: "DistrictID",
                 }}
               >
-                <option aria-label="None" value="0">
-                  กรุณาเลือกอำเภอ
+                <option aria-label="None" value={districtName}>
+                    {districtName}
                 </option>
                 {district.map((item: DistrictInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -495,8 +542,8 @@ function EmployeeCreate() {
                   name: "Sub_districtID",
                 }}
               >
-                <option aria-label="None" value="0">
-                  กรุณาเลือกตำบล
+                <option aria-label="None" value={subdistrictName}>
+                    {subdistrictName}
                 </option>
                 {subdistrict.map((item: Sub_districtInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -518,8 +565,8 @@ function EmployeeCreate() {
                   name: "GenderID",
                 }}
               >
-                <option aria-label="None" value="">
-                  กรุณาเลือกเพศ
+                <option aria-label="None" value={genName}>
+                    {genName}
                 </option>
                 {gender.map((item: GenderInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -542,8 +589,8 @@ function EmployeeCreate() {
                   name: "RoleID",
                 }}
               >
-                <option aria-label="None" value="">
-                  กรุณาเลือกบทบาท
+                <option aria-label="None" value={roleName}>
+                    {roleName}
                 </option>
                 {role.map((item: RoleInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -551,6 +598,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
+              {employee.RoleID && <div>Selected role id : {employee.RoleID}</div>}
             </FormControl>
           </Grid>
 

@@ -66,6 +66,17 @@ function PaitentCreate() {
   const [drug, setDrug] = React.useState<string>("");
   const [house, setHouse] = React.useState<string>("");
   const [sn, setSn] = React.useState<string>("");
+    //combobox
+    const [provinceName, setPname] = React.useState<string>("");
+    const [districtName, setDname] = React.useState<string>("");
+    const [subdistrictName, setSname] = React.useState<string>("");
+    const [genName, setGname] = React.useState<string>("");
+    const [syName, setSyname] = React.useState<string>("");
+    const [pid, setPid] = React.useState<string>("");
+    const [did, setDid] = React.useState<string>("");
+    const [sid, setSid] = React.useState<string>("");
+    const [gid, setGid] = React.useState<string>("");
+    const [syid, setSyid] = React.useState<string>("");
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -98,6 +109,56 @@ function PaitentCreate() {
                 setHouse(res.data.House_no .toString());
                 setSn(res.data.Symptom_name.toString());
             }
+            fetch(`http://localhost:8080/province/${res.data.ProvinceID}`)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.data) {
+                    setPname(res.data.Province_name)
+                    setPid(res.data.ID)
+                    patient.ProvinceID = res.data.ID
+                    console.log("province : "+patient.ProvinceID)
+                }
+         })
+         fetch(`http://localhost:8080/district_by/${res.data.DistrictID}`)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.data) {
+                    setDname(res.data.District_name)
+                    setDid(res.data.ID)
+                    patient.DistrictID = res.data.ID
+                    console.log("district : "+ patient.DistrictID)
+                }
+            })
+        fetch(`http://localhost:8080/subdistrict_by/${res.data.Sub_districtID}`)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.data) {
+                    setSname(res.data.Sub_district_name)
+                    setSid(res.data.ID)
+                    patient.Sub_districtID = res.data.ID
+                    console.log("sub_district : "+ patient.Sub_districtID)
+                }
+          })
+        fetch(`http://localhost:8080/gender/${res.data.GenderID}`)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.data) {
+                    setGname(res.data.Gender_name)
+                    setGid(res.data.ID)
+                    patient.GenderID = res.data.ID
+                    console.log("gender : "+patient.GenderID)
+                }
+            })
+        fetch(`http://localhost:8080/symptoms/${res.data.SymptomID}`)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.data) {
+                    setSyname(res.data.Symptom_choice)
+                    setSyid(res.data.ID)
+                    patient.SymptomID = res.data.ID
+                    console.log("role : "+patient.SymptomID)
+                }
+            })
         }
         )
 }, [id])
@@ -260,6 +321,11 @@ function PaitentCreate() {
 
   
   async function submit() {
+    patient.ProvinceID = Number(pid);
+    patient.DistrictID = Number(did);
+    patient.Sub_districtID = Number(sid);
+    patient.GenderID = Number(gid);
+    patient.SymptomID = Number(syid);
     let data = {
       FirstName: firstname,
       LastName: lastname,
@@ -511,8 +577,8 @@ function PaitentCreate() {
                   name: "ProvinceID",
                 }}
               >
-                <option aria-label="None" value="0">
-                  กรุณาเลือกจังหวัด
+                 <option aria-label="None" value={provinceName}>
+                      {provinceName}
                 </option>
                 {province.map((item: ProvinceInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -536,8 +602,8 @@ function PaitentCreate() {
                   name: "DistrictID",
                 }}
               >
-                <option aria-label="None" value="0">
-                  กรุณาเลือกอำเภอ
+                <option aria-label="None" value={districtName}>
+                    {districtName}
                 </option>
                 {district.map((item: DistrictInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -559,8 +625,8 @@ function PaitentCreate() {
                   name: "Sub_districtID",
                 }}
               >
-                <option aria-label="None" value="0">
-                  กรุณาเลือกตำบล
+                <option aria-label="None" value={subdistrictName}>
+                    {subdistrictName}
                 </option>
                 {subdistrict.map((item: Sub_districtInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -582,8 +648,8 @@ function PaitentCreate() {
                   name: "GenderID",
                 }}
               >
-                <option aria-label="None" value="">
-                  กรุณาเลือกเพศ
+                 <option aria-label="None" value={genName}>
+                    {genName}
                 </option>
                 {gender.map((item: GenderInterface) => (
                   <option value={item.ID} key={item.ID}>
@@ -606,9 +672,9 @@ function PaitentCreate() {
                   name: "SymptomID",
                 }}
               >
-              <option aria-label="None" value="">
-                  กรุณาเลือกอาการเบื้องต้น
-              </option>
+              <option aria-label="None" value={syName}>
+                    {syName}
+                </option>
                 {symptom.map((item: SymptomInterface) => (
                   <option value={item.ID} key={item.ID}>
                     {item.Symptom_choice}

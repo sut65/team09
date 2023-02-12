@@ -64,6 +64,9 @@ func SetupDatabase() {
 		&Room_Number{},
 		&Category{},
 		&Room_Detail{},
+		//Payment
+		&Payment_status{},
+		&Payment{},
 	)
 
 	db = database
@@ -907,10 +910,76 @@ func SetupDatabase() {
 
 	///////////////ข้อมูลใน entity Medicine///////////
 	Medicine1 := Medicine{
-		Medicine_name:  "แก้ปวด",
-		Medicine_price: 100,
+		Medicine_name:  "paracetamol 250 mg/5 mL) syrup, 60 mL bottle",
+		Medicine_price: 145,
 	}
 	db.Model(&Medicine{}).Create(&Medicine1)
+
+	Medicine2 := Medicine{
+		Medicine_name:  "Ibuprofen",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine2)
+
+	Medicine3 := Medicine{
+		Medicine_name:  "Mefenamic acid",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine3)
+
+	Medicine4 := Medicine{
+		Medicine_name:  "Triamcinolone acetonide oral paste",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine4)
+
+	Medicine5 := Medicine{
+		Medicine_name:  "Acyclovir cream",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine5)
+
+	Medicine6 := Medicine{
+		Medicine_name:  "Sodium fluoride 0.25 mg.",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine6)
+
+	Medicine7 := Medicine{
+		Medicine_name:  "Chlorhexidine 0.02%",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine7)
+
+	Medicine8 := Medicine{
+		Medicine_name:  "Penicillin V",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine8)
+
+	Medicine9 := Medicine{
+		Medicine_name:  "Amoxicillin",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine9)
+
+	Medicine10 := Medicine{
+		Medicine_name:  "Roxithromycin",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine10)
+
+	Medicine11 := Medicine{
+		Medicine_name:  "Metronidazole",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine11)
+
+	Medicine12 := Medicine{
+		Medicine_name:  "Tetracy-cline HCl",
+		Medicine_price: 100,
+	}
+	db.Model(&Medicine{}).Create(&Medicine12)
 
 	///////////////ข้อมูลใน entity Medicine_status///////////
 	Medicine_status1 := Medicine_status{
@@ -918,9 +987,16 @@ func SetupDatabase() {
 	}
 	db.Model(&Medicine_status{}).Create(&Medicine_status1)
 
+	Medicine_status2 := Medicine_status{
+		Medicine_status_name: "ยังไม่ได้รับยา",
+	}
+	db.Model(&Medicine_status{}).Create(&Medicine_status2)
+
 	///////////////ข้อมูลใน entity Prescription///////////
-	DateTimePrescriptionA := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
-	//DateTimePrescriptionB := time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local)
+	DateTimePrescriptionA := time.Date(2022, time.September, 1, 13, 23, 44, 0, time.Local)
+	DateTimePrescriptionB := time.Date(2022, time.September, 6, 13, 55, 26, 0, time.Local)
+	DateTimePrescriptionC := time.Date(2022, time.September, 8, 25, 22, 33, 0, time.Local)
+
 	Prescription1 := Prescription{
 		Medicine:             Medicine1,
 		Medicine_status:      Medicine_status1,
@@ -929,6 +1005,24 @@ func SetupDatabase() {
 		DateTimePrescription: DateTimePrescriptionA,
 	}
 	db.Model(&Prescription{}).Create(&Prescription1)
+
+	Prescription2 := Prescription{
+		Medicine:             Medicine12,
+		Medicine_status:      Medicine_status2,
+		Patient:              patient2,
+		Dentist:              dentist2,
+		DateTimePrescription: DateTimePrescriptionB,
+	}
+	db.Model(&Prescription{}).Create(&Prescription2)
+
+	Prescription3 := Prescription{
+		Medicine:             Medicine2,
+		Medicine_status:      Medicine_status2,
+		Patient:              patient2,
+		Dentist:              dentist3,
+		DateTimePrescription: DateTimePrescriptionC,
+	}
+	db.Model(&Prescription{}).Create(&Prescription3)
 
 	//จำลองข้อมูลระบบจัดตารางงานแพทย์
 	var Ttype = []Type_of_treatment{
@@ -1120,6 +1214,38 @@ func SetupDatabase() {
 	}
 	db.Model(&Type_of_number_of_treatment{}).Create(&Type_of_number_of_treatment3)
 
+	//---------------------------------- ตารางหลัก treatment ---------------------------------
+	treatment1 := Treatment{
+		Dentist: dentist2,
+		Patient: patient2,
+		Number_of_cavities: 1,
+		Number_of_swollen_gums: 1,
+		Other_teeth_problems: "มีหินปูน",
+		Type_Of_Treatment: Type_of_treatment8,
+		Number_of_treatment: 1,
+		Type_Of_Number_Of_Treatment: Type_of_number_of_treatment1,
+		Treatment_detail: "ถอนฟัน1ซี่ ซ้ายบน",
+		Treatment_time: time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
+		Treatment_code: "T8906834",
+		
+	}
+	db.Model(&Treatment{}).Create(&treatment1)
+
+	//---------------------------------- ตารางหลัก treatment plan ---------------------------------
+	treatment_plan1 := Treatment_plan{
+		Dentist: dentist2,
+		Patient: patient2,
+		Order_of_treatment: 1,
+		Type_Of_Treatment: Type_of_treatment8,
+		Number_of_treatment: 1,
+		Type_Of_Number_Of_Treatment: Type_of_number_of_treatment1,
+		Treatment_detail: "ถอนฟัน1ซี่ ซ้ายบน",
+		Treatment_explain: "ถอนฟันก่อนทำการจัดฟัน",
+		Treatment_time: time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
+		
+	}
+	db.Model(&Treatment_plan{}).Create(&treatment_plan1)
+
 	//------------------------------------------------------------------------
 	//---------------------------------Room-----------------------------------
 
@@ -1218,5 +1344,48 @@ func SetupDatabase() {
 		{Method: "ปวดใจว่าปวดแล้วปวดฟันดันซ้ำเติม"},
 	}
 	db.CreateInBatches(re, 4)
+
+	///////////////ข้อมูลใน entity Payment_status///////////
+	Payment_status1 := Payment_status{
+		Payment_status_name: "ชำระแล้ว",
+	}
+	db.Model(&Payment_status{}).Create(&Payment_status1)
+
+	Payment_status2 := Payment_status{
+		Payment_status_name: "ยังไม่ได้ชำระ",
+	}
+	db.Model(&Payment_status{}).Create(&Payment_status2)
+
+	///////////////ข้อมูลใน entity Prescription///////////
+	DateTimePaymentA := time.Date(2022, time.September, 1, 13, 23, 44, 0, time.Local)
+	DateTimePaymentB := time.Date(2022, time.September, 6, 13, 55, 26, 0, time.Local)
+	DateTimePaymentC := time.Date(2022, time.September, 8, 25, 22, 33, 0, time.Local)
+
+	Payment1 := Payment{
+		Total_price:          1500,
+		Payment_status:       Payment_status1,
+		Patient:              patient1,
+		Employee:             em2,
+		DateTimePayment: DateTimePaymentA,
+	}
+	db.Model(&Payment{}).Create(&Payment1)
+
+	Payment2 := Payment{
+		Total_price:          2500,
+		Payment_status:       Payment_status1,
+		Patient:              patient2,
+		Employee:             em1,
+		DateTimePayment: DateTimePaymentB,
+	}
+	db.Model(&Payment{}).Create(&Payment2)
+
+	Payment3 := Payment{
+		Total_price:          500,
+		Payment_status:       Payment_status2,
+		Patient:              patient1,
+		Employee:             em2,
+		DateTimePayment: DateTimePaymentC,
+	}
+	db.Model(&Payment{}).Create(&Payment3)
 
 }

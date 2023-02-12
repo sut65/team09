@@ -9,6 +9,7 @@ import { DentistInterface } from "../models/IDentist";
 import { Room_DetailInterface } from "../models/IRoom_Detail";
 import { PrescriptionInterface } from "../models/IPrescription";
 import { RepairInterface } from "../models/IRepair";
+import { PaymentInterface } from "../models/IPayment";
 
 const apiUrl = "http://localhost:8080";
 
@@ -1064,6 +1065,51 @@ async function GetReasons() {
     return res;
   }
 
+  async function GetPayment_status() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/payment_statuses`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+  async function CreatePayment(data: PaymentInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/payments`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return { status: true, message: res.data };
+      } else {
+        return { status: false, message: res.error };
+      }
+      });
+  
+    return res;
+  }
+
   async function GetPayment() {
     const requestOptions = {
       method: "GET",
@@ -1230,7 +1276,9 @@ async function GetReasons() {
     GetPrescription,
     CreatePrescription,
 
+    GetPayment_status,
     GetPayment,
+    CreatePayment,
 
     GetDamageLevel,
     GetRepair,

@@ -61,12 +61,14 @@ func main() {
 
 	router.GET("/districts", employee.ListDistrict)
 	router.GET("/district/:id", employee.GetDistrict)
+	router.GET("/district_by/:id", employee.GetDistrictbyID) //เพิ่ม
 	router.POST("/district", employee.CreateDistrict)
 	router.PATCH("/district", employee.UpdateDistrict)
 	router.DELETE("/district/:id", employee.DeleteDistrict)
 
 	router.GET("/subdistricts", employee.ListSubDistrict)
 	router.GET("/subdistrict/:id", employee.GetSubDistrict)
+	router.GET("/subdistrict_by/:id", employee.GetSubDistrictbyID) //เพิ่ม
 	router.POST("/subdistrict", employee.CreateSubDistrict)
 	router.PATCH("/subdistrict", employee.UpdateSubDistrict)
 	router.DELETE("/subdistrict/:id", employee.DeleteSubDistrict)
@@ -203,38 +205,29 @@ func main() {
 	// Payment_status Routes
 	router.GET("/payment_statuses", payment.ListPayment_statuses)
 	router.GET("/payment_status/:id", payment.GetPayment_status)
-	//router.POST("/payment_statuses", payment.CreatePayment_status)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// Payment Routes
 	router.GET("/payments", payment.ListPayments)
 	router.GET("/payment/:id", payment.GetPayment)
 	router.POST("/payments", payment.CreatePayment)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+	router.PATCH("/update-payment", payment.UpdatePayment)
+	router.DELETE("/delete-payment/:id", payment.DeletePayment)
 
 	//---------Prescription-------------
 	// Medicine_status Routes
 	router.GET("/medicine_statuses", prescription.ListMedicine_statuses)
 	router.GET("/medicine_status/:id", prescription.GetMedicine_status)
-	//router.POST("/payment_statuses", payment.CreatePayment_status)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// Medicine Routes
 	router.GET("/medicines", prescription.ListMedicines)
 	router.GET("/medicine/:id", prescription.GetMedicine)
-	//router.POST("/payment_statuses", payment.CreatePayment_status)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
 
 	// Prescription Routes
 	router.GET("/prescriptions", prescription.ListPrescriptions)
-	router.GET("/prescription/:id", prescription.GetPrescription)
+ 	router.GET("/prescription/:id", prescription.GetPrescription)
 	router.POST("/prescriptions", prescription.CreatePrescription)
-	// router.PATCH("/payment_statuses", payment.UpdatePayment_statuses)
-	// router.DELETE("/payment_status/:id", payment.DeletePayment_status)
+	router.PATCH("/update-prescription", prescription.UpdatePrescription)
+	router.DELETE("/delete-prescription/:id", prescription.DeletePrescription)
 
 	//----Repair-----
 	r.GET("/repairs", repair.ListRepairs)
@@ -272,7 +265,7 @@ func main() {
 
 	// Run the server
 
-	r.Run()  //("0.0.0.0:3001")
+	r.Run() //("0.0.0.0:3001")
 
 }
 

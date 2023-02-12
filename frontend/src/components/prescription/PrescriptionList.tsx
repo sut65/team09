@@ -10,6 +10,8 @@ import Stack from "@mui/material/Stack";
 import axios from 'axios';
 import { GetPrescription } from "../../services/HttpClientService";
 import { ButtonGroup } from "@mui/material";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Prescriptions() {
   const [prescriptions, setPrescriptions] = useState<PrescriptionInterface[]>([]);
@@ -21,9 +23,9 @@ function Prescriptions() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete1 = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/prescription/${id}`, {
+      const response = await axios.delete(`http://localhost:3001/delete-prescription/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
@@ -42,27 +44,24 @@ function Prescriptions() {
   };
 
   const columns: GridColDef[] = [
-    { field: "ID", headerName: "ลำดับ", width: 50 },
-    { field: "Patient", headerName: "ชื่อ ผู้ป่วย", width: 250,  valueFormatter: (params) => params.value.FirstName,},
-    { field: "Patient", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
-    { field: "Patient", headerName: "เลขประจำตัวประชาชน", width: 250,  valueFormatter: (params) => params.value.Personal_id,},
-    { field: "Medicine", headerName: "ชื่อยา", width: 250,  valueFormatter: (params) => params.value.Medicine_name,},
-    { field: "Medicine", headerName: "ราคา", width: 250,  valueFormatter: (params) => params.value.Medicine_price,},
-    // { field: "Patient", headerName: "ชื่อ ทันตแพทย์", width: 250,  valueFormatter: (params) => params.value.FirstName,},
-    // { field: "Patient", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
-    { field: "Medicine_status", headerName: "สถานะ", width: 250,  valueFormatter: (params) => params.value.Medicine_status_name,},
-    {
-      field: "action", headerName: "Action",width: 200, sortable: false, renderCell: ({ row }) =>
-      <ButtonGroup>
-                <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
-                    delete
-                </Button>
-                <Button component={RouterLink} to={`/prescriptionupdate/${row.id}`} variant="contained">
-                            <div className="good-font">
-                                update
-                            </div>
-                        </Button>
-            </ButtonGroup>
+    { field: "ID", headerName: "ลำดับ", width: 80 },
+    { field: "Patient", headerName: "ชื่อผู้ป่วย", width: 180,  valueFormatter: (params) => params.value.FirstName,},
+    { field: "Dentist", headerName: "ชื่อทันตแทพย์", width: 180,  valueFormatter: (params) => params.value.FirstName,},
+    { field: "Medicine", headerName: "ชื่อยา", width: 395,  valueFormatter: (params) => params.value.Medicine_name,},
+    { field: "Medicine_status", headerName: "สถานะ", width: 140,  valueFormatter: (params) => params.value.Medicine_status_name,},
+    { field: "action", headerName: "Action",width: 125, sortable: false, renderCell: ({ row }) =>
+      {
+        return <ButtonGroup>
+          <Button onClick={() => handleDelete1(row.ID)} variant="contained" color="error">
+              <DeleteForeverIcon />
+          </Button>
+          <Button component={RouterLink} to={`/prescriptionupdate/${row.ID}`} variant="contained" color="info">
+            <div className="good-font">
+              <EditIcon />
+            </div>
+          </Button>
+        </ButtonGroup>;
+      }
     },
   ];
 
@@ -91,14 +90,6 @@ function Prescriptions() {
           </Box>
           <Box>
           <Stack spacing={2} direction="row">
-            <Button
-                component={RouterLink}
-                to=""
-                variant="contained"
-                color="primary"
-                >
-                แก้ไขข้อมูล
-            </Button>
             <Button
                 component={RouterLink}
                 to="/prescription/create"

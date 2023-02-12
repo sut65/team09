@@ -23,7 +23,19 @@ func CreateSubDistrict(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"data": subdistrict})
 }
 
-// GET /subdistrict/:id
+// get district ของตารางตัวเอง #เพิ่มมา
+func GetSubDistrictbyID(c *gin.Context) {
+	var subdistrict entity.Sub_district
+	id := c.Param("id")
+	if tx := entity.DB().Where("id = ?", id).First(&subdistrict); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "sub_district not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": subdistrict})
+}
+
+// GET /subdistrict/:id = district
 func GetSubDistrict(c *gin.Context) {
 	var subdistrict []entity.Sub_district
 	id := c.Param("id")

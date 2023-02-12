@@ -70,6 +70,7 @@ import PrescriptionList from "./components/prescription/PrescriptionList";
 import PrescriptionCreate from "./components/prescription/PrescriptionCreate";
 
 import PaymentList from "./components/payment/PaymentList";
+import PaymentCreate from "./components/payment/PaymentCreate";
 
 import CreateRepair from "./components/repair/CreateRepair"
 import RepairList from "./components/repair/RepairList";
@@ -291,6 +292,7 @@ function App() {
                 <Route path="/payment" element={<PaymentList />} />
                 <Route path="/Repair/create" element={<CreateRepair />} />
                 <Route path="/Repair" element={<RepairList />} />
+                <Route path="/payment/create" element={<PaymentCreate />} />
             </Routes>
             </Container>
         </Box>
