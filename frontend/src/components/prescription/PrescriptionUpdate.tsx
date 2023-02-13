@@ -176,12 +176,32 @@ useEffect(() => {
                 setQty(res.data.Qty.toString());
             }
 
-            fetch(`http://localhost:8080/dentist/${res.data.DentistID}`)
+            fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.data) {
                         setDentistName(res.data.FirstName)
                         prescription.DentistID = res.data.ID
+                    }
+                }
+                )
+
+            fetch(`http://localhost:8080/medicine_status/${res.data.PatientID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setMedicine_statusName(res.data.Medicine_status_name)
+                        prescription.Medicine_statusID = res.data.ID
+                    }
+                }
+                )
+
+            fetch(`http://localhost:8080/medicine/${res.data.PatientID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setMedicineName(res.data.Medicine_name)
+                        prescription.MedicineID = res.data.ID
                     }
                 }
                 )
@@ -272,7 +292,7 @@ useEffect(() => {
                         gutterBottom
                     >
                         <div className="good-font">
-                            แก้ไขแผนการรักษา ID : {id}
+                            แก้ไขสั่งจ่ายยา ID : {id}
                         </div>
                     </Typography>
                 </Box>
@@ -335,15 +355,14 @@ useEffect(() => {
                         <p className="good-font">ยา</p>
                         <Select
                             native
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
+                            id="medicinename"
                             value={prescription.MedicineID + ""}
                             onChange={handleSelectChange}
                             inputProps={{
                                 name: "MedicineID",
                             }}
                         >
-                            <option aria-label="None" value={medicinename}>
+                            <option aria-label="None" value="">
                                 {medicinename}
                             </option>
                             {medicine.map((item: MedicineInterface) => (
@@ -359,9 +378,10 @@ useEffect(() => {
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">จำนวน</p>
                             <TextField
-                                id="qty"
+                                id="qyt"
                                 variant="outlined"
                                 type="number"
+                                name='Qty'
                                 size="medium"
                                 InputProps={{ inputProps: { min: 1 } }}
                                 InputLabelProps={{
@@ -373,19 +393,19 @@ useEffect(() => {
                         </FormControl>
                     </Grid>
 
-                <Grid item xs={6}>
-                        <FormControl fullWidth variant="outlined">
-                            <p className="good-font">รายละเอียด</p>
-                            <TextField
-                                id="Details"
-                                variant="outlined"
-                                type="string"
-                                size="medium"
-                                value={details}
-                                onChange={(event) => setDetails(event.target.value)}
-                            />
-                        </FormControl>
-                    </Grid>
+                  <Grid item xs={6}>
+                      <FormControl fullWidth variant="outlined">
+                          <p className="good-font">รายละเอียด</p>
+                          <TextField
+                              id="details"
+                              variant="outlined"
+                              type="string"
+                              size="medium"
+                              value={details}
+                              onChange={(event) => setDetails(event.target.value)}
+                          />
+                      </FormControl>
+                  </Grid>
 
                 <Grid item xs={6}>
                     <FormControl fullWidth variant="outlined">

@@ -25,7 +25,7 @@ function Prescriptions() {
 
   const handleDelete1 = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/delete-prescription/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/delete-prescription/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',

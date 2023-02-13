@@ -304,10 +304,10 @@ type Prescription struct {
 	Details				string
 	//PatientID ทำหน้าที่เป็น FK
 	PatientID 			*uint `valid:"required~Name cannot be blank"`
-	Patient   			Patient
+	Patient   			Patient	`gorm:"references:id" valid:"-"`
 	//DentistID ทำหน้าที่เป็น FK
 	DentistID 			*uint
-	Dentist   			Dentist
+	Dentist   			Dentist	`gorm:"references:id" valid:"-"`
 	//Medicine_statusID ทำหน้าที่เป็น FK
 	Medicine_statusID 	*uint `valid:"required~Medicine_status cannot be blank"`
 	Medicine_status   	Medicine_status
@@ -398,12 +398,13 @@ type Payment struct {
 	gorm.Model
 	Total_price     uint
 	DateTimePayment time.Time
+	Note			string
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID *uint
-	Patient   Patient
+	Patient   Patient	`gorm:"references:id" valid:"-"`
 	//EmployeeID 	ทำหน้าที่เป็น FK
 	EmployeeID *uint
-	Employee   Employee
+	Employee   Employee	`gorm:"references:id" valid:"-"`
 	//Payment_statusID 	ทำหน้าที่เป็น FK
 	Payment_statusID *uint
 	Payment_status   Payment_status
