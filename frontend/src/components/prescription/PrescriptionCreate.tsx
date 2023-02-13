@@ -128,7 +128,7 @@ function PrescriptionCreate() {
         MedicineID: convertType(prescription.MedicineID),
         Medicine_statusID: convertType(prescription.Medicine_statusID),
         Qty: typeof prescription.Qty === "string" ? parseInt(prescription.Qty) : 0,
-        Detail: prescription.Details ?? "",
+        Details: prescription.Details ?? "",
         DateTimePrescription: prescription.DateTimePrescription,
     };
     console.log(data);
@@ -271,7 +271,6 @@ function PrescriptionCreate() {
               />
             </FormControl>
           </Grid>
-          <Grid item xs={6}></Grid>
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
@@ -286,8 +285,6 @@ function PrescriptionCreate() {
               />
             </FormControl>
           </Grid>
-          <Grid item xs={6}></Grid>
-
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">

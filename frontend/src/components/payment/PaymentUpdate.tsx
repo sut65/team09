@@ -24,20 +24,18 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 // Interface
-import { DentistInterface } from "../../models/IDentist"; 
+import { EmployeeInterface } from "../../models/IEmployee"; 
 import { PatientInterface } from "../../models/IPatient";
-import { MedicineInterface } from "../../models/IMedicine";
-import { Medicine_statusInterface } from "../../models/IMedicine_status";
-import { PrescriptionInterface } from "../../models/IPrescription";
+import { Payment_statusInterface } from "../../models/IPayment_status";
+import { PaymentInterface } from "../../models/IPayment";
 
 //API
 import {
-    GetMedicine,
-    GetMedicine_status,
+    GetEmployee,
+    GetPayment_status,
     GetPatient,
-    GetDentists,
-    GetPrescriptionByID,
-    UpdatePrescription,
+    GetPaymentByID,
+    UpdatePayment,
 } from '../../services/HttpClientService';
 
 const ImgBox = styled(Box)({
@@ -51,23 +49,21 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function PrescriptionUpdate() {
+function PaymentUpdate() {
     const { id } = useParams();
-    const [dentist, setDentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
+    const [employee, setEmployee] = React.useState<EmployeeInterface[]>([]); //React.useState<DentistsInterface>();
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
-    const [medicine, setMedicine] = React.useState<MedicineInterface[]>([]);
-    const [medicine_status, setMedicine_status] = React.useState<Medicine_statusInterface[]>([]);
-    const [prescription, setPrescription] = React.useState<PrescriptionInterface>({ DateTimePrescription: new Date(), });
+    const [payment_status, setPayment_status] = React.useState<Payment_statusInterface[]>([]);
+    const [payment, setPayment] = React.useState<PaymentInterface>({ DateTimePayment: new Date(), });
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     const [image, setImage] = useState({ name: "", src: "" });
     const [message, setAlertMessage] = React.useState("");
-    const [dentistname, setDentistName] = React.useState("");
+    const [employeename, setEmployeeName] = React.useState("");
     const [patientname, setPatientName] = React.useState("");
-    const [medicine_statusname, setMedicine_statusName] = React.useState("");
-    const [medicinename, setMedicineName] = React.useState("");
-    const [details, setDetails] = React.useState<string>("");
-    const [qty, setQty] = React.useState(0);
+    const [payment_statusname, setPayment_statusName] = React.useState("");
+    const [note, setNote] = React.useState<string>("");
+    const [total_price, setTotal_price] = React.useState(0);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -80,23 +76,37 @@ function PrescriptionUpdate() {
     setError(false);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const name = e.target.name;
+//     console.log(name);
+//     setPayment({ ...payment, [name]: e.target.value });
+//   };
+
+//   const handleInputChange = (
+//     event: React.ChangeEvent<{ id?: string; value: any }>
+// ) => {
+//     const id = event.target.id as keyof typeof PaymentUpdate;
+//     const { value } = event.target;
+//     setPayment({ ...payment, [id]: value });
+// };
+
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     console.log(name);
-    setPrescription({ ...prescription, [name]: e.target.value });
+    setPayment({ ...payment, [name]: e.target.value });
   };
 
   const handleSelectChange = (event: SelectChangeEvent) => {
-    const name = event.target.name as keyof typeof prescription;
-    setPrescription({
-      ...prescription,
+    const name = event.target.name as keyof typeof payment;
+    setPayment({
+      ...payment,
       [name]: event.target.value,
     });
   };
 
   const handleChangeImages = (event: any, id?: string) => {
     const input = event.target.files[0];
-    const name = event.target.name as keyof typeof prescription;
+    const name = event.target.name as keyof typeof payment;
 
     var reader = new FileReader();
     reader.readAsDataURL(input);
@@ -104,7 +114,7 @@ function PrescriptionUpdate() {
       const dataURL = reader.result;
       setImage({ name: input.name, src: dataURL?.toString() as string });
       if (event.target.name === "Image") {
-        setPrescription({ ...prescription, [name]: dataURL?.toString() });
+        setPayment({ ...payment, [name]: dataURL?.toString() });
       }
     };
   };
@@ -121,24 +131,17 @@ function PrescriptionUpdate() {
     }
   };
 
-  const getMedicine = async () => {
-    let res = await GetMedicine();
+  const getPayment_status = async () => {
+    let res = await GetPayment_status();
     if (res) {
-      setMedicine(res);
+      setPayment_status(res);
     }
   };
 
-  const getMedicine_status = async () => {
-    let res = await GetMedicine_status();
+  const getEmployee = async () => {
+    let res = await GetEmployee();
     if (res) {
-      setMedicine_status(res);
-    }
-  };
-
-  const getDentist = async () => {
-    let res = await GetDentists();
-    if (res) {
-      setDentist(res);
+      setEmployee(res);
     }
   };
 
@@ -168,40 +171,30 @@ function PrescriptionUpdate() {
 //   };
 
 useEffect(() => {
-    fetch(`http://localhost:8080/prescription/${id}`)
+    fetch(`http://localhost:8080/payment/${id}`)
         .then((response) => response.json())
         .then((res) => {
             if (res.data) {
-                setDetails(res.data.Details.toString());
-                setQty(res.data.Qty.toString());
+                setNote(res.data.Note.toString());
+                setTotal_price(res.data.Total_price.toString());
             }
 
-            fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+            fetch(`http://localhost:8080/employee/${res.data.PatientID}`)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.data) {
-                        setDentistName(res.data.FirstName)
-                        prescription.DentistID = res.data.ID
+                        setEmployeeName(res.data.FirstName)
+                        payment.EmployeeID = res.data.ID
                     }
                 }
                 )
 
-            fetch(`http://localhost:8080/medicine_status/${res.data.PatientID}`)
+            fetch(`http://localhost:8080/payment_status/${res.data.PatientID}`)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.data) {
-                        setMedicine_statusName(res.data.Medicine_status_name)
-                        prescription.Medicine_statusID = res.data.ID
-                    }
-                }
-                )
-
-            fetch(`http://localhost:8080/medicine/${res.data.PatientID}`)
-                .then((response) => response.json())
-                .then((res) => {
-                    if (res.data) {
-                        setMedicineName(res.data.Medicine_name)
-                        prescription.MedicineID = res.data.ID
+                        setPayment_statusName(res.data.Payment_status_name)
+                        payment.Payment_statusID = res.data.ID
                     }
                 }
                 )
@@ -211,7 +204,7 @@ useEffect(() => {
                 .then((res) => {
                     if (res.data) {
                         setPatientName(res.data.FirstName)
-                        prescription.PatientID = res.data.ID
+                        payment.PatientID = res.data.ID
                     }
                 }
                 )
@@ -223,16 +216,15 @@ useEffect(() => {
   const submit = async () => {
     let newdata = {
         ID: convertType(id),
-        DentistID: convertType(prescription.DentistID),
-        PatientID: convertType(prescription.PatientID),
-        MedicineID: convertType(prescription.MedicineID),
-        Medicine_statusID: convertType(prescription.Medicine_statusID),
-        Qty: typeof prescription.Qty === "string" ? parseInt(prescription.Qty) : 0,
-        Details: prescription.Details ?? "",
-        DateTimePrescription: prescription.DateTimePrescription,
+        PatientID: convertType(payment.PatientID),
+        EmployeeID: convertType(payment.EmployeeID),
+        Payment_statusID: convertType(payment.Payment_statusID),
+        Total_price: typeof payment.Total_price === "string" ? parseInt(payment.Total_price) : 0,
+        Note: payment.Note ?? "",
+        DateTimePayment: payment.DateTimePayment,
     };
 
-    let res = await UpdatePrescription(newdata);
+    let res = await UpdatePayment(newdata);
     if (res.status) {
       setSuccess(true);
       setAlertMessage("อัปเตดสำเร็จ");
@@ -246,9 +238,8 @@ useEffect(() => {
 
   useEffect(() => {
     getPatient();
-    getMedicine();
-    getDentist();
-    getMedicine_status();
+    getEmployee();
+    getPayment_status();
 
   }, []);
 
@@ -292,7 +283,7 @@ useEffect(() => {
                         gutterBottom
                     >
                         <div className="good-font">
-                            แก้ไขสั่งจ่ายยา ID : {id}
+                            แก้ไขแจ้งยอดชำระ ID : {id}
                         </div>
                     </Typography>
                 </Box>
@@ -302,21 +293,21 @@ useEffect(() => {
 
                 <Grid item xs={6}>
                     <FormControl fullWidth variant="outlined">
-                        <p className="good-font">ทันตแพทย์</p>
+                        <p className="good-font">พนักงาน</p>
                         <Select
                             native
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={prescription.DentistID + ""}
+                            value={payment.EmployeeID + ""}
                             onChange={handleSelectChange}
                             inputProps={{
-                                name: "DentistID",
+                                name: "EmployeeID",
                             }}
                         >
                             <option aria-label="None" value="">
-                                {dentistname}
+                                {employeename}
                             </option>
-                            {dentist.map((item: DentistInterface) => (
+                            {employee.map((item: EmployeeInterface) => (
                                 <option value={item.ID} key={item.ID}>
                                     {item.FirstName}
                                 </option>
@@ -332,7 +323,7 @@ useEffect(() => {
                             native
                             
                             id="patientname"
-                            value={prescription.PatientID + ""}
+                            value={payment.PatientID + ""}
                             onChange={handleSelectChange}
                             inputProps={{
                                 name: "PatientID",
@@ -351,23 +342,43 @@ useEffect(() => {
                 </Grid>
 
                 <Grid item xs={6}>
+                        <FormControl fullWidth variant="outlined">
+                            <p className="good-font">ราคารวม</p>
+                            <TextField
+                                id="total_price"
+                                variant="outlined"
+                                name='Total_price'
+                                type="number"
+                                size="medium"
+                                InputProps={{ inputProps: { min: 1 } }}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                value={payment.Total_price || "" || total_price}
+                                onChange={handleInputChange}
+                            />
+                        </FormControl>
+                    </Grid>
+
+                <Grid item xs={6}>
                     <FormControl fullWidth variant="outlined">
-                        <p className="good-font">ยา</p>
+                        <p className="good-font">สถานนะการชำระ</p>
                         <Select
                             native
-                            id="medicinename"
-                            value={prescription.MedicineID + ""}
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={payment.Payment_statusID + ""}
                             onChange={handleSelectChange}
                             inputProps={{
-                                name: "MedicineID",
+                                name: "Payment_statusID",
                             }}
                         >
-                            <option aria-label="None" value="">
-                                {medicinename}
+                            <option aria-label="None" value={payment_statusname}>
+                                {payment_statusname}
                             </option>
-                            {medicine.map((item: MedicineInterface) => (
+                            {payment_status.map((item: Payment_statusInterface) => (
                                 <option value={item.ID} key={item.ID}>
-                                    {item.Medicine_name}
+                                    {item.Payment_status_name}
                                 </option>
                             ))}
                         </Select>
@@ -376,72 +387,28 @@ useEffect(() => {
 
                 <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">จำนวน</p>
+                            <p className="good-font">หมายเหตู</p>
                             <TextField
-                                id="qyt"
+                                id="Note"
                                 variant="outlined"
-                                type="number"
-                                name='Qty'
+                                type="string"
                                 size="medium"
-                                InputProps={{ inputProps: { min: 1 } }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                value={prescription.Qty || "" || qty}
-                                onChange={handleInputChange}
+                                value={note}
+                                onChange={(event) => setNote(event.target.value)}
                             />
                         </FormControl>
                     </Grid>
 
                   <Grid item xs={6}>
                       <FormControl fullWidth variant="outlined">
-                          <p className="good-font">รายละเอียด</p>
-                          <TextField
-                              id="details"
-                              variant="outlined"
-                              type="string"
-                              size="medium"
-                              value={details}
-                              onChange={(event) => setDetails(event.target.value)}
-                          />
-                      </FormControl>
-                  </Grid>
-
-                <Grid item xs={6}>
-                    <FormControl fullWidth variant="outlined">
-                        <p className="good-font">สถานนะยา</p>
-                        <Select
-                            native
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={prescription.Medicine_statusID + ""}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: "Medicine_statusID",
-                            }}
-                        >
-                            <option aria-label="None" value={medicine_statusname}>
-                                {medicine_statusname}
-                            </option>
-                            {medicine_status.map((item: Medicine_statusInterface) => (
-                                <option value={item.ID} key={item.ID}>
-                                    {item.Medicine_status_name}
-                                </option>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                  <Grid item xs={6}>
-                      <FormControl fullWidth variant="outlined">
-                          <p className="good-font">เวลาการสั่งจ่าย</p>
+                          <p className="good-font">เวลาการแจ้งยอดชำระ</p>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
                               <DatePicker
-                                  value={prescription.DateTimePrescription}
+                                  value={payment.DateTimePayment}
                                   onChange={(newValue) => {
-                                      setPrescription({
-                                          ...prescription,
-                                          DateTimePrescription: newValue,
+                                      setPayment({
+                                          ...payment,
+                                          DateTimePayment: newValue,
                                       });
                                   }}
                                   renderInput={(params) => <TextField {...params} />}
@@ -451,7 +418,7 @@ useEffect(() => {
                   </Grid>
 
                 <Grid item xs={12}>
-                    <Button component={RouterLink} to="/prescription" variant="contained">
+                    <Button component={RouterLink} to="/payment" variant="contained">
                         <div className="good-font">
                             กลับ
                         </div>
@@ -473,4 +440,4 @@ useEffect(() => {
 );
 }
 
-export default PrescriptionUpdate;
+export default PaymentUpdate;

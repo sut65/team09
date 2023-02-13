@@ -39,6 +39,7 @@ func CreatePayment(c *gin.Context) {
 		Employee:              	employee,
 		Payment_status:       	payment_status,
 		Total_price:			payment.Total_price,
+		Note:					payment.Note,
 		DateTimePayment: 		payment.DateTimePayment,
 	}
 
@@ -117,6 +118,7 @@ func UpdatePayment(c *gin.Context) {
 		Employee:              	employee,
 		Payment_status:       	payment_status,
 		Total_price:			payment.Total_price,
+		Note:					payment.Note,
 		DateTimePayment: 		payment.DateTimePayment,
 	}
 

@@ -1362,7 +1362,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Payment_status{}).Create(&Payment_status2)
 
-	///////////////ข้อมูลใน entity Prescription///////////
+	///////////////ข้อมูลใน entity Payment///////////
 	DateTimePaymentA := time.Date(2022, time.September, 1, 13, 23, 44, 0, time.Local)
 	DateTimePaymentB := time.Date(2022, time.September, 6, 13, 55, 26, 0, time.Local)
 	DateTimePaymentC := time.Date(2022, time.September, 8, 25, 22, 33, 0, time.Local)
@@ -1370,6 +1370,7 @@ func SetupDatabase() {
 	Payment1 := Payment{
 		Total_price:          1500,
 		Payment_status:       Payment_status1,
+		Note: 				  "จ่ายด้วยเงินสด",	
 		Patient:              patient1,
 		Employee:             em2,
 		DateTimePayment: DateTimePaymentA,
@@ -1379,6 +1380,7 @@ func SetupDatabase() {
 	Payment2 := Payment{
 		Total_price:          2500,
 		Payment_status:       Payment_status1,
+		Note: 				  "จ่ายด้วยพร้อมเพย์",
 		Patient:              patient2,
 		Employee:             em1,
 		DateTimePayment: DateTimePaymentB,
@@ -1388,6 +1390,7 @@ func SetupDatabase() {
 	Payment3 := Payment{
 		Total_price:          500,
 		Payment_status:       Payment_status2,
+		Note: 				  "รักษาฟรี",
 		Patient:              patient1,
 		Employee:             em2,
 		DateTimePayment: DateTimePaymentC,

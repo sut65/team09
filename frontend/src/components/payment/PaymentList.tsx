@@ -26,27 +26,7 @@ function Payments() {
 
   const handleDelete1 = async (id: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/delete-payment/${id}`, {
-          headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-              'Content-Type': 'application/json',
-          }
-      });
-
-      if (response.status === 200) {
-          console.log("Payment deleted successfully");
-          getPayments();
-      } else {
-          throw new Error("Failed to delete Payment");
-      }
-  } catch (err) {
-      console.error(err);
-  }
-  };
-
-  const handleDelete = async (id: number) => {
-    try {
-      const response = await axios.delete(`http://localhost:3001/delete-prescription/${id}`, {
+      const response = await axios.delete(`http://localhost:8080/delete-payment/${id}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
@@ -76,7 +56,7 @@ function Payments() {
           <Button onClick={() => handleDelete1(row.ID)} variant="contained" color="error">
             <DeleteForeverIcon />
           </Button>
-          <Button component={RouterLink} to={`/paymentupdate/${row.ID}`} variant="contained" color="info">
+          <Button component={RouterLink} to={`/payment/update/${row.ID}`} variant="contained" color="info">
             <div className="good-font">
               <EditIcon />
             </div>

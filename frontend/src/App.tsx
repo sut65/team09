@@ -73,6 +73,7 @@ import PrescriptionUpdate from "./components/prescription/PrescriptionUpdate";
 
 import PaymentList from "./components/payment/PaymentList";
 import PaymentCreate from "./components/payment/PaymentCreate";
+import PaymentUpdate from "./components/payment/PaymentUpdate";
 
 import CreateRepair from "./components/repair/CreateRepair"
 import RepairList from "./components/repair/RepairList";
@@ -297,9 +298,10 @@ function App() {
                 <Route path="/prescription/create" element={<PrescriptionCreate />} />
                 <Route path="/prescription/update/:id" element={<PrescriptionUpdate />} />
                 <Route path="/payment" element={<PaymentList />} />
+                <Route path="/payment/create" element={<PaymentCreate />} />
+                <Route path="/payment/update/:id" element={<PaymentUpdate />} />
                 <Route path="/Repair/create" element={<CreateRepair />} />
                 <Route path="/Repair" element={<RepairList />} />
-                <Route path="/payment/create" element={<PaymentCreate />} />
             </Routes>
             </Container>
         </Box>

@@ -5,6 +5,7 @@ import { Payment_statusInterface } from "./IPayment_status";
 export interface PaymentInterface {
     ID?: number,
     Total_price?: number,
+    Note?: string,
 
     PatientID?: number,
     Patient?: PatientInterface,
@@ -15,5 +16,5 @@ export interface PaymentInterface {
     Payment_statusID?: number,
     Payment_status?: Payment_statusInterface,
 
-    DateTimePayment?: Date,
+    DateTimePayment?: Date | null,
 }

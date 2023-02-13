@@ -1179,6 +1179,53 @@ async function GetReasons() {
     return res;
   }
 
+  const UpdatePayment = async (data: PaymentInterface) => {
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/update-payment`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          return { status: true, message: res.data };
+        } else {
+          return { status: false, message: res.error };
+        }
+      });
+  
+    return res;
+  };
+
+  async function GetPaymentByID() {
+    let id = localStorage.getItem("id");
+    const requestOptions = {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        },
+    };
+  
+    let res = await fetch(`${apiUrl}/payment/${id}`, requestOptions)
+        .then((response) => response.json())
+        .then((res) => {
+            if (res.data) {
+                console.log(res.data);
+                return res.data;
+            } else {
+                return false;
+            }
+        });
+  
+    return res;
+  }
+
   //-------------Repair------------------------
   async function GetDamageLevel() {
     const requestOptions = {
@@ -1328,6 +1375,8 @@ async function GetReasons() {
     GetPayment_status,
     GetPayment,
     CreatePayment,
+    UpdatePayment,
+    GetPaymentByID,
 
     GetDamageLevel,
     GetRepair,

@@ -12,9 +12,9 @@ import Snackbar from "@mui/material/Snackbar";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-//import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-//import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-//import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { EmployeeInterface } from "../../models/IEmployee"; 
 import { PatientInterface } from "../../models/IPatient";
@@ -129,7 +129,8 @@ function PaymentCreate() {
         EmployeeID: convertType(payment.EmployeeID),
         Payment_statusID: convertType(payment.Payment_statusID),
         Total_price: typeof payment.Total_price === "string" ? parseInt(payment.Total_price) : 0,
-        DateTimePayment: new Date(),
+        Note: payment.Note ?? "",
+        DateTimePayment: payment.DateTimePayment,
     };
     console.log(data);
 
@@ -268,6 +269,38 @@ function PaymentCreate() {
                   </option>
                 ))}
               </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+              <p className="good-font">หมายเหตุ</p>
+              <TextField
+                id="Note"
+                variant="outlined"
+                type="string"
+                size="medium"
+                value={payment.Note || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+              <p className="good-font">เวลาการแจ้งยอดชำระ</p>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  value={payment.DateTimePayment}
+                  onChange={(newValue) => {
+                    setPayment({
+                      ...payment,
+                      DateTimePayment: newValue,
+                    });
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
             </FormControl>
           </Grid>
 
