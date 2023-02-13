@@ -9,16 +9,27 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import axios from 'axios';
 import { GetEmployee } from "../../services/HttpClientService";
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Employees() {
   const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
+  const [open, setOpen] = React.useState(false);
 
   const getEmployes = async () => {
     let res = await GetEmployee();
     if (res) {
       setEmployees(res);
     }
+  };
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleDelete = async (id: number) => {
@@ -56,15 +67,37 @@ function Employees() {
     { field: "Gender", headerName: "เพศ", width: 100 , valueFormatter: (params) => params.value.Gender_name,},       
     { field: "Role", headerName: "บทบาท", width: 250,  valueFormatter: (params) => params.value.Role_name,},
     {
-      field: "action", headerName: "Action",width: 250, sortable: false, renderCell: ({ row }) =>
+      field: "action", headerName: "Action",width: 150, sortable: false, renderCell: ({ row }) =>
       <ButtonGroup>
         <Stack spacing={2} direction="row">
-          <Button onClick={() => handleDelete(row.ID)} variant="contained" color="error">
-                  delete
+          <Button onClick={handleClickOpen} variant="contained" color="error">
+                <DeleteForeverIcon />
           </Button>
+          <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"ต้องการลบข้อมูลหรือไม่?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                หากลบข้อมูลแล้วข้อมูลของพนักงานคนนี้จะหายไป.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => { handleDelete(row.ID); handleClose();}} variant="contained" autoFocus>
+                Yes
+              </Button>
+              <Button onClick={handleClose} variant="contained" color="error">No</Button>
+            </DialogActions>
+          </Dialog>
+          {/* อัพเดต */}
           <Button component={RouterLink} to={`/employee_update/${row.ID}`} variant="contained">
               <div className="good-font">
-                  update
+                  <EditIcon />
               </div>
           </Button>
         </Stack>

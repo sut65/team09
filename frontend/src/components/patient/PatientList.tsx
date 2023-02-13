@@ -8,6 +8,7 @@ import { PatientInterface } from "../../models/IPatient";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import { GetEmployee, GetPatient } from "../../services/HttpClientService";
+import EditIcon from '@mui/icons-material/Edit';
 
 function Patient() {
   const [patient, setPatient] = useState<PatientInterface[]>([]);
@@ -40,7 +41,7 @@ function Patient() {
       field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
           <Button component={RouterLink} to={`/patients_update/${row.ID}`} variant="contained">
               <div className="good-font">
-                  update
+                  <EditIcon />
               </div>
           </Button>
     },
