@@ -49,15 +49,16 @@ const requestOptions = {
     },
 };
 
-function EmployeeCreate() {
+function EmployeeUpdate() {
   const [gender, setGender] = useState<GenderInterface[]>([]);
   const [role, setRole] = useState<RoleInterface[]>([]);
   const [province, setProvince] = React.useState<ProvinceInterface[]>([]);
   const [district, setDistrict] = React.useState<DistrictInterface[]>([]);
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
-  const [provinceId, setProvinceId] = useState('0');
-  const [districtId, setDistrictId] = useState('0');
+  //ไม่ใช้เพราะใช้ตัวข้างล่าง
+  // const [provinceId, setProvinceId] = useState('0');
+  // const [districtId, setDistrictId] = useState('0');
   //เพิ่มเพื่อรับข้อมูลมาโชว์ตอนอัพเดต
   const [employee_number, setEmployee_number] = React.useState<string>("");
   const [personal, setPersonal] = React.useState<string>("");
@@ -72,9 +73,9 @@ function EmployeeCreate() {
   const [subdistrictName, setSname] = React.useState<string>("");
   const [genName, setGname] = React.useState<string>("");
   const [roleName, setRname] = React.useState<string>("");
-  const [pid, setPid] = React.useState<string>("");
-  const [did, setDid] = React.useState<string>("");
-  const [sid, setSid] = React.useState<string>("");
+  const [pid, setPid] = React.useState<string>("0");
+  const [did, setDid] = React.useState<string>("0");
+  const [sid, setSid] = React.useState<string>("0");
   const [gid, setGid] = React.useState<string>("");
   const [rid, setRid] = React.useState<string>("");
 
@@ -164,25 +165,58 @@ function EmployeeCreate() {
     };
 
     const handleChangeProvince = (event: SelectChangeEvent) => {
-      setProvinceId(event.target.value);
+      setPid(event.target.value);
       console.log(event.target.value)
       getDistrict();
-      const name = event.target.name as keyof typeof EmployeeCreate;
+      const name = event.target.name as keyof typeof EmployeeUpdate;
       setEmployee({
       ...employee,
       [name]: event.target.value,
     });
     }
+    //ต้องมีไม่งั้นตำบลไม่อับเดต
     const handleChangeDistrict = (event: SelectChangeEvent) => {
-      setDistrictId(event.target.value);
+      setDid(event.target.value);
       console.log(event.target.value)
       getSubdistrict();
-      const name = event.target.name as keyof typeof EmployeeCreate;
+      const name = event.target.name as keyof typeof EmployeeUpdate;
       setEmployee({
       ...employee,
       [name]: event.target.value,
     });
     }
+
+    const handleChangeSubdistrict = (event: SelectChangeEvent) => {
+      setSid(event.target.value);
+      console.log(event.target.value)
+      // getSubdistrict();
+      const name = event.target.name as keyof typeof EmployeeUpdate;
+      setEmployee({
+      ...employee,
+      [name]: event.target.value,
+    });
+    }
+
+    const handleChangeGender = (event: SelectChangeEvent) => {
+      setGid(event.target.value);
+      console.log(event.target.value)
+      const name = event.target.name as keyof typeof EmployeeUpdate;
+      setEmployee({
+      ...employee,
+      [name]: event.target.value,
+    });
+    }
+
+    const handleChangeRole = (event: SelectChangeEvent) => {
+      setRid(event.target.value);
+      console.log(event.target.value)
+      const name = event.target.name as keyof typeof EmployeeUpdate;
+      setEmployee({
+      ...employee,
+      [name]: event.target.value,
+    });
+    }
+
     // เรียกเพื่อให่ส่ง id แบบ real time
     const clickChang = () => {
       getDistrict();
@@ -191,7 +225,7 @@ function EmployeeCreate() {
 
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
-    const name = event.target.name as keyof typeof EmployeeCreate;
+    const name = event.target.name as keyof typeof EmployeeUpdate;
     setEmployee({
       ...employee,
       [name]: event.target.value,
@@ -229,7 +263,7 @@ function EmployeeCreate() {
   };
 
   const getDistrict = async () => {
-    let id = provinceId
+    let id = pid
     fetch(`${apiUrl}/district/${id}`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
@@ -242,7 +276,7 @@ function EmployeeCreate() {
   };
 
   const getSubdistrict = async () => {
-    let id = districtId
+    let id = did
     fetch(`${apiUrl}/subdistrict/${id}`)
       .then((response) => response.json())
       .then((res) => {
@@ -252,7 +286,6 @@ function EmployeeCreate() {
           return false;
         }
       });
-  
   };
 
   const getEmployee = async () => {
@@ -387,6 +420,7 @@ function EmployeeCreate() {
                 placeholder="กรุณากรอกรหัสพนักงาน"
                 value={employee_number}
                 onChange={(event) => setEmployee_number(event.target.value)}
+                inputProps={{maxLength :8}}
               />
             </FormControl>
         </Grid>
@@ -463,6 +497,7 @@ function EmployeeCreate() {
                 placeholder="กรุณากรอกเบอร์โทรศัพท์"
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
+                inputProps={{maxLength :10}}
               />
             </FormControl>
         </Grid>
@@ -503,7 +538,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
-              {pid && <div>Selected province id: {pid}</div>}
+              {/* {pid && <div>Selected province id: {pid}</div>} */}
             </FormControl>
         </Grid>
 
@@ -537,7 +572,8 @@ function EmployeeCreate() {
               <Select
                 native
                 value={employee.Sub_districtID + ""}
-                onChange={handleChange}
+                onChange={handleChangeSubdistrict}
+                onClick={clickChang}
                 inputProps={{
                   name: "Sub_districtID",
                 }}
@@ -560,7 +596,7 @@ function EmployeeCreate() {
               <Select
                 native
                 value={employee.GenderID + ""}
-                onChange={handleChange}
+                onChange={handleChangeGender}
                 inputProps={{
                   name: "GenderID",
                 }}
@@ -584,7 +620,7 @@ function EmployeeCreate() {
               <Select
                 native
                 value={employee.RoleID + ""}
-                onChange={handleChange}
+                onChange={handleChangeRole}
                 inputProps={{
                   name: "RoleID",
                 }}
@@ -598,7 +634,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
-              {employee.RoleID && <div>Selected role id : {employee.RoleID}</div>}
+              {/* {employee.RoleID && <div>Selected role id : {employee.RoleID}</div>} */}
             </FormControl>
           </Grid>
 
@@ -626,4 +662,4 @@ function EmployeeCreate() {
   );
 }
 
-export default EmployeeCreate;
+export default EmployeeUpdate;
