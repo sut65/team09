@@ -38,7 +38,7 @@ function Patient() {
     { field: "Symptom", headerName: "อาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_choice,},
     { field: "Symptom_name", headerName: "รายละเอียดอาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_name,},
     {
-      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
+      field: "action", headerName: "Action",width: 80, sortable: false, renderCell: ({ row }) =>
           <Button component={RouterLink} to={`/patients_update/${row.ID}`} variant="contained">
               <div className="good-font">
                   <EditIcon />

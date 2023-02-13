@@ -44,7 +44,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function PaitentCreate() {
+function PaitentUpdate() {
   const [symptom, setSymptom] = useState<SymptomInterface[]>([]);
   const [gender, setGender] = useState<GenderInterface[]>([]);
   const [province, setProvince] = React.useState<ProvinceInterface[]>([]);
@@ -52,16 +52,16 @@ function PaitentCreate() {
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
   const [patient, setPatient] = useState<Partial<PatientInterface>>({});
-  const [provinceId, setProvinceId] = useState('0');
-  const [districtId, setDistrictId] = useState('0');
+  // const [provinceId, setProvinceId] = useState('0');
+  // const [districtId, setDistrictId] = useState('0');
 
   //เพิ่มเพื่อรับข้อมูลมาโชว์ตอนอัพเดต
   const [personal, setPersonal] = React.useState<string>("");
   const [firstname, setfn] = React.useState<string>("");
   const [lastname, setLn] = React.useState<string>("");
-  const [old, setOld] = React.useState(0);
-  const [weight, setWeight] = React.useState(0);
-  const [height, setHeight] = React.useState(0);
+  const [old, setOld] = React.useState(1);
+  const [weight, setWeight] = React.useState(1);
+  const [height, setHeight] = React.useState(1);
   const [ud, setUd] = React.useState<string>("");
   const [drug, setDrug] = React.useState<string>("");
   const [house, setHouse] = React.useState<string>("");
@@ -72,9 +72,9 @@ function PaitentCreate() {
     const [subdistrictName, setSname] = React.useState<string>("");
     const [genName, setGname] = React.useState<string>("");
     const [syName, setSyname] = React.useState<string>("");
-    const [pid, setPid] = React.useState<string>("");
-    const [did, setDid] = React.useState<string>("");
-    const [sid, setSid] = React.useState<string>("");
+    const [pid, setPid] = React.useState<string>("0");
+    const [did, setDid] = React.useState<string>("0");
+    const [sid, setSid] = React.useState<string>("0");
     const [gid, setGid] = React.useState<string>("");
     const [syid, setSyid] = React.useState<string>("");
 
@@ -177,12 +177,12 @@ function PaitentCreate() {
 
   //เพิ่มเมื่อมีการเปลี่ยนแปลงของจังหวัดส่ง id จังหวัดไปที่อ ำเภอ
   const handleChangeProvince = (event: SelectChangeEvent) => {
-    setProvinceId(event.target.value);
+    setPid(event.target.value);
     console.log(event.target.value)
     //เลือกใช้เพื่อส่งข้อมูลแบบ realtime
     getDistrict();
     //เพื่อบันทึกลง employee
-    const name = event.target.name as keyof typeof PaitentCreate;
+    const name = event.target.name as keyof typeof PaitentUpdate;
     setPatient({
       ...patient,
       [name]: event.target.value,
@@ -196,18 +196,40 @@ function PaitentCreate() {
 
   //เพิ่มเมื่อมีการเปลี่ยนแปลงของอำเภอส่ง id จังหวัดไปที่ตำบล
   const handleChangeDistrict = (event: SelectChangeEvent) => {
-    setDistrictId(event.target.value);
+    setDid(event.target.value);
     console.log(event.target.value)
     getSubdistrict();
-    const name = event.target.name as keyof typeof PaitentCreate;
+    const name = event.target.name as keyof typeof PaitentUpdate;
+    setPatient({
+      ...patient,
+      [name]: event.target.value,
+    });
+  }
+
+  const handleChangeSubdistrict = (event: SelectChangeEvent) => {
+    setSid(event.target.value);
+    console.log(event.target.value)
+    // getSubdistrict();
+    const name = event.target.name as keyof typeof PaitentUpdate;
     setPatient({
       ...patient,
       [name]: event.target.value,
     });
   }
   
+  const handleChangeGender = (event: SelectChangeEvent) => {
+    setGid(event.target.value);
+    console.log(event.target.value)
+    const name = event.target.name as keyof typeof PaitentUpdate;
+    setPatient({
+      ...patient,
+      [name]: event.target.value,
+    });
+  }
+
   const openChange = (event: SelectChangeEvent) => {
     console.log(event.target.value)
+    setSyid(event.target.value);
     const value = event.target.value;
     if (value === "1" || value === "3") {
       setOpen(true);
@@ -215,7 +237,7 @@ function PaitentCreate() {
       setOpen(false);
     }
     console.log(open)
-    const name = event.target.name as keyof typeof PaitentCreate;
+    const name = event.target.name as keyof typeof PaitentUpdate;
     setPatient({
       ...patient,
       [name]: event.target.value,
@@ -223,7 +245,7 @@ function PaitentCreate() {
   };
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
-    const name = event.target.name as keyof typeof PaitentCreate;
+    const name = event.target.name as keyof typeof PaitentUpdate;
     setPatient({
       ...patient,
       [name]: event.target.value,
@@ -261,7 +283,7 @@ function PaitentCreate() {
   };
 
   const getDistrict = async () => {
-    let id = provinceId
+    let id = pid
     fetch(`${apiUrl}/district/${id}`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
@@ -274,7 +296,7 @@ function PaitentCreate() {
   };
 
   const getSubdistrict = async () => {
-    let id = districtId
+    let id = did
     fetch(`${apiUrl}/subdistrict/${id}`)
       .then((response) => response.json())
       .then((res) => {
@@ -325,12 +347,17 @@ function PaitentCreate() {
     patient.DistrictID = Number(did);
     patient.Sub_districtID = Number(sid);
     patient.GenderID = Number(gid);
+    // เพิ่มเพื่อให้ update field Symptom_name
+    let newsn = sn
+    if(Number(syid) === 2){
+        newsn = "-"
+    }
     patient.SymptomID = Number(syid);
     let data = {
       FirstName: firstname,
       LastName: lastname,
       Personal_id: personal,
-      Symptom_name: sn || "-",
+      Symptom_name: newsn || "-",
       Old: convertType(old),
       Weight: convertType(weight),
       Height: convertType(height),
@@ -476,8 +503,8 @@ function PaitentCreate() {
                   shrink: true,
                 }}
                 placeholder="กรุณากรอกอายุ"
-                value={patient.Old || "" || old}
-                onChange={handleInputChange}
+                value={old}
+                onChange={(event) => setOld(Number(event.target.value))}
               />
             </FormControl>
         </Grid>
@@ -495,8 +522,8 @@ function PaitentCreate() {
                   shrink: true,
                 }}
                 placeholder="กรุณากรอกน้ำหนัก"
-                value={patient.Weight || "" || weight}
-                onChange={handleInputChange}
+                value={weight}
+                onChange={(event) => setWeight(Number(event.target.value))}
               />
             </FormControl>
         </Grid>
@@ -514,8 +541,8 @@ function PaitentCreate() {
                   shrink: true,
                 }}
                 placeholder="กรุณากรอกส่วนสูง"
-                value={patient.Height || "" || height}
-                onChange={handleInputChange}
+                value={height}
+                onChange={(event) => setHeight(Number(event.target.value))}
               />
             </FormControl>
         </Grid>
@@ -586,7 +613,7 @@ function PaitentCreate() {
                   </option>
                 ))}
               </Select>
-              {provinceId && <div>Selected province id: {provinceId}</div>}
+              {/* {provinceId && <div>Selected province id: {provinceId}</div>} */}
             </FormControl>
         </Grid>
 
@@ -620,7 +647,8 @@ function PaitentCreate() {
               <Select
                 native
                 value={patient.Sub_districtID + ""}
-                onChange={handleChange}
+                onChange={handleChangeSubdistrict}
+                onClick={clickChang}
                 inputProps={{
                   name: "Sub_districtID",
                 }}
@@ -643,7 +671,7 @@ function PaitentCreate() {
               <Select
                 native
                 value={patient.GenderID + ""}
-                onChange={handleChange}
+                onChange={handleChangeGender}
                 inputProps={{
                   name: "GenderID",
                 }}
@@ -725,4 +753,4 @@ function PaitentCreate() {
   );
 }
 
-export default PaitentCreate;
+export default PaitentUpdate;

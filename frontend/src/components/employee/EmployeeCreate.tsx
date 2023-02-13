@@ -265,6 +265,7 @@ function EmployeeCreate() {
                 placeholder="กรุณากรอกรหัสพนักงาน"
                 value={employee.Employee_number || ""}
                 onChange={handleInputChange}
+                inputProps={{maxLength :8}}
               />
             </FormControl>
         </Grid>
@@ -341,6 +342,7 @@ function EmployeeCreate() {
                 placeholder="กรุณากรอกเบอร์โทรศัพท์"
                 value={employee.Phone || ""}
                 onChange={handleInputChange}
+                inputProps={{maxLength :10}}
               />
             </FormControl>
         </Grid>
@@ -381,7 +383,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
-              {provinceId && <div>Selected province id: {provinceId}</div>}
+              {/* {provinceId && <div>Selected province id: {provinceId}</div>} */}
             </FormControl>
         </Grid>
 
@@ -406,7 +408,7 @@ function EmployeeCreate() {
                   </option>
                 ))}
               </Select>
-              {districtId && <div>Selected district id: {districtId}</div>}
+              {/* {districtId && <div>Selected district id: {districtId}</div>} */}
             </FormControl>
         </Grid>
 
