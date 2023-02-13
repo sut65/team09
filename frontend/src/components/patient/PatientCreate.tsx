@@ -463,7 +463,6 @@ function PaitentCreate() {
                   </option>
                 ))}
               </Select>
-              {/* {provinceId && <div>Selected province id: {provinceId}</div>} */}
             </FormControl>
         </Grid>
 
