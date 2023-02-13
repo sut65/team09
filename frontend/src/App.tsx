@@ -18,6 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
 import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
 import PaymentsIcon from '@mui/icons-material/Payments';
+import CoPresentIcon from '@mui/icons-material/CoPresent';
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
@@ -111,6 +112,7 @@ const Drawer = styled(MuiDrawer, {
 })(({ theme, open }) => ({
   "& .MuiDrawer-paper": {
     position: "relative",
+    background : '#FEC8D8',
     whiteSpace: "nowrap",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -136,8 +138,8 @@ const mdTheme = createTheme();
 
 const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,},
-  { name: "พนักงาน", icon: <PeopleIcon />, path: "/employees" ,},
-  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,},
+  { name: "พนักงาน", icon: <PeopleIcon htmlColor="#7B68EE" />, path: "/employees" ,},
+  { name: "ผู้ป่วย", icon: <CoPresentIcon color="primary" />, path: "/patients" ,},
   { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
   { name: "แจ้งซ่อมเครื่องมือแพทย์", icon: <HandymanIcon />, path: "/Repair" ,},
   { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
@@ -189,6 +191,7 @@ function App() {
             <Toolbar
               sx={{
                 pr: "24px", // keep right padding when drawer closed
+                background : '#FEC8D8',
               }}
             >
               <IconButton
@@ -206,13 +209,13 @@ function App() {
               <Typography
                 component="h1"
                 variant="h6"
-                color="inherit"
+                color="#00008B"
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
                 Team09-ระบบทันตกรรม
               </Typography>
-              <Button color="inherit" onClick={signout}>
+              <Button color="error" onClick={signout}>
                 ออกจากระบบ
               </Button>
             </Toolbar>
@@ -254,6 +257,7 @@ function App() {
                 theme.palette.mode === "light"
                   ? theme.palette.grey[100]
                   : theme.palette.grey[900],
+              background : '#FFF0F5',
               flexGrow: 1,
               height: "100vh",
               overflow: "auto",
