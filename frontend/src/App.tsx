@@ -20,6 +20,7 @@ import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 
+import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
@@ -29,7 +30,9 @@ import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import HandymanIcon from '@mui/icons-material/Handyman';
 
-// import Home from "./components/Home";
+import Home from "./components/Home";
+import SignIn from "./components/SignIn";
+
 import EmployeeList from "./components/employee/EmployeeList";
 import EmployeeCreate from "./components/employee/EmployeeCreate";
 import EmployeeUpdate from "./components/employee/EmployeeUpdate";
@@ -138,27 +141,50 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const menu = [
-  { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,},
-  { name: "พนักงาน", icon: <PeopleIcon htmlColor="#7B68EE" />, path: "/employees" ,},
-  { name: "ผู้ป่วย", icon: <CoPresentIcon color="primary" />, path: "/patients" ,},
-  { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,},
-  { name: "แจ้งซ่อมเครื่องมือแพทย์", icon: <HandymanIcon />, path: "/Repair" ,},
-  { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" ,},
-  { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,},
-  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,},
-  { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,},
-  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" ,},
-  { name: "จัดการข้อมูลแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,},
-  { name: "จัดการข้อมูลห้อง", icon: <BuildCircleIcon />, path: "/room_details" ,},
-  { name: "แจ้งยอดชำระ", icon: <PaymentsIcon />, path: "/payment" ,},
+  { name: "หน้าแรก", icon: <HomeIcon />, path: "/Home" , role: "Admin"},
+  { name: "หน้าแรก", icon: <HomeIcon />, path: "/Home" , role: "Nurse"},
+  { name: "หน้าแรก", icon: <HomeIcon />, path: "/Home" , role: "Dentist"},
+
+  { name: "พนักงาน", icon: <PeopleIcon htmlColor="#7B68EE" />, path: "/employees" ,  role: "Admin"},
+
+  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,   role: "Dentist" },
+  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,   role: "Nurse" },
+
+  { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,  role: "Admin"},
+
+  { name: "แจ้งซ่อมเครื่องมือแพทย์", icon: <HandymanIcon />, path: "/Repair" ,  role: "Dentist"},
+  { name: "แจ้งซ่อมเครื่องมือแพทย์", icon: <HandymanIcon />, path: "/Repair" ,  role: "Nurse"},
+
+  { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" , role: "Dentist"},
+  { name: "ตารางนัดผู้ป่วย", icon: <CalendarMonthIcon />, path: "/PatientSchedule/home" , role: "Nurse"},
+
+  { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,  role: "Dentist"},
+  { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,  role: "Nurse"},
+
+  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,  role: "Dentist"},
+  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,  role: "Nurse"},
+
+  { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,  role: "Dentist"},
+  { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,  role: "Nurse"},
+
+
+  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Dentist"},
+  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Nurse"},
+
+  { name: "จัดการข้อมูลทันตแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,   role: "Admin"},
+
+  { name: "จัดการข้อมูลห้อง", icon: <BuildCircleIcon />, path: "/room_details" ,  role: "Admin"},
+
+  { name: "แจ้งยอดชำระ", icon: <PaymentsIcon />, path: "/payment" , role: "Admin"},
 
 ];
 
 function App() {
   const [token, setToken] = useState<String>("");
   const [open, setOpen] = React.useState(true);
-  //รับ Position
-  /* const [position, setPosition] = useState<String | null>("");  */
+
+  //รับ Role
+  const [role, setRole] = useState<String | null>("");  
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -166,17 +192,17 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const position = localStorage.getItem("position");
+    const role = localStorage.getItem("role");
 
     if (token) {
       setToken(token);
-      /*setPosition(position); */
+      setRole(role); 
     }
   }, []);
 
-  // if (!token) {  //pass token
-  //   return <SignIn />;
-  // }
+  if (!token) {  //pass token
+    return <SignIn />;
+  }
 
   const signout = () => {
     localStorage.clear();
@@ -216,7 +242,7 @@ function App() {
               >
                 Team09-ระบบทันตกรรม
               </Typography>
-              <Button color="error" onClick={signout}>
+              <Button  color="inherit" onClick={signout} startIcon={<LogoutSharpIcon />}>
                 ออกจากระบบ
               </Button>
             </Toolbar>
@@ -236,8 +262,8 @@ function App() {
             </Toolbar>
             <Divider />
             <List>
-              {menu.map((item, index) => 
-                
+            {menu.map((item, index) => 
+                role === item.role && (
                 <Link
                   to={item.path}
                   key={item.name}
@@ -248,7 +274,7 @@ function App() {
                     <ListItemText primary={item.name} />
                   </ListItem>
                 </Link>
-              )}
+              ))}
             </List>
           </Drawer>
           <Box
@@ -267,7 +293,7 @@ function App() {
             <Toolbar />
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
               <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/Home" element={<Home />} />
                 <Route path="/patients" element={<PatientList />} />
                 <Route path="/patients/create" element={<PatientCreate />} />
                 <Route path="/patients_update/:id" element={<PatientUpdate />} />
