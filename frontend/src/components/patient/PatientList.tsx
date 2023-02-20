@@ -37,6 +37,7 @@ function Patient() {
     { field: "Gender", headerName: "เพศ", width: 100 , valueFormatter: (params) => params.value.Gender_name,},       
     { field: "Symptom", headerName: "อาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_choice,},
     { field: "Symptom_name", headerName: "รายละเอียดอาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_name,},
+    { field: "Employee", headerName: "พยาบาลที่บันทึกข้อมูล", width: 200,  valueFormatter: (params) => params.value.FirstName,},
     {
       field: "action", headerName: "Action",width: 80, sortable: false, renderCell: ({ row }) =>
           <Button component={RouterLink} to={`/patients_update/${row.ID}`} variant="contained">

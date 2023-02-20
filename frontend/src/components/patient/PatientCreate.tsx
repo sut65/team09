@@ -193,14 +193,14 @@ function PaitentCreate() {
   
   };
 
-  // const getEmployeeByUID = async ()=>{
-  //   let res = await GetEmployeeByUID();
-  //   patient.EmployeeID = res.ID;
-  //   if (res) {
-  //     setEmployee(res);
-  //   }
-  // }
-
+  const getEmployeeByUID = async ()=>{
+    let res = await GetEmployeeByUID();
+    patient.EmployeeID = res.ID;
+    // console.log("Em " + patient.EmployeeID)
+    if (res) {
+      setEmployee(res);
+    }
+  }
 
   useEffect(() => {
     getGender();
@@ -208,7 +208,7 @@ function PaitentCreate() {
     getProvince();
     getDistrict();
     getSubdistrict();
-    // getEmployeeByUID();
+    getEmployeeByUID();
   }, []);
 
   const convertType = (data: string | number | undefined) => {
@@ -216,8 +216,6 @@ function PaitentCreate() {
     return val;
   };
 
-
-  
   async function submit() {
     let data = {
       FirstName: patient.FirstName,

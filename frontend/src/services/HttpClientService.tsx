@@ -321,32 +321,6 @@ async function GetEmployee() {
     return res;
   }
 
-
-// //*get token by ID
-// async function GetEmployeeByUID() {
-//   let uid = localStorage.getItem("uid");
-//   const requestOptions = {
-//       method: "GET",
-//       headers: {
-//           Authorization: `Bearer ${localStorage.getItem("token")}`,
-//           "Content-Type": "application/json"
-//       },
-//   };
-
-//   let res = await fetch(`${apiUrl}/employee/${uid}`, requestOptions)
-//       .then((response) => response.json())
-//       .then((res) => {
-//           if (res.data) {
-//               console.log(res.data);
-//               return res.data;
-//           } else {
-//               return false;
-//           }
-//       });
-
-//   return res;
-// }
-
 // --------------------------------------------------------------
 
 //------MedicalDevice-------
