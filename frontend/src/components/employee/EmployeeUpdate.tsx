@@ -64,7 +64,7 @@ function EmployeeUpdate() {
   const [personal, setPersonal] = React.useState<string>("");
   const [firstname, setfn] = React.useState<string>("");
   const [lastname, setLn] = React.useState<string>("");
-  const [password, setPass] = React.useState<string>("");
+  // const [password, setPass] = React.useState<string>("");
   const [phone, setPhone] = React.useState<string>("");
   const [house, setHouse] = React.useState<string>("");
   //combobox
@@ -95,7 +95,7 @@ function EmployeeUpdate() {
                 setPersonal(res.data.Personal_id.toString());
                 setfn(res.data.FirstName.toString());
                 setLn(res.data.LastName.toString());
-                setPass(res.data.Password.toString());
+                // setPass(res.data.Password.toString());
                 setPhone(res.data.Phone.toString());
                 setHouse(res.data.House_no .toString());
             }
@@ -322,7 +322,7 @@ function EmployeeUpdate() {
       FirstName: firstname,
       LastName: lastname,
       Personal_id: personal,
-      Password: password,
+      // Password: password,
       Phone: phone,
       House_no: house,
       RoleID: convertType(employee.RoleID),
@@ -471,7 +471,7 @@ function EmployeeUpdate() {
             </FormControl>
         </Grid>
         
-        <Grid item xs={6}>
+        {/* <Grid item xs={6}>
             <p>รหัสผ่าน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
@@ -484,7 +484,7 @@ function EmployeeUpdate() {
                 onChange={(event) => setPass(event.target.value)}
               />
             </FormControl>
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={6}>
             <p>เบอร์โทรศัพท์</p>

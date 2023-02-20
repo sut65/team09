@@ -147,8 +147,8 @@ const menu = [
 
   { name: "พนักงาน", icon: <PeopleIcon htmlColor="#7B68EE" />, path: "/employees" ,  role: "Admin"},
 
-  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,   role: "Dentist" },
-  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,   role: "Nurse" },
+  { name: "ผู้ป่วย", icon: <PeopleIcon htmlColor="#7B68EE"/>, path: "/patients" ,   role: "Dentist" },
+  { name: "ผู้ป่วย", icon: <PeopleIcon htmlColor="#7B68EE"/>, path: "/patients" ,   role: "Nurse" },
 
   { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,  role: "Admin"},
 
