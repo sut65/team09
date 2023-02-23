@@ -405,7 +405,7 @@ function TreatmentUpdate() {
                                 value={treatment_plan.Type_Of_TreatmentID + ""}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: "Type_of_treatmentsID",
+                                    name: "Type_Of_TreatmentID",
                                 }}
                             >
                                 <option aria-label="None" value={typeoftreatmentname}>
