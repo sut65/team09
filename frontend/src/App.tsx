@@ -80,8 +80,9 @@ import PaymentList from "./components/payment/PaymentList";
 import PaymentCreate from "./components/payment/PaymentCreate";
 import PaymentUpdate from "./components/payment/PaymentUpdate";
 
-import CreateRepair from "./components/repair/CreateRepair"
+import CreateRepair from "./components/repair/CreateRepair";
 import RepairList from "./components/repair/RepairList";
+import RepairUpdate from "./components/repair/RepairUpdate";
 
 
 // import Students from "./components/Student";
@@ -327,6 +328,7 @@ function App() {
                 <Route path="/payment/update/:id" element={<PaymentUpdate />} />
                 <Route path="/Repair/create" element={<CreateRepair />} />
                 <Route path="/Repair" element={<RepairList />} />
+                <Route path="/Repair/update/:id" element={<RepairUpdate />} />
             </Routes>
             </Container>
         </Box>

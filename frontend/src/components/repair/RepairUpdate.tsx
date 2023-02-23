@@ -11,7 +11,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 //import { GetAdminByID } from "../services/HttpClientService";
 
 //api
@@ -19,7 +19,8 @@ import {
     GetDamageLevel,
     GetMedicalDevice,
     GetEmployeeByUID,
-    CreateRepair
+    UpdateRepairs,
+    GetRepairByID,
   } from '../../services/HttpClientService';
 
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -29,8 +30,10 @@ import {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   })
   
-  function Repair() {
-    const [repair, setRepair] = useState<RepairInterface>({});
+  function UpdateRepair() {
+    const {id} = useParams();
+    //const [repair, setRepair] = useState<RepairInterface>({});
+    const [repair, setRepair] = useState<Partial<RepairInterface>>({});
     const [damageLevel, setDamageLevel] = useState<DamageLevelInterface[]>([]);
     const [employee, setEmployee] = useState<EmployeeInterface[]>([]);
     const [medicaldevice, setMedicalDevice] = useState<MedicalDeviceInterface[]>([]);
@@ -39,6 +42,7 @@ import {
     const [date, setDate] = useState<Date | null>(new Date());
     const [error, setError] = useState(false);
     const [message, setAlertMessage] = React.useState("");
+    const [Repair_Note, setRepair_Note] = useState<string>("");
   
     const handleClose = (
       event?: React.SyntheticEvent | Event,
@@ -60,12 +64,11 @@ import {
       });
     };
   
-    const handleInputChange = (event: React.ChangeEvent<{ id?: string; value: any }>
-    ) => {
-      const id = event.target.id as keyof typeof Repair;
-      const { value } = event.target;
-      setRepair({ ...repair, [id]: value });
-    };
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const name = e.target.name;
+        console.log(name);
+        setRepair({ ...repair, [name]: e.target.value });
+      };
   
     // fetch POST
     const fetchDamageLevel = async () => {
@@ -77,20 +80,63 @@ import {
       let res = await GetMedicalDevice();
       res && setMedicalDevice(res);
     };
+
+    const fetchRepair = async () => {
+      let res = await GetRepairByID(id);
+      res && setRepair(res);
+    };
   
     const convertType = (data: string | number | undefined) => {
       let val = typeof data === "string" ? parseInt(data) : data;
       return val;
     };
-  
+
     const fetchEmployeeByUID = async () => {
       let res = await GetEmployeeByUID();
-      repair.EmployeeID = res.ID;
+      res && setEmployee(res);
     };
+
+    useEffect(() => {
+      fetch(`http://localhost:8080/repairs/${id}`)
+          .then((response) => response.json())
+          .then((res) => {
+              fetch(`http://localhost:8080/employee/${res.data.EmployeeID}`)
+                  .then((response) => response.json())
+                  .then((res) => {
+                      if (res.data) {
+                          setEmployee(res.data.FirstName)
+                          repair.EmployeeID = res.data.ID
+                      }
+                  }
+                  )
   
+              fetch(`http://localhost:8080/medicaldevice/${res.data.MedicalDeviceID}`)
+                  .then((response) => response.json())
+                  .then((res) => {
+                      if (res.data) {
+                          setMedicalDevice(res.data.Device_Name)
+                          repair.MedicalDeviceID = res.data.ID
+                      }
+                  }
+                  )
+  
+              fetch(`http://localhost:8080/damagelevel/${res.data.PatientID}`)
+                  .then((response) => response.json())
+                  .then((res) => {
+                      if (res.data) {
+                          setDamageLevel(res.data.Damage_Choice)
+                          repair.DamageLevelID = res.data.ID
+                      }
+                  }
+                  )
+          }
+          )
+  }, [id])
+
     // insert data to db
     const submit = async () => {
-      let data = {
+      let newdata = {
+        ID: convertType(id),
         EmployeeID: convertType(repair.EmployeeID),
         MedicalDeviceID: convertType(repair.MedicalDeviceID),
         DamageLevelID: convertType(repair.DamageLevelID),
@@ -98,11 +144,11 @@ import {
         Date_Of_Repair: date,
       };
   
-      console.log("data", data)
+      console.log("data", newdata)
   
-      let res = await CreateRepair(data);
+      let res = await UpdateRepairs(newdata);
       if (res.status) {
-        setAlertMessage("บันทึกข้อมูลสำเร็จ");
+        setAlertMessage("แก้ไขข้อมูลสำเร็จ");
         setSuccess(true);
       } else {
         setAlertMessage(res.message);
@@ -115,9 +161,9 @@ import {
       fetchMedicalDevice();
       fetchDamageLevel();
       fetchEmployeeByUID();
-      //fetchEmployeeID();
+      fetchRepair();
     }, []);
-
+    console.log(repair)
     return (
         <div>
           <Box
@@ -160,7 +206,7 @@ import {
                 variant="h4"
                 style={{ textAlign: "center", color: "#333" }}
               >
-                Repair
+                Update-Repair: {id}
               </Typography>
               <hr style={{ width: "400px", opacity: "0.5" }} />
     
@@ -185,9 +231,6 @@ import {
                       name: "MedicalDeviceID",
                     }}
                   >
-                    <option aria-label="None" value="">
-                      MedicalDevice
-                    </option>
                     {medicaldevice.map((item: MedicalDeviceInterface) => (
                       <option value={item.ID}>{item.Device_Name}</option>
                     ))}
@@ -216,9 +259,6 @@ import {
                       name: "DamageLevelID",
                     }}
                   >
-                    <option aria-label="None" value="">
-                      DamageLevel
-                    </option>
                     {damageLevel.map((item: DamageLevelInterface) => (
                       <option value={item.ID}>{item.Damage_Choice}</option>
                     ))}
@@ -237,10 +277,10 @@ import {
                 <TextField
                   id="Repair_Note"
                   name="Repair_Note"
-                  value={repair.Repair_Note}
+                  value={repair.Repair_Note || "" || Repair_Note}
                   onChange={handleInputChange}
                   //multiline
-                  placeholder="Repair Note" //ข้อความข้างใน
+                  //placeholder="Repair Note" //ข้อความข้างใน
                   minRows={8}
                   sx={{
                     fontSize: "1.5rem",
@@ -295,7 +335,7 @@ import {
                   variant="contained"
                   color="primary"
                 >
-                  Repair
+                  Update-Repair
                 </Button>
               </Box>
             </Box>
@@ -304,4 +344,4 @@ import {
       );
 }
 
-export default Repair;
+export default UpdateRepair;

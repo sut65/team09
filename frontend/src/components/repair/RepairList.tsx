@@ -10,6 +10,8 @@ import { GetRepair } from "../../services/HttpClientService";
 import moment from "moment";
 import axios from 'axios';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ButtonGroup from "@mui/material/ButtonGroup";
+import EditIcon from '@mui/icons-material/Edit';
 
 function RepairList() {
   const [repair, setRepair] = useState<RepairInterface[]>([]);
@@ -69,10 +71,19 @@ function RepairList() {
     { field: "Repair_Note", headerName: "หมายเหตุ", width: 210 },
     { field: "Date_Of_Repair", headerName: "วันที่ เวลาตอนบันทึกข้อมูล", width: 250, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm') },
     {
-      field: "action", headerName: "Action",width: 100, sortable: false, renderCell: ({ row }) =>
-            <Button  onClick={() => Delete(row.ID)} size="small" variant="contained" color="error" >
-                Delete <DeleteForeverIcon />
-            </Button>
+      field: "action", headerName: "Action",width: 150, sortable: false, renderCell: ({ row }) =>
+      {
+        return <ButtonGroup>
+          <Button onClick={() => Delete(row.ID)} variant="contained" color="error">
+            <DeleteForeverIcon />
+          </Button>
+          <Button component={RouterLink} to={`/Repair/update/${row.ID}`} variant="contained" color="info">
+            <div className="good-font">
+              <EditIcon />
+            </div>
+          </Button>
+        </ButtonGroup>;
+      }
     },
 
   ];

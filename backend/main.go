@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/sut65/team09/controller"
 	dentist "github.com/sut65/team09/controller/dentist"
 	docterschedule "github.com/sut65/team09/controller/docterschedule"
 	employee "github.com/sut65/team09/controller/employee"
@@ -14,7 +15,6 @@ import (
 	room "github.com/sut65/team09/controller/room"
 	treatment "github.com/sut65/team09/controller/treatment"
 	treatment_plan "github.com/sut65/team09/controller/treatment_plan"
-	"github.com/sut65/team09/controller"
 	"github.com/sut65/team09/entity"
 )
 
@@ -225,7 +225,7 @@ func main() {
 
 	// Prescription Routes
 	router.GET("/prescriptions", prescription.ListPrescriptions)
- 	router.GET("/prescription/:id", prescription.GetPrescription)
+	router.GET("/prescription/:id", prescription.GetPrescription)
 	router.POST("/prescriptions", prescription.CreatePrescription)
 	router.PATCH("/update-prescription", prescription.UpdatePrescription)
 	router.DELETE("/delete-prescription/:id", prescription.DeletePrescription)
