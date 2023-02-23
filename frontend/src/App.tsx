@@ -19,6 +19,8 @@ import Button from "@mui/material/Button";
 import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -161,12 +163,9 @@ const menu = [
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,  role: "Dentist"},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,  role: "Nurse"},
 
-  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,  role: "Dentist"},
-  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,  role: "Nurse"},
+  { name: "การรักษา", icon: <MedicalServicesIcon />, path: "/treatmentlistshow" ,  role: "Dentist"},
 
-  { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,  role: "Dentist"},
-  { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,  role: "Nurse"},
-
+  { name: "แผนการรักษา", icon: <PlaylistAddCheckIcon />, path: "/treatmentplanlistshow" ,  role: "Dentist"},
 
   { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Dentist"},
   { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Nurse"},

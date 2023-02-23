@@ -391,7 +391,7 @@ function TreatmentCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ซี่ ด้าน หรือ ฟิล์ม</p>
+                            <p className="good-font">ประเภทจำนวนการรักษา</p>
                             <Autocomplete 
                                 disablePortal 
                                 id="Type_Of_Number_Of_TreatmentID"
