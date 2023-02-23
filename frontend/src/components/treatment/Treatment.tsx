@@ -73,7 +73,7 @@ function Treatment(props: any){
 
         { field: "type_of_number_of_treatment_name", headerName: "Type of number of treatment", width: 200 },
         
-        { field: "treatment_detail", headerName: "Treatment detail", width: 150 },
+        { field: "treatment_detail", headerName: "Treatment detail", width: 400 },
  
         { field: "treatment_time", headerName: "Treatment Time", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm ') },
 

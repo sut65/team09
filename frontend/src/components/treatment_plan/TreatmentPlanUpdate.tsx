@@ -33,7 +33,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function TreatmentCreate() {
+function TreatmentUpdate() {
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
@@ -79,7 +79,7 @@ function TreatmentCreate() {
                     setTreatment_explain(res.data.Treatment_explain.toString());
                 }
 
-                fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/dentist/${res.data.DentistID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -99,7 +99,7 @@ function TreatmentCreate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_treatments/${res.data.Type_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -109,7 +109,7 @@ function TreatmentCreate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.Type_Of_Number_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -136,7 +136,7 @@ function TreatmentCreate() {
     const handleInputChange = (
         event: React.ChangeEvent<{ id?: string; value: any }>
     ) => {
-        const id = event.target.id as keyof typeof TreatmentCreate;
+        const id = event.target.id as keyof typeof TreatmentUpdate;
         const { value } = event.target;
         setTreatmentPlan({ ...treatment_plan, [id]: value });
     };
@@ -440,7 +440,7 @@ function TreatmentCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ซี่ ด้าน หรือ ฟิล์ม</p>
+                            <p className="good-font">ประเภทจำนวนการรักษา</p>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
@@ -536,4 +536,4 @@ function TreatmentCreate() {
     );
 }
 
-export default TreatmentCreate;
+export default TreatmentUpdate;
