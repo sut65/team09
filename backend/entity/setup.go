@@ -1031,11 +1031,6 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription3)
 
 	//จำลองข้อมูลระบบจัดตารางงานแพทย์
-	var Ttype = []Type_of_treatment{
-		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
-		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
-	}
-	db.CreateInBatches(Ttype, 2)
 
 	var day = []Workingday{
 		{Day: "วันจันทร์"},
