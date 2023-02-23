@@ -23,8 +23,9 @@ import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
 import { DentistInterface } from "../../models/IDentist";
 import { PatientInterface } from "../../models/IPatient";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, DateTimePicker } from "@mui/x-date-pickers";
 import { TreatmentsPlanInterface } from "../../models/ITreatment_plan";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -491,11 +492,12 @@ function TreatmentUpdate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">เวลาการรักษา</p>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
                                     value={treatment_plan.Treatment_time}
                                     onChange={(newValue) => {
                                         setTreatmentPlan({
@@ -503,15 +505,10 @@ function TreatmentUpdate() {
                                             Treatment_time: newValue,
                                         });
                                     }}
-                                    renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
                         </FormControl>
                     </Grid>
-
-
-
-
 
                     <Grid item xs={12}>
                         <Button component={RouterLink} to="/treatmentplanlistshow" variant="contained">

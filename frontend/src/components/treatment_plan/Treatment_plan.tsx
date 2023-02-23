@@ -75,7 +75,7 @@ function Treatment_plan() {
 
         { field: "treatment_explain", headerName: "Treatment explain", width: 450 },
 
-        { field: "treatment_time", headerName: "Treatment Time", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm ')  },
+        { field: "treatment_time", headerName: "Treatment Time", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm a')  },
 
         {
             field: "action", headerName: "Action", width: 200, sortable: false, renderCell: ({ row }) =>
