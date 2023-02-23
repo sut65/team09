@@ -10,7 +10,7 @@ import { GetPatientSchedules } from "../../services/HttpClientService";
 import moment from "moment";
 import axios from 'axios';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -32,7 +32,10 @@ function PatienScheduleHome() {
   const [message, setAlertMessage] = React.useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
- 
+  const [open, setOpen] = React.useState(false);
+
+
+
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -56,6 +59,13 @@ function PatienScheduleHome() {
   useEffect(() => {
     getPatien_schedules();
   }, []);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const Close = () => {
+    setOpen(false);
+  };
 
   const Delete = async (id: number) => {
     try {
@@ -93,9 +103,30 @@ function PatienScheduleHome() {
       field: "action", headerName: "Action",width: 250  , sortable: false, renderCell: ({ row }) =>
       <ButtonGroup>
         <Stack spacing={2} direction="row">
-          <IconButton aria-label="delete" onClick={() => Delete(row.ID)}>
+          <IconButton aria-label="delete" onClick={handleClickOpen}>
            <DeleteIcon />
            </IconButton>
+           <Dialog
+        open={open}
+        onClose={Close}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"ต้องการลบข้อมูลหรือไม่?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                หากลบข้อมูลแล้วข้อมูลนี้จะหายไป.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => {Delete(row.ID); Close();}} variant="contained" autoFocus>
+                Yes
+              </Button>
+              <Button onClick={Close} variant="contained" color="error">No</Button>
+            </DialogActions>
+          </Dialog>
            <IconButton aria-label="edit" component={RouterLink} to={`/PatientSchedule/Update/${row.ID}`} >
               <EditIcon/>
               </IconButton>
