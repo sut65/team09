@@ -8,6 +8,7 @@ import { TreatmentsInterface } from "../../models/ITreatment";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import axios from 'axios';
 import { ButtonGroup } from "@mui/material";
+import moment from "moment";
 
 function Treatment(props: any){
     const [treatment, setTreatment] = React.useState<TreatmentsInterface[]>([]);
@@ -66,7 +67,7 @@ function Treatment(props: any){
 
         { field: "other_teeth_problems", headerName: "Other teeth problems", width: 150 },
 
-        { field: "type_of_treatment_name", headerName: "Type of treatment", width: 160 },
+        { field: "type_of_treatment_name", headerName: "Type of treatment", width: 230 },
 
         { field: "number_of_treatment", headerName: "Number of treatment", width: 150 },
 
@@ -74,7 +75,7 @@ function Treatment(props: any){
         
         { field: "treatment_detail", headerName: "Treatment detail", width: 150 },
  
-        { field: "treatment_time", headerName: "Treatment Time", width: 200 },
+        { field: "treatment_time", headerName: "Treatment Time", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm ') },
 
         { field: "treatment_code", headerName: "Treatment code", width: 120 },
 
