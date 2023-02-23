@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid"; 
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -17,11 +17,12 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 //import { GetCurrentAdmin } from "../services/HttpClientService"
 import { TreatmentsInterface } from "../../models/ITreatment";
-import { Type_of_treatments_Interface } from "../../models/IType_of_treatment"; 
-import { DentistInterface } from "../../models/IDentist"; 
+import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
+import { DentistInterface } from "../../models/IDentist";
 import { PatientInterface } from "../../models/IPatient";
-import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment"; 
-import { DatePicker } from "@mui/x-date-pickers";
+import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
+import { DatePicker, DateTimePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -39,8 +40,8 @@ function TreatmentCreate() {
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
     const [type_of_treatments, setType_of_treatments] = React.useState<Type_of_treatments_Interface[]>([]);
     const [type_of_number_of_treatments, setType_of_number_treatments] = React.useState<Type_of_number_of_treatment_Interface[]>([]);
-    const [treatment, setTreatment] = React.useState<TreatmentsInterface>({Treatment_time: new Date(), });
-     const [message, setAlertMessage] = React.useState("");
+    const [treatment, setTreatment] = React.useState<TreatmentsInterface>({ Treatment_time: new Date(), });
+    const [message, setAlertMessage] = React.useState("");
     // const [other_teeth_problems, setTOther_teeth_problems] = React.useState<string>("");
     // const [treatment_detail, setTreatment_detail] = React.useState<string>("");
     // const [treatment_code, setTreatment_code] = React.useState<string>("");
@@ -151,7 +152,7 @@ function TreatmentCreate() {
         getPatient();
         getType_of_treatment();
         getType_of_number_of_treatment();
-        
+
     }, []);
 
     const convertType = (data: string | number | undefined) => {
@@ -159,27 +160,27 @@ function TreatmentCreate() {
         return val;
     };
 
-    async function submit() { 
+    async function submit() {
         let data = {
 
             DentistID: convertType(treatment.DentistID),
-            PatientID: convertType(treatment.PatientID), 
-            
+            PatientID: convertType(treatment.PatientID),
+
             Number_of_cavities: typeof treatment.number_of_cavities === "string" ? parseInt(treatment.number_of_cavities) : 0,
             Number_of_swollen_gums: typeof treatment.number_of_swollen_gums === "string" ? parseInt(treatment.number_of_swollen_gums) : 0,
             Other_teeth_problems: treatment.other_teeth_problems ?? "",
             Type_Of_TreatmentID: convertType(treatment.Type_of_treatmentsID),
             Number_of_treatment: typeof treatment.number_of_treatment === "string" ? parseInt(treatment.number_of_treatment) : 0,
 
-            Type_Of_Number_Of_TreatmentID: convertType(treatment.Type_Of_Number_Of_TreatmentID), 
+            Type_Of_Number_Of_TreatmentID: convertType(treatment.Type_Of_Number_Of_TreatmentID),
 
-            
-            
+
+
             Treatment_detail: treatment.treatment_detail ?? "",
             Treatment_time: treatment.Treatment_time,
-            Treatment_code: treatment.treatment_code ?? "",          
+            Treatment_code: treatment.treatment_code ?? "",
 
-        }; 
+        };
 
         console.log(JSON.stringify(data))
 
@@ -205,15 +206,15 @@ function TreatmentCreate() {
                     return { status: false, message: res.error };
                 }
             });
-        
-            
-            if (res.status) {
-              setAlertMessage("บันทึกข้อมูลสำเร็จ");
-              setSuccess(true);
-            } else {
-              setAlertMessage(res.message);
-              setError(true);
-            }
+
+
+        if (res.status) {
+            setAlertMessage("บันทึกข้อมูลสำเร็จ");
+            setSuccess(true);
+        } else {
+            setAlertMessage(res.message);
+            setError(true);
+        }
 
     }
 
@@ -221,7 +222,7 @@ function TreatmentCreate() {
         <Container maxWidth="md">
             <Snackbar
                 id="success"
-              
+
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
@@ -229,24 +230,24 @@ function TreatmentCreate() {
             >
                 <Alert onClose={handleClose} severity="success">
                     <div className="good-font">
-                    {message}
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
-            <Snackbar 
-            id="error"
-            open={error}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
-                
+            <Snackbar
+                id="error"
+                open={error}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
-                    {message}
+                        {message}
                     </div>
                 </Alert>
             </Snackbar>
-            <Paper> 
+            <Paper>
                 <Box
                     display="flex"
                     sx={{
@@ -257,7 +258,7 @@ function TreatmentCreate() {
                         <Typography
                             component="h2"
                             variant="h6"
-                            color="primary" 
+                            color="primary"
                             gutterBottom
                         >
                             <div className="good-font">
@@ -269,10 +270,10 @@ function TreatmentCreate() {
                 <Divider />
                 <Grid container spacing={3} sx={{ padding: 2 }}>
 
-                <Grid item xs={6}>
+                    <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ทันตเเพทย์</p>
-                            <Autocomplete 
+                            <Autocomplete
                                 disablePortal
                                 id="DentistID"
                                 getOptionLabel={(item: DentistInterface) => `${item.FirstName}`}
@@ -289,7 +290,7 @@ function TreatmentCreate() {
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ผู้ป่วย</p>
-                            <Autocomplete 
+                            <Autocomplete
                                 disablePortal
                                 id="PatientID"
                                 getOptionLabel={(item: PatientInterface) => `${item.FirstName}`}
@@ -368,7 +369,7 @@ function TreatmentCreate() {
                                 renderInput={(params) => <TextField {...params} label="เลือกประเภทการรักษา" />}
                             />
                         </FormControl>
-                    </Grid>    
+                    </Grid>
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
@@ -384,7 +385,7 @@ function TreatmentCreate() {
                                 }}
                                 value={treatment.number_of_treatment || ""}
                                 onChange={handleInputChange}
-                             />
+                            />
                         </FormControl>
                     </Grid>
 
@@ -392,8 +393,8 @@ function TreatmentCreate() {
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">ประเภทจำนวนการรักษา</p>
-                            <Autocomplete 
-                                disablePortal 
+                            <Autocomplete
+                                disablePortal
                                 id="Type_Of_Number_Of_TreatmentID"
                                 getOptionLabel={(item: Type_of_number_of_treatment_Interface) => `${item.Type_of_number_of_treatment_name}`}
                                 options={type_of_number_of_treatments}
@@ -405,7 +406,7 @@ function TreatmentCreate() {
                             />
                         </FormControl>
                     </Grid>
-                    
+
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">รายละเอียดการรักษา</p>
@@ -420,11 +421,12 @@ function TreatmentCreate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">เวลาการรักษา</p>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker 
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
                                     value={treatment.Treatment_time}
                                     onChange={(newValue) => {
                                         setTreatment({
@@ -432,7 +434,6 @@ function TreatmentCreate() {
                                             Treatment_time: newValue,
                                         });
                                     }}
-                                    renderInput={(params) => <TextField {...params} />} 
                                 />
                             </LocalizationProvider>
                         </FormControl>

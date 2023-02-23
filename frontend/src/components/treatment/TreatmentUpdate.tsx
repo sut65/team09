@@ -23,6 +23,8 @@ import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { DentistInterface } from "../../models/IDentist";
 import { PatientInterface } from "../../models/IPatient";
 import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -508,11 +510,12 @@ function TreatmentUpdate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">เวลาการรักษา</p>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
                                     value={treatment.Treatment_time}
                                     onChange={(newValue) => {
                                         setTreatment({
@@ -520,7 +523,6 @@ function TreatmentUpdate() {
                                             Treatment_time: newValue,
                                         });
                                     }}
-                                    renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
                         </FormControl>
