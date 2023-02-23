@@ -157,6 +157,11 @@ function PaitentUpdate() {
                     setSyid(res.data.ID)
                     patient.SymptomID = res.data.ID
                     console.log("role : "+patient.SymptomID)
+                    if (patient.SymptomID === 1 || patient.SymptomID === 3) {
+                      setOpen(true);
+                    } else if (patient.SymptomID === 2) {
+                      setOpen(false);
+                    }
                 }
             })
         }
@@ -343,6 +348,7 @@ function PaitentUpdate() {
 
   
   async function submit() {
+    patient.EmployeeID = Number(localStorage.getItem("uid"));
     patient.ProvinceID = Number(pid);
     patient.DistrictID = Number(did);
     patient.Sub_districtID = Number(sid);

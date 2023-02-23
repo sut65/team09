@@ -19,7 +19,7 @@ import {
   GetType,
   GetStatus,
   CreateMedicalDevice,
-  GetEmployee // teast
+  GetEmployeeByUID,
 } from '../../services/HttpClientService';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -85,10 +85,9 @@ function MedicalDevice() {
     return val;
   };
 
-  //ทดสอบข้อมูล
-  const fetchEmployees = async () => {
-    let res = await GetEmployee();
-    res && setEmployee(res);
+  const fetchEmployeeByUID = async () => {
+    let res = await GetEmployeeByUID();
+    medicaldevice.EmployeeID = res.ID;
   };
 
   // insert data to db
@@ -118,8 +117,7 @@ function MedicalDevice() {
   useEffect(() => {
     fetchTypes();
     fetchStatuses();
-    fetchEmployees();
-    //fetchEmployeeID();
+    fetchEmployeeByUID();
   }, []);
 
   return (
@@ -167,37 +165,6 @@ function MedicalDevice() {
             Medical Device
           </Typography>
           <hr style={{ width: "400px", opacity: "0.5" }} />
-          
-          {/*Employee ID รอดึงข้อมูลจากผูู้ login*/ }
-          <Box
-            sx={{
-              display: "flex",
-              mt: 2,
-            }}
-          >
-            <Box
-              sx={{
-                width: "400px"
-              }}
-            >
-              <Select
-                native
-                fullWidth
-                value={medicaldevice.EmployeeID + ""}
-                onChange={handleChange}
-                inputProps={{
-                  name: "EmployeeID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  Employee
-                </option>
-                {employee.map((item: EmployeeInterface) => (
-                  <option value={item.ID}>{item.ID}</option>
-                ))}
-              </Select>
-            </Box>
-          </Box>
 
           {/*Type ID*/}
           <Box

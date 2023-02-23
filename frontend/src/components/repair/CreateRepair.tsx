@@ -18,7 +18,7 @@ import { Link as RouterLink } from "react-router-dom";
 import {
     GetDamageLevel,
     GetMedicalDevice,
-    GetEmployee,
+    GetEmployeeByUID,
     CreateRepair
   } from '../../services/HttpClientService';
 
@@ -83,10 +83,9 @@ import {
       return val;
     };
   
-    //ทดสอบข้อมูล
-    const fetchEmployees = async () => {
-      let res = await GetEmployee();
-      res && setEmployee(res);
+    const fetchEmployeeByUID = async () => {
+      let res = await GetEmployeeByUID();
+      repair.EmployeeID = res.ID;
     };
   
     // insert data to db
@@ -115,7 +114,7 @@ import {
     useEffect(() => {
       fetchMedicalDevice();
       fetchDamageLevel();
-      fetchEmployees();
+      fetchEmployeeByUID();
       //fetchEmployeeID();
     }, []);
 
@@ -164,37 +163,6 @@ import {
                 Repair
               </Typography>
               <hr style={{ width: "400px", opacity: "0.5" }} />
-              
-              {/*Employee ID รอดึงข้อมูลจากผูู้ login*/ }
-              <Box
-                sx={{
-                  display: "flex",
-                  mt: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    width: "400px"
-                  }}
-                >
-                  <Select
-                    native
-                    fullWidth
-                    value={repair.EmployeeID + ""}
-                    onChange={handleChange}
-                    inputProps={{
-                      name: "EmployeeID",
-                    }}
-                  >
-                    <option aria-label="None" value="">
-                      Employee
-                    </option>
-                    {employee.map((item: EmployeeInterface) => (
-                      <option value={item.ID}>{item.ID}</option>
-                    ))}
-                  </Select>
-                </Box>
-              </Box>
     
               {/*MeaicalDevice ID*/}
               <Box

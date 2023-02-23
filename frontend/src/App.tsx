@@ -19,6 +19,8 @@ import Button from "@mui/material/Button";
 import MedicationLiquidIcon from '@mui/icons-material/MedicationLiquid';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -78,8 +80,9 @@ import PaymentList from "./components/payment/PaymentList";
 import PaymentCreate from "./components/payment/PaymentCreate";
 import PaymentUpdate from "./components/payment/PaymentUpdate";
 
-import CreateRepair from "./components/repair/CreateRepair"
+import CreateRepair from "./components/repair/CreateRepair";
 import RepairList from "./components/repair/RepairList";
+import RepairUpdate from "./components/repair/RepairUpdate";
 
 
 // import Students from "./components/Student";
@@ -147,8 +150,8 @@ const menu = [
 
   { name: "พนักงาน", icon: <PeopleIcon htmlColor="#7B68EE" />, path: "/employees" ,  role: "Admin"},
 
-  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,   role: "Dentist" },
-  { name: "ผู้ป่วย", icon: <PeopleIcon />, path: "/patients" ,   role: "Nurse" },
+  { name: "ผู้ป่วย", icon: <PeopleIcon htmlColor="#7B68EE"/>, path: "/patients" ,   role: "Dentist" },
+  { name: "ผู้ป่วย", icon: <PeopleIcon htmlColor="#7B68EE"/>, path: "/patients" ,   role: "Nurse" },
 
   { name: "เครื่องมือแพทย์", icon: <BuildCircleIcon />, path: "/MedicalDevice" ,  role: "Admin"},
 
@@ -161,12 +164,9 @@ const menu = [
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,  role: "Dentist"},
   { name: "ตารางงานแพทย์", icon: <WorkHistoryIcon />, path: "/DentistSchedule/home" ,  role: "Nurse"},
 
-  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,  role: "Dentist"},
-  { name: "การรักษา", icon: <WorkHistoryIcon />, path: "/treatmentlistshow" ,  role: "Nurse"},
+  { name: "การรักษา", icon: <MedicalServicesIcon />, path: "/treatmentlistshow" ,  role: "Dentist"},
 
-  { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,  role: "Dentist"},
-  { name: "แผนการรักษา", icon: <WorkHistoryIcon />, path: "/treatmentplanlistshow" ,  role: "Nurse"},
-
+  { name: "แผนการรักษา", icon: <PlaylistAddCheckIcon />, path: "/treatmentplanlistshow" ,  role: "Dentist"},
 
   { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Dentist"},
   { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Nurse"},
@@ -328,6 +328,7 @@ function App() {
                 <Route path="/payment/update/:id" element={<PaymentUpdate />} />
                 <Route path="/Repair/create" element={<CreateRepair />} />
                 <Route path="/Repair" element={<RepairList />} />
+                <Route path="/Repair/update/:id" element={<RepairUpdate />} />
             </Routes>
             </Container>
         </Box>

@@ -105,12 +105,12 @@ func SetupDatabase() {
 
 	//Gender
 	gender1 := Gender{
-		Gender_name: "Male",
+		Gender_name: "ชาย",
 	}
 	db.Model(&Gender{}).Create(&gender1)
 
 	gender2 := Gender{
-		Gender_name: "FeMale",
+		Gender_name: "หญิง",
 	}
 	db.Model(&Gender{}).Create(&gender2)
 
@@ -707,7 +707,7 @@ func SetupDatabase() {
 		Symptom:            symp2,
 		Symptom_name:       "-",
 		EmployeeID:         new(uint),
-		Employee:           em1,
+		Employee:           em2,
 	}
 	db.Model(&Patient{}).Create(&patient1)
 
@@ -733,7 +733,7 @@ func SetupDatabase() {
 		Symptom:            symp1,
 		Symptom_name:       "ปวดฟัน",
 		// EmployeeID:         new(uint),
-		Employee: em1,
+		Employee: em2,
 	}
 	db.Model(&Patient{}).Create(&patient2)
 
@@ -998,8 +998,8 @@ func SetupDatabase() {
 	DateTimePrescriptionC := time.Date(2022, time.September, 8, 25, 22, 33, 0, time.Local)
 
 	Prescription1 := Prescription{
-		Qty:				  2,	     			 	
-		Details:			  "รับประทานหลังอาหาร",
+		Qty:                  2,
+		Details:              "รับประทานหลังอาหาร",
 		Medicine:             Medicine1,
 		Medicine_status:      Medicine_status1,
 		Patient:              patient1,
@@ -1009,8 +1009,8 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription1)
 
 	Prescription2 := Prescription{
-		Qty:				  10,	     			 	
-		Details:			  "รับประทานวันละ 1 เม็ด",
+		Qty:                  10,
+		Details:              "รับประทานวันละ 1 เม็ด",
 		Medicine:             Medicine12,
 		Medicine_status:      Medicine_status2,
 		Patient:              patient2,
@@ -1020,8 +1020,8 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription2)
 
 	Prescription3 := Prescription{
-		Qty:				  5,	     			 	
-		Details:			  "ทานยาแล้วอาจรู้สึกง่วงซึม",
+		Qty:                  5,
+		Details:              "ทานยาแล้วอาจรู้สึกง่วงซึม",
 		Medicine:             Medicine2,
 		Medicine_status:      Medicine_status2,
 		Patient:              patient2,
@@ -1031,11 +1031,6 @@ func SetupDatabase() {
 	db.Model(&Prescription{}).Create(&Prescription3)
 
 	//จำลองข้อมูลระบบจัดตารางงานแพทย์
-	var Ttype = []Type_of_treatment{
-		{Type_of_treatment_name: "อยากรักษาาาาาา", Price: 1000},
-		{Type_of_treatment_name: "อยากออกไปแตะขอบฟ้าาาา", Price: 2000},
-	}
-	db.CreateInBatches(Ttype, 2)
 
 	var day = []Workingday{
 		{Day: "วันจันทร์"},
@@ -1222,33 +1217,31 @@ func SetupDatabase() {
 
 	//---------------------------------- ตารางหลัก treatment ---------------------------------
 	treatment1 := Treatment{
-		Dentist: dentist2,
-		Patient: patient2,
-		Number_of_cavities: 1,
-		Number_of_swollen_gums: 1,
-		Other_teeth_problems: "มีหินปูน",
-		Type_Of_Treatment: Type_of_treatment8,
-		Number_of_treatment: 1,
+		Dentist:                     dentist2,
+		Patient:                     patient2,
+		Number_of_cavities:          1,
+		Number_of_swollen_gums:      1,
+		Other_teeth_problems:        "มีหินปูน",
+		Type_Of_Treatment:           Type_of_treatment8,
+		Number_of_treatment:         1,
 		Type_Of_Number_Of_Treatment: Type_of_number_of_treatment1,
-		Treatment_detail: "ถอนฟัน1ซี่ ซ้ายบน",
-		Treatment_time: time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
-		Treatment_code: "T8906834",
-		
+		Treatment_detail:            "ถอนฟัน1ซี่ ซ้ายบน",
+		Treatment_time:              time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
+		Treatment_code:              "T8906834",
 	}
 	db.Model(&Treatment{}).Create(&treatment1)
 
 	//---------------------------------- ตารางหลัก treatment plan ---------------------------------
 	treatment_plan1 := Treatment_plan{
-		Dentist: dentist2,
-		Patient: patient2,
-		Order_of_treatment: 1,
-		Type_Of_Treatment: Type_of_treatment8,
-		Number_of_treatment: 1,
+		Dentist:                     dentist2,
+		Patient:                     patient2,
+		Order_of_treatment:          1,
+		Type_Of_Treatment:           Type_of_treatment8,
+		Number_of_treatment:         1,
 		Type_Of_Number_Of_Treatment: Type_of_number_of_treatment1,
-		Treatment_detail: "ถอนฟัน1ซี่ ซ้ายบน",
-		Treatment_explain: "ถอนฟันก่อนทำการจัดฟัน",
-		Treatment_time: time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
-		
+		Treatment_detail:            "ถอนฟัน1ซี่ ซ้ายบน",
+		Treatment_explain:           "ถอนฟันก่อนทำการจัดฟัน",
+		Treatment_time:              time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
 	}
 	db.Model(&Treatment_plan{}).Create(&treatment_plan1)
 
@@ -1368,31 +1361,31 @@ func SetupDatabase() {
 	DateTimePaymentC := time.Date(2022, time.September, 8, 25, 22, 33, 0, time.Local)
 
 	Payment1 := Payment{
-		Total_price:          1500,
-		Payment_status:       Payment_status1,
-		Note: 				  "จ่ายด้วยเงินสด",	
-		Patient:              patient1,
-		Employee:             em2,
+		Total_price:     1500,
+		Payment_status:  Payment_status1,
+		Note:            "จ่ายด้วยเงินสด",
+		Patient:         patient1,
+		Employee:        em2,
 		DateTimePayment: DateTimePaymentA,
 	}
 	db.Model(&Payment{}).Create(&Payment1)
 
 	Payment2 := Payment{
-		Total_price:          2500,
-		Payment_status:       Payment_status1,
-		Note: 				  "จ่ายด้วยพร้อมเพย์",
-		Patient:              patient2,
-		Employee:             em1,
+		Total_price:     2500,
+		Payment_status:  Payment_status1,
+		Note:            "จ่ายด้วยพร้อมเพย์",
+		Patient:         patient2,
+		Employee:        em1,
 		DateTimePayment: DateTimePaymentB,
 	}
 	db.Model(&Payment{}).Create(&Payment2)
 
 	Payment3 := Payment{
-		Total_price:          500,
-		Payment_status:       Payment_status2,
-		Note: 				  "รักษาฟรี",
-		Patient:              patient1,
-		Employee:             em2,
+		Total_price:     500,
+		Payment_status:  Payment_status2,
+		Note:            "รักษาฟรี",
+		Patient:         patient1,
+		Employee:        em2,
 		DateTimePayment: DateTimePaymentC,
 	}
 	db.Model(&Payment{}).Create(&Payment3)

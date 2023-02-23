@@ -187,27 +187,28 @@ func UpdateEmployee(c *gin.Context) {
 		return
 	}
 
-	hashPassword, err := bcrypt.GenerateFromPassword([]byte(employee.Password), 14)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
-		return
-	}
+	// hashPassword, err := bcrypt.GenerateFromPassword([]byte(employee.Password), 14)
+	// if err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
+	// 	return
+	// }
 
-	employee.Password = string(hashPassword)
+	// employee.Password = string(hashPassword)
 
 	emp := entity.Employee{
 		FirstName:       employee.FirstName,
 		LastName:        employee.LastName,
 		Employee_number: employee.Employee_number,
 		Personal_id:     employee.Personal_id,
-		Password:        string(hashPassword),
-		Phone:           employee.Phone,
-		House_no:        employee.House_no,
-		Gender:          gender,
-		Province:        province,
-		District:        district,
-		Sub_district:    sub_district,
-		Role:            role,
+		// Password:        string(hashPassword),
+		// Password:     employee.Password,
+		Phone:        employee.Phone,
+		House_no:     employee.House_no,
+		Gender:       gender,
+		Province:     province,
+		District:     district,
+		Sub_district: sub_district,
+		Role:         role,
 	}
 
 	if err := entity.DB().Where("id = ?", id).Updates(&employee).Error; err != nil {

@@ -21,7 +21,8 @@ import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
 import { DentistInterface } from "../../models/IDentist";
 import { PatientInterface } from "../../models/IPatient";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, DateTimePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -332,7 +333,7 @@ function TreatmentPlanCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ซี่ ด้าน หรือ ฟิล์ม</p>
+                            <p className="good-font">ประเภทจำนวนการรักษา</p>
                             <Autocomplete
                                 disablePortal
                                 id="Type_Of_Number_Of_TreatmentID"
@@ -375,11 +376,12 @@ function TreatmentPlanCreate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">เวลาการรักษา</p>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
                                     value={treatment_plan.Treatment_time}
                                     onChange={(newValue) => {
                                         setTreatmentPlan({
@@ -387,7 +389,6 @@ function TreatmentPlanCreate() {
                                             Treatment_time: newValue,
                                         });
                                     }}
-                                    renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
                         </FormControl>

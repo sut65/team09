@@ -23,8 +23,9 @@ import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
 import { DentistInterface } from "../../models/IDentist";
 import { PatientInterface } from "../../models/IPatient";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, DateTimePicker } from "@mui/x-date-pickers";
 import { TreatmentsPlanInterface } from "../../models/ITreatment_plan";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -33,7 +34,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function TreatmentCreate() {
+function TreatmentUpdate() {
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
@@ -79,7 +80,7 @@ function TreatmentCreate() {
                     setTreatment_explain(res.data.Treatment_explain.toString());
                 }
 
-                fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/dentist/${res.data.DentistID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -99,7 +100,7 @@ function TreatmentCreate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_treatments/${res.data.Type_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -109,7 +110,7 @@ function TreatmentCreate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.Type_Of_Number_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -136,7 +137,7 @@ function TreatmentCreate() {
     const handleInputChange = (
         event: React.ChangeEvent<{ id?: string; value: any }>
     ) => {
-        const id = event.target.id as keyof typeof TreatmentCreate;
+        const id = event.target.id as keyof typeof TreatmentUpdate;
         const { value } = event.target;
         setTreatmentPlan({ ...treatment_plan, [id]: value });
     };
@@ -405,7 +406,7 @@ function TreatmentCreate() {
                                 value={treatment_plan.Type_Of_TreatmentID + ""}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: "Type_of_treatmentsID",
+                                    name: "Type_Of_TreatmentID",
                                 }}
                             >
                                 <option aria-label="None" value={typeoftreatmentname}>
@@ -440,7 +441,7 @@ function TreatmentCreate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ซี่ ด้าน หรือ ฟิล์ม</p>
+                            <p className="good-font">ประเภทจำนวนการรักษา</p>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
@@ -491,11 +492,12 @@ function TreatmentCreate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">เวลาการรักษา</p>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
                                     value={treatment_plan.Treatment_time}
                                     onChange={(newValue) => {
                                         setTreatmentPlan({
@@ -503,15 +505,10 @@ function TreatmentCreate() {
                                             Treatment_time: newValue,
                                         });
                                     }}
-                                    renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
                         </FormControl>
                     </Grid>
-
-
-
-
 
                     <Grid item xs={12}>
                         <Button component={RouterLink} to="/treatmentplanlistshow" variant="contained">
@@ -536,4 +533,4 @@ function TreatmentCreate() {
     );
 }
 
-export default TreatmentCreate;
+export default TreatmentUpdate;

@@ -23,6 +23,8 @@ import { Type_of_treatments_Interface } from "../../models/IType_of_treatment";
 import { DentistInterface } from "../../models/IDentist";
 import { PatientInterface } from "../../models/IPatient";
 import { Type_of_number_of_treatment_Interface } from "../../models/IType_of_number_of_treatment";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -81,7 +83,7 @@ function TreatmentUpdate() {
                     setNumber_of_treatment(res.data.Number_of_treatment.toString());
                 }
 
-                fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/dentist/${res.data.DentistID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -101,7 +103,7 @@ function TreatmentUpdate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_treatments/${res.data.Type_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -111,7 +113,7 @@ function TreatmentUpdate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.Type_Of_Number_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -471,7 +473,7 @@ function TreatmentUpdate() {
 
                     <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">ซี่ ด้าน หรือ ฟิล์ม</p>
+                            <p className="good-font">ประเภทจำนวนการรักษา</p>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
@@ -508,11 +510,12 @@ function TreatmentUpdate() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <FormControl fullWidth variant="outlined">
                             <p className="good-font">เวลาการรักษา</p>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
                                     value={treatment.Treatment_time}
                                     onChange={(newValue) => {
                                         setTreatment({
@@ -520,7 +523,6 @@ function TreatmentUpdate() {
                                             Treatment_time: newValue,
                                         });
                                     }}
-                                    renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
                         </FormControl>

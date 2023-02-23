@@ -8,9 +8,10 @@ import { TreatmentsPlanInterface } from "../../models/ITreatment_plan";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import axios from "axios";
 import { ButtonGroup } from "@mui/material";
+import moment from "moment";
 
 
-function Branch() {
+function Treatment_plan() {
     const [treatment_plan, setTreatment_plan] = React.useState<TreatmentsPlanInterface[]>([]);
 
     const getBranch = async () => {
@@ -64,17 +65,17 @@ function Branch() {
 
         { field: "order_of_treatment", headerName: "Order Of Treatment", width: 150 },
 
-        { field: "type_of_treatment_name", headerName: "Type of treatment", width: 130 },
+        { field: "type_of_treatment_name", headerName: "Type of treatment", width: 230 },
 
         { field: "number_of_treatment", headerName: "Number of treatment", width: 150 },
 
         { field: "type_of_number_of_treatment_name", headerName: "Type of number of treatment", width: 200 },
 
-        { field: "treatment_detail", headerName: "Treatment detail", width: 150 },
+        { field: "treatment_detail", headerName: "Treatment detail", width: 400 },
 
-        { field: "treatment_explain", headerName: "Treatment explain", width: 150 },
+        { field: "treatment_explain", headerName: "Treatment explain", width: 450 },
 
-        { field: "treatment_time", headerName: "Treatment Time", width: 200 },
+        { field: "treatment_time", headerName: "Treatment Time", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm a')  },
 
         {
             field: "action", headerName: "Action", width: 200, sortable: false, renderCell: ({ row }) =>
@@ -143,4 +144,4 @@ function Branch() {
     );
 }
 
-export default Branch;
+export default Treatment_plan;

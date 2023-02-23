@@ -15,7 +15,7 @@ func CreateRepair(c *gin.Context) {
 	var medicaldevice entity.MedicalDevice
 	var damagelevel entity.DamageLevel
 
-	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร medicaldevice
+	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร repair
 	if err := c.ShouldBindJSON(&repair); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -97,21 +97,56 @@ func DeleteRepair(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": id})
 }
 
-// PATCH /medicaldevice
+// PATCH /repair
 func UpdateRepairs(c *gin.Context) {
-
 	var repair entity.Repair
+	// id := c.Param("id")
+	var employee entity.Employee
+	var medicaldevice entity.MedicalDevice
+	var damagelevel entity.DamageLevel
+
+	// ผลลัพธ์ที่ได้จะถูก bind เข้าตัวแปร repair
 	if err := c.ShouldBindJSON(&repair); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if tx := entity.DB().Where("id = ?", repair.ID).First(&repair); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "medicaldevices not found"})
-		return
-	}
-	if err := entity.DB().Save(&repair).Error; err != nil {
+
+	if _, err := govalidator.ValidateStruct(repair); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": repair})
+
+	// ค้นหา employee ด้วย id
+	if tx := entity.DB().Where("id = ?", repair.EmployeeID).First(&employee); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
+		return
+	}
+
+	// ค้นหา medicaldevice ด้วย id
+	if tx := entity.DB().Where("id = ?", repair.MedicalDeviceID).First(&medicaldevice); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "medicaldevice not found"})
+		return
+	}
+
+	// ค้นหา damagelevel ด้วย id
+	if tx := entity.DB().Where("id = ?", repair.DamageLevelID).First(&damagelevel); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "damagelevel not found"})
+		return
+	}
+
+	rp := entity.Repair{
+		Employee:       employee,
+		MedicalDevice:  medicaldevice,
+		DamageLevel:    damagelevel,
+		Repair_Note:    repair.Repair_Note,
+		Date_Of_Repair: repair.Date_Of_Repair,
+	}
+
+	// บันทึก
+	if err := entity.DB().Where("id = ?", repair.ID).Updates(&rp).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusCreated, gin.H{"data": repair})
+
 }
