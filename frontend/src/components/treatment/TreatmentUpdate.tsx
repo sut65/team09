@@ -81,7 +81,7 @@ function TreatmentUpdate() {
                     setNumber_of_treatment(res.data.Number_of_treatment.toString());
                 }
 
-                fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/dentist/${res.data.DentistID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -101,7 +101,7 @@ function TreatmentUpdate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_treatments/${res.data.Type_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
@@ -111,7 +111,7 @@ function TreatmentUpdate() {
                     }
                     )
 
-                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.PatientID}`)
+                fetch(`http://localhost:8080/type_of_number_of_treatments/${res.data.Type_Of_Number_Of_TreatmentID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
