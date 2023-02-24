@@ -34,7 +34,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function TreatmentUpdate() {
+function TreatmentPlanUpdate() {
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
@@ -137,7 +137,7 @@ function TreatmentUpdate() {
     const handleInputChange = (
         event: React.ChangeEvent<{ id?: string; value: any }>
     ) => {
-        const id = event.target.id as keyof typeof TreatmentUpdate;
+        const id = event.target.id as keyof typeof TreatmentPlanUpdate;
         const { value } = event.target;
         setTreatmentPlan({ ...treatment_plan, [id]: value });
     };
@@ -282,8 +282,9 @@ function TreatmentUpdate() {
 
     return (
         <Container maxWidth="md">
-            <Snackbar
+               <Snackbar
                 id="success"
+
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
@@ -295,16 +296,20 @@ function TreatmentUpdate() {
                     </div>
                 </Alert>
             </Snackbar>
-            <Snackbar id="error"
+            <Snackbar
+                id="error"
                 open={error}
                 autoHideDuration={6000}
-                onClose={handleClose}>
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
                         {message}
                     </div>
                 </Alert>
             </Snackbar>
+            
             <Paper>
                 <Box
                     display="flex"
@@ -534,4 +539,4 @@ function TreatmentUpdate() {
     );
 }
 
-export default TreatmentUpdate;
+export default TreatmentPlanUpdate;

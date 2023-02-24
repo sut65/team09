@@ -280,6 +280,7 @@ function TreatmentUpdate() {
         <Container maxWidth="md">
             <Snackbar
                 id="success"
+
                 open={success}
                 autoHideDuration={6000}
                 onClose={handleClose}
@@ -295,13 +296,16 @@ function TreatmentUpdate() {
                 id="error"
                 open={error}
                 autoHideDuration={6000}
-                onClose={handleClose}>
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+
                 <Alert onClose={handleClose} severity="error">
                     <div className="good-font">
                         {message}
                     </div>
                 </Alert>
             </Snackbar>
+            
             <Paper>
                 <Box
                     display="flex"
