@@ -28,14 +28,17 @@ import { EmployeeInterface } from "../../models/IEmployee";
 import { PatientInterface } from "../../models/IPatient";
 import { Payment_statusInterface } from "../../models/IPayment_status";
 import { PaymentInterface } from "../../models/IPayment";
+import { PrescriptionInterface } from "../../models/IPrescription";
+import { TreatmentsInterface } from "../../models/ITreatment";
 
 //API
 import {
     GetEmployee,
     GetPayment_status,
     GetPatient,
-    GetPaymentByID,
     UpdatePayment,
+    GetPrescription,
+    GetTreatment,
 } from '../../services/HttpClientService';
 
 const ImgBox = styled(Box)({
@@ -62,8 +65,21 @@ function PaymentUpdate() {
     const [employeename, setEmployeeName] = React.useState("");
     const [patientname, setPatientName] = React.useState("");
     const [payment_statusname, setPayment_statusName] = React.useState("");
-    const [note, setNote] = React.useState<string>("");
+    const [payment_code, setPayment_code] = React.useState<string>("");
     const [total_price, setTotal_price] = React.useState(0);
+    const [prescription, setPrescription] = React.useState<PrescriptionInterface[]>([]);
+    const [treatment, setTreatment] = React.useState<TreatmentsInterface[]>([]);
+
+    const Prescription_code = prescription.map(prescription=>prescription.Prescription_code)
+    const Prescription111 = prescription.map(prescription=>prescription.Medicine?.Medicine_price)
+    const Prescription222 = prescription.map(prescription=>prescription.Qty)
+    const treatment_code = treatment.map(treatment=>treatment.treatment_code)
+    const treatment111 = treatment.map(treatment=>treatment.price)
+    const treatment222 = treatment.map(treatment=>treatment.number_of_treatment)
+
+    const [reportincome, setReportincome] = useState(0);
+    const [report1, setReport1] = useState(0);
+    const [report2, setReport2] = useState(0);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -76,25 +92,34 @@ function PaymentUpdate() {
     setError(false);
   };
 
-//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const name = e.target.name;
-//     console.log(name);
-//     setPayment({ ...payment, [name]: e.target.value });
-//   };
-
-//   const handleInputChange = (
-//     event: React.ChangeEvent<{ id?: string; value: any }>
-// ) => {
-//     const id = event.target.id as keyof typeof PaymentUpdate;
-//     const { value } = event.target;
-//     setPayment({ ...payment, [id]: value });
-// };
-
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const handleInputChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     console.log(name);
     setPayment({ ...payment, [name]: e.target.value });
   };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<{ id?: string; value: any }>
+) => {
+    const id = event.target.id as keyof typeof PaymentUpdate;
+    const { value } = event.target;
+    setPayment({ ...payment, [id]: value });
+    let num1: number = 0;
+    let num2: number = 0;
+    for (let i = 0; i < Prescription_code.length; i++) {
+      if (Prescription_code[i] === (value)) {
+        num1 += Prescription111[i]! * Prescription222[i]!;
+      }
+    }
+    for (let i = 0; i < treatment_code.length; i++) {
+      if (treatment_code[i] === (value)) {
+        num2 += treatment111[i]! * treatment222[i]!;
+      }
+    }
+    setReport1(num1)
+    setReport2(num2)
+    setReportincome(num1+num2)
+};
 
   const handleSelectChange = (event: SelectChangeEvent) => {
     const name = event.target.name as keyof typeof payment;
@@ -116,6 +141,20 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
   };
 
+  const getPrescription = async () => {
+    let res = await GetPrescription();
+    if (res) {
+      setPrescription(res);
+    }
+  };
+
+  const getTreatment = async () => {
+    let res = await GetTreatment();
+    if (res) {
+      setTreatment(res);
+    }
+  };
+
   const getPayment_status = async () => {
     let res = await GetPayment_status();
     if (res) {
@@ -130,41 +169,18 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
   };
 
-  //FetchAPI
-//   const fetchFoodTypes = async () => {
-//     let res = await GetFoodTypes();
-//     res && setFoodTypes(res);
-//   };
-
-//   const fetchMainIngredients = async () => {
-//     let res = await GetMainIngredients();
-//     res && setMainIngredients(res);
-//   };
-
-//   const fetchAdminByID = async () => {
-//     let res = await GetAdminByID();
-//     foodinformation.AdminID = res.ID;
-//     if (res) {
-//       console.log(res)
-//       setAdmin(res);
-//     }
-//   };
-
-//   const fetchFoodInformation = async () => {
-//     let res = await GetFoodInformationByID(id + "");
-//     res && setFoodInformation(res);
-//   };
-
 useEffect(() => {
+    getPrescription();
+    getTreatment();
     fetch(`http://localhost:8080/payment/${id}`)
         .then((response) => response.json())
         .then((res) => {
             if (res.data) {
-                setNote(res.data.Note.toString());
+                setPayment_code(res.data.Payment_code.toString());
                 setTotal_price(res.data.Total_price.toString());
             }
 
-            fetch(`http://localhost:8080/employee/${res.data.PatientID}`)
+            fetch(`http://localhost:8080/employee/${res.data.EmployeeID}`)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.data) {
@@ -174,7 +190,7 @@ useEffect(() => {
                 }
                 )
 
-            fetch(`http://localhost:8080/payment_status/${res.data.PatientID}`)
+            fetch(`http://localhost:8080/payment_status/${res.data.Payment_statusID}`)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.data) {
@@ -204,8 +220,8 @@ useEffect(() => {
         PatientID: convertType(payment.PatientID),
         EmployeeID: convertType(payment.EmployeeID),
         Payment_statusID: convertType(payment.Payment_statusID),
-        Total_price: typeof payment.Total_price === "string" ? parseInt(payment.Total_price) : 0,
-        Note: payment.Note ?? "",
+        Total_price: typeof total_price === "string" ? parseInt(total_price) : 0,
+        Payment_code:payment_code ?? "",
         DateTimePayment: payment.DateTimePayment,
     };
 
@@ -340,14 +356,14 @@ useEffect(() => {
                                     shrink: true,
                                 }}
                                 value={payment.Total_price || "" || total_price}
-                                onChange={handleInputChange}
+                                onChange={handleInputChange1}
                             />
                         </FormControl>
                     </Grid>
 
                 <Grid item xs={6}>
                     <FormControl fullWidth variant="outlined">
-                        <p className="good-font">สถานนะการชำระ</p>
+                        <p className="good-font">สถานะการชำระ</p>
                         <Select
                             native
                             labelId="demo-simple-select-label"
@@ -372,14 +388,14 @@ useEffect(() => {
 
                 <Grid item xs={6}>
                         <FormControl fullWidth variant="outlined">
-                            <p className="good-font">หมายเหตู</p>
+                            <p className="good-font">รหัสแจ้งยอดชำระ</p>
                             <TextField
                                 id="Note"
                                 variant="outlined"
                                 type="string"
                                 size="medium"
-                                value={note}
-                                onChange={(event) => setNote(event.target.value)}
+                                value={payment_code}
+                                onChange={handleInputChange} 
                             />
                         </FormControl>
                     </Grid>
@@ -401,6 +417,12 @@ useEffect(() => {
                           </LocalizationProvider>
                       </FormControl>
                   </Grid>
+
+                  <Grid item xs={6}>
+                      <li>ค่าการรักษาทั้งหมด<span>{report2}</span></li>,
+                      <li>ค่ายาทั้งหมด{report1}</li>
+                      <li>ยอดทั้งหมด{reportincome}</li>
+                 </Grid>
 
                 <Grid item xs={12}>
                     <Button component={RouterLink} to="/payment" variant="contained">

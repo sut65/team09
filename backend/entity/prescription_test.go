@@ -23,7 +23,7 @@ func TestPrescription(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Qty cannot be negative or too much"))
+		g.Expect(err.Error()).To(Equal("จำนวนต้องเป็นเลขจำนวนเต็มบวก"))
 	})
 
 	t.Run("Check DateTimePrescription must be a current date", func(t *testing.T) {
@@ -38,7 +38,7 @@ func TestPrescription(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("DateTimePrescription must be a current date"))
+		g.Expect(err.Error()).To(Equal("เวลาต้องเป็นค่าปัจจุบัน"))
 	})
 
 	t.Run("Check Details note cannot be blank", func(t *testing.T) {
@@ -53,7 +53,7 @@ func TestPrescription(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Details note cannot be blank"))
+		g.Expect(err.Error()).To(Equal("รายละเอียดห้ามใส่ค่าว่าง"))
 	})
 
 	t.Run("Check Details note must consist of 6 or more characters", func(t *testing.T) {
@@ -68,7 +68,7 @@ func TestPrescription(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Details note must consist of 6 or more characters"))
+		g.Expect(err.Error()).To(Equal("รายละเอียดต้องมี 6 ตัวอักษรขึ้นไป"))
 	})
 
 	t.Run("Check Prescription_code code cannot be blank", func(t *testing.T) {
@@ -83,7 +83,7 @@ func TestPrescription(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Prescription_code code cannot be blank"))
+		g.Expect(err.Error()).To(Equal("รหัสสั่งจ่ายยาห้ามใส่ค่าว่าง"))
 	})
 
 	t.Run("Check Details note must consist of 6 or more characters", func(t *testing.T) {
@@ -99,7 +99,7 @@ func TestPrescription(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Prescription_code does not validate as matches(^[T]\\d{7}$) to equal"))
+		g.Expect(err.Error()).To(Equal("รหัสสั่งจ่ายยาต้องขึ้นต้นด้วยตัว T และต่อด้วยเลขอีก 7 ตัว"))
 		
 	})
 

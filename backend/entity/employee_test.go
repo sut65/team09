@@ -23,9 +23,11 @@ func TestEmployeeIDMustBeInValidPattern(t *testing.T) {
 			FirstName:       "AAA",
 			LastName:        "BBB",
 			Personal_id:     "1234567890123",
-			Password:        "1234",
-			// Phone:           "0956478156",
-			House_no: "56",
+			Password:        "123456789",
+			Email:           "aaa@gmail.com",
+			Old:             23,
+			Salary:          28000,
+			House_no:        "56",
 		}
 
 		ok, err := govalidator.ValidateStruct(employee)
@@ -36,22 +38,23 @@ func TestEmployeeIDMustBeInValidPattern(t *testing.T) {
 		// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
 		g.Expect(err).ToNot(BeNil())
 
-		// err.Error ต้องมี error message แสดงออกมา
-		g.Expect(err.Error()).To(Equal(fmt.Sprintf(`Employee_number: %s does not validate as matches(^[E]\d{7}$)`, fixture)))
+		// err.Error ต้องมี error message แสดงออกมาlo
+		g.Expect(err.Error()).To(Equal(fmt.Sprintf(`Employee_number ต้องขึ้นต้นด้วย E ตามด้วยตัวเลข 7 ตัว`)))
 	}
 }
 
-func TestEmployeeEqualthirteenDigit(t *testing.T) {
+func TestEmployeeEmail(t *testing.T) {
 	g := NewGomegaWithT(t)
-	personal := "12345678910" //ผิด
 	employee := Employee{
-		Employee_number: "E6489129",
-		FirstName:       "AAA",
-		LastName:        "BBB",
-		Personal_id:     personal,
-		Password:        "1234",
-		// Phone:           "0956478156",
-		House_no: "56",
+		Employee_number: "E0000001",
+		FirstName:       "first",
+		LastName:        "Lastname",
+		Personal_id:     "1158877436521",
+		Password:        "123456789",
+		Old:             23,
+		Email:           "a@gmail.",
+		Salary:          28000,
+		House_no:        "56",
 	}
 
 	// ตรวจสอบด้วย govalidator
@@ -64,5 +67,57 @@ func TestEmployeeEqualthirteenDigit(t *testing.T) {
 	g.Expect(err).ToNot(BeNil())
 
 	// err.Error ต้องมี error message แสดงออกมา
-	g.Expect(err.Error()).To(Equal(fmt.Sprintf(`Personal_id: %s does not validate as matches(^[0-9]{13}$)`, personal)))
+	g.Expect(err.Error()).To(Equal(fmt.Sprintf(`รูปแบบ Email ไม่ถูกต้อง`)))
+}
+
+func TestEmployeeOldcannotbeNegative(t *testing.T) {
+	g := NewGomegaWithT(t)
+	employee := Employee{
+		Employee_number: "E0000001",
+		FirstName:       "firstName",
+		LastName:        "lastName",
+		Personal_id:     "1158877436521",
+		Password:        "123456789",
+		Old:             -23,
+		Salary:          28000,
+		House_no:        "56",
+	}
+
+	// ตรวจสอบด้วย govalidator
+	ok, err := govalidator.ValidateStruct(employee)
+
+	// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
+	g.Expect(ok).ToNot(BeTrue())
+
+	// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
+	g.Expect(err).ToNot(BeNil())
+
+	// err.Error ต้องมี error message แสดงออกมา
+	g.Expect(err.Error()).To(Equal(fmt.Sprintf(`อายุห้ามเป็นค่าลบและไม่ควรเกิน 200 ปี`)))
+}
+
+func TestEmployeePasswordEqul8digit(t *testing.T) {
+	g := NewGomegaWithT(t)
+	employee := Employee{
+		Employee_number: "E0000001",
+		FirstName:       "firstName",
+		LastName:        "lastName",
+		Personal_id:     "1158877436521",
+		Password:        "1234",
+		Old:             23,
+		Salary:          28000,
+		House_no:        "56",
+	}
+
+	// ตรวจสอบด้วย govalidator
+	ok, err := govalidator.ValidateStruct(employee)
+
+	// ok ต้องไม่เป็นค่า true แปลว่าต้องจับ error ได้
+	g.Expect(ok).ToNot(BeTrue())
+
+	// err ต้องไม่เป็นค่า nil แปลว่าต้องจับ error ได้
+	g.Expect(err).ToNot(BeNil())
+
+	// err.Error ต้องมี error message แสดงออกมา
+	g.Expect(err.Error()).To(Equal(fmt.Sprintf(`Password ต้องมีความยาวอย่างน้อย 8 ตัวอักษร`)))
 }

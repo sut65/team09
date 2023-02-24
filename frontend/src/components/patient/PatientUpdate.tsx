@@ -730,7 +730,7 @@ function PaitentUpdate() {
                     variant="outlined"
                     type="string"
                     size="medium"
-                    placeholder="กรุณากรอกรายละเอียด"
+                    placeholder="กรุณากรอกรายละเอียดมีความยาว 1-20 ตัวอักษร"
                     value={sn}
                     onChange={(event) => setSn(event.target.value)}
                   />

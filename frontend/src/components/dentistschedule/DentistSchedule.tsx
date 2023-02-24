@@ -16,6 +16,7 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Slide from '@mui/material/Slide';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -31,6 +32,7 @@ function DentistSchedule() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [rowId, setrowID] = React.useState<string>("");
 
   const handleClose = (
   
@@ -86,20 +88,22 @@ function DentistSchedule() {
   }
   };
 
+  
+
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 60 },
     { field: "Workingday",headerName: "วัน",width: 100, valueFormatter: (params) => params.value.Day,},
     { field: "Responsity",headerName: "งานที่รับผิดชอบ",width: 150,valueFormatter: (params) => params.value.Respon,},
     { field: "Dentist",headerName: "ทันตแพทย์",width: 150,valueFormatter: (params) => params.value.FirstName,},
-    { field: "Room_Number", headerName: "ห้องตรวจ", width: 150,valueFormatter: (params) => params.value.Room_number, },
-    { field: "Job_description", headerName: "รายละเอียดงาน", width: 150 },
+    { field: "Room_Number", headerName: "ห้องตรวจ", width: 100,valueFormatter: (params) => params.value.Room_number, },
+    { field: "Job_description", headerName: "รายละเอียดงาน", width: 200 },
     { field: "TimeWork", headerName: "เวลา", width: 180, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
     { field: "TimeEnd", headerName: "ถึง", width: 180, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm น.') },
     {
-      field: "action", headerName: "Action",width: 250, sortable: false, renderCell: ({ row }) =>
+      field: "action", headerName: "Action",width: 250, sortable: false, renderCell: ({ row }) => 
       <ButtonGroup>
       <Stack spacing={2} direction="row">
-      <IconButton aria-label="delete" onClick={handleClickOpen}>
+      <IconButton aria-label="delete" onClick={handleClickOpen} >
       <DeleteIcon />
            </IconButton>
            <Dialog
@@ -117,7 +121,8 @@ function DentistSchedule() {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => {Delete(row.ID); Close();}} variant="contained" autoFocus>
+              
+              <Button onClick={() => {Delete(Number(rowId)); Close();}} variant="contained" autoFocus >
                 Yes
               </Button>
               <Button onClick={Close} variant="contained" color="error">No</Button>
@@ -164,7 +169,11 @@ function DentistSchedule() {
               color="primary"
               gutterBottom
             >
-              ข้อมูลตารางงานแพทย์'
+              <Slide direction="down" in={true} timeout={700}>
+                        <Typography variant="h4" component="h4">
+                        ข้อมูลตารางงานแพทย์
+                        </Typography>
+                        </Slide>
             </Typography>
           </Box>
           <Box>
@@ -185,6 +194,11 @@ function DentistSchedule() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            onRowClick={(params) => {
+              console.log(params.row.ID); 
+              setrowID(params.row.ID)
+              
+            }}
           />
         </div>
        

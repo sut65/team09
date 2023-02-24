@@ -17,6 +17,9 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Slide from '@mui/material/Slide';
+
+
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -33,6 +36,7 @@ function PatienScheduleHome() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [rowId, setrowID] = React.useState<string>("");
 
 
 
@@ -121,7 +125,7 @@ function PatienScheduleHome() {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => {Delete(row.ID); Close();}} variant="contained" autoFocus>
+              <Button onClick={() => {Delete(Number(rowId)); Close();}} variant="contained" autoFocus>
                 Yes
               </Button>
               <Button onClick={Close} variant="contained" color="error">No</Button>
@@ -170,7 +174,12 @@ function PatienScheduleHome() {
               color="primary"
               gutterBottom
             >
-              ข้อมูลตารางการนัดผู้ป่วย
+  
+              <Slide direction="down" in={true} timeout={700}>
+                        <Typography variant="h4" component="h4">
+                        ข้อมูลตารางการนัดผู้ป่วย
+                        </Typography>
+                        </Slide>
             </Typography>
           </Box>
           <Box>
@@ -191,6 +200,11 @@ function PatienScheduleHome() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            onRowClick={(params) => {
+              console.log(params.row.ID); 
+              setrowID(params.row.ID)
+              
+            }}
           />
         </div>
        

@@ -12,10 +12,27 @@ import axios from 'axios';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ButtonGroup from "@mui/material/ButtonGroup";
 import EditIcon from '@mui/icons-material/Edit';
-import { margin } from "@mui/system";
+import { Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Snackbar } from "@mui/material";
 
 function RepairList() {
   const [repair, setRepair] = useState<RepairInterface[]>([]);
+  const [message, setAlertMessage] = React.useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [rowId, setrowID] = React.useState<string>("");
+
+  const handleClose = (
+  
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+        return;
+    }
+    setSuccess(false);
+    setError(false);
+  };
 
   useEffect(() => {
     getRepair();
@@ -26,6 +43,13 @@ function RepairList() {
     if (res) {
       setRepair(res);
     } 
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const Close = () => {
+    setOpen(false);
   };
 
   const Delete = async (id: number) => {
@@ -40,8 +64,11 @@ function RepairList() {
       if (response.status === 200) {
           console.log("Repair deleted successfully");
           getRepair();
+          setSuccess(true);
+          setAlertMessage("Deleted successfully");
       } else {
-          throw new Error("Failed to delete Repair");
+          setError(true);
+          setAlertMessage("Deleted unsuccessfully");
       }
   } catch (err) {
       console.error(err);
@@ -75,9 +102,31 @@ function RepairList() {
       field: "action", headerName: "Action",width: 150, sortable: false, renderCell: ({ row }) =>
       {
         return <ButtonGroup>
-          <Button onClick={() => Delete(row.ID)} variant="contained" color="error" style={{marginRight: 5}}>
-            <DeleteForeverIcon />
-          </Button>
+          <Button aria-label="delete" onClick={handleClickOpen} variant="contained" color="error" style={{marginRight: 5}} >
+      <DeleteForeverIcon />
+           </Button>
+           <Dialog
+        open={open}
+        onClose={Close}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"ต้องการลบข้อมูลหรือไม่?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                หากลบข้อมูลแล้วข้อมูลนี้จะหายไป.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              
+              <Button onClick={() => {Delete(Number(rowId)); Close();}} variant="contained" autoFocus >
+                Yes
+              </Button>
+              <Button onClick={Close} variant="contained" color="error">No</Button>
+            </DialogActions>
+          </Dialog>
           <Button component={RouterLink} to={`/Repair/update/${row.ID}`} variant="contained" color="info">
             <div className="good-font">
               <EditIcon />
@@ -92,6 +141,23 @@ function RepairList() {
   return (
     <div>
       <Container maxWidth="md">
+      <Snackbar
+                id="success"
+                open={success}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                <Alert onClose={handleClose} severity="success">
+                    {message}
+                </Alert>
+                </Snackbar>
+                <Snackbar id="error" open={error} autoHideDuration={3000} onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+                <Alert onClose={handleClose} severity="error">
+                    {message}
+                </Alert>
+                </Snackbar>
         <Box
           display="flex"
           sx={{
@@ -126,6 +192,11 @@ function RepairList() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            onRowClick={(params) => {
+              console.log(params.row.ID); 
+              setrowID(params.row.ID)
+              
+            }}
           />
         </div>
       </Container>

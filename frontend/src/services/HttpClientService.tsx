@@ -1100,7 +1100,7 @@ async function GetReasons() {
         } else {
           return { status: false, message: res.error };
         }
-      });
+        });
   
     return res;
   };
