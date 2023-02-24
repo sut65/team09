@@ -55,12 +55,15 @@ type Sub_district struct {
 
 type Employee struct {
 	gorm.Model
-	Employee_number string `gorm:"uniqueIndex" valid:"matches(^[E]\\d{7}$)"`
-	FirstName       string
-	LastName        string
-	Personal_id     string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)"`
-	Password        string `gorm:"uniqueIndex"`
-	Phone           string
+	Employee_number string `gorm:"uniqueIndex" valid:"matches(^[E]\\d{7}$)~Employee_number ต้องขึ้นต้นด้วย E ตามด้วยตัวเลข 7 ตัว"`
+	FirstName       string //`valid:"required~กรุณาใส่ชื่อ"`
+	LastName        string //`valid:"required~กรุณาใส่นามสกุล"`
+	Personal_id     string `gorm:"uniqueIndex"`
+	Password        string `gorm:"uniqueIndex" valid:"minstringlength(8)~Password ต้องมีความยาวอย่างน้อย 8 ตัวอักษร"`
+	Email           string `valid:"email~รูปแบบ Email ไม่ถูกต้อง"`
+	Old             int    `valid:"range(0|200)~อายุห้ามเป็นค่าลบและไม่ควรเกิน 200 ปี"`
+	Date_employed   time.Time
+	Salary          int
 	House_no        string
 
 	//Sub_districtID ทำหน้าที่เป็น FK
@@ -99,12 +102,12 @@ type Symptom struct {
 
 type Patient struct {
 	gorm.Model
-	FirstName          string `valid:"required~FirstName can't be blank"`
-	LastName           string `valid:"required~LastName can't be blank"`
-	Personal_id        string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)"`
-	Old                int    `valid:"range(0|150)~Old cannot be negative"`
-	Weight             int    `valid:"range(0|300)~Weight cannot be negative"`
-	Height             int    `valid:"range(0|300)~Height cannot be negative"`
+	FirstName          string `valid:"required~กรุณาใส่ชื่อ"`
+	LastName           string `valid:"required~กรุณาใส่นามสกุล"`
+	Personal_id        string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)~รหัสบัตรประชาชนต้องมี 13 ตัวและเป็นตัวเลข(0-9)"`
+	Old                int    `valid:"range(0|200)~อายุห้ามเป็นค่าติดลบและไม่ควรเกิน 200"`
+	Weight             int    `valid:"range(0|300)~น้ำหนักห้ามเป็นค่าติดลบและไม่ควรเกิน 300"`
+	Height             int    `valid:"range(0|300)~ส่วนสูงห้ามเป็นค่าติดลบและไม่ควรเกิน 300"`
 	Underlying_disease string
 	Drug_alergy        string
 	House_no           string
@@ -128,10 +131,12 @@ type Patient struct {
 	//SymptomID ทำหน้าที่เป็น FK
 	SymptomID    *uint
 	Symptom      Symptom `gorm:"references:id"`
-	Symptom_name string
+	Symptom_name string  `valid:"stringlength(1|50)~ข้อความต้องมีความยาว 1 ถึง 50 ตัวอักษร"`
 
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
+
+	Modifiled_date time.Time
 
 	Prescriptions []Prescription `gorm:"foreignKey:PatientID"`
 
@@ -293,19 +298,19 @@ type Medicine struct {
 
 type Prescription struct {
 	gorm.Model
-	DateTimePrescription time.Time	`valid:"current~DateTimePrescription must be a current date"`
-	Qty     			int	`valid:"range(0|50)~Qty cannot be negative or too much"`
-	Details				string	`valid:"stringlength(5|100)~Details note must consist of 6 or more characters, required~Details note cannot be blank"`
-	Prescription_code	string	`valid:"matches(^[T]\\d{7}$)~Prescription_code does not validate as matches(^[T]\\d{7}$) to equal, required~Prescription_code code cannot be blank"`
+	DateTimePrescription time.Time `valid:"current~เวลาต้องเป็นค่าปัจจุบัน"`
+	Qty                  int       `valid:"range(1|50)~จำนวนต้องเป็นเลขจำนวนเต็มบวก"`
+	Details              string    `valid:"stringlength(5|100)~รายละเอียดต้องมี 6 ตัวอักษรขึ้นไป, required~รายละเอียดห้ามใส่ค่าว่าง"`
+	Prescription_code    string    `valid:"matches(^[T]\\d{7}$)~รหัสสั่งจ่ายยาต้องขึ้นต้นด้วยตัว T และต่อด้วยเลขอีก 7 ตัว, required~รหัสสั่งจ่ายยาห้ามใส่ค่าว่าง"`
 	//PatientID ทำหน้าที่เป็น FK
-	PatientID 			*uint 
-	Patient   			Patient	`gorm:"references:id" valid:"-"`
+	PatientID *uint
+	Patient   Patient `gorm:"references:id" valid:"-"`
 	//DentistID ทำหน้าที่เป็น FK
-	DentistID 			*uint
-	Dentist   			Dentist	`gorm:"references:id" valid:"-"`
-	//MedicineID ทำหน้าที่เป็น FK
-	MedicineID 			*uint
-	Medicine   			Medicine
+	DentistID *uint
+	Dentist   Dentist `gorm:"references:id" valid:"-"`
+	//MedicineID ทำหน้าที่เป็น FK111
+	MedicineID *uint
+	Medicine   Medicine
 }
 
 // / ระบบบันทึกการรักษา
@@ -342,19 +347,19 @@ type Treatment struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID              *uint
 	Patient                Patient `gorm:"references:id" valid:"-"`
-	Number_of_cavities     int     `valid:"range(0|50)~Number of cavities cannot be negative or too much"`
-	Number_of_swollen_gums int     `valid:"range(0|50)~Number of swollen gums cannot be negative or too much"`
-	Other_teeth_problems   string  `valid:"required~Other teeth problems cannot be blank"`
+	Number_of_cavities     int     `valid:"range(0|50)~จำนวนฟันผุจะต้องไม่เป็นลบหรือมากเกินไป"`
+	Number_of_swollen_gums int     `valid:"range(0|50)~จำนวนเหงือกบวมจะต้องไม่เป็นลบหรือมากเกินไป"`
+	Other_teeth_problems   string  `valid:"required~ปัญหาฟันอื่นๆไม่สามารถเป็นค่าว่างได้"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative or too much"`
+	Number_of_treatment int               `valid:"range(0|50)~จำนวนการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment `gorm:"references:id" valid:"-"`
-	Treatment_detail              string                      `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"`
-	Treatment_time                time.Time                   `valid:"past~Treatment time must be a past date"`
-	Treatment_code                string                      `valid:"matches(^[T]\\d{7}$), required~Treatment code cannot be blank"`
+	Treatment_detail              string                      `valid:"stringlength(6|100)~รายละเอียดการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า, required~รายละเอียดการรักษาไม่สามารถเป็นค่าว่างได้"`
+	Treatment_time                time.Time                   `valid:"past~เวลาการรักษาจะต้องเป็นอดีต"`
+	Treatment_code                string                      `valid:"matches(^[T]\\d{7}$)~รหัสการรักษาจะต้องขึ้นต้นด้วย T ตามด้วยตัวเลข 7 ตัว, required~รหัสการรักษาไม่สามารถเป็นค่าว่างได้"`
 }
 
 // ------ระบบจัดแผนการรักษา------//
@@ -366,16 +371,16 @@ type Treatment_plan struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID          *uint
 	Patient            Patient `gorm:"references:id" valid:"-"`
-	Order_of_treatment int     `valid:"range(0|50)~Order of treatment cannot be negative or too much"`
+	Order_of_treatment int     `valid:"range(0|50)~ลำดับการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative or too much"`
+	Number_of_treatment int               `valid:"range(0|50)~จำนวนการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment `gorm:"references:id" valid:"-"`
-	Treatment_detail              string                      `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"`
-	Treatment_explain             string                      `valid:"required~Treatment explain cannot be blank, stringlength(6|100)~Treatment explain must consist of 6 or more characters"`
+	Treatment_detail              string                      `valid:"stringlength(6|100)~รายละเอียดการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า, required~รายละเอียดการรักษาไม่สามารถเป็นค่าว่างได้"`
+	Treatment_explain             string                      `valid:"required~คำอธิบายการรักษาไม่สามารถเป็นค่าว่างได้, stringlength(6|100)~คำอธิบายการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า"`
 	Treatment_time                time.Time
 }
 
@@ -388,15 +393,15 @@ type Payment_status struct {
 
 type Payment struct {
 	gorm.Model
-	Total_price     uint
-	DateTimePayment time.Time
-	Note			string
+	Total_price     int	`valid:"range(0|1000000)~ราคารวมต้องเป็นเลขจำนวนเต็มบวก"`
+	DateTimePayment time.Time	`valid:"current~เวลาต้องเป็นค่าปัจจุบัน"`
+	Payment_code            string	`valid:"matches(^[T]\\d{7}$)~รหัสแจ้งยอดชำระต้องขึ้นต้นด้วยตัว T และต่อด้วยเลขอีก 7 ตัว, required~รหัสแจ้งยอดชำระห้ามใส่ค่าว่าง"`
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID *uint
-	Patient   Patient	`gorm:"references:id" valid:"-"`
+	Patient   Patient `gorm:"references:id" valid:"-"`
 	//EmployeeID 	ทำหน้าที่เป็น FK
 	EmployeeID *uint
-	Employee   Employee	`gorm:"references:id" valid:"-"`
+	Employee   Employee `gorm:"references:id" valid:"-"`
 	//Payment_statusID 	ทำหน้าที่เป็น FK
 	Payment_statusID *uint
 	Payment_status   Payment_status
@@ -450,12 +455,16 @@ type Room_Number struct {
 
 	Room_Details     []Room_Detail      `gorm:"foreignKey:Room_NumberID"`
 	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:Room_NumberID"`
-	Patien_schedule []Patien_schedule `gorm:"foreignKey:Room_NumberID"`
+	Patien_schedule  []Patien_schedule  `gorm:"foreignKey:Room_NumberID"`
 }
 
 type Room_Detail struct {
 	gorm.Model
+<<<<<<< HEAD
 	Note string	`valid:"stringlength(1|50)~ห้ามพิมพ์เกิน 50 ตัวอักษร, required~หมายเหตุห้ามเป็นช่องว่าง"`
+=======
+	Note string `valid:"stringlength(1|50)~ห้ามพิมพ์เกิน 50 ตัวอักษร, required~หมายเหตุห้ามเป็นช่องว่าง"`
+>>>>>>> fac446d (comment commit - close #211, close #212)
 
 	//CategoryID ทำหน้าที่เป็น FK
 	CategoryID *uint

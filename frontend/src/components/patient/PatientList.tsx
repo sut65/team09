@@ -9,6 +9,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import { GetEmployee, GetPatient } from "../../services/HttpClientService";
 import EditIcon from '@mui/icons-material/Edit';
+import moment from "moment";
 
 function Patient() {
   const [patient, setPatient] = useState<PatientInterface[]>([]);
@@ -38,6 +39,7 @@ function Patient() {
     { field: "Symptom", headerName: "อาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_choice,},
     { field: "Symptom_name", headerName: "รายละเอียดอาการเบื้องต้น", width: 250,  valueFormatter: (params) => params.value.Symptom_name,},
     { field: "Employee", headerName: "พยาบาลที่บันทึกข้อมูล", width: 200,  valueFormatter: (params) => params.value.FirstName,},
+    { field: "Modifiled_date", headerName: "แก้ไขล่าสุด", width: 200,  valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy')},
     {
       field: "action", headerName: "Action",width: 80, sortable: false, renderCell: ({ row }) =>
           <Button component={RouterLink} to={`/patients_update/${row.ID}`} variant="contained">

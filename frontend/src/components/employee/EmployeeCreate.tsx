@@ -32,6 +32,9 @@ import {
   // GetSubdistrict,
   CreateEmployee,
 } from "../../services/HttpClientService";
+import { DatePicker, DateTimePicker, LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -46,7 +49,7 @@ function EmployeeCreate() {
   const [province, setProvince] = React.useState<ProvinceInterface[]>([]);
   const [district, setDistrict] = React.useState<DistrictInterface[]>([]);
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
-  const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
+  const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({ Date_employed: new Date(), });
   const [provinceId, setProvinceId] = useState('0');
   const [districtId, setDistrictId] = useState('0');
 
@@ -188,7 +191,10 @@ function EmployeeCreate() {
       LastName: employee.LastName,
       Personal_id: employee.Personal_id,
       Password: employee.Password,
-      Phone: employee.Phone,
+      Email: employee.Email,
+      Old: convertType(employee.Old),
+      Date_employed: employee.Date_employed,
+      Salary: convertType(employee.Salary),
       House_no: employee.House_no,
       RoleID: convertType(employee.RoleID),
       GenderID: convertType(employee.GenderID),
@@ -262,7 +268,7 @@ function EmployeeCreate() {
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกรหัสพนักงาน"
+                placeholder="รหัสพนักงานขึ้นต้นด้วย E ตามด้วยตัวเลข 7 ตัว"
                 value={employee.Employee_number || ""}
                 onChange={handleInputChange}
                 inputProps={{maxLength :8}}
@@ -322,27 +328,78 @@ function EmployeeCreate() {
               <TextField
                 id="Password"
                 variant="outlined"
-                type="string"
+                type="password"
                 size="medium"
-                placeholder="กรุณากรอกรหัสผ่าน"
-                value={employee.Password?.replace(/./g, "*") || ""}
+                placeholder="รหัสผ่านควรมีอย่างน้อย 8 ตัวอักษร"
+                value={employee.Password || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
         </Grid>
 
         <Grid item xs={6}>
-            <p>เบอร์โทรศัพท์</p>
+            <p>E-mail</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Phone"
+                id="Email"
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                value={employee.Phone || ""}
+                placeholder="กรุณากรอก E-mail"
+                value={employee.Email || ""}
                 onChange={handleInputChange}
-                inputProps={{maxLength :10}}
+              />
+            </FormControl>
+        </Grid>
+
+        <Grid item xs={4}>
+            <p>อายุ</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Old"
+                variant="outlined"
+                type="number"
+                size="medium"
+                InputProps={{ inputProps: { min: 1 } }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                placeholder="กรุณากรอกอายุ"
+                value={employee.Old || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+        </Grid>
+
+        <Grid item xs={4} >
+            <FormControl fullWidth variant="outlined">
+                <p className="good-font">วันที่จ้างงาน</p>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <MobileDatePicker
+                            renderInput={(props) => <TextField {...props} />}
+                            value={employee.Date_employed}
+                            onChange={(newValue) => {
+                              setEmployee({
+                                  ...employee,
+                                  Date_employed: newValue,
+                              });
+                            }}
+                          />
+                    </LocalizationProvider>
+            </FormControl>
+        </Grid>
+
+        <Grid item xs={4}>
+            <p>เงินเดือน</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Salary"
+                variant="outlined"
+                type="number"
+                size="medium"
+                placeholder="กรุณากรอกเงินเดือน"
+                value={employee.Salary || ""}
+                onChange={handleInputChange}
               />
             </FormControl>
         </Grid>

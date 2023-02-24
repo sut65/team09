@@ -12,10 +12,12 @@ import { GetEmployee } from "../../services/HttpClientService";
 import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import moment from "moment";
 
 function Employees() {
   const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
   const [open, setOpen] = React.useState(false);
+  const [rowId, setrowID] = React.useState<string>("");
 
   const getEmployes = async () => {
     let res = await GetEmployee();
@@ -33,6 +35,7 @@ function Employees() {
   };
 
   const handleDelete = async (id: number) => {
+    console.log("show "+id)
     try {
       const response = await axios.delete(`http://localhost:8080/employees/${id}`, {
           headers: {
@@ -59,7 +62,10 @@ function Employees() {
     { field: "LastName", headerName: "นามสกุล", width: 250,  valueFormatter: (params) => params.value.LastName,},
     { field: "Personal_id", headerName: "เลขประจำตัวประชาชน", width: 250,  valueFormatter: (params) => params.value.Personal_id,},
     // { field: "Password", headerName: "รหัสผ่าน", width: 250,  valueFormatter: (params) => params.value.Password,},
-    { field: "Phone", headerName: "เบอร์โทรศัพท์", width: 250,  valueFormatter: (params) => params.value.Phone,},
+    { field: "Email", headerName: "E-mail", width: 250,  valueFormatter: (params) => params.value.Email,},
+    { field: "Old", headerName: "อายุ", width: 150,  valueFormatter: (params) => params.value.Old,},
+    { field: "Date_employed", headerName: "วันที่จ้างงาน", width: 250,  valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy') },
+    { field: "Salary", headerName: "เงินเดือน", width: 150,  valueFormatter: (params) => params.value.Salary,},
     { field: "House_no", headerName: "ที่อยู่", width: 250,  valueFormatter: (params) => params.value.House_no,},
     { field: "Sub_district", headerName: "ตำบล", width: 250,  valueFormatter: (params) => params.value.Sub_district_name,},
     { field: "District", headerName: "อำเภอ", width: 250,  valueFormatter: (params) => params.value.District_name,},
@@ -73,7 +79,7 @@ function Employees() {
           <Button onClick={handleClickOpen} variant="contained" color="error">
                 <DeleteForeverIcon />
           </Button>
-          <Dialog
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -88,7 +94,7 @@ function Employees() {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => { handleDelete(row.ID); handleClose();}} variant="contained" autoFocus>
+              <Button onClick={() => { handleDelete(Number(rowId)); handleClose();}} variant="contained" autoFocus>
                 Yes
               </Button>
               <Button onClick={handleClose} variant="contained" color="error">No</Button>
@@ -149,6 +155,11 @@ function Employees() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            onRowClick={(params) => {
+              console.log(params.row.ID); 
+              setrowID(params.row.ID)
+              
+            }}
           />
         </div>
       </Container>

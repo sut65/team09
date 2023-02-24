@@ -32,6 +32,9 @@ import {
   // GetSubdistrict,
   CreateEmployee,
 } from "../../services/HttpClientService";
+import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -64,8 +67,11 @@ function EmployeeUpdate() {
   const [personal, setPersonal] = React.useState<string>("");
   const [firstname, setfn] = React.useState<string>("");
   const [lastname, setLn] = React.useState<string>("");
-  // const [password, setPass] = React.useState<string>("");
-  const [phone, setPhone] = React.useState<string>("");
+  const [password, setPass] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
+  const [Date_employed, setDate] = React.useState(new Date());
+  const [old, setOld] = React.useState(1);
+  const [salary, setSalary] = React.useState(1);
   const [house, setHouse] = React.useState<string>("");
   //combobox
   const [provinceName, setPname] = React.useState<string>("");
@@ -95,8 +101,11 @@ function EmployeeUpdate() {
                 setPersonal(res.data.Personal_id.toString());
                 setfn(res.data.FirstName.toString());
                 setLn(res.data.LastName.toString());
-                // setPass(res.data.Password.toString());
-                setPhone(res.data.Phone.toString());
+                setPass(res.data.Password.toString());
+                setEmail(res.data.Email.toString());
+                setOld(res.data.Old);
+                setDate(res.data.Date_employed.toString());
+                setSalary(res.data.Salary);
                 setHouse(res.data.House_no .toString());
             }
             fetch(`http://localhost:8080/province/${res.data.ProvinceID}`)
@@ -322,8 +331,10 @@ function EmployeeUpdate() {
       FirstName: firstname,
       LastName: lastname,
       Personal_id: personal,
-      // Password: password,
-      Phone: phone,
+      Password: password,
+      Email: email,
+      Old: old,
+      Salary: salary,
       House_no: house,
       RoleID: convertType(employee.RoleID),
       GenderID: convertType(employee.GenderID),
@@ -417,7 +428,7 @@ function EmployeeUpdate() {
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกรหัสพนักงาน"
+                placeholder="รหัสพนักงานขึ้นต้นด้วย E ตามด้วยตัวเลข 7 ตัว"
                 value={employee_number}
                 onChange={(event) => setEmployee_number(event.target.value)}
                 inputProps={{maxLength :8}}
@@ -471,33 +482,88 @@ function EmployeeUpdate() {
             </FormControl>
         </Grid>
         
-        {/* <Grid item xs={6}>
+        <Grid item xs={6}>
             <p>รหัสผ่าน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="Password"
                 variant="outlined"
-                type="string"
+                type="password"
                 size="medium"
-                placeholder="กรุณากรอกรหัสผ่าน"
-                value={password.replace(/./g, "*")}
+                placeholder="รหัสผ่านควรมีอย่างน้อย 8 ตัวอักษร"
+                value={password}
                 onChange={(event) => setPass(event.target.value)}
               />
             </FormControl>
-        </Grid> */}
+        </Grid>
 
         <Grid item xs={6}>
-            <p>เบอร์โทรศัพท์</p>
+            <p>E-mail</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="Phone"
+                id="Email"
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
-                inputProps={{maxLength :10}}
+                placeholder="กรุณากรอก E-mail"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </FormControl>
+        </Grid>
+
+        <Grid item xs={4}>
+            <p>อายุ</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Old"
+                variant="outlined"
+                type="number"
+                size="medium"
+                InputProps={{ inputProps: { min: 1 } }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                placeholder="กรุณากรอกอายุ"
+                value={old}
+                onChange={(event) => setOld(Number(event.target.value))}
+              />
+            </FormControl>
+        </Grid>
+
+        <Grid item xs={4} >
+            <FormControl fullWidth variant="outlined">
+                <p className="good-font">วันที่จ้างงาน</p>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <MobileDatePicker
+                            value={Date_employed}
+                            onChange={(newValue) => {
+                              setEmployee({
+                                  ...employee,
+                                  Date_employed: newValue,
+                              });
+                            }}
+                            renderInput={(props) => <TextField {...props} />}
+                          />
+                    </LocalizationProvider>
+            </FormControl>
+        </Grid>
+
+        <Grid item xs={4}>
+            <p>เงินเดือน</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Salary"
+                variant="outlined"
+                type="number"
+                size="medium"
+                InputProps={{ inputProps: { min: 1 } }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                placeholder="กรุณากรอกเงินเดือน"
+                value={salary}
+                onChange={(event) => setSalary(Number(event.target.value))}
               />
             </FormControl>
         </Grid>

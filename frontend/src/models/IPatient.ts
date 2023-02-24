@@ -28,4 +28,5 @@ export interface PatientInterface {
 	Sub_district?: 		Sub_districtInterface, 
     EmployeeID? : number;
     Employee? : EmployeeInterface;
+	Modifiled_date?:     Date | null;
 }

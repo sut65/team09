@@ -97,7 +97,7 @@ function SignIn() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://as2.ftcdn.net/v2/jpg/03/06/12/49/1000_F_306124934_F4PcrIhtQSd9dr467CNl4ozFcfu4zZU4.jpg)",
+            backgroundImage: "url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/458cb356911423.59c147f0e3019.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
