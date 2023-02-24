@@ -1359,7 +1359,7 @@ func SetupDatabase() {
 	Payment1 := Payment{
 		Total_price:     1500,
 		Payment_status:  Payment_status1,
-		Note:            "จ่ายด้วยเงินสด",
+		Payment_code:    "T0000009",
 		Patient:         patient1,
 		Employee:        em2,
 		DateTimePayment: DateTimePaymentA,
@@ -1369,7 +1369,7 @@ func SetupDatabase() {
 	Payment2 := Payment{
 		Total_price:     2500,
 		Payment_status:  Payment_status1,
-		Note:            "จ่ายด้วยพร้อมเพย์",
+		Payment_code:    "T0000008",
 		Patient:         patient2,
 		Employee:        em1,
 		DateTimePayment: DateTimePaymentB,
@@ -1379,7 +1379,7 @@ func SetupDatabase() {
 	Payment3 := Payment{
 		Total_price:     500,
 		Payment_status:  Payment_status2,
-		Note:            "รักษาฟรี",
+		Payment_code:    "T0000007",
 		Patient:         patient1,
 		Employee:        em2,
 		DateTimePayment: DateTimePaymentC,

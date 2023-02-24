@@ -33,6 +33,8 @@ export interface TreatmentsInterface {
 
 	treatment_code?: string;
 
+	price?:  number;
+
     
  
     

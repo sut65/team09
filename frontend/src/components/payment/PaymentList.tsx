@@ -48,6 +48,7 @@ function Payments() {
     { field: "ID", headerName: "ลำดับ", width: 80 },
     { field: "Patient", headerName: "เลขประจำตัวประชาชน", width: 250,  valueFormatter: (params) => params.value.Personal_id,},
     { field: "Total_price", headerName: "ราคารวม", width: 220,  valueFormatter: (params) => params.value.Total_price,},
+    { field: "Payment_code", headerName: "รหัสสั่งจ่ายยา", width: 220,  valueFormatter: (params) => params.value.Payment_code,},
     { field: "Payment_status", headerName: "สถานะ", width: 180,  valueFormatter: (params) => params.value.Payment_status_name,},
     { field: "DateTimePayment", headerName: "วันที่ เวลาตอนบันทึกข้อมูล", width: 245, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm') },
     { field: "action", headerName: "Action",width: 125, sortable: false, renderCell: ({ row }) =>

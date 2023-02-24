@@ -5,7 +5,7 @@ import { Payment_statusInterface } from "./IPayment_status";
 export interface PaymentInterface {
     ID?: number,
     Total_price?: number,
-    Note?: string,
+    Payment_code?: string,
 
     PatientID?: number,
     Patient?: PatientInterface,

@@ -127,7 +127,7 @@ useEffect(() => {
                 setQty(res.data.Qty.toString());
             }
 
-            fetch(`http://localhost:8080/dentist/${res.data.PatientID}`)
+            fetch(`http://localhost:8080/dentist/${res.data.DentistID}`)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.data) {
@@ -137,7 +137,7 @@ useEffect(() => {
                 }
                 )
 
-            fetch(`http://localhost:8080/medicine/${res.data.PatientID}`)
+            fetch(`http://localhost:8080/medicine/${res.data.MedicineID}`)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.data) {
@@ -167,10 +167,9 @@ useEffect(() => {
         DentistID: convertType(prescription.DentistID),
         PatientID: convertType(prescription.PatientID),
         MedicineID: convertType(prescription.MedicineID),
-        // Medicine_statusID: convertType(prescription.Medicine_statusID),
         Qty: typeof prescription.Qty === "string" ? parseInt(prescription.Qty) : 0,
-        Details: prescription.Details ?? "",
-        Prescription_code: prescription.Prescription_code ?? "",
+        Details: details ?? "",
+        Prescription_code: prescription_code ?? "",
         DateTimePrescription: prescription.DateTimePrescription,
     };
 
@@ -178,7 +177,6 @@ useEffect(() => {
     if (res.status) {
       setSuccess(true);
       setAlertMessage("อัปเตดสำเร็จ");
-    //   window.location.href = "/admin/food-display"
     } else {
       setError(true);
       setAlertMessage(res.message);
@@ -190,7 +188,6 @@ useEffect(() => {
     getPatient();
     getMedicine();
     getDentist();
-    // getMedicine_status();
 
   }, []);
 
@@ -349,31 +346,6 @@ useEffect(() => {
                       </FormControl>
                   </Grid>
 
-                {/* <Grid item xs={6}>
-                    <FormControl fullWidth variant="outlined">
-                        <p className="good-font">สถานนะยา</p>
-                        <Select
-                            native
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={prescription.Medicine_statusID + ""}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: "Medicine_statusID",
-                            }}
-                        >
-                            <option aria-label="None" value={medicine_statusname}>
-                                {medicine_statusname}
-                            </option>
-                            {medicine_status.map((item: Medicine_statusInterface) => (
-                                <option value={item.ID} key={item.ID}>
-                                    {item.Medicine_status_name}
-                                </option>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Grid> */}
-
                   <Grid item xs={6}>
                       <FormControl fullWidth variant="outlined">
                           <p className="good-font">เวลาการสั่งจ่าย</p>
@@ -394,7 +366,7 @@ useEffect(() => {
 
                   <Grid item xs={6}>
                       <FormControl fullWidth variant="outlined">
-                          <p className="good-font">รายละเอียด</p>
+                          <p className="good-font">รหัสสั่งจ่ายยา</p>
                           <TextField
                               id="prescription_code"
                               variant="outlined"
