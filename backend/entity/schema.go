@@ -371,16 +371,16 @@ type Treatment_plan struct {
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID          *uint
 	Patient            Patient `gorm:"references:id" valid:"-"`
-	Order_of_treatment int     `valid:"range(0|50)~Order of treatment cannot be negative or too much"`
+	Order_of_treatment int     `valid:"range(0|50)~ลำดับการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"`
 	//Type_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_TreatmentID *uint
 	Type_Of_Treatment   Type_of_treatment `gorm:"references:id" valid:"-"`
-	Number_of_treatment int               `valid:"range(0|50)~Number of treatment cannot be negative or too much"`
+	Number_of_treatment int               `valid:"range(0|50)~จำนวนการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"`
 	//Type_Of_Number_Of_TreatmentID 	ทำหน้าที่เป็น FK
 	Type_Of_Number_Of_TreatmentID *uint
 	Type_Of_Number_Of_Treatment   Type_of_number_of_treatment `gorm:"references:id" valid:"-"`
-	Treatment_detail              string                      `valid:"stringlength(6|100)~Treatment detail must consist of 6 or more characters, required~Treatment detail cannot be blank"`
-	Treatment_explain             string                      `valid:"required~Treatment explain cannot be blank, stringlength(6|100)~Treatment explain must consist of 6 or more characters"`
+	Treatment_detail              string                      `valid:"stringlength(6|100)~รายละเอียดการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า, required~รายละเอียดการรักษาไม่สามารถเป็นค่าว่างได้"`
+	Treatment_explain             string                      `valid:"required~คำอธิบายการรักษาไม่สามารถเป็นค่าว่างได้, stringlength(6|100)~คำอธิบายการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า"`
 	Treatment_time                time.Time
 }
 
