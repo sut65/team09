@@ -1386,4 +1386,60 @@ func SetupDatabase() {
 	}
 	db.Model(&Payment{}).Create(&Payment3)
 
+
+	timeeeeA := time.Date(2030, time.September, 1, 13, 23, 44, 0, time.Local)
+	timeeeeB := time.Date(2000, time.September, 1, 13, 23, 44, 0, time.Local)
+	patienschedule1 := Patien_schedule{
+		Patient: patient1,
+		Employee: em1,
+		Reason: method1,
+		Patien_Number: "0123456789",
+		Room_Number: room_number1,
+		Type_of_treatment: Type_of_treatment10,
+		Date_time: timeeeeA ,
+	}
+	db.Model(&Patien_schedule{}).Create(&patienschedule1)
+	patienschedule2 := Patien_schedule{
+		Patient: patient2,
+		Employee: em2,
+		Reason: method1,
+		Patien_Number: "0123456789",
+		Room_Number: room_number1,
+		Type_of_treatment: Type_of_treatment10,
+		Date_time: timeeeeA ,
+	}
+	db.Model(&Patien_schedule{}).Create(&patienschedule2)
+
+	dentistschedule1 := Dentist_schedule{
+		Responsity: task[1],
+		Workingday: day[2],
+		Dentist: dentist3,
+		Room_Number: room_number3,
+		Job_description: "เป็นงานที่ทำแล้วน้ำตาจะไหล",
+		TimeWork: timeeeeB,
+		TimeEnd:  timeeeeA,
+	}
+	db.Model(&Dentist_schedule{}).Create(&dentistschedule1)
+	
+	dentistschedule2 := Dentist_schedule{
+		Responsity: task[1],
+		Workingday: day[2],
+		Dentist: dentist3,
+		Room_Number: room_number3,
+		Job_description: "ต้องมีอะไรผิดพลาดตรงไหนไม่เข้าใจเลยสักครั้้้งง",
+		TimeWork: timeeeeB,
+		TimeEnd:  timeeeeA,
+	}
+	db.Model(&Dentist_schedule{}).Create(&dentistschedule2)
+
+	dentistschedule3 := Dentist_schedule{
+		Responsity: task[3],
+		Workingday: day[1],
+		Dentist: dentist3,
+		Room_Number: room_number2,
+		Job_description: "รึเป็นเพราะเลือดกรุ๊ป B รึเปล่า~",
+		TimeWork: timeeeeB,
+		TimeEnd:  timeeeeA,
+	}
+	db.Model(&Dentist_schedule{}).Create(&dentistschedule3)
 }
