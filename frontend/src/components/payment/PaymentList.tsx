@@ -9,19 +9,29 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import axios from 'axios';
 import { GetPayment } from "../../services/HttpClientService";
-import { ButtonGroup } from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import moment from "moment";
+import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
 function Payments() {
   const [payments, setPayments] = useState<PaymentInterface[]>([]);
+  const [open, setOpen] = React.useState(false); 
+  const [rowId, setrowID] = React.useState<string>("");
 
   const getPayments = async () => {
     let res = await GetPayment();
     if (res) {
         setPayments(res);
     }
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleDelete1 = async (id: number) => {
@@ -54,9 +64,30 @@ function Payments() {
     { field: "action", headerName: "Action",width: 125, sortable: false, renderCell: ({ row }) =>
       {
         return <ButtonGroup>
-          <Button onClick={() => handleDelete1(row.ID)} variant="contained" color="error">
-            <DeleteForeverIcon />
+          <Button onClick={ handleClickOpen} variant="contained" color="error">
+              <DeleteForeverIcon />
           </Button>
+          <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"ต้องการลบข้อมูลหรือไม่?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                หากลบข้อมูลแล้วข้อมูลของพนักงานคนนี้จะหายไป.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => { handleDelete1((Number(rowId))); handleClose();}} variant="contained" autoFocus>
+                Yes
+              </Button>
+              <Button onClick={handleClose} variant="contained" color="error">No</Button>
+            </DialogActions>
+          </Dialog>
           <Button component={RouterLink} to={`/payment/update/${row.ID}`} variant="contained" color="info">
             <div className="good-font">
               <EditIcon />
@@ -111,6 +142,11 @@ function Payments() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            onRowClick={(params) => {
+              console.log(params.row.ID); 
+              setrowID(params.row.ID)
+              
+            }}
           />
         </div>
       </Container>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<title>payment_test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">success</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:3000/payment/create<datalist><option>http://localhost:3000/payment/create</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>name=PatientID<datalist><option>name=PatientID</option><option>xpath=//select[@name='PatientID']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/select</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='สร้างข้อมูลแจ้งยอดชำระ'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='แจ้งยอดชำระ'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[1]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[2]/preceding::select[2]</option><option>xpath=//select</option><option>css=select[name="PatientID"]</option></datalist></td><td></td></tr>
+<tr><td>select</td><td>name=PatientID<datalist><option>name=PatientID</option><option>xpath=//select[@name='PatientID']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/select</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='สร้างข้อมูลแจ้งยอดชำระ'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='แจ้งยอดชำระ'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[1]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[2]/preceding::select[2]</option><option>xpath=//select</option><option>css=select[name="PatientID"]</option></datalist></td><td>label=Kaoru</td></tr>
+<tr><td>click</td><td>name=EmployeeID<datalist><option>name=EmployeeID</option><option>xpath=//select[@name='EmployeeID']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/select</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='สร้างข้อมูลแจ้งยอดชำระ'])[1]/following::select[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[2]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[3]/preceding::select[1]</option><option>xpath=//div[2]/div/div/select</option><option>css=select[name="EmployeeID"]</option></datalist></td><td></td></tr>
+<tr><td>select</td><td>name=EmployeeID<datalist><option>name=EmployeeID</option><option>xpath=//select[@name='EmployeeID']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/select</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[1]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='สร้างข้อมูลแจ้งยอดชำระ'])[1]/following::select[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[2]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[3]/preceding::select[1]</option><option>xpath=//div[2]/div/div/select</option><option>css=select[name="EmployeeID"]</option></datalist></td><td>label=Ayato</td></tr>
+<tr><td>click</td><td>id=Note<datalist><option>id=Note</option><option>xpath=//input[@id='Note']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/input</option><option>xpath=//div[7]/div/div/input</option><option>css=#Note</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id=Note<datalist><option>id=Note</option><option>xpath=//input[@id='Note']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/input</option><option>xpath=//div[7]/div/div/input</option><option>css=#Note</option></datalist></td><td>T0000007</td></tr>
+<tr><td>click</td><td>id=Total_price<datalist><option>id=Total_price</option><option>xpath=//input[@id='Total_price']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input</option><option>xpath=//input</option><option>css=#Total_price</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id=Total_price<datalist><option>id=Total_price</option><option>xpath=//input[@id='Total_price']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input</option><option>xpath=//input</option><option>css=#Total_price</option></datalist></td><td>1500</td></tr>
+<tr><td>click</td><td>name=Payment_statusID<datalist><option>name=Payment_statusID</option><option>xpath=//select[@name='Payment_statusID']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/select</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[3]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[2]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[4]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[5]/preceding::select[1]</option><option>xpath=//div[4]/div/div/select</option><option>css=select[name="Payment_statusID"]</option></datalist></td><td></td></tr>
+<tr><td>select</td><td>name=Payment_statusID<datalist><option>name=Payment_statusID</option><option>xpath=//select[@name='Payment_statusID']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/select</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[3]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[2]/following::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[4]/preceding::select[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[5]/preceding::select[1]</option><option>xpath=//div[4]/div/div/select</option><option>css=select[name="Payment_statusID"]</option></datalist></td><td>label=ชำระแล้ว</td></tr>
+<tr><td>click</td><td>id=Payment_code<datalist><option>id=Payment_code</option><option>xpath=//input[@id='Payment_code']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input</option><option>xpath=//div[5]/div/div/div/input</option><option>css=#Payment_code</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id=Payment_code<datalist><option>id=Payment_code</option><option>xpath=//input[@id='Payment_code']</option><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input</option><option>xpath=//div[5]/div/div/div/input</option><option>css=#Payment_code</option></datalist></td><td>T0000007</td></tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[5]/following::*[name()='svg'][1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[5]/following::*[name()='svg'][1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[4]/following::*[name()='svg'][1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[6]/preceding::*[name()='svg'][1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[7]/preceding::*[name()='svg'][1]</option><option>css=button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeMedium.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root > svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='S'])[2]/following::button[24]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='S'])[2]/following::button[24]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='F'])[1]/following::button[24]</option><option>xpath=//*/text()[normalize-space(.)='24']/parent::*</option><option>xpath=//div[4]/button[6]</option><option>css=button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected.MuiPickersDay-dayWithMargin.MuiPickersDay-today.css-195y93z-MuiButtonBase-root-MuiPickersDay-root</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/button<datalist><option>xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/button</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='กลับ'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[10]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Katalon Recorder is recording ...'])[1]/preceding::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Stop'])[1]/preceding::button[1]</option><option>xpath=//*/text()[normalize-space(.)='บันทึก']/parent::*</option><option>xpath=//div[11]/button</option><option>css=button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.css-sghohy-MuiButtonBase-root-MuiButton-root</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>xpath=//div[@id='success']/div/div[2]/div<datalist><option>xpath=//div[@id='success']/div/div[2]/div</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='แจ้งยอดชำระ'])[1]/following::div[8]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='จัดการข้อมูลห้อง'])[1]/following::div[11]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='สร้างข้อมูลแจ้งยอดชำระ'])[1]/preceding::div[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[1]/preceding::div[4]</option><option>xpath=//*/text()[normalize-space(.)='บันทึกข้อมูลสำเร็จ']/parent::*</option><option>xpath=//div[2]/div/div/div/div[2]/div</option><option>css=div.good-font</option></datalist></td><td></td></tr>
+<tr><td>assertText</td><td>xpath=//div[@id='success']/div/div[2]/div<datalist><option>xpath=//div[@id='success']/div/div[2]/div</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='แจ้งยอดชำระ'])[1]/following::div[8]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='จัดการข้อมูลห้อง'])[1]/following::div[11]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='สร้างข้อมูลแจ้งยอดชำระ'])[1]/preceding::div[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='​'])[1]/preceding::div[4]</option><option>xpath=//*/text()[normalize-space(.)='บันทึกข้อมูลสำเร็จ']/parent::*</option><option>xpath=//div[2]/div/div/div/div[2]/div</option><option>css=div.good-font</option></datalist></td><td>บันทึกข้อมูลสำเร็จ</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">เวลาต้องเป็นค่าปัจจุบัน</td></tr>
+</thead>
+<tbody>
+
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">รหัสแจ้งยอดชำระต้องขึ้นต้นด้วยตัว T และต่อด้วยเลขอีก 7 ตัว</td></tr>
+</thead>
+<tbody>
+
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">รหัสแจ้งยอดชำระห้ามใส่ค่าว่าง</td></tr>
+</thead>
+<tbody>
+
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">Untitled Test Case</td></tr>
+</thead>
+<tbody>
+
+</tbody></table>
+</body>
+</html>

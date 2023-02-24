@@ -325,12 +325,12 @@ function PaymentCreate() {
             <FormControl fullWidth variant="outlined">
               <p className="good-font">รหัสแจ้งยอดชำระ</p>
               <TextField
-                id="Note"
+                id="Payment_code"
                 variant="outlined"
                 type="string"
                 size="medium"
-                value={payment.Payment_code || ""}
-                onChange={handleInputChange}
+                value={payment.Payment_code}
+                onChange={handleInputChange1}
               />
             </FormControl>
           </Grid>
@@ -352,17 +352,47 @@ function PaymentCreate() {
               </LocalizationProvider>
             </FormControl>
           </Grid>
+          
+          <Grid item xs={4}>
+              <p className="good-font">กรอกรหัส ถ้าจำราคารวมไม่ได้</p>
+              <TextField
+                id="Note"
+                variant="outlined"
+                type="string"
+                size="medium"
+                value={payment.Payment_code}
+                onChange={handleInputChange}
+              /> 
+          </Grid>
 
-          <Grid item xs={6}>
-            <li>ค่าการรักษาทั้งหมด<span>{report2}</span></li>,
-            <li>ค่ายาทั้งหมด{report1}</li>
-            <Button
-              size="large"
-              variant="contained"
-              color="secondary"
-              >{reportincome} <SearchIcon />
-            </Button>
+          <Grid item xs={2.5}>
+            <p className="good-font">ค่าการรักษา</p>
+            <TextField
+              variant="outlined"
+              type="string"
+              size="medium"
+              value={report2}
+            />
+          </Grid>
+          
+          <Grid item xs={2.5}>
+            <p className="good-font">ค่ายา</p>
+            <TextField
+              variant="outlined"
+              type="string"
+              size="medium"
+              value={report1}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <p className="good-font">รวมทั้งหมด</p>
+            <TextField
 
+              variant="outlined"
+              type="string"
+              size="medium"
+              value={reportincome}
+            />
           </Grid>
 
           <Grid item xs={12}>
