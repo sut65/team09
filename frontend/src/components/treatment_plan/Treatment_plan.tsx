@@ -4,12 +4,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { TreatmentsPlanInterface } from "../../models/ITreatment_plan"; 
+import { TreatmentsPlanInterface } from "../../models/ITreatment_plan";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import axios from "axios";
 import { ButtonGroup } from "@mui/material";
 import moment from "moment";
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Treatment_plan() {
     const [treatment_plan, setTreatment_plan] = React.useState<TreatmentsPlanInterface[]>([]);
@@ -54,7 +55,7 @@ function Treatment_plan() {
         } catch (err) {
             console.error(err);
         }
-    }; 
+    };
 
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 70 },
@@ -75,17 +76,17 @@ function Treatment_plan() {
 
         { field: "treatment_explain", headerName: "Treatment explain", width: 450 },
 
-        { field: "treatment_time", headerName: "Treatment Time", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm a')  },
+        { field: "treatment_time", headerName: "Treatment Time", width: 200, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา HH:mm') },
 
         {
-            field: "action", headerName: "Action", width: 200, sortable: false, renderCell: ({ row }) =>
+            field: "action", headerName: "Action", width: 130, sortable: false, renderCell: ({ row }) =>
                 <ButtonGroup>
                     <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
-                        delete
+                        <DeleteForeverIcon />
                     </Button>
                     <Button component={RouterLink} to={`/treatmentplan_update/${row.id}`} variant="contained">
                         <div className="good-font">
-                            update
+                            <EditIcon />
                         </div>
                     </Button>
                 </ButtonGroup>
