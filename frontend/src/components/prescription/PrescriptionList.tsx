@@ -9,18 +9,28 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import axios from 'axios';
 import { GetPrescription } from "../../services/HttpClientService";
-import { ButtonGroup } from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+
 
 function Prescriptions() {
   const [prescriptions, setPrescriptions] = useState<PrescriptionInterface[]>([]);
+  const [open, setOpen] = React.useState(false);
 
   const getPrescriptions = async () => {
     let res = await GetPrescription();
     if (res) {
         setPrescriptions(res);
     }
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleDelete1 = async (id: number) => {
@@ -45,15 +55,38 @@ function Prescriptions() {
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 80 },
-    { field: "Patient", headerName: "ชื่อผู้ป่วย", width: 180,  valueFormatter: (params) => params.value.FirstName,},
-    { field: "Dentist", headerName: "ชื่อทันตแทพย์", width: 180,  valueFormatter: (params) => params.value.FirstName,},
-    { field: "Medicine", headerName: "ชื่อยา", width: 395,  valueFormatter: (params) => params.value.Medicine_name,},
+    { field: "Patient", headerName: "ชื่อผู้ป่วย", width: 150,  valueFormatter: (params) => params.value.FirstName,},
+    { field: "Dentist", headerName: "ชื่อทันตแทพย์", width: 150,  valueFormatter: (params) => params.value.FirstName,},
+    { field: "Medicine", headerName: "ชื่อยา", width: 380,  valueFormatter: (params) => params.value.Medicine_name,},
+    { field: "Qty", headerName: "จำนวน", width: 60 },
+    { field: "Prescription_code", headerName: "รหัสสั่งจ่ายยา", width: 140 },
     { field: "action", headerName: "Action",width: 125, sortable: false, renderCell: ({ row }) =>
       {
         return <ButtonGroup>
-          <Button onClick={() => handleDelete1(row.ID)} variant="contained" color="error">
+          <Button onClick={() => handleClickOpen} variant="contained" color="error">
               <DeleteForeverIcon />
           </Button>
+          <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"ต้องการลบข้อมูลหรือไม่?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                หากลบข้อมูลแล้วข้อมูลของพนักงานคนนี้จะหายไป.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => { handleDelete1(row.ID); handleClose();}} variant="contained" autoFocus>
+                Yes
+              </Button>
+              <Button onClick={handleClose} variant="contained" color="error">No</Button>
+            </DialogActions>
+          </Dialog>
           <Button component={RouterLink} to={`/prescription/update/${row.ID}`} variant="contained" color="info">
             <div className="good-font">
               <EditIcon />

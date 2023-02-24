@@ -138,27 +138,28 @@ function PrescriptionCreate() {
   return (
     <Container maxWidth="md">
       <Snackbar
-      id = "success"
-        open={success}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert onClose={handleClose} severity="success">
-        {message}
-        </Alert>
-      </Snackbar>
-      <Snackbar
-       id = "error"
-        open={error}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert onClose={handleClose} severity="error">
-        {message}
-        </Alert>
-      </Snackbar>
+            id="success"
+            open={success}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+            <Alert onClose={handleClose} severity="success">
+                <div className="good-font">
+                    {message}
+                </div>
+            </Alert>
+        </Snackbar>
+        <Snackbar id="error"
+            open={error}
+            autoHideDuration={6000}
+            onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error">
+                <div className="good-font">
+                    {message}
+                </div>
+            </Alert>
+        </Snackbar>
       <Paper>
         <Box
           display="flex"
