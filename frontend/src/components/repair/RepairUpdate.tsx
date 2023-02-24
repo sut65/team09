@@ -32,7 +32,6 @@ import {
   
   function UpdateRepair() {
     const {id} = useParams();
-    //const [repair, setRepair] = useState<RepairInterface>({});
     const [repair, setRepair] = useState<Partial<RepairInterface>>({});
     const [damageLevel, setDamageLevel] = useState<DamageLevelInterface[]>([]);
     const [employee, setEmployee] = useState<EmployeeInterface[]>([]);
@@ -43,6 +42,7 @@ import {
     const [error, setError] = useState(false);
     const [message, setAlertMessage] = React.useState("");
     const [Repair_Note, setRepair_Note] = useState<string>("");
+    const id_emp = localStorage.getItem("uid")
   
     const handleClose = (
       event?: React.SyntheticEvent | Event,
@@ -96,6 +96,11 @@ import {
       res && setEmployee(res);
     };
 
+    const convertTypes = (data: string | number | undefined | null) => {
+      let val = typeof data === "string" ? parseInt(data) : data;
+      return val;
+    };
+
     useEffect(() => {
       fetch(`http://localhost:8080/repairs/${id}`)
           .then((response) => response.json())
@@ -120,7 +125,7 @@ import {
                   }
                   )
   
-              fetch(`http://localhost:8080/damagelevel/${res.data.PatientID}`)
+              fetch(`http://localhost:8080/damagelevel/${res.data.DamageLevelID}`)
                   .then((response) => response.json())
                   .then((res) => {
                       if (res.data) {
@@ -137,7 +142,7 @@ import {
     const submit = async () => {
       let newdata = {
         ID: convertType(id),
-        EmployeeID: convertType(repair.EmployeeID),
+        EmployeeID: convertTypes(id_emp),
         MedicalDeviceID: convertType(repair.MedicalDeviceID),
         DamageLevelID: convertType(repair.DamageLevelID),
         Repair_Note: repair.Repair_Note,

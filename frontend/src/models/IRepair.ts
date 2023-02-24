@@ -6,7 +6,7 @@ export interface RepairInterface{
     ID?: number,
 
     Employee?: EmployeeInterface,
-    EmployeeID?: number,
+    EmployeeID?: number | null,
 
     MedicalDevice?: MedicalDeviceInterface,
     MedicalDeviceID?: number,
