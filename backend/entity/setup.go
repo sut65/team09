@@ -83,7 +83,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Reason{}).Create(&method1)
 
-	//add example
+	//add example1
 
 	// ======================================  Employee  =====================================================================
 	//role
