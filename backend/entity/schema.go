@@ -284,12 +284,6 @@ type Dentist struct {
 }
 
 // -----ระบบสั่งจ่ายยา-----
-type Medicine_status struct {
-	gorm.Model
-	Medicine_status_name string
-	Prescriptions        []Prescription `gorm:"foreignKey:Medicine_statusID"`
-}
-
 type Medicine struct {
 	gorm.Model
 	Medicine_name  string
@@ -299,18 +293,16 @@ type Medicine struct {
 
 type Prescription struct {
 	gorm.Model
-	DateTimePrescription time.Time
-	Qty     			uint
-	Details				string
+	DateTimePrescription time.Time	`valid:"current~Date_Of_Repair must be a current date"`
+	Qty     			uint	`valid:"int~Date_Of_Repair must be a current date, required~Date_Of_Repair must be a current date"`
+	Details				string	`valid:"stringlength(5|100)~prescription note must consist of 6 or more characters, required~prescription note cannot be blank"`
+	Prescription_code	string	`valid:"matches(^[T]\\d{7}$), required~Treatment code cannot be blank"`
 	//PatientID ทำหน้าที่เป็น FK
-	PatientID 			*uint `valid:"required~Name cannot be blank"`
+	PatientID 			*uint 
 	Patient   			Patient	`gorm:"references:id" valid:"-"`
 	//DentistID ทำหน้าที่เป็น FK
 	DentistID 			*uint
 	Dentist   			Dentist	`gorm:"references:id" valid:"-"`
-	//Medicine_statusID ทำหน้าที่เป็น FK
-	Medicine_statusID 	*uint `valid:"required~Medicine_status cannot be blank"`
-	Medicine_status   	Medicine_status
 	//MedicineID ทำหน้าที่เป็น FK
 	MedicineID 			*uint
 	Medicine   			Medicine

@@ -87,11 +87,16 @@ import {
       let res = await GetEmployeeByUID();
       repair.EmployeeID = res.ID;
     };
+
+    const convertTypes = (data: string | number | undefined | null) => {
+      let val = typeof data === "string" ? parseInt(data) : data;
+      return val;
+    };
   
     // insert data to db
     const submit = async () => {
       let data = {
-        EmployeeID: convertType(repair.EmployeeID),
+        EmployeeID: convertTypes(repair.EmployeeID),
         MedicalDeviceID: convertType(repair.MedicalDeviceID),
         DamageLevelID: convertType(repair.DamageLevelID),
         Repair_Note: repair.Repair_Note,

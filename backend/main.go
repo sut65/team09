@@ -215,10 +215,6 @@ func main() {
 	router.DELETE("/delete-payment/:id", payment.DeletePayment)
 
 	//---------Prescription-------------
-	// Medicine_status Routes
-	router.GET("/medicine_statuses", prescription.ListMedicine_statuses)
-	router.GET("/medicine_status/:id", prescription.GetMedicine_status)
-
 	// Medicine Routes
 	router.GET("/medicines", prescription.ListMedicines)
 	router.GET("/medicine/:id", prescription.GetMedicine)

@@ -4,13 +4,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { TreatmentsInterface } from "../../models/ITreatment"; 
+import { TreatmentsInterface } from "../../models/ITreatment";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import axios from 'axios';
 import { ButtonGroup } from "@mui/material";
 import moment from "moment";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
-function Treatment(props: any){
+function Treatment(props: any) {
     const [treatment, setTreatment] = React.useState<TreatmentsInterface[]>([]);
     const getTreatment = async () => {
         const apiUrl = "http://localhost:8080/treatments";
@@ -72,25 +74,25 @@ function Treatment(props: any){
         { field: "number_of_treatment", headerName: "Number of treatment", width: 150 },
 
         { field: "type_of_number_of_treatment_name", headerName: "Type of number of treatment", width: 200 },
-        
+
         { field: "treatment_detail", headerName: "Treatment detail", width: 400 },
- 
-        { field: "treatment_time", headerName: "Treatment Time", width: 200,valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา hh:mm a') },
+
+        { field: "treatment_time", headerName: "Treatment Time", width: 200, valueFormatter: (params) => moment(params.value).format('DD-MM-yyyy เวลา HH:mm') },
 
         { field: "treatment_code", headerName: "Treatment code", width: 120 },
 
         {
-            field: "action", headerName: "Action",width: 200, sortable: false, renderCell: ({ row }) =>
-            <ButtonGroup>
-                <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
-                    delete
-                </Button>
-                <Button component={RouterLink} to={`/treatmentsupdate/${row.id}`} variant="contained">
-                            <div className="good-font">
-                                update
-                            </div>
-                        </Button>
-            </ButtonGroup>
+            field: "action", headerName: "Action", width: 130, sortable: false, renderCell: ({ row }) =>
+                <ButtonGroup>
+                    <Button onClick={() => handleDelete(row.id)} variant="contained" color="error">
+                        <DeleteForeverIcon />
+                    </Button>
+                    <Button component={RouterLink} to={`/treatmentsupdate/${row.id}`} variant="contained">
+                        <div className="good-font">
+                            <EditIcon />
+                        </div>
+                    </Button>
+                </ButtonGroup>
         },
 
     ];

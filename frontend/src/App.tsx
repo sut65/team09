@@ -47,8 +47,9 @@ import DentistScheduleCreate from "./components/dentistschedule/DentistScheduleC
 import DentistSchedule from "./components/dentistschedule/DentistSchedule";
 import DentistScheduleUpdate from "./components/dentistschedule/DentistScheduleUpdate";
 
-import CreateMedicalDevice from "./components/MedicalDevice/CreateMedicalDevice"
+import CreateMedicalDevice from "./components/MedicalDevice/CreateMedicalDevice";
 import MedicalDeviceList from "./components/MedicalDevice/MedicalDeviceList";
+import MedicalDeviceUpdate from "./components/MedicalDevice/MedicalDeviceUpdate";
 
 import PatientList from "./components/patient/PatientList";
 import PatientCreate from "./components/patient/PatientCreate";
@@ -168,14 +169,14 @@ const menu = [
 
   { name: "แผนการรักษา", icon: <PlaylistAddCheckIcon />, path: "/treatmentplanlistshow" ,  role: "Dentist"},
 
-  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Dentist"},
-  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon />, path: "/prescription" , role: "Nurse"},
+  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon htmlColor="#f50057"/>, path: "/prescription" , role: "Dentist"},
+  { name: "สั่งจ่ายยา", icon: <MedicationLiquidIcon htmlColor="#f50057"/>, path: "/prescription" , role: "Nurse"},
 
   { name: "จัดการข้อมูลทันตแพทย์", icon: <PersonAddAltRoundedIcon />, path: "/dentists" ,   role: "Admin"},
 
   { name: "จัดการข้อมูลห้อง", icon: <BuildCircleIcon />, path: "/room_details" ,  role: "Admin"},
 
-  { name: "แจ้งยอดชำระ", icon: <PaymentsIcon />, path: "/payment" , role: "Admin"},
+  { name: "แจ้งยอดชำระ", icon: <PaymentsIcon htmlColor="#2e7d32"/>, path: "/payment" , role: "Admin"},
 
 ];
 
@@ -308,6 +309,7 @@ function App() {
                 <Route path="/DentistSchedule/Update/:id" element={<DentistScheduleUpdate />} />
                 <Route path="/MedicalDevice/create" element={<CreateMedicalDevice />} />
                 <Route path="/MedicalDevice" element={<MedicalDeviceList />} />
+                <Route path="/MedicalDevice/update/:id" element={<MedicalDeviceUpdate />} />
                 <Route path="/treatmentlistshow" element={<Treatment />} />
                 <Route path="/treatmentscreate" element={<TreatmentCreate />} />
                 <Route path="/treatmentupdate" element={<TreatmentUpdate />} />

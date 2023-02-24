@@ -11,15 +11,16 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 //import { GetAdminByID } from "../services/HttpClientService";
 
 //api
 import {
   GetType,
   GetStatus,
-  CreateMedicalDevice,
   GetEmployeeByUID,
+  UpdateMedicalDevice,
+  GetMedicalDeviceByID,
 } from '../../services/HttpClientService';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -30,10 +31,10 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 })
 
 function MedicalDevice() {
-  const [medicaldevice, setMedicalDevice] = useState<MedicalDeviceInterface>({});
+  //const [medicaldevice, setMedicalDevice] = useState<MedicalDeviceInterface>({});
+  const [medicaldevice, setMedicalDevice] = useState<Partial<MedicalDeviceInterface>>({});
   const [type, setType] = useState<TypeInterface[]>([]);
   const [status, setStatus] = useState<StatusInterface[]>([]);
-  const [employee, setEmployee] = useState<EmployeeInterface[]>([]); //.ใช้ทดสอบสร้างตาราง
   const [amount, setAmount] = useState<number>(0);
   const [device_name, setDevice_Name] = useState<string>("");
   // const [admin, setAdmin] = useState<Partial<AdminInterface>>({ Name: "" });
@@ -41,6 +42,9 @@ function MedicalDevice() {
   const [date, setDate] = useState<Date | null>(new Date());
   const [error, setError] = useState(false);
   const [message, setAlertMessage] = React.useState("");
+  const [employee, setEmployee] = useState<EmployeeInterface[]>([]);
+  const {id} = useParams();
+  const id_emp = localStorage.getItem("uid")
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -80,6 +84,11 @@ function MedicalDevice() {
     res && setStatus(res);
   };
 
+  const fetchMedicalDevice = async () => {
+    let res = await GetMedicalDeviceByID(id);
+    res && setMedicalDevice(res);
+  };
+
   const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
     return val;
@@ -95,10 +104,48 @@ function MedicalDevice() {
     return val;
   };
 
+  useEffect(() => {
+    fetch(`http://localhost:8080/medicaldevices/${id}`)
+        .then((response) => response.json())
+        .then((res) => {
+            fetch(`http://localhost:8080/employee/${res.data.EmployeeID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setEmployee(res.data.FirstName)
+                        medicaldevice.EmployeeID = res.data.ID
+                    }
+                }
+                )
+
+            fetch(`http://localhost:8080/ttype/${res.data.TypeID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setType(res.data.Type_Name)
+                        medicaldevice.TypeID = res.data.ID
+                    }
+                }
+                )
+
+            fetch(`http://localhost:8080/status/${res.data.StatusID}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.data) {
+                        setStatus(res.data.Status_Choice)
+                        medicaldevice.StatusID = res.data.ID
+                    }
+                }
+                )
+            }
+            )
+    }, [id])
+
   // insert data to db
   const submit = async () => {
-    let data = {
-      EmployeeID: convertTypes(medicaldevice.EmployeeID),
+    let newdata = {
+      ID: convertType(id),
+      EmployeeID: convertTypes(id_emp),
       TypeID: convertType(medicaldevice.TypeID),
       StatusID: convertType(medicaldevice.StatusID),
       Device_Name: medicaldevice.Device_Name,
@@ -106,11 +153,11 @@ function MedicalDevice() {
       Record_Date: date,
     };
 
-    console.log("data", data)
+    console.log("data", newdata)
 
-    let res = await CreateMedicalDevice(data);
+    let res = await UpdateMedicalDevice(newdata);
     if (res.status) {
-      setAlertMessage("บันทึกข้อมูลสำเร็จ");
+      setAlertMessage("แก้ไขข้อมูลสำเร็จ");
       setSuccess(true);
     } else {
       setAlertMessage(res.message);
@@ -123,6 +170,7 @@ function MedicalDevice() {
     fetchTypes();
     fetchStatuses();
     fetchEmployeeByUID();
+    fetchMedicalDevice();
   }, []);
 
   return (
@@ -192,9 +240,6 @@ function MedicalDevice() {
                   name: "TypeID",
                 }}
               >
-                <option aria-label="None" value="">
-                  Type
-                </option>
                 {type.map((item: TypeInterface) => (
                   <option value={item.ID}>{item.Type_Name}</option>
                 ))}
@@ -223,9 +268,6 @@ function MedicalDevice() {
                   name: "StatusID",
                 }}
               >
-                <option aria-label="None" value="">
-                  Status
-                </option>
                 {status.map((item: StatusInterface) => (
                   <option value={item.ID}>{item.Status_Choice}</option>
                 ))}
@@ -247,7 +289,7 @@ function MedicalDevice() {
               value={medicaldevice.Device_Name}
               onChange={handleInputChange}
               //multiline
-              placeholder="Device Name" //ข้อความข้างใน
+            //   placeholder="Device Name" //ข้อความข้างใน
               minRows={8}
               sx={{
                 fontSize: "1.5rem",
@@ -278,7 +320,7 @@ function MedicalDevice() {
                 value={medicaldevice.Amount}
                 onChange={handleInputChange}
                 //multiline
-                placeholder="Amount" //ข้อความข้างใน
+                // placeholder="Amount" //ข้อความข้างใน
                 //minRows={8}
                 sx={{
                   fontSize: "1.5rem",
@@ -332,7 +374,7 @@ function MedicalDevice() {
               variant="contained"
               color="primary"
             >
-              Create Medical Device
+              Update Medical Device
             </Button>
           </Box>
         </Box>

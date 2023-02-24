@@ -54,7 +54,6 @@ func SetupDatabase() {
 		&Type_of_number_of_treatment{},
 		//Prescription
 		&Medicine{},
-		&Medicine_status{},
 		&Prescription{},
 		//DoctorSchedule
 		&Workingday{},
@@ -981,17 +980,6 @@ func SetupDatabase() {
 	}
 	db.Model(&Medicine{}).Create(&Medicine12)
 
-	///////////////ข้อมูลใน entity Medicine_status///////////
-	Medicine_status1 := Medicine_status{
-		Medicine_status_name: "รับยาแล้ว",
-	}
-	db.Model(&Medicine_status{}).Create(&Medicine_status1)
-
-	Medicine_status2 := Medicine_status{
-		Medicine_status_name: "ยังไม่ได้รับยา",
-	}
-	db.Model(&Medicine_status{}).Create(&Medicine_status2)
-
 	///////////////ข้อมูลใน entity Prescription///////////
 	DateTimePrescriptionA := time.Date(2022, time.September, 1, 13, 23, 44, 0, time.Local)
 	DateTimePrescriptionB := time.Date(2022, time.September, 6, 13, 55, 26, 0, time.Local)
@@ -1001,7 +989,7 @@ func SetupDatabase() {
 		Qty:                  2,
 		Details:              "รับประทานหลังอาหาร",
 		Medicine:             Medicine1,
-		Medicine_status:      Medicine_status1,
+		Prescription_code:    "T8906834",
 		Patient:              patient1,
 		Dentist:              dentist1,
 		DateTimePrescription: DateTimePrescriptionA,
@@ -1012,9 +1000,9 @@ func SetupDatabase() {
 		Qty:                  10,
 		Details:              "รับประทานวันละ 1 เม็ด",
 		Medicine:             Medicine12,
-		Medicine_status:      Medicine_status2,
+		Prescription_code:    "T0000007",
 		Patient:              patient2,
-		Dentist:              dentist2,
+		Dentist:              dentist3,
 		DateTimePrescription: DateTimePrescriptionB,
 	}
 	db.Model(&Prescription{}).Create(&Prescription2)
@@ -1023,7 +1011,7 @@ func SetupDatabase() {
 		Qty:                  5,
 		Details:              "ทานยาแล้วอาจรู้สึกง่วงซึม",
 		Medicine:             Medicine2,
-		Medicine_status:      Medicine_status2,
+		Prescription_code:    "T0000007",
 		Patient:              patient2,
 		Dentist:              dentist3,
 		DateTimePrescription: DateTimePrescriptionC,
