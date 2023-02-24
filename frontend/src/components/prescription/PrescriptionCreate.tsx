@@ -19,13 +19,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DentistInterface } from "../../models/IDentist"; 
 import { PatientInterface } from "../../models/IPatient";
 import { MedicineInterface } from "../../models/IMedicine";
-import { Medicine_statusInterface } from "../../models/IMedicine_status";
+// import { Medicine_statusInterface } from "../../models/IMedicine_status";
 import { PrescriptionInterface } from "../../models/IPrescription";
 
 
 import {
   GetPrescription,
-  GetMedicine_status,
+  // GetMedicine_status,
   GetMedicine,
   GetPatient,
   GetDentists,
@@ -43,7 +43,7 @@ function PrescriptionCreate() {
     const [dentist, setDentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
     const [medicine, setMedicine] = React.useState<MedicineInterface[]>([]);
-    const [medicine_status, setMedicine_status] = React.useState<Medicine_statusInterface[]>([]);
+    // const [medicine_status, setMedicine_status] = React.useState<Medicine_statusInterface[]>([]);
     const [prescription, setPrescription] = React.useState<PrescriptionInterface>({ DateTimePrescription: new Date(), });
     const [message, setAlertMessage] = React.useState("");
 
@@ -93,12 +93,12 @@ function PrescriptionCreate() {
     }
   };
 
-  const getMedicine_status = async () => {
-    let res = await GetMedicine_status();
-    if (res) {
-      setMedicine_status(res);
-    }
-  };
+  // const getMedicine_status = async () => {
+  //   let res = await GetMedicine_status();
+  //   if (res) {
+  //     setMedicine_status(res);
+  //   }
+  // };
 
   const getDentist = async () => {
     let res = await GetDentists();
@@ -111,7 +111,7 @@ function PrescriptionCreate() {
     getPatient();
     getMedicine();
     getDentist();
-    getMedicine_status();
+    // getMedicine_status();
   }, []);
 
   const convertType = (data: string | number | undefined) => {
@@ -126,9 +126,9 @@ function PrescriptionCreate() {
         DentistID: convertType(prescription.DentistID),
         PatientID: convertType(prescription.PatientID),
         MedicineID: convertType(prescription.MedicineID),
-        Medicine_statusID: convertType(prescription.Medicine_statusID),
         Qty: typeof prescription.Qty === "string" ? parseInt(prescription.Qty) : 0,
         Details: prescription.Details ?? "",
+        Prescription_code: prescription.Prescription_code ?? "",
         DateTimePrescription: prescription.DateTimePrescription,
     };
     console.log(data);
@@ -286,7 +286,7 @@ function PrescriptionCreate() {
             </FormControl>
           </Grid>
 
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <p>สถานนะยา</p>
               <Select
@@ -307,7 +307,7 @@ function PrescriptionCreate() {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
@@ -324,6 +324,20 @@ function PrescriptionCreate() {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+              <p className="good-font">รหัสสั่งจ่ายยา</p>
+              <TextField
+                id="Prescription_code"
+                variant="outlined"
+                type="string"
+                size="medium"
+                value={prescription.Prescription_code || ""}
+                onChange={handleInputChange}
+              />
             </FormControl>
           </Grid>
 
