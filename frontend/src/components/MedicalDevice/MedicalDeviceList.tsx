@@ -76,7 +76,7 @@ function MedicalDeviceList() {
       field: "action", headerName: "Action",width: 150, sortable: false, renderCell: ({ row }) =>
       {
         return <ButtonGroup>
-          <Button onClick={() => Delete(row.ID)} variant="contained" color="error">
+          <Button onClick={() => Delete(row.ID)} variant="contained" color="error" style={{marginRight: 5}}>
             <DeleteForeverIcon />
           </Button>
           <Button component={RouterLink} to={`/MedicalDevice/update/${row.ID}`} variant="contained" color="info">
