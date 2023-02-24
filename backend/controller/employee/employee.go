@@ -78,7 +78,10 @@ func CreateEmployee(c *gin.Context) {
 		Employee_number: employee.Employee_number,
 		Personal_id:     employee.Personal_id,
 		Password:        string(hashPassword),
-		Phone:           employee.Phone,
+		Email:           employee.Email,
+		Old:             employee.Old,
+		Date_employed:   employee.Date_employed,
+		Salary:          employee.Salary,
 		House_no:        employee.House_no,
 		Gender:          gender, // โยงความสัมพันธ์กับ Entity gender
 		Province:        province,
@@ -187,28 +190,34 @@ func UpdateEmployee(c *gin.Context) {
 		return
 	}
 
-	// hashPassword, err := bcrypt.GenerateFromPassword([]byte(employee.Password), 14)
-	// if err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
-	// 	return
-	// }
-
-	// employee.Password = string(hashPassword)
-
 	emp := entity.Employee{
 		FirstName:       employee.FirstName,
 		LastName:        employee.LastName,
 		Employee_number: employee.Employee_number,
 		Personal_id:     employee.Personal_id,
-		// Password:        string(hashPassword),
-		// Password:     employee.Password,
-		Phone:        employee.Phone,
-		House_no:     employee.House_no,
-		Gender:       gender,
-		Province:     province,
-		District:     district,
-		Sub_district: sub_district,
-		Role:         role,
+		Password:        employee.Password,
+		Email:           employee.Email,
+		Old:             employee.Old,
+		Date_employed:   employee.Date_employed,
+		Salary:          employee.Salary,
+		House_no:        employee.House_no,
+		Gender:          gender,
+		Province:        province,
+		District:        district,
+		Sub_district:    sub_district,
+		Role:            role,
+	}
+
+	if !(employee.Password[0:7] == "$2a$14$") { // เช็คว่ารหัสที่ผ่านเข้ามามีการ encrypt แล้วหรือยัง หากมีการ encrypt แล้วจะไม่ทำการ encrypt ซ้ำ
+		hashPassword, err := bcrypt.GenerateFromPassword([]byte(employee.Password), 14)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
+			return
+		}
+		print("HASH!!!!")
+		employee.Password = string(hashPassword)
+	} else {
+		print("NOT HASH!!!")
 	}
 
 	if err := entity.DB().Where("id = ?", id).Updates(&employee).Error; err != nil {
@@ -216,5 +225,4 @@ func UpdateEmployee(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"data": emp})
-
 }

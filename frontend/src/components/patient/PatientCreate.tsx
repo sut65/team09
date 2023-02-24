@@ -36,6 +36,8 @@ import {
   CreateEmployee,
   GetEmployeeByUID,
 } from "../../services/HttpClientService";
+import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -51,7 +53,7 @@ function PaitentCreate() {
   const [district, setDistrict] = React.useState<DistrictInterface[]>([]);
   const [subdistrict, setSubdistrict] = React.useState<Sub_districtInterface[]>([]);
   const [employee, setEmployee] = useState<Partial<EmployeeInterface>>({});
-  const [patient, setPatient] = useState<Partial<PatientInterface>>({});
+  const [patient, setPatient] = useState<Partial<PatientInterface>>({ Modifiled_date: new Date(), });
   const [provinceId, setProvinceId] = useState('0');
   const [districtId, setDistrictId] = useState('0');
 
@@ -234,6 +236,7 @@ function PaitentCreate() {
       DistrictID: convertType(patient.DistrictID),
       Sub_districtID: convertType(patient.Sub_districtID),
       EmployeeID: convertType(patient.EmployeeID),
+      Modifiled_date: patient.Modifiled_date,
     };
 
     let res = await CreatePatient(data);
@@ -574,6 +577,24 @@ function PaitentCreate() {
                 </FormControl>
               </Grid>
           )}
+
+          <Grid item xs={4} >
+            <FormControl fullWidth variant="outlined">
+                <p className="good-font">แก้ไขล่าสุด</p>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <MobileDatePicker
+                            renderInput={(props) => <TextField {...props} />}
+                            value={patient.Modifiled_date}
+                            onChange={(newValue) => {
+                              setPatient({
+                                  ...patient,
+                                  Modifiled_date: newValue,
+                              });
+                            }}
+                          />
+                    </LocalizationProvider>
+            </FormControl>
+          </Grid>
 
           <Grid item xs={12}>
             <Button
