@@ -60,7 +60,10 @@ type Employee struct {
 	LastName        string
 	Personal_id     string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)"`
 	Password        string `gorm:"uniqueIndex"`
-	Phone           string
+	Email           string
+	Old             int
+	Date_employed   time.Time
+	Salary          int
 	House_no        string
 
 	//Sub_districtID ทำหน้าที่เป็น FK
@@ -132,6 +135,8 @@ type Patient struct {
 
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`
+
+	Modifiled_date time.Time
 
 	Prescriptions []Prescription `gorm:"foreignKey:PatientID"`
 
@@ -293,19 +298,19 @@ type Medicine struct {
 
 type Prescription struct {
 	gorm.Model
-	DateTimePrescription time.Time	`valid:"current~DateTimePrescription must be a current date"`
-	Qty     			int	`valid:"range(0|50)~Qty cannot be negative or too much"`
-	Details				string	`valid:"stringlength(5|100)~Details note must consist of 6 or more characters, required~Details note cannot be blank"`
-	Prescription_code	string	`valid:"matches(^[T]\\d{7}$)~Prescription_code does not validate as matches(^[T]\\d{7}$) to equal, required~Prescription_code code cannot be blank"`
+	DateTimePrescription time.Time `valid:"current~DateTimePrescription must be a current date"`
+	Qty                  int       `valid:"range(0|50)~Qty cannot be negative or too much"`
+	Details              string    `valid:"stringlength(5|100)~Details note must consist of 6 or more characters, required~Details note cannot be blank"`
+	Prescription_code    string    `valid:"matches(^[T]\\d{7}$)~Prescription_code does not validate as matches(^[T]\\d{7}$) to equal, required~Prescription_code code cannot be blank"`
 	//PatientID ทำหน้าที่เป็น FK
-	PatientID 			*uint 
-	Patient   			Patient	`gorm:"references:id" valid:"-"`
+	PatientID *uint
+	Patient   Patient `gorm:"references:id" valid:"-"`
 	//DentistID ทำหน้าที่เป็น FK
-	DentistID 			*uint
-	Dentist   			Dentist	`gorm:"references:id" valid:"-"`
+	DentistID *uint
+	Dentist   Dentist `gorm:"references:id" valid:"-"`
 	//MedicineID ทำหน้าที่เป็น FK
-	MedicineID 			*uint
-	Medicine   			Medicine
+	MedicineID *uint
+	Medicine   Medicine
 }
 
 // / ระบบบันทึกการรักษา
@@ -390,13 +395,13 @@ type Payment struct {
 	gorm.Model
 	Total_price     uint
 	DateTimePayment time.Time
-	Note			string
+	Note            string
 	//PatientID 	ทำหน้าที่เป็น FK
 	PatientID *uint
-	Patient   Patient	`gorm:"references:id" valid:"-"`
+	Patient   Patient `gorm:"references:id" valid:"-"`
 	//EmployeeID 	ทำหน้าที่เป็น FK
 	EmployeeID *uint
-	Employee   Employee	`gorm:"references:id" valid:"-"`
+	Employee   Employee `gorm:"references:id" valid:"-"`
 	//Payment_statusID 	ทำหน้าที่เป็น FK
 	Payment_statusID *uint
 	Payment_status   Payment_status
@@ -450,12 +455,12 @@ type Room_Number struct {
 
 	Room_Details     []Room_Detail      `gorm:"foreignKey:Room_NumberID"`
 	Dentist_schedule []Dentist_schedule `gorm:"foreignKey:Room_NumberID"`
-	Patien_schedule []Patien_schedule `gorm:"foreignKey:Room_NumberID"`
+	Patien_schedule  []Patien_schedule  `gorm:"foreignKey:Room_NumberID"`
 }
 
 type Room_Detail struct {
 	gorm.Model
-	Note string	`valid:"stringlength(1|50)~ห้ามพิมพ์เกิน 50 ตัวอักษร, required~หมายเหตุห้ามเป็นช่องว่าง"`
+	Note string `valid:"stringlength(1|50)~ห้ามพิมพ์เกิน 50 ตัวอักษร, required~หมายเหตุห้ามเป็นช่องว่าง"`
 
 	//CategoryID ทำหน้าที่เป็น FK
 	CategoryID *uint
