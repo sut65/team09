@@ -523,6 +523,7 @@ function TreatmentUpdate() {
                                             Treatment_time: newValue,
                                         });
                                     }}
+                                    ampm={false} 
                                 />
                             </LocalizationProvider>
                         </FormControl>
