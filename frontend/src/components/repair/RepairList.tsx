@@ -12,6 +12,7 @@ import axios from 'axios';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ButtonGroup from "@mui/material/ButtonGroup";
 import EditIcon from '@mui/icons-material/Edit';
+import { margin } from "@mui/system";
 
 function RepairList() {
   const [repair, setRepair] = useState<RepairInterface[]>([]);
@@ -74,7 +75,7 @@ function RepairList() {
       field: "action", headerName: "Action",width: 150, sortable: false, renderCell: ({ row }) =>
       {
         return <ButtonGroup>
-          <Button onClick={() => Delete(row.ID)} variant="contained" color="error">
+          <Button onClick={() => Delete(row.ID)} variant="contained" color="error" style={{marginRight: 5}}>
             <DeleteForeverIcon />
           </Button>
           <Button component={RouterLink} to={`/Repair/update/${row.ID}`} variant="contained" color="info">
