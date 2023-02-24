@@ -104,21 +104,6 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     });
   };
 
-  const handleChangeImages = (event: any, id?: string) => {
-    const input = event.target.files[0];
-    const name = event.target.name as keyof typeof payment;
-
-    var reader = new FileReader();
-    reader.readAsDataURL(input);
-    reader.onload = function () {
-      const dataURL = reader.result;
-      setImage({ name: input.name, src: dataURL?.toString() as string });
-      if (event.target.name === "Image") {
-        setPayment({ ...payment, [name]: dataURL?.toString() });
-      }
-    };
-  };
-
   const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
     return val;

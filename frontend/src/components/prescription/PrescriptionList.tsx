@@ -48,7 +48,6 @@ function Prescriptions() {
     { field: "Patient", headerName: "ชื่อผู้ป่วย", width: 180,  valueFormatter: (params) => params.value.FirstName,},
     { field: "Dentist", headerName: "ชื่อทันตแทพย์", width: 180,  valueFormatter: (params) => params.value.FirstName,},
     { field: "Medicine", headerName: "ชื่อยา", width: 395,  valueFormatter: (params) => params.value.Medicine_name,},
-    // { field: "Medicine_status", headerName: "สถานะ", width: 140,  valueFormatter: (params) => params.value.Medicine_status_name,},
     { field: "action", headerName: "Action",width: 125, sortable: false, renderCell: ({ row }) =>
       {
         return <ButtonGroup>

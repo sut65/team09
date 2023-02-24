@@ -19,13 +19,11 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DentistInterface } from "../../models/IDentist"; 
 import { PatientInterface } from "../../models/IPatient";
 import { MedicineInterface } from "../../models/IMedicine";
-// import { Medicine_statusInterface } from "../../models/IMedicine_status";
 import { PrescriptionInterface } from "../../models/IPrescription";
 
 
 import {
   GetPrescription,
-  // GetMedicine_status,
   GetMedicine,
   GetPatient,
   GetDentists,
