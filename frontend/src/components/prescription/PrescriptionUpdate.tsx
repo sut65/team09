@@ -27,13 +27,11 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DentistInterface } from "../../models/IDentist"; 
 import { PatientInterface } from "../../models/IPatient";
 import { MedicineInterface } from "../../models/IMedicine";
-// import { Medicine_statusInterface } from "../../models/IMedicine_status";
 import { PrescriptionInterface } from "../../models/IPrescription";
 
 //API
 import {
     GetMedicine,
-    // GetMedicine_status,
     GetPatient,
     GetDentists,
     GetPrescriptionByID,
@@ -56,7 +54,6 @@ function PrescriptionUpdate() {
     const [dentist, setDentist] = React.useState<DentistInterface[]>([]); //React.useState<DentistsInterface>();
     const [patient, setPatient] = React.useState<PatientInterface[]>([]);
     const [medicine, setMedicine] = React.useState<MedicineInterface[]>([]);
-    // const [medicine_status, setMedicine_status] = React.useState<Medicine_statusInterface[]>([]);
     const [prescription, setPrescription] = React.useState<PrescriptionInterface>({ DateTimePrescription: new Date(), });
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -64,7 +61,6 @@ function PrescriptionUpdate() {
     const [message, setAlertMessage] = React.useState("");
     const [dentistname, setDentistName] = React.useState("");
     const [patientname, setPatientName] = React.useState("");
-    // const [medicine_statusname, setMedicine_statusName] = React.useState("");
     const [medicinename, setMedicineName] = React.useState("");
     const [details, setDetails] = React.useState<string>("");
     const [prescription_code, setPrescription_code] = React.useState<string>("");
@@ -95,21 +91,6 @@ function PrescriptionUpdate() {
     });
   };
 
-  const handleChangeImages = (event: any, id?: string) => {
-    const input = event.target.files[0];
-    const name = event.target.name as keyof typeof prescription;
-
-    var reader = new FileReader();
-    reader.readAsDataURL(input);
-    reader.onload = function () {
-      const dataURL = reader.result;
-      setImage({ name: input.name, src: dataURL?.toString() as string });
-      if (event.target.name === "Image") {
-        setPrescription({ ...prescription, [name]: dataURL?.toString() });
-      }
-    };
-  };
-
   const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
     return val;
@@ -129,44 +110,12 @@ function PrescriptionUpdate() {
     }
   };
 
-//   const getMedicine_status = async () => {
-//     let res = await GetMedicine_status();
-//     if (res) {
-//       setMedicine_status(res);
-//     }
-//   };
-
   const getDentist = async () => {
     let res = await GetDentists();
     if (res) {
       setDentist(res);
     }
   };
-
-  //FetchAPI
-//   const fetchFoodTypes = async () => {
-//     let res = await GetFoodTypes();
-//     res && setFoodTypes(res);
-//   };
-
-//   const fetchMainIngredients = async () => {
-//     let res = await GetMainIngredients();
-//     res && setMainIngredients(res);
-//   };
-
-//   const fetchAdminByID = async () => {
-//     let res = await GetAdminByID();
-//     foodinformation.AdminID = res.ID;
-//     if (res) {
-//       console.log(res)
-//       setAdmin(res);
-//     }
-//   };
-
-//   const fetchFoodInformation = async () => {
-//     let res = await GetFoodInformationByID(id + "");
-//     res && setFoodInformation(res);
-//   };
 
 useEffect(() => {
     fetch(`http://localhost:8080/prescription/${id}`)
@@ -187,16 +136,6 @@ useEffect(() => {
                     }
                 }
                 )
-
-            // fetch(`http://localhost:8080/medicine_status/${res.data.PatientID}`)
-            //     .then((response) => response.json())
-            //     .then((res) => {
-            //         if (res.data) {
-            //             setMedicine_statusName(res.data.Medicine_status_name)
-            //             prescription.Medicine_statusID = res.data.ID
-            //         }
-            //     }
-            //     )
 
             fetch(`http://localhost:8080/medicine/${res.data.PatientID}`)
                 .then((response) => response.json())
