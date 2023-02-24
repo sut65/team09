@@ -55,13 +55,13 @@ type Sub_district struct {
 
 type Employee struct {
 	gorm.Model
-	Employee_number string `gorm:"uniqueIndex" valid:"matches(^[E]\\d{7}$)"`
-	FirstName       string
-	LastName        string
-	Personal_id     string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)"`
-	Password        string `gorm:"uniqueIndex"`
-	Email           string
-	Old             int
+	Employee_number string `gorm:"uniqueIndex" valid:"matches(^[E]\\d{7}$)~Employee_number ต้องขึ้นต้นด้วย E ตามด้วยตัวเลข 7 ตัว"`
+	FirstName       string //`valid:"required~กรุณาใส่ชื่อ"`
+	LastName        string //`valid:"required~กรุณาใส่นามสกุล"`
+	Personal_id     string `gorm:"uniqueIndex"`
+	Password        string `gorm:"uniqueIndex" valid:"minstringlength(8)~Password ต้องมีความยาวอย่างน้อย 8 ตัวอักษร"`
+	Email           string `valid:"email~รูปแบบ Email ไม่ถูกต้อง"`
+	Old             int    `valid:"range(0|200)~อายุห้ามเป็นค่าลบและไม่ควรเกิน 200 ปี"`
 	Date_employed   time.Time
 	Salary          int
 	House_no        string
@@ -102,12 +102,12 @@ type Symptom struct {
 
 type Patient struct {
 	gorm.Model
-	FirstName          string `valid:"required~FirstName can't be blank"`
-	LastName           string `valid:"required~LastName can't be blank"`
-	Personal_id        string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)"`
-	Old                int    `valid:"range(0|150)~Old cannot be negative"`
-	Weight             int    `valid:"range(0|300)~Weight cannot be negative"`
-	Height             int    `valid:"range(0|300)~Height cannot be negative"`
+	FirstName          string `valid:"required~กรุณาใส่ชื่อ"`
+	LastName           string `valid:"required~กรุณาใส่นามสกุล"`
+	Personal_id        string `gorm:"uniqueIndex" valid:"matches(^[0-9]{13}$)~รหัสบัตรประชาชนต้องมี 13 ตัวและเป็นตัวเลข(0-9)"`
+	Old                int    `valid:"range(0|200)~อายุห้ามเป็นค่าติดลบและไม่ควรเกิน 200"`
+	Weight             int    `valid:"range(0|300)~น้ำหนักห้ามเป็นค่าติดลบและไม่ควรเกิน 300"`
+	Height             int    `valid:"range(0|300)~ส่วนสูงห้ามเป็นค่าติดลบและไม่ควรเกิน 300"`
 	Underlying_disease string
 	Drug_alergy        string
 	House_no           string
@@ -131,7 +131,7 @@ type Patient struct {
 	//SymptomID ทำหน้าที่เป็น FK
 	SymptomID    *uint
 	Symptom      Symptom `gorm:"references:id"`
-	Symptom_name string
+	Symptom_name string  `valid:"stringlength(1|50)~ข้อความต้องมีความยาว 1 ถึง 50 ตัวอักษร"`
 
 	EmployeeID *uint
 	Employee   Employee `gorm:"references:id"`

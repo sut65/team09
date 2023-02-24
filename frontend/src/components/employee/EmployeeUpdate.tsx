@@ -428,7 +428,7 @@ function EmployeeUpdate() {
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกรหัสพนักงาน"
+                placeholder="รหัสพนักงานขึ้นต้นด้วย E ตามด้วยตัวเลข 7 ตัว"
                 value={employee_number}
                 onChange={(event) => setEmployee_number(event.target.value)}
                 inputProps={{maxLength :8}}
@@ -488,10 +488,10 @@ function EmployeeUpdate() {
               <TextField
                 id="Password"
                 variant="outlined"
-                type="string"
+                type="password"
                 size="medium"
-                placeholder="กรุณากรอกรหัสผ่าน"
-                value={password.replace(/./g, "*")}
+                placeholder="รหัสผ่านควรมีอย่างน้อย 8 ตัวอักษร"
+                value={password}
                 onChange={(event) => setPass(event.target.value)}
               />
             </FormControl>

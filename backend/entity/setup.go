@@ -70,8 +70,8 @@ func SetupDatabase() {
 
 	db = database
 
-	password1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
-	password2, err := bcrypt.GenerateFromPassword([]byte("5678"), 14)
+	password1, err := bcrypt.GenerateFromPassword([]byte("12345678"), 14)
+	password2, err := bcrypt.GenerateFromPassword([]byte("987654321"), 14)
 	password3, err := bcrypt.GenerateFromPassword([]byte("12123"), 14)
 	password4, err := bcrypt.GenerateFromPassword([]byte("abcde00"), 14)
 	password5, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
