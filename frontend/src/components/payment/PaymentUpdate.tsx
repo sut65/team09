@@ -395,7 +395,7 @@ useEffect(() => {
                                 type="string"
                                 size="medium"
                                 value={payment_code}
-                                onChange={handleInputChange1} 
+                                onChange={handleInputChange} 
                             />
                         </FormControl>
                     </Grid>
@@ -418,47 +418,11 @@ useEffect(() => {
                       </FormControl>
                   </Grid>
 
-                  <Grid item xs={4}>
-              <p className="good-font">กรอกรหัส ถ้าจำราคารวมไม่ได้</p>
-              <TextField
-                id="Note"
-                variant="outlined"
-                type="string"
-                size="medium"
-                value={payment.Payment_code}
-                onChange={handleInputChange}
-              /> 
-          </Grid>
-
-          <Grid item xs={2.5}>
-            <p className="good-font">ค่าการรักษา</p>
-            <TextField
-              variant="outlined"
-              type="string"
-              size="medium"
-              value={report2}
-            />
-          </Grid>
-          
-          <Grid item xs={2.5}>
-            <p className="good-font">ค่ายา</p>
-            <TextField
-              variant="outlined"
-              type="string"
-              size="medium"
-              value={report1}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <p className="good-font">รวมทั้งหมด</p>
-            <TextField
-
-              variant="outlined"
-              type="string"
-              size="medium"
-              value={reportincome}
-            />
-          </Grid>
+                  <Grid item xs={6}>
+                      <li>ค่าการรักษาทั้งหมด<span>{report2}</span></li>,
+                      <li>ค่ายาทั้งหมด{report1}</li>
+                      <li>ยอดทั้งหมด{reportincome}</li>
+                 </Grid>
 
                 <Grid item xs={12}>
                     <Button component={RouterLink} to="/payment" variant="contained">

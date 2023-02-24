@@ -63,7 +63,7 @@ function Prescriptions() {
     { field: "action", headerName: "Action",width: 125, sortable: false, renderCell: ({ row }) =>
       {
         return <ButtonGroup>
-          <Button onClick={ handleClickOpen} variant="contained" color="error">
+          <Button onClick={() => handleClickOpen} variant="contained" color="error">
               <DeleteForeverIcon />
           </Button>
           <Dialog
