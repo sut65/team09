@@ -27,7 +27,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Other teeth problems cannot be blank"))
+		g.Expect(err.Error()).To(Equal("ปัญหาฟันอื่นๆไม่สามารถเป็นค่าว่างได้"))
 	})
 
 	t.Run("Check Treatment detail cannot be blank", func(t *testing.T) {
@@ -45,7 +45,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment detail cannot be blank"))
+		g.Expect(err.Error()).To(Equal("รายละเอียดการรักษาไม่สามารถเป็นค่าว่างได้"))
 	})
 
 	t.Run("Check Treatment detail must consist of 6 or more characters", func(t *testing.T) {
@@ -63,7 +63,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment detail must consist of 6 or more characters"))
+		g.Expect(err.Error()).To(Equal("รายละเอียดการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า"))
 	})
 
 	t.Run("Check Treatment code cannot be blank", func(t *testing.T) {
@@ -81,7 +81,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment code cannot be blank"))
+		g.Expect(err.Error()).To(Equal("รหัสการรักษาไม่สามารถเป็นค่าว่างได้"))
 	})
 
 	t.Run("Check Treatment code cannot be blank", func(t *testing.T) {
@@ -112,7 +112,7 @@ func TestTreatment(t *testing.T) {
 			g.Expect(err).ToNot(BeNil())
 
 			// err.Error ต้องมี error message แสดงออกมา
-			g.Expect(err.Error()).To(Equal(fmt.Sprintf(`Treatment_code: %s does not validate as matches(^[T]\d{7}$)`, fixture)))
+			g.Expect(err.Error()).To(Equal(fmt.Sprintf(`รหัสการรักษาจะต้องขึ้นต้นด้วย T ตามด้วยตัวเลข 7 ตัว`)))
 		}
 	})
 
@@ -131,7 +131,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Number of cavities cannot be negative or too much"))
+		g.Expect(err.Error()).To(Equal("จำนวนฟันผุจะต้องไม่เป็นลบหรือมากเกินไป"))
 	})
 
 	t.Run("Check Number of swollen gums cannot be negative or too much", func(t *testing.T) {
@@ -149,7 +149,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Number of swollen gums cannot be negative or too much"))
+		g.Expect(err.Error()).To(Equal("จำนวนเหงือกบวมจะต้องไม่เป็นลบหรือมากเกินไป"))
 	})
 
 	t.Run("Check Number of treatment cannot be negative or too much", func(t *testing.T) {
@@ -167,7 +167,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Number of treatment cannot be negative or too much"))
+		g.Expect(err.Error()).To(Equal("จำนวนการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"))
 	})
 
 	t.Run("Check Treatment time must be a past date", func(t *testing.T) {
@@ -185,7 +185,7 @@ func TestTreatment(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment time must be a past date"))
+		g.Expect(err.Error()).To(Equal("เวลาการรักษาจะต้องเป็นอดีต"))
 	})
 
 }
