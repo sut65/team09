@@ -24,8 +24,8 @@ func TestEmployeeIDMustBeInValidPattern(t *testing.T) {
 			LastName:        "BBB",
 			Personal_id:     "1234567890123",
 			Password:        "1234",
-			Phone:           "0956478156",
-			House_no:        "56",
+			// Phone:           "0956478156",
+			House_no: "56",
 		}
 
 		ok, err := govalidator.ValidateStruct(employee)
@@ -50,8 +50,8 @@ func TestEmployeeEqualthirteenDigit(t *testing.T) {
 		LastName:        "BBB",
 		Personal_id:     personal,
 		Password:        "1234",
-		Phone:           "0956478156",
-		House_no:        "56",
+		// Phone:           "0956478156",
+		House_no: "56",
 	}
 
 	// ตรวจสอบด้วย govalidator
