@@ -93,6 +93,7 @@ func CreatePatient(c *gin.Context) {
 		District:           district,
 		Sub_district:       sub_district,
 		Employee:           employee,
+		Modifiled_date:     patient.Modifiled_date,
 	}
 	// 13: บันทึก
 	if err := entity.DB().Create(&pt).Error; err != nil {
@@ -233,6 +234,7 @@ func UpdatePatient(c *gin.Context) {
 		District:           district,
 		Sub_district:       sub_district,
 		Employee:           employee,
+		Modifiled_date:     patient.Modifiled_date,
 	}
 	// 13: อัพเดต
 	if err := entity.DB().Where("id = ?", id).Updates(&patient).Error; err != nil {

@@ -10,8 +10,11 @@ export interface EmployeeInterface {
 	LastName?:           string,
 	Personal_id ?:      string,
 	Password?:			string,
-    Phone?:             string,
+    Email?:             string,
 	House_no?:           string,
+	Old?: 				number,
+	Date_employed?:     Date | null;
+	Salary?:			number,
 	RoleID?:    	    number,
 	Role?:    		    RoleInterface,  
 	GenderID?:        	number,    

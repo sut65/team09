@@ -631,7 +631,10 @@ func SetupDatabase() {
 		LastName:        "Mitoma",
 		Personal_id:     "1163388945367",
 		Password:        string(password1),
-		Phone:           "0986542781",
+		Email:           "ayato@gmail.com",
+		Old:             28,
+		Date_employed:   time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
+		Salary:          28000,
 		House_no:        "10/a",
 		Sub_districtID:  new(uint),
 		Sub_district:    subdistrict2,
@@ -652,7 +655,10 @@ func SetupDatabase() {
 		LastName:        "Jisaru",
 		Personal_id:     "1290033526782",
 		Password:        string(password2),
-		Phone:           "0890241627",
+		Email:           "kamiki@gmail.com",
+		Old:             24,
+		Date_employed:   time.Date(2022, time.September, 6, 13, 55, 26, 0, time.Local),
+		Salary:          30000,
 		House_no:        "90",
 		Sub_districtID:  new(uint),
 		Sub_district:    subdistrict33,
@@ -707,6 +713,7 @@ func SetupDatabase() {
 		Symptom_name:       "-",
 		EmployeeID:         new(uint),
 		Employee:           em2,
+		Modifiled_date:     time.Date(2022, time.September, 01, 13, 23, 44, 0, time.Local),
 	}
 	db.Model(&Patient{}).Create(&patient1)
 
@@ -732,7 +739,8 @@ func SetupDatabase() {
 		Symptom:            symp1,
 		Symptom_name:       "ปวดฟัน",
 		// EmployeeID:         new(uint),
-		Employee: em2,
+		Employee:       em2,
+		Modifiled_date: time.Date(2022, time.September, 6, 13, 55, 26, 0, time.Local),
 	}
 	db.Model(&Patient{}).Create(&patient2)
 
