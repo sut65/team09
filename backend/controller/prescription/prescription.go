@@ -107,6 +107,12 @@ func UpdatePrescription(c *gin.Context) {
 		return
 	}
 
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(prescription); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	if tx := entity.DB().Where("id = ?", prescription.PatientID).First(&patient); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "patient not found"})
 		return
@@ -121,11 +127,6 @@ func UpdatePrescription(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "admin not found"})
 		return
 	}
-
-	// if tx := entity.DB().Where("id = ?", prescription.Medicine_statusID).First(&medicine_status); tx.RowsAffected == 0 {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "medicine_status not found"})
-	// 	return
-	// }
 
 	// อัปเดต Prescription
 	p_update1 := entity.Prescription{

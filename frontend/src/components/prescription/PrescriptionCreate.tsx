@@ -90,14 +90,7 @@ function PrescriptionCreate() {
       setMedicine(res);
     }
   };
-
-  // const getMedicine_status = async () => {
-  //   let res = await GetMedicine_status();
-  //   if (res) {
-  //     setMedicine_status(res);
-  //   }
-  // };
-
+  
   const getDentist = async () => {
     let res = await GetDentists();
     if (res) {
@@ -283,29 +276,6 @@ function PrescriptionCreate() {
               />
             </FormControl>
           </Grid>
-
-          {/* <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>สถานนะยา</p>
-              <Select
-                native
-                value={prescription.Medicine_statusID + ""}
-                onChange={handleChange}
-                inputProps={{
-                  name: "Medicine_statusID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกสถานะ
-                </option>
-                {medicine_status.map((item: Medicine_statusInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Medicine_status_name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid> */}
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">

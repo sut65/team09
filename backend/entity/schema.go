@@ -293,10 +293,10 @@ type Medicine struct {
 
 type Prescription struct {
 	gorm.Model
-	DateTimePrescription time.Time	`valid:"current~Date_Of_Repair must be a current date"`
-	Qty     			uint	`valid:"int~Date_Of_Repair must be a current date, required~Date_Of_Repair must be a current date"`
-	Details				string	`valid:"stringlength(5|100)~prescription note must consist of 6 or more characters, required~prescription note cannot be blank"`
-	Prescription_code	string	`valid:"matches(^[T]\\d{7}$), required~Treatment code cannot be blank"`
+	DateTimePrescription time.Time	`valid:"current~DateTimePrescription must be a current date"`
+	Qty     			uint	`valid:"range(1|50)~Qty cannot be negative or too much"`
+	Details				string	`valid:"stringlength(5|100)~Details note must consist of 6 or more characters, required~Details note cannot be blank"`
+	Prescription_code	string	`valid:"matches(^[T]\\d{7}$), required~Prescription_code code cannot be blank"`
 	//PatientID ทำหน้าที่เป็น FK
 	PatientID 			*uint 
 	Patient   			Patient	`gorm:"references:id" valid:"-"`
