@@ -13,6 +13,7 @@ export interface DentistInterface {
 	Password?:			string,
     Age?:               number,
     Phone_Number?:      string,
+    Date?:              Date | null,
 
 	
 	GenderID?:        	number,    

@@ -183,23 +183,23 @@ func main() {
 	//-------------Room-------------------
 	// Room_Number Routes
 	router.GET("/room_numbers", room.ListRoom_Number)
-	router.GET("/room_number:id", room.GetRoom_Number)
+	router.GET("/room_number/:id", room.GetRoom_Number)
 	router.POST("/room_numbers", room.CreateRoom_Number)
 	router.PATCH("/room_numbers", room.UpdateRoom_Number)
 	router.DELETE("/room_number/:id", room.DeleteRoom_Number)
 
 	// Category Routes
 	router.GET("/categories", room.ListCategory)
-	router.GET("/category:id", room.GetCategory)
+	router.GET("/category/:id", room.GetCategory)
 	router.POST("/categories", room.CreateCategory)
 	router.PATCH("/categories", room.UpdateCategory)
 	router.DELETE("/category/:id", room.DeleteCategory)
 
 	// Category Routes
 	router.GET("/room_details", room.ListRoom_Detail)
-	router.GET("/room_detail:id", room.GetRoom_Detail)
+	router.GET("/room_detail/:id", room.GetRoom_Detail)
 	router.POST("/room_details", room.CreateRoom_Detail)
-	router.PATCH("/room_details", room.UpdateRoom_Detail)
+	router.PATCH("/room_details/:id", room.UpdateRoom_Detail)
 	router.DELETE("/room_detail/:id", room.DeleteRoom_Detail)
 
 	//---------Payment-------------

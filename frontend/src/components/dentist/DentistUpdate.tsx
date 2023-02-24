@@ -12,6 +12,9 @@ import Snackbar from "@mui/material/Snackbar";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { GenderInterface } from "../../models/IGender";
 import { SpecializedInterface } from "../../models/ISpecialized";
@@ -32,8 +35,6 @@ import {
   
   } from "../../services/HttpClientService";
   import { DentistInterface } from "../../models/IDentist";
-import Autocomplete from "@mui/material/Autocomplete";
-import InputLabel from "@mui/material/InputLabel";
 
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -47,18 +48,17 @@ import InputLabel from "@mui/material/InputLabel";
     const [genders, setGenders] = useState<GenderInterface[]>([]);
     const [specializeds, setSpecializeds] = useState<SpecializedInterface[]>([]);
     const [universitys, setUniversitys] = useState<UniversityInterface[]>([]);
-    const [roles, setRoles] = useState<RoleInterface[]>([]);
+    const [roles, setRoles] = useState(0);
     const [provinces, setProvinces] = React.useState<ProvinceInterface[]>([]);
-    const [dentist, setDentists] = useState<DentistInterface>({});
+    const [dentist, setDentists] = useState<DentistInterface>({
+      Date: new Date(),
+    });
 
-    //const [dentists, setDentist] = useState<DentistInterface>({}); useState<Partial<DentistInterface>>({});
 
     const [gender, setGender] = useState<string>("");
     const [specialized, setSpecialized] = useState<string>("");
     const [university, setUniversity] = useState<string>("");
-    const [role, setRole] = useState<string>("");
     const [province, setProvince] = useState<string>("");
-
 
 
     const [firstname, setFirstname] = useState<string>("");
@@ -69,6 +69,12 @@ import InputLabel from "@mui/material/InputLabel";
     const [age, setAge] = useState(0);
     const [phone_number, setPhone_number] = useState<string>("");
 
+    const [gid, setGid] = useState<string>("");
+    const [sid, setSid] = useState<string>("");
+    const [uid, setUid] = useState<string>("");
+    const [rid, setRid] = useState(0);
+    const [pid, setPid] = useState<string>("");
+
     const [message, setAlertMessage] = React.useState("");
   
     const [success, setSuccess] = useState(false);
@@ -76,13 +82,6 @@ import InputLabel from "@mui/material/InputLabel";
 
 
     const apiUrl = "http://localhost:8080";
-    const requestOptions = {
-      method: "GET",
-      headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
-        },
-    };
 
     const { id } = useParams();
 
@@ -94,25 +93,14 @@ import InputLabel from "@mui/material/InputLabel";
 
               if (res.data) {
                   setFirstname(res.data.FirstName.toString());
-
                   setLastname(res.data.LastName.toString());
 
-                  // console.log("FirstName : ")
-                  // console.log(res.data.FirstName)
                   setPersonal_id(res.data.Personal_id.toString());
-
-                  // console.log("LastName : ")
-                  // console.log(res.data.LastName)
                   setEmail(res.data.Email.toString());
 
                   setPassword(res.data.Password.toString());
 
-                  // console.log("Phone : ")
-                  // console.log(res.data.Phone)
                   setAge(res.data.Age.toString());
-
-                  // console.log("House_no : ")
-                  // console.log(res.data.House_no )
                   setPhone_number(res.data.Phone_Number .toString());
 
                   fetch(`${apiUrl}/gender/${res.data.GenderID}`)
@@ -120,8 +108,7 @@ import InputLabel from "@mui/material/InputLabel";
                     .then((res) => {
                         if (res.data) {
                             setGender(res.data.Gender_name)
-                            dentist.GenderID = res.data.ID
-
+                            setGid(res.data.ID)
                             
                         }
                     }
@@ -132,7 +119,7 @@ import InputLabel from "@mui/material/InputLabel";
                     .then((res) => {
                         if (res.data) {
                             setSpecialized(res.data.Specialized_Name)
-                            dentist.SpecializedID = res.data.ID
+                            setSid(res.data.ID)
 
                         }
                     }
@@ -143,7 +130,7 @@ import InputLabel from "@mui/material/InputLabel";
                     .then((res) => {
                         if (res.data) {
                             setUniversity(res.data.University_Name)
-                            dentist.UniversityID = res.data.ID
+                            setUid(res.data.ID)
 
                         }
                     }
@@ -154,18 +141,18 @@ import InputLabel from "@mui/material/InputLabel";
                     .then((res) => {
                         if (res.data) {
                             setProvince(res.data.Province_name)
-                            dentist.ProvinceID = res.data.ID
+                            setPid(res.data.ID)
 
                         }
                     }
                   )
 
-                  fetch(`${apiUrl}/roles/${res.data.RoleID}`)
+                  fetch(`${apiUrl}/roles/${3}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
-                            setRole(res.data.Role_name)
-                            dentist.RoleID = res.data.ID
+                            setRoles(res.data.Role_name)
+                            setRid(res.data.ID)
 
                         }
                     }
@@ -207,6 +194,47 @@ import InputLabel from "@mui/material/InputLabel";
       const { value } = event.target;
       setDentists({ ...dentist, [id]: value });
     };
+
+    const handleChangeGender = (event: SelectChangeEvent) => {
+      setGid(event.target.value);
+      console.log(event.target.value)
+      const name = event.target.name as keyof typeof DentistUpdate;
+      setDentists({
+      ...dentist,
+      [name]: event.target.value,
+    });
+    }
+
+    const handleChangeSpecialized = (event: SelectChangeEvent) => {
+      setSid(event.target.value);
+      console.log(event.target.value)
+      const name = event.target.name as keyof typeof DentistUpdate;
+      setDentists({
+      ...dentist,
+      [name]: event.target.value,
+    });
+    }
+
+    const handleChangeUniversity = (event: SelectChangeEvent) => {
+      setUid(event.target.value);
+      console.log(event.target.value)
+      const name = event.target.name as keyof typeof DentistUpdate;
+      setDentists({
+      ...dentist,
+      [name]: event.target.value,
+    });
+    }
+
+    const handleChangeProvince = (event: SelectChangeEvent) => {
+      setPid(event.target.value);
+      console.log(event.target.value)
+      const name = event.target.name as keyof typeof DentistUpdate;
+      setDentists({
+      ...dentist,
+      [name]: event.target.value,
+    });
+    }
+    
     
     const getGenders = async () => {
       let res = await GetGender();
@@ -270,25 +298,24 @@ import InputLabel from "@mui/material/InputLabel";
     
     async function submit() {
       let data = {
-        FirstName: dentist.FirstName ,
-        LastName: dentist.LastName ,
-        Personal_id: dentist.Personal_id ,
-        Age:   convertType(dentist.Age),
-        Email: dentist.Email ,
-        Password: dentist.Password ,
-        Phone_Number: dentist.Phone_Number ,
+        FirstName: firstname ,
+        LastName: lastname ,
+        Personal_id: personal_id ,
+        Age:   convertType(age),
+        Email: email ,
+        Password: password ,
+        Phone_Number: phone_number ,
+        Date: dentist.Date,
   
-        GenderID: convertType(dentist.GenderID),
-        SpecializedID: convertType(dentist.SpecializedID),
-        UniversityID: convertType(dentist.UniversityID),
-        RoleID:     convertType(dentist.RoleID),
-        ProvinceID: convertType(dentist.ProvinceID),
+        GenderID: convertType(gid),
+        SpecializedID: convertType(sid),
+        UniversityID: convertType(uid),
+        RoleID:     convertType(rid),
+        ProvinceID: convertType(pid),
 
         
       };
-      console.log(data);
-      console.log(dentist.GenderID);
-      console.log(dentist.SpecializedID);
+      
       let res: any = await UpdateDentists(data);
         if (res.status) {
             setAlertMessage("อัพเดตข้อมูลสำเร็จ");
@@ -316,7 +343,15 @@ import InputLabel from "@mui/material/InputLabel";
             } else {
                 return { status: false, message: res.error };
             }
+            
         });
+        if (res.status) {
+          setAlertMessage("อัปเดตข้อมูลสำเร็จ");
+          setSuccess(true);
+        } else {
+          setAlertMessage(res.message);
+          setError(true);
+        }
       }
   
     return (
@@ -373,8 +408,8 @@ import InputLabel from "@mui/material/InputLabel";
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกชื่อ"
-                value={dentist.FirstName || "" || firstname}
-                onChange={handleInputChange}
+                value={firstname}
+                onChange={(event) => setFirstname(event.target.value)}
               />
             </FormControl>
         </Grid>  
@@ -389,8 +424,8 @@ import InputLabel from "@mui/material/InputLabel";
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกนามสกุล"
-                  value={dentist.LastName || "" || lastname}
-                  onChange={handleInputChange}
+                  value={lastname}
+                  onChange={(event) => setLastname(event.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -401,21 +436,16 @@ import InputLabel from "@mui/material/InputLabel";
                 <TextField
                   id="Age"
                   variant="outlined"
-                  type="string"
+                  type="number"
                   size="medium"
                   placeholder="กรุณากรอกอายุ"
-                  InputProps={{ inputProps: {max: 100}}}
+                  InputProps={{ inputProps: { min: 1 , max: 100}}}
                   InputLabelProps={{
                   shrink: true,
                   }}
-                  value={dentist.Age || "" || age}
-                  onChange={handleInputChange}
-                  onKeyPress={(e) => {
-                    if (!/[0-9]/.test(e.key)){
-                      e.preventDefault()
-                    }
-                  }}
-                  inputProps={{maxLength :10}}
+                  value={age}
+                  onChange={(event) => setAge(parseInt(event.target.value))}
+                
                 />
               </FormControl>
             </Grid>
@@ -429,8 +459,8 @@ import InputLabel from "@mui/material/InputLabel";
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกบัตรประชาชน"
-                  value={dentist.Personal_id || "" || personal_id}
-                  onChange={handleInputChange}
+                  value={personal_id}
+                  onChange={(event) => setPersonal_id(event.target.value)}
                   onKeyPress={(e) => {
                     if (!/[0-9]/.test(e.key)){
                       e.preventDefault()
@@ -450,8 +480,8 @@ import InputLabel from "@mui/material/InputLabel";
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                  value={dentist.Phone_Number || "" || phone_number}
-                  onChange={handleInputChange}
+                  value={phone_number}
+                  onChange={(event) => setPhone_number(event.target.value)}
                   onKeyPress={(e) => {
                     if (!/[0-9]/.test(e.key)){
                       e.preventDefault()
@@ -471,8 +501,8 @@ import InputLabel from "@mui/material/InputLabel";
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกอีเมลล์"
-                  value={dentist.Email || "" || email}
-                  onChange={handleInputChange}
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -483,52 +513,49 @@ import InputLabel from "@mui/material/InputLabel";
                 <TextField
                   id="Password"
                   variant="outlined"
-                  type="string"
+                  type="password"
                   size="medium"
                   placeholder="กรุณากรอกรหัสผ่าน"
-                  value={dentist.Password || "" || personal_id}
-                  onChange={handleInputChange}
+                  value={password || ""}
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </FormControl>
             </Grid>
 
+
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <InputLabel id="demo-simple-select-label">เพศ</InputLabel>
-                            <Select
-                                native
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={dentist.GenderID + ""}
-                                onChange={handleChange}
-                                label="เพศ"
-                                inputProps={{
-                                    name: "GenderID",
-                                }}
-                            >
-                                <option aria-label="None" value="">
-                                    {gender}
+                <p>เพศ</p>
+                   <Select
+                     native  
+                     value={dentist.GenderID + ""}
+                     onChange={handleChangeGender}
+                     label="กรุณาเลือกเพศ"
+                        inputProps={{
+                           name: "GenderID",
+                        }}
+                    >
+                         <option aria-label="None" value="">
+                            {gender}
+                         </option>
+                            {genders.map((item: GenderInterface) => (
+                                <option value={item.ID} key={item.ID}>
+                                    {item.Gender_name}
                                 </option>
-                                {genders.map((item: GenderInterface) => (
-                                    <option value={item.ID} key={item.ID}>
-                                        {item.Gender_name}
-                                    </option>
-                                ))}
-                            </Select>
+                            ))}
+                    </Select>
                 </FormControl>
             </Grid>
 
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <InputLabel id="demo-simple-select-label">สาขา</InputLabel>
+                <p id="demo-simple-select-label">สาขา</p>
                             <Select
                                 native
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
                                 value={dentist.SpecializedID + ""}
-                                onChange={handleChange}
-                                label="สาขา"
+                                onChange={handleChangeSpecialized}
+                                label="กรุณาเลือกสาขา"
                                 inputProps={{
                                     name: "SpecializedID",
                                 }}
@@ -548,14 +575,14 @@ import InputLabel from "@mui/material/InputLabel";
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <InputLabel id="demo-simple-select-label">มหาวิทยาลัย</InputLabel>
+                <p id="demo-simple-select-label">มหาวิทยาลัย</p>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={dentist.UniversityID + ""}
-                                onChange={handleChange}
-                                label="มหาวิทยาลัย"
+                                onChange={handleChangeUniversity}
+                                label="กรุณาเลือกมหาวิทยาลัย"
                                 inputProps={{
                                     name: "UniversityID",
                                 }}
@@ -575,14 +602,14 @@ import InputLabel from "@mui/material/InputLabel";
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <InputLabel id="demo-simple-select-label">จังหวัด</InputLabel>
+                <p id="demo-simple-select-label">จังหวัด</p>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={dentist.ProvinceID + ""}
-                                onChange={handleChange}
-                                label="เลือกจังหวัด"
+                                onChange={handleChangeProvince}
+                                label="กรุณาเลือกเลือกจังหวัด"
                                 inputProps={{
                                     name: "ProvinceID",
                                 }}
@@ -602,28 +629,44 @@ import InputLabel from "@mui/material/InputLabel";
   
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <InputLabel id="demo-simple-select-label">บทบาท</InputLabel>
+                <p id="demo-simple-select-label">บทบาท</p>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={dentist.RoleID + ""}
                                 onChange={handleChange}
-                                label="เลือกบทบาท"
+                                label="กรุณาเลือกเลือกบทบาท"
                                 inputProps={{
                                     name: "RoleID",
                                 }}
                             >
                                 <option aria-label="None" value="">
-                                    {role}
+                                    {roles}
                                 </option>
-                                {roles.map((item: RoleInterface) => (
-                                    <option value={item.ID} key={item.ID}>
-                                        {item.Role_name}
-                                    </option>
-                                ))}
+                                
                             </Select>
                 </FormControl>
+            </Grid>
+
+            <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+                <p> วันที่สร้างข้อมูลทันตแพทย์ </p>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateTimePicker 
+                      renderInput={(props) => <TextField {...props} />}
+                      // label="วันที่สร้างทันตแพทย์"
+                      value={dentist.Date}
+                      onChange={(newValue) => {
+                        setDentists({
+                        ...dentist,
+                        Date: newValue,
+                        });
+                      }}
+                            
+                        />
+                </LocalizationProvider>
+              </FormControl>
             </Grid>
   
             <Grid item xs={12}>

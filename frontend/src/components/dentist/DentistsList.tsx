@@ -4,14 +4,22 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 import { DentistInterface } from "../../models//IDentist";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { GetDentists } from "../../services/HttpClientService";
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack  } from "@mui/material";
 import axios from "axios";
+import { Close, Delete } from "@mui/icons-material";
 
 function Dentists() {
   const [dentists, setDentists] = useState<DentistInterface[]>([]);
+  const [open, setOpen] = React.useState(false);
+  const [rowId, setrowID] = React.useState<string>("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
 
   const getDentists = async () => {
     let res = await GetDentists();
@@ -24,7 +32,27 @@ function Dentists() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+        return;
+    }
+  
+    setSuccess(false);
+    setError(false);
+  };
+
+  const Close = () => {
+    setOpen(false);
+  };
+
+  const Delete = async (id: number) => {
     try {
         const response = await axios.delete(`http://localhost:8080/dentist/${id}`, {
             headers: {
@@ -57,20 +85,48 @@ function Dentists() {
     { field: "University", headerName: "มหาวิทยาลัย", width: 200 , valueFormatter: (params) => params.value.University_Name,},
     { field: "Specialized", headerName: "สาขา", width: 250 , valueFormatter: (params) => params.value.Specialized_Name,},
     { field: "Province", headerName: "จังหวัด", width: 150  ,valueFormatter: (params) => params.value.Province_name,},    
-       
+     
+    
     {
-      field: "action", headerName: "Action",width: 200, sortable: false, renderCell: ({ row }) =>
+      field: "action", headerName: "",width: 250, sortable: false, renderCell: ({ row }) =>
       <ButtonGroup>
-          <Button onClick={() => handleDelete(row.ID)} variant="contained" color="error">
-              delete
+          <Stack spacing={2} direction="row">
+          <Button onClick={handleClickOpen} variant="contained" color="error">
+                <DeleteForeverIcon />
+                <div className="good-font">
+                          delete
+                </div>
           </Button>
-          <Button component={RouterLink} to={`/dentist_update/${row.ID}`} variant="contained">
+          <Dialog
+        open={open}
+        onClose={Close}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+          >
+        <DialogTitle id="alert-dialog-title">
+          {"ต้องการลบข้อมูลหรือไม่?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                หากลบข้อมูลแล้วข้อมูลของทันตแพทย์คนนี้จะหายไป.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => {Delete(Number(rowId)); Close();}} variant="contained" autoFocus>
+                Yes
+              </Button>
+              <Button onClick={handleClose} variant="contained" color="error">No</Button>
+            </DialogActions>
+          </Dialog>
+          <Button component={RouterLink} to={`/dentist/update/${row.ID}`} variant="contained">
+                      <EditIcon />
                       <div className="good-font">
                           update
                       </div>
                   </Button>
+          </Stack>
       </ButtonGroup>
-  },
+    },
   ];
 
   useEffect(() => {
@@ -107,13 +163,17 @@ function Dentists() {
             </Button>
           </Box>
         </Box>
-        <div style={{ height: 400, width: "100%", marginTop: "20px" }}>
+        <div style={{ height: 600, width: "100%", marginTop: "20px" }}>
           <DataGrid
             rows={dentists}
             getRowId={(row) => row.ID}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            onRowClick={(params) => { 
+              setrowID(params.row.ID)
+              
+            }}
           />
         </div>
       </Container>

@@ -4,8 +4,9 @@ import { MedicalDeviceInterface } from "./IMedicaldevice";
 
 export interface Room_DetailInterface {
     ID?: number,
-    
     Note?:                  string,
+    Amount?:                number,
+    Date?:                  Date | null,
     
     Room_NumberID?:        	number,    
 	Room_number?:        	Room_NumberInterface,

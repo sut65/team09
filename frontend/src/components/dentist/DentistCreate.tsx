@@ -12,9 +12,9 @@ import Snackbar from "@mui/material/Snackbar";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-//import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-//import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-//import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { GenderInterface } from "../../models/IGender";
 import { SpecializedInterface } from "../../models/ISpecialized";
@@ -32,6 +32,7 @@ import {
 
 } from "../../services/HttpClientService";
 import { DentistInterface } from "../../models/IDentist";
+import { InputLabel } from "@mui/material";
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -45,8 +46,10 @@ function DentistCreate() {
   const [gender, setGenders] = useState<GenderInterface[]>([]);
   const [specialized, setSpecializeds] = useState<SpecializedInterface[]>([]);
   const [university, setUniversitys] = useState<UniversityInterface[]>([]);
-  const [role, setRoles] = useState<RoleInterface[]>([]);
-  const [roleID, setRoleID] = useState(3);
+  
+  const [role, setRole] = useState(0);
+  const [rid, setRID] = useState(0);
+
   const [province, setProvinces] = React.useState<ProvinceInterface[]>([]);
   const [dentist, setDentists] = useState<Partial<DentistInterface>>({});
 
@@ -54,6 +57,7 @@ function DentistCreate() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  
 
    //เปิดปิดตัว alert
   const handleClose = (
@@ -105,12 +109,25 @@ function DentistCreate() {
     }
   };
 
-  const getRoles = async () => {
-    let res = await GetRole();
-    if (res) {
-      setRoles(res);
-    }
-  };
+  const apiUrl = "http://localhost:8080";
+
+  fetch(`${apiUrl}/roles/${3}`)
+      .then((response) => response.json())
+      .then((res) => {
+          if (res.data) {
+              setRole(res.data.Role_name)
+              setRID(res.data.ID)
+
+            } 
+          }   
+  )
+
+  // const getRoles = async () => {
+  //   let res = await GetRole();
+  //   if (res) {
+  //     setRoles(res);
+  //   }
+  // };
 
 
   const getProvinces = async () => {
@@ -124,7 +141,6 @@ function DentistCreate() {
     getGenders();
     getSpecializeds();
     getUniversitys();
-    getRoles();
     getProvinces();
   }, []);
 
@@ -144,11 +160,12 @@ function DentistCreate() {
       Email: dentist.Email,
       Password: dentist.Password,
       Phone_Number: dentist.Phone_Number,
+      Date: dentist.Date,
 
       GenderID: convertType(dentist.GenderID),
       SpecializedID: convertType(dentist.SpecializedID),
       UniversityID: convertType(dentist.UniversityID),
-      RoleID:     convertType(dentist.RoleID),
+      RoleID:     convertType(rid),
       ProvinceID: convertType(dentist.ProvinceID),
     };
     console.log(data);
@@ -210,7 +227,7 @@ function DentistCreate() {
         <Grid container spacing={3} sx={{ padding: 2 }}>
 
         <Grid item xs={6}>
-            <p>ชื่อ</p>
+        <p>ชื่อ</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="FirstName"
@@ -225,7 +242,7 @@ function DentistCreate() {
         </Grid>
 
         <Grid item xs={6}>
-            <p>นามสกุล</p>
+        <p>นามสกุล</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="LastName"
@@ -240,7 +257,7 @@ function DentistCreate() {
           </Grid>
 
           <Grid item xs={6}>
-            <p>อายุ</p>
+          <p>อายุ </p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="Age"
@@ -254,18 +271,13 @@ function DentistCreate() {
                   }}
                 value={dentist.Age || ""}
                 onChange={handleInputChange}
-                onKeyPress={(e) => {
-                  if (!/[0-9]/.test(e.key)){
-                    e.preventDefault()
-                  }
-                }}
-                inputProps={{maxLength :10}}
+                
               />
             </FormControl>
           </Grid>
 
           <Grid item xs={6}>
-            <p>บัตรประจำตัวประชาชน</p>
+          <p>บัตรประชาชน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="Personal_id"
@@ -286,7 +298,7 @@ function DentistCreate() {
           </Grid>
 
           <Grid item xs={6}>
-            <p>เบอร์โทรศัพท์</p>
+          <p>เบอร์โทรศัพท์</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="Phone_Number"
@@ -307,7 +319,7 @@ function DentistCreate() {
           </Grid>
 
           <Grid item xs={6}>
-            <p>อีเมลล์</p>
+          <p>อีเมลล์</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="Email"
@@ -322,15 +334,15 @@ function DentistCreate() {
           </Grid>
 
           <Grid item xs={6}>
-            <p>รหัสผ่าน</p>
+          <p>รหัสผ่าน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="Password"
                 variant="outlined"
-                type="string"
+                type="password"
                 size="medium"
                 placeholder="กรุณากรอกรหัสผ่าน"
-                value={dentist.Password?.replace(/./g, "*") || "" }
+                value={dentist.Password || "" }
                 onChange={handleInputChange}
               />
             </FormControl>
@@ -339,7 +351,7 @@ function DentistCreate() {
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <p>เพศ</p>
+            <p>เพศ</p>
               <Select
                 native
                 value={dentist.GenderID + ""}
@@ -363,7 +375,7 @@ function DentistCreate() {
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <p>สาขา</p>
+            <p>สาขา</p>
               <Select
                 native
                 value={dentist.SpecializedID + ""}
@@ -386,7 +398,7 @@ function DentistCreate() {
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <p>มหาวิทยาลัย</p>
+            <p>มหาวิทยาลัย</p>
               <Select
                 native
                 value={dentist.UniversityID + ""}
@@ -410,7 +422,7 @@ function DentistCreate() {
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <p>จังหวัด</p>
+            <p>จังหวัด</p>
               <Select
                 native
                 value={dentist.ProvinceID + ""}
@@ -433,7 +445,7 @@ function DentistCreate() {
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <p>บทบาท</p>
+            <p>บทบาท</p>
               <Select
                 native
                 value={dentist.RoleID + ""}
@@ -443,16 +455,31 @@ function DentistCreate() {
                 }}
               >
                 <option aria-label="None" value="">
-                  กรุณาเลือกบทบาท
-                </option>
-                {role.map((item: RoleInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Role_name}
-                  </option>
-                ))}
+                  {role}
+                </option>         
               </Select>
             </FormControl>
           </Grid>
+
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+                <p> วันที่สร้างข้อมูลทันตแพทย์ </p>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateTimePicker 
+                      renderInput={(props) => <TextField {...props} />}
+                      // label="วันที่สร้างทันตแพทย์"
+                      value={dentist.Date}
+                      onChange={(newValue) => {
+                        setDentists({
+                        ...dentist,
+                        Date: newValue,
+                        });
+                      }}
+                            
+                        />
+                </LocalizationProvider>
+              </FormControl>
+            </Grid>
 
           <Grid item xs={12}>
             <Button

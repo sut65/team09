@@ -55,18 +55,6 @@ func CreateDentist(c *gin.Context) {
 		return
 	}
 
-	// เข้ารหัสลับจาก Password ที่ Admin กรอกข้อมูล
-	hashPassword, err := bcrypt.GenerateFromPassword([]byte(dentist.Password), 14)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
-		return
-	}
-
-	dentist.Password = string(hashPassword)
-
-
-
-	// 12: สร้าง Dentist
 	dt := entity.Dentist{
 		FirstName:    dentist.FirstName,
 		LastName:     dentist.LastName,
@@ -75,6 +63,7 @@ func CreateDentist(c *gin.Context) {
 		Password:     dentist.Password,
 		Age:          dentist.Age,
 		Phone_Number: dentist.Phone_Number,
+		Date:         dentist.Date,
 
 		Gender:      gender,      // โยงความสัมพันธ์กับ Entity gender
 		Specialized: specialized, // โยงความสัมพันธ์กับ Entity Specialized
@@ -88,8 +77,42 @@ func CreateDentist(c *gin.Context) {
 		return
 	}
 
+	// เข้ารหัสลับจาก Password ที่ Admin กรอกข้อมูล
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte(dentist.Password), 14)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
+		return
+	}
+
+	dentist.Password = string(hashPassword)
+
+
+
+	// 12: สร้าง Dentist
+	dta := entity.Dentist{
+		FirstName:    dentist.FirstName,
+		LastName:     dentist.LastName,
+		Personal_id:  dentist.Personal_id,
+		Email:        dentist.Email,
+		Password:     dentist.Password,
+		Age:          dentist.Age,
+		Phone_Number: dentist.Phone_Number,
+		Date:         dentist.Date,
+
+		Gender:      gender,      // โยงความสัมพันธ์กับ Entity gender
+		Specialized: specialized, // โยงความสัมพันธ์กับ Entity Specialized
+		University:  university,  // โยงความสัมพันธ์กับ Entity University
+		Role:        role,        // โยงความสัมพันธ์กับ Entity Role
+		Province:    province,    // โยงความสัมพันธ์กับ Entity Province
+	}
+
+	if _, err := govalidator.ValidateStruct(dta); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	// 13: บันทึก
-	if err := entity.DB().Create(&dt).Error; err != nil {
+	if err := entity.DB().Create(&dta).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -185,6 +208,7 @@ func UpdateDentist(c *gin.Context) {
 		return
 	}
 
+
 	//dentist.Password = string(hashPassword)
 
 	dt := entity.Dentist{
@@ -195,6 +219,41 @@ func UpdateDentist(c *gin.Context) {
 		Password:     dentist.Password,
 		Age:          dentist.Age,
 		Phone_Number: dentist.Phone_Number,
+		Date:         dentist.Date,
+
+		Gender:      gender,      // โยงความสัมพันธ์กับ Entity gender
+		Specialized: specialized, // โยงความสัมพันธ์กับ Entity Specialized
+		University:  university,  // โยงความสัมพันธ์กับ Entity University
+		Role:        role,        // โยงความสัมพันธ์กับ Entity Role
+		Province:    province,    // โยงความสัมพันธ์กับ Entity Province
+	}
+
+	if _, err := govalidator.ValidateStruct(dt); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if !(dentist.Password[0:7] == "$2a$14$") { // เช็คว่ารหัสที่ผ่านเข้ามามีการ encrypt แล้วหรือยัง หากมีการ encrypt แล้วจะไม่ทำการ encrypt ซ้ำ
+		hashPassword, err := bcrypt.GenerateFromPassword([]byte(dentist.Password), 14)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "error hashing password"})
+			return
+		}
+		print("HASH!!!!")
+		dentist.Password = string(hashPassword)
+	} else {
+		print("NOT HASH!!!")
+	}
+
+	dta := entity.Dentist{
+		FirstName:    dentist.FirstName,
+		LastName:     dentist.LastName,
+		Personal_id:  dentist.Personal_id,
+		Email:        dentist.Email,
+		Password:     dentist.Password,
+		Age:          dentist.Age,
+		Phone_Number: dentist.Phone_Number,
+		Date:         dentist.Date,
 
 		Gender:      gender,      // โยงความสัมพันธ์กับ Entity gender
 		Specialized: specialized, // โยงความสัมพันธ์กับ Entity Specialized
@@ -204,12 +263,8 @@ func UpdateDentist(c *gin.Context) {
 	}
 	
 
-	if _, err := govalidator.ValidateStruct(dt); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
 
-	if err := entity.DB().Where("id = ?", id).Updates(&dt).Error; err != nil {
+	if err := entity.DB().Where("id = ?", id).Updates(&dta).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

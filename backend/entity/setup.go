@@ -838,6 +838,7 @@ func SetupDatabase() {
 		Password:     string(password4),
 		Age:          31,
 		Phone_Number: "0645127854",
+		Date:          time.Now(),
 
 		Gender:      gender1,
 		Specialized: specialized9,
@@ -855,6 +856,7 @@ func SetupDatabase() {
 		Password:     string(password3),
 		Age:          28,
 		Phone_Number: "0854123457",
+		Date:          time.Now(),
 
 		Gender:      gender2,
 		Specialized: specialized4,
@@ -872,6 +874,7 @@ func SetupDatabase() {
 		Password:     string(password5),
 		Age:          41,
 		Phone_Number: "0965412547",
+		Date:          time.Now(),
 
 		Gender:      gender1,
 		Specialized: specialized1,
@@ -889,6 +892,7 @@ func SetupDatabase() {
 		Password:     string(password7),
 		Age:          39,
 		Phone_Number: "0654174582",
+		Date:          time.Now(),
 
 		Gender:      gender2,
 		Specialized: specialized8,
@@ -906,6 +910,7 @@ func SetupDatabase() {
 		Password:     string(password6),
 		Age:          45,
 		Phone_Number: "0854127833",
+		Date:          time.Now(),
 
 		Gender:      gender1,
 		Specialized: specialized2,
@@ -1289,6 +1294,9 @@ func SetupDatabase() {
 	//room_detail
 	room_detail1 := Room_Detail{
 		Note:          "เพิ่มอุปกรณ์",
+		Amount:         5,
+		Date:           time.Now(),
+
 		Room_Number:   room_number3,
 		Category:      category1,
 		MedicalDevice: MedicalDevice1,
@@ -1297,6 +1305,9 @@ func SetupDatabase() {
 
 	room_detail2 := Room_Detail{
 		Note:          "เพิ่มอุปกรณ์",
+		Amount:         2,
+		Date:           time.Now(),
+
 		Room_Number:   room_number4,
 		Category:      category3,
 		MedicalDevice: MedicalDevice3,

@@ -45,6 +45,9 @@ func CreateRoom_Detail(c *gin.Context) {
 	wv := entity.Room_Detail{
 
 		Note:           room_detail.Note,
+		Amount:         room_detail.Amount,
+		Date:           room_detail.Date,
+
 		Category:       category,       // โยงความสัมพันธ์กับ Entity category
 		Room_Number:    room_number,    // โยงความสัมพันธ์กับ Entity room_number
 		MedicalDevice:  md, // โยงความสัมพันธ์กับ Entity medicaldevice
@@ -115,28 +118,50 @@ func UpdateRoom_Detail(c *gin.Context) {
 
 	var room_detail entity.Room_Detail
 
+	var room_number entity.Room_Number
+	var category entity.Category
+	var medicaldevice entity.MedicalDevice
+
+	id := c.Param("id")
+
 	if err := c.ShouldBindJSON(&room_detail); err != nil {
-
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-
 		return
-
 	}
 
-	if tx := entity.DB().Where("id = ?", room_detail.ID).First(&room_detail); tx.RowsAffected == 0 {
-
-		c.JSON(http.StatusBadRequest, gin.H{"error": "room_detail not found"})
-
+	if tx := entity.DB().Where("id = ?", room_detail.Room_NumberID).First(&room_number); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "room number not found"}) 
 		return
-
 	}
 
-	if err := entity.DB().Save(&room_detail).Error; err != nil {
-
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-
+	if tx := entity.DB().Where("id = ?", room_detail.CategoryID).First(&category); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "category not found"}) 
 		return
+	}
 
+	if tx := entity.DB().Where("id = ?", room_detail.MedicalDeviceID).First(&medicaldevice); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "medicaldevice not found"}) 
+		return
+	}
+
+	rd := entity.Room_Detail{
+		Note:  room_detail.Note,
+		Amount:  room_detail.Amount,
+		Date:   room_detail.Date,
+
+		Category:       category,       // โยงความสัมพันธ์กับ Entity category
+		Room_Number:    room_number,    // โยงความสัมพันธ์กับ Entity room_number
+		MedicalDevice:  medicaldevice,
+	}
+
+	if _, err := govalidator.ValidateStruct(rd); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := entity.DB().Where("id = ?", id).Updates(&rd).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": room_detail})
