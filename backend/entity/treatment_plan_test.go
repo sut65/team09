@@ -25,7 +25,7 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Order of treatment cannot be negative or too much"))
+		g.Expect(err.Error()).To(Equal("ลำดับการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"))
 	})
 
 	t.Run("Check Number of treatment cannot be negative or too much", func(t *testing.T) {
@@ -41,7 +41,7 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Number of treatment cannot be negative or too much"))
+		g.Expect(err.Error()).To(Equal("จำนวนการรักษาจะต้องไม่เป็นลบหรือมากเกินไป"))
 	})
 
 	t.Run("Check Treatment detail must consist of 6 or more characters", func(t *testing.T) {
@@ -56,7 +56,7 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment detail must consist of 6 or more characters"))
+		g.Expect(err.Error()).To(Equal("รายละเอียดการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า"))
 	})
 
 	t.Run("Check Treatment detail cannot be blank", func(t *testing.T) {
@@ -72,7 +72,7 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment detail cannot be blank"))
+		g.Expect(err.Error()).To(Equal("รายละเอียดการรักษาไม่สามารถเป็นค่าว่างได้"))
 	})
 
 	t.Run("Check Treatment explain cannot be blank", func(t *testing.T) {
@@ -88,7 +88,7 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment explain cannot be blank"))
+		g.Expect(err.Error()).To(Equal("คำอธิบายการรักษาไม่สามารถเป็นค่าว่างได้"))
 	})
 
 	t.Run("Check Treatment explain must consist of 6 or more characters", func(t *testing.T) {
@@ -104,7 +104,7 @@ func TestTreatmentPlan(t *testing.T) {
 
 		g.Expect(ok).ToNot(BeTrue())
 		g.Expect(err).ToNot(BeNil())
-		g.Expect(err.Error()).To(Equal("Treatment explain must consist of 6 or more characters"))
+		g.Expect(err.Error()).To(Equal("คำอธิบายการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า"))
 	})
 	
 }

@@ -16,6 +16,9 @@ import Button from '@mui/material/Button';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
+import Slide from '@mui/material/Slide';
+import Typography from '@mui/material/Typography';
+
 //import Interface
 import {ReasonInterface} from "../../models/IReason";
 import {PatienSceheduleInterface} from "../../models/IPatienSchedule";
@@ -199,7 +202,11 @@ const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
                             paddingY: 2,
                         }}
                     >
-                        <h2>Patient Schedule Create</h2>
+                        <Slide direction="left" in={true} timeout={2500}>
+                        <Typography variant="h3" component="h3">
+                            Patient Schedule Create
+                        </Typography>
+                        </Slide>
                     </Box>
                     <hr />
                     <Grid container spacing={1} sx={{ padding: 2 }}>
