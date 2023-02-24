@@ -215,7 +215,7 @@ function MedicalDevice() {
             variant="h4"
             style={{ textAlign: "center", color: "#333" }}
           >
-            Medical Device
+            Update-Medical Device: {id}
           </Typography>
           <hr style={{ width: "400px", opacity: "0.5" }} />
 
