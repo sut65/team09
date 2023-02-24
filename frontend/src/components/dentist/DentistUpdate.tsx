@@ -12,9 +12,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { GenderInterface } from "../../models/IGender";
 import { SpecializedInterface } from "../../models/ISpecialized";
@@ -35,6 +32,8 @@ import {
   
   } from "../../services/HttpClientService";
   import { DentistInterface } from "../../models/IDentist";
+import Autocomplete from "@mui/material/Autocomplete";
+import InputLabel from "@mui/material/InputLabel";
 
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -48,17 +47,18 @@ import {
     const [genders, setGenders] = useState<GenderInterface[]>([]);
     const [specializeds, setSpecializeds] = useState<SpecializedInterface[]>([]);
     const [universitys, setUniversitys] = useState<UniversityInterface[]>([]);
-    const [roles, setRoles] = useState(0);
+    const [roles, setRoles] = useState<RoleInterface[]>([]);
     const [provinces, setProvinces] = React.useState<ProvinceInterface[]>([]);
-    const [dentist, setDentists] = useState<DentistInterface>({
-      Date: new Date(),
-    });
+    const [dentist, setDentists] = useState<DentistInterface>({});
 
+    //const [dentists, setDentist] = useState<DentistInterface>({}); useState<Partial<DentistInterface>>({});
 
     const [gender, setGender] = useState<string>("");
     const [specialized, setSpecialized] = useState<string>("");
     const [university, setUniversity] = useState<string>("");
+    const [role, setRole] = useState<string>("");
     const [province, setProvince] = useState<string>("");
+
 
 
     const [firstname, setFirstname] = useState<string>("");
@@ -69,12 +69,6 @@ import {
     const [age, setAge] = useState(0);
     const [phone_number, setPhone_number] = useState<string>("");
 
-    const [gid, setGid] = useState<string>("");
-    const [sid, setSid] = useState<string>("");
-    const [uid, setUid] = useState<string>("");
-    const [rid, setRid] = useState(0);
-    const [pid, setPid] = useState<string>("");
-
     const [message, setAlertMessage] = React.useState("");
   
     const [success, setSuccess] = useState(false);
@@ -82,6 +76,13 @@ import {
 
 
     const apiUrl = "http://localhost:8080";
+    const requestOptions = {
+      method: "GET",
+      headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+        },
+    };
 
     const { id } = useParams();
 
@@ -93,14 +94,25 @@ import {
 
               if (res.data) {
                   setFirstname(res.data.FirstName.toString());
+
                   setLastname(res.data.LastName.toString());
 
+                  // console.log("FirstName : ")
+                  // console.log(res.data.FirstName)
                   setPersonal_id(res.data.Personal_id.toString());
+
+                  // console.log("LastName : ")
+                  // console.log(res.data.LastName)
                   setEmail(res.data.Email.toString());
 
                   setPassword(res.data.Password.toString());
 
+                  // console.log("Phone : ")
+                  // console.log(res.data.Phone)
                   setAge(res.data.Age.toString());
+
+                  // console.log("House_no : ")
+                  // console.log(res.data.House_no )
                   setPhone_number(res.data.Phone_Number .toString());
 
                   fetch(`${apiUrl}/gender/${res.data.GenderID}`)
@@ -108,7 +120,8 @@ import {
                     .then((res) => {
                         if (res.data) {
                             setGender(res.data.Gender_name)
-                            setGid(res.data.ID)
+                            dentist.GenderID = res.data.ID
+
                             
                         }
                     }
@@ -119,7 +132,7 @@ import {
                     .then((res) => {
                         if (res.data) {
                             setSpecialized(res.data.Specialized_Name)
-                            setSid(res.data.ID)
+                            dentist.SpecializedID = res.data.ID
 
                         }
                     }
@@ -130,7 +143,7 @@ import {
                     .then((res) => {
                         if (res.data) {
                             setUniversity(res.data.University_Name)
-                            setUid(res.data.ID)
+                            dentist.UniversityID = res.data.ID
 
                         }
                     }
@@ -141,18 +154,18 @@ import {
                     .then((res) => {
                         if (res.data) {
                             setProvince(res.data.Province_name)
-                            setPid(res.data.ID)
+                            dentist.ProvinceID = res.data.ID
 
                         }
                     }
                   )
 
-                  fetch(`${apiUrl}/roles/${3}`)
+                  fetch(`${apiUrl}/roles/${res.data.RoleID}`)
                     .then((response) => response.json())
                     .then((res) => {
                         if (res.data) {
-                            setRoles(res.data.Role_name)
-                            setRid(res.data.ID)
+                            setRole(res.data.Role_name)
+                            dentist.RoleID = res.data.ID
 
                         }
                     }
@@ -194,47 +207,6 @@ import {
       const { value } = event.target;
       setDentists({ ...dentist, [id]: value });
     };
-
-    const handleChangeGender = (event: SelectChangeEvent) => {
-      setGid(event.target.value);
-      console.log(event.target.value)
-      const name = event.target.name as keyof typeof DentistUpdate;
-      setDentists({
-      ...dentist,
-      [name]: event.target.value,
-    });
-    }
-
-    const handleChangeSpecialized = (event: SelectChangeEvent) => {
-      setSid(event.target.value);
-      console.log(event.target.value)
-      const name = event.target.name as keyof typeof DentistUpdate;
-      setDentists({
-      ...dentist,
-      [name]: event.target.value,
-    });
-    }
-
-    const handleChangeUniversity = (event: SelectChangeEvent) => {
-      setUid(event.target.value);
-      console.log(event.target.value)
-      const name = event.target.name as keyof typeof DentistUpdate;
-      setDentists({
-      ...dentist,
-      [name]: event.target.value,
-    });
-    }
-
-    const handleChangeProvince = (event: SelectChangeEvent) => {
-      setPid(event.target.value);
-      console.log(event.target.value)
-      const name = event.target.name as keyof typeof DentistUpdate;
-      setDentists({
-      ...dentist,
-      [name]: event.target.value,
-    });
-    }
-    
     
     const getGenders = async () => {
       let res = await GetGender();
@@ -298,24 +270,25 @@ import {
     
     async function submit() {
       let data = {
-        FirstName: firstname ,
-        LastName: lastname ,
-        Personal_id: personal_id ,
-        Age:   convertType(age),
-        Email: email ,
-        Password: password ,
-        Phone_Number: phone_number ,
-        Date: dentist.Date,
+        FirstName: dentist.FirstName ,
+        LastName: dentist.LastName ,
+        Personal_id: dentist.Personal_id ,
+        Age:   convertType(dentist.Age),
+        Email: dentist.Email ,
+        Password: dentist.Password ,
+        Phone_Number: dentist.Phone_Number ,
   
-        GenderID: convertType(gid),
-        SpecializedID: convertType(sid),
-        UniversityID: convertType(uid),
-        RoleID:     convertType(rid),
-        ProvinceID: convertType(pid),
+        GenderID: convertType(dentist.GenderID),
+        SpecializedID: convertType(dentist.SpecializedID),
+        UniversityID: convertType(dentist.UniversityID),
+        RoleID:     convertType(dentist.RoleID),
+        ProvinceID: convertType(dentist.ProvinceID),
 
         
       };
-      
+      console.log(data);
+      console.log(dentist.GenderID);
+      console.log(dentist.SpecializedID);
       let res: any = await UpdateDentists(data);
         if (res.status) {
             setAlertMessage("อัพเดตข้อมูลสำเร็จ");
@@ -343,15 +316,7 @@ import {
             } else {
                 return { status: false, message: res.error };
             }
-            
         });
-        if (res.status) {
-          setAlertMessage("อัปเดตข้อมูลสำเร็จ");
-          setSuccess(true);
-        } else {
-          setAlertMessage(res.message);
-          setError(true);
-        }
       }
   
     return (
@@ -408,8 +373,8 @@ import {
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกชื่อ"
-                value={firstname}
-                onChange={(event) => setFirstname(event.target.value)}
+                value={dentist.FirstName || "" || firstname}
+                onChange={handleInputChange}
               />
             </FormControl>
         </Grid>  
@@ -424,8 +389,8 @@ import {
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกนามสกุล"
-                  value={lastname}
-                  onChange={(event) => setLastname(event.target.value)}
+                  value={dentist.LastName || "" || lastname}
+                  onChange={handleInputChange}
                 />
               </FormControl>
             </Grid>
@@ -436,16 +401,21 @@ import {
                 <TextField
                   id="Age"
                   variant="outlined"
-                  type="number"
+                  type="string"
                   size="medium"
                   placeholder="กรุณากรอกอายุ"
-                  InputProps={{ inputProps: { min: 1 , max: 100}}}
+                  InputProps={{ inputProps: {max: 100}}}
                   InputLabelProps={{
                   shrink: true,
                   }}
-                  value={age}
-                  onChange={(event) => setAge(parseInt(event.target.value))}
-                
+                  value={dentist.Age || "" || age}
+                  onChange={handleInputChange}
+                  onKeyPress={(e) => {
+                    if (!/[0-9]/.test(e.key)){
+                      e.preventDefault()
+                    }
+                  }}
+                  inputProps={{maxLength :10}}
                 />
               </FormControl>
             </Grid>
@@ -459,8 +429,8 @@ import {
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกบัตรประชาชน"
-                  value={personal_id}
-                  onChange={(event) => setPersonal_id(event.target.value)}
+                  value={dentist.Personal_id || "" || personal_id}
+                  onChange={handleInputChange}
                   onKeyPress={(e) => {
                     if (!/[0-9]/.test(e.key)){
                       e.preventDefault()
@@ -480,8 +450,8 @@ import {
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                  value={phone_number}
-                  onChange={(event) => setPhone_number(event.target.value)}
+                  value={dentist.Phone_Number || "" || phone_number}
+                  onChange={handleInputChange}
                   onKeyPress={(e) => {
                     if (!/[0-9]/.test(e.key)){
                       e.preventDefault()
@@ -501,8 +471,8 @@ import {
                   type="string"
                   size="medium"
                   placeholder="กรุณากรอกอีเมลล์"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
+                  value={dentist.Email || "" || email}
+                  onChange={handleInputChange}
                 />
               </FormControl>
             </Grid>
@@ -513,49 +483,52 @@ import {
                 <TextField
                   id="Password"
                   variant="outlined"
-                  type="password"
+                  type="string"
                   size="medium"
                   placeholder="กรุณากรอกรหัสผ่าน"
-                  value={password || ""}
-                  onChange={(event) => setPassword(event.target.value)}
+                  value={dentist.Password || "" || personal_id}
+                  onChange={handleInputChange}
                 />
               </FormControl>
             </Grid>
 
-
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <p>เพศ</p>
-                   <Select
-                     native  
-                     value={dentist.GenderID + ""}
-                     onChange={handleChangeGender}
-                     label="กรุณาเลือกเพศ"
-                        inputProps={{
-                           name: "GenderID",
-                        }}
-                    >
-                         <option aria-label="None" value="">
-                            {gender}
-                         </option>
-                            {genders.map((item: GenderInterface) => (
-                                <option value={item.ID} key={item.ID}>
-                                    {item.Gender_name}
+                <InputLabel id="demo-simple-select-label">เพศ</InputLabel>
+                            <Select
+                                native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={dentist.GenderID + ""}
+                                onChange={handleChange}
+                                label="เพศ"
+                                inputProps={{
+                                    name: "GenderID",
+                                }}
+                            >
+                                <option aria-label="None" value="">
+                                    {gender}
                                 </option>
-                            ))}
-                    </Select>
+                                {genders.map((item: GenderInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Gender_name}
+                                    </option>
+                                ))}
+                            </Select>
                 </FormControl>
             </Grid>
 
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <p id="demo-simple-select-label">สาขา</p>
+                <InputLabel id="demo-simple-select-label">สาขา</InputLabel>
                             <Select
                                 native
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
                                 value={dentist.SpecializedID + ""}
-                                onChange={handleChangeSpecialized}
-                                label="กรุณาเลือกสาขา"
+                                onChange={handleChange}
+                                label="สาขา"
                                 inputProps={{
                                     name: "SpecializedID",
                                 }}
@@ -575,14 +548,14 @@ import {
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <p id="demo-simple-select-label">มหาวิทยาลัย</p>
+                <InputLabel id="demo-simple-select-label">มหาวิทยาลัย</InputLabel>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={dentist.UniversityID + ""}
-                                onChange={handleChangeUniversity}
-                                label="กรุณาเลือกมหาวิทยาลัย"
+                                onChange={handleChange}
+                                label="มหาวิทยาลัย"
                                 inputProps={{
                                     name: "UniversityID",
                                 }}
@@ -602,14 +575,14 @@ import {
 
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <p id="demo-simple-select-label">จังหวัด</p>
+                <InputLabel id="demo-simple-select-label">จังหวัด</InputLabel>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={dentist.ProvinceID + ""}
-                                onChange={handleChangeProvince}
-                                label="กรุณาเลือกเลือกจังหวัด"
+                                onChange={handleChange}
+                                label="เลือกจังหวัด"
                                 inputProps={{
                                     name: "ProvinceID",
                                 }}
@@ -629,44 +602,28 @@ import {
   
             <Grid item xs={6}>
                 <FormControl fullWidth variant="outlined">
-                <p id="demo-simple-select-label">บทบาท</p>
+                <InputLabel id="demo-simple-select-label">บทบาท</InputLabel>
                             <Select
                                 native
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={dentist.RoleID + ""}
                                 onChange={handleChange}
-                                label="กรุณาเลือกเลือกบทบาท"
+                                label="เลือกบทบาท"
                                 inputProps={{
                                     name: "RoleID",
                                 }}
                             >
                                 <option aria-label="None" value="">
-                                    {roles}
+                                    {role}
                                 </option>
-                                
+                                {roles.map((item: RoleInterface) => (
+                                    <option value={item.ID} key={item.ID}>
+                                        {item.Role_name}
+                                    </option>
+                                ))}
                             </Select>
                 </FormControl>
-            </Grid>
-
-            <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-                <p> วันที่สร้างข้อมูลทันตแพทย์ </p>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateTimePicker 
-                      renderInput={(props) => <TextField {...props} />}
-                      // label="วันที่สร้างทันตแพทย์"
-                      value={dentist.Date}
-                      onChange={(newValue) => {
-                        setDentists({
-                        ...dentist,
-                        Date: newValue,
-                        });
-                      }}
-                            
-                        />
-                </LocalizationProvider>
-              </FormControl>
             </Grid>
   
             <Grid item xs={12}>

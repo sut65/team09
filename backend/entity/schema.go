@@ -249,14 +249,13 @@ type University struct {
 type Dentist struct {
 	gorm.Model
 
-	FirstName    string `valid:"required~กรุณากรอกชื่อ"`
-	LastName     string `valid:"required~กรุณากรอกนามสกุล"`
-	Personal_id  string `gorm:"uniqueIndex"  valid:"required~กรุณากรอกบัตรประจำตัวประชาขน"`
+	FirstName    string `valid:"required~FirstName cannot be blank"`
+	LastName     string `valid:"required~LastName cannot be blank"`
+	Personal_id  string `gorm:"uniqueIndex"  valid:"required~Personal_id cannot be blank"`
 	Email        string `gorm:"uniqueIndex"  valid:"email~รูปแบบ Email ไม่ถูกต้อง,required~รูปแบบ Email ไม่ถูกต้อง"`
-	Password     string `valid:"minstringlength(8)~กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร"`
-	Age          int    `valid:"range(10|100)~กรุณากรอกอายุระหว่าง 10 - 100"`
+	Password     string `valid:"required~Password cannot be blank"`
+	Age          int    `valid:"range(10|100)~Age is not in range 10 to 100"`
 	Phone_Number string `gorm:"uniqueIndex"`
-	Date 	time.Time   `valid:"current~กรุณาใส่เวลาปัจจุบัน"`
 
 	//GenderID ทำหน้าที่เป็น FK
 	GenderID *uint
@@ -461,7 +460,11 @@ type Room_Number struct {
 
 type Room_Detail struct {
 	gorm.Model
+<<<<<<< HEAD
 	Note string	`valid:"stringlength(1|50)~ห้ามพิมพ์เกิน 50 ตัวอักษร, required~หมายเหตุห้ามเป็นช่องว่าง"`
+=======
+	Note string `valid:"stringlength(1|50)~ห้ามพิมพ์เกิน 50 ตัวอักษร, required~หมายเหตุห้ามเป็นช่องว่าง"`
+>>>>>>> fac446d (comment commit - close #211, close #212)
 
 	//CategoryID ทำหน้าที่เป็น FK
 	CategoryID *uint
@@ -475,7 +478,6 @@ type Room_Detail struct {
 	MedicalDeviceID *uint
 	MedicalDevice   MedicalDevice `gorm:"references:id"  valid:"-" `
 }
-
 
 func init() {
 	govalidator.CustomTypeTagMap.Set("past", func(i interface{}, context interface{}) bool {

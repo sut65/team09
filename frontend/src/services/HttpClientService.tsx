@@ -887,7 +887,7 @@ async function GetReasons() {
       body: JSON.stringify(data),
     };
   
-    let res = await fetch(`${apiUrl}/dentists`, requestOptions)
+    let res = await fetch(`${apiUrl}/dentists/:id`, requestOptions)
       .then((response) => response.json())
       .then((res) => { 
         if (res.data) {
@@ -957,29 +957,6 @@ async function GetReasons() {
     };
   
     let res = await fetch(`${apiUrl}/room_details`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => { 
-        if (res.data) {
-          return { status: true, message: res.data };
-        } else {
-          return { status: false, message: res.error };
-        }
-      });
-  
-    return res;
-  }
-
-  async function UpdateRoomDetails(data: Room_DetailInterface) {
-    const requestOptions = {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-  
-    let res = await fetch(`${apiUrl}/room_details/:id`, requestOptions)
       .then((response) => response.json())
       .then((res) => { 
         if (res.data) {
@@ -1453,7 +1430,6 @@ async function GetReasons() {
     GetCategory,
     GetRoom_Detail,
     CreateRoom_Details,
-    UpdateRoomDetails,
 
     GetMedicine,
     GetMedicine_status,

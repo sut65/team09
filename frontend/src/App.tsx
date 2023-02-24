@@ -61,7 +61,6 @@ import DentistUpdate from "./components/dentist/DentistUpdate";
 
 import Room_Details from "./components/room/Room_DetailList";
 import Room_DetailCreate from "./components/room/Room_DetailCreate";
-import Room_DetailUpdate from "./components/room/Room_DetailUpdate";
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
@@ -320,10 +319,9 @@ function App() {
                 <Route path="/treatmentplan_update/:id" element={<TreatmentPlanUpdate />} />         
                 <Route path="/dentists" element={<Dentists />} />
                 <Route path="/dentist/create" element={<DentistCreate />} />
-                <Route path="/dentist/update/:id" element={<DentistUpdate />} />
+                <Route path="/dentist_update/:id" element={<DentistUpdate />} />
                 <Route path="/room_details" element={<Room_Details />} />
                 <Route path="/room_detail/create" element={<Room_DetailCreate />} />
-                <Route path="/room_detail/update/:id" element={<Room_DetailUpdate />} />
                 <Route path="/prescription" element={<PrescriptionList />} />
                 <Route path="/prescription/create" element={<PrescriptionCreate />} />
                 <Route path="/prescription/update/:id" element={<PrescriptionUpdate />} />

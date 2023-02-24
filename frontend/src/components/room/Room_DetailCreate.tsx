@@ -12,9 +12,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { Room_NumberInterface } from "../../models/IRoom_Number";
 import { CategoryInterface } from "../../models/ICategory";
@@ -113,8 +110,6 @@ function Room_DetailCreate() {
       async function submit() {
         let data = {
             Note: room_detail.Note,
-            Amount: convertType(room_detail.Amount),
-            Date:  room_detail.Date,
 
             Room_numberID: convertType(room_detail.Room_NumberID),
             CategoryID: convertType(room_detail.CategoryID),
@@ -251,54 +246,19 @@ function Room_DetailCreate() {
               </Grid>
 
               <Grid item xs={6}>
-                <p>จำนวน</p>
+                <p>หมายเหตุ</p>
                 <FormControl fullWidth variant="outlined">
                   <TextField
-                    id="Amount"
+                    id="Note"
                     variant="outlined"
-                    type="number"
+                    type="string"
                     size="medium"
-                    placeholder="กรุณากรอกจำนวน"
-                    value={room_detail.Amount || ""}
+                    placeholder="หมายเหตุ"
+                    value={room_detail.Note || ""}
                     onChange={handleInputChange}
                   />
                 </FormControl>
               </Grid>
-
-          <Grid item xs={6}>
-            <p>หมายเหตุ</p>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                id="Note"
-                variant="outlined"
-                type="string"
-                size="medium"
-                placeholder="กรุณากรอกหมายเหตุ"
-                value={room_detail.Note || ""}
-                onChange={handleInputChange}
-              />
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl fullWidth variant="outlined">
-                <p> วันที่สร้างข้อมูลห้อง </p>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateTimePicker 
-                      renderInput={(props) => <TextField {...props} />}
-                      // label="วันที่สร้างข้อมูลห้อง"
-                      value={room_detail.Date}
-                      onChange={(newValue) => {
-                        setRoom_detail({
-                        ...room_detail,
-                        Date: newValue,
-                        });
-                      }}
-                            
-                        />
-                </LocalizationProvider>
-              </FormControl>
-            </Grid>
     
               <Grid item xs={12}>
                 <Button
