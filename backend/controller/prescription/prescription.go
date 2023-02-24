@@ -15,7 +15,6 @@ func CreatePrescription(c *gin.Context) {
 	var patient entity.Patient
 	var dentist entity.Dentist
 	var medicine entity.Medicine
-	var medicine_status entity.Medicine_status
 
 	if err := c.ShouldBindJSON(&prescription); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error not access": err.Error()})
@@ -43,16 +42,11 @@ func CreatePrescription(c *gin.Context) {
 		return
 	}
 
-	if tx := entity.DB().Where("id = ?", prescription.Medicine_statusID).First(&medicine_status); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "medicine_status not found"})
-		return
-	}
-
 	p_create1 := entity.Prescription{
 		Patient:              	patient,
 		Dentist:              	dentist,
 		Medicine:				medicine,
-		Medicine_status:       	medicine_status,
+		Prescription_code:      prescription.Prescription_code,
 		Qty:					prescription.Qty,
 		Details:				prescription.Details,
 		DateTimePrescription: prescription.DateTimePrescription,
@@ -70,7 +64,7 @@ func GetPrescription(c *gin.Context) {
 	var prescription entity.Prescription
 	id := c.Param("id")
 
-	if tx := entity.DB().Preload("Patient").Preload("Dentist").Preload("Medicine").Preload("Medicine_status").Where("id = ?", id).First(&prescription); tx.RowsAffected == 0 {
+	if tx := entity.DB().Preload("Patient").Preload("Dentist").Preload("Medicine").Where("id = ?", id).First(&prescription); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "prescription not found"})
 		return
 	}
@@ -82,7 +76,7 @@ func GetPrescription(c *gin.Context) {
 func ListPrescriptions(c *gin.Context) {
 	var prescriptions []entity.Prescription
 
-	if err := entity.DB().Preload("Patient").Preload("Dentist").Preload("Medicine").Preload("Medicine_status").Raw("SELECT * FROM prescriptions").Find(&prescriptions).Error; err != nil {
+	if err := entity.DB().Preload("Patient").Preload("Dentist").Preload("Medicine").Raw("SELECT * FROM prescriptions").Find(&prescriptions).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -107,7 +101,6 @@ func UpdatePrescription(c *gin.Context) {
 	var patient entity.Patient
 	var dentist entity.Dentist
 	var medicine entity.Medicine
-	var medicine_status entity.Medicine_status
 
 	if err := c.ShouldBindJSON(&prescription); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -129,17 +122,17 @@ func UpdatePrescription(c *gin.Context) {
 		return
 	}
 
-	if tx := entity.DB().Where("id = ?", prescription.Medicine_statusID).First(&medicine_status); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "medicine_status not found"})
-		return
-	}
+	// if tx := entity.DB().Where("id = ?", prescription.Medicine_statusID).First(&medicine_status); tx.RowsAffected == 0 {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "medicine_status not found"})
+	// 	return
+	// }
 
 	// อัปเดต Prescription
 	p_update1 := entity.Prescription{
 		Patient:              	patient,
 		Dentist:              	dentist,
 		Medicine:				medicine,
-		Medicine_status:       	medicine_status,
+		Prescription_code:      prescription.Prescription_code,
 		Qty:					prescription.Qty,
 		Details:				prescription.Details,
 		DateTimePrescription: prescription.DateTimePrescription,
