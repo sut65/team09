@@ -268,7 +268,7 @@ function EmployeeCreate() {
                 variant="outlined"
                 type="string"
                 size="medium"
-                placeholder="กรุณากรอกรหัสพนักงาน"
+                placeholder="รหัสพนักงานขึ้นต้นด้วย E ตามด้วยตัวเลข 7 ตัว"
                 value={employee.Employee_number || ""}
                 onChange={handleInputChange}
                 inputProps={{maxLength :8}}
@@ -328,10 +328,10 @@ function EmployeeCreate() {
               <TextField
                 id="Password"
                 variant="outlined"
-                type="string"
+                type="password"
                 size="medium"
-                placeholder="กรุณากรอกรหัสผ่าน"
-                value={employee.Password?.replace(/./g, "*") || ""}
+                placeholder="รหัสผ่านควรมีอย่างน้อย 8 ตัวอักษร"
+                value={employee.Password || ""}
                 onChange={handleInputChange}
               />
             </FormControl>

@@ -17,6 +17,7 @@ import moment from "moment";
 function Employees() {
   const [employees, setEmployees] = useState<EmployeeInterface[]>([]);
   const [open, setOpen] = React.useState(false);
+  const [rowId, setrowID] = React.useState<string>("");
 
   const getEmployes = async () => {
     let res = await GetEmployee();
@@ -93,7 +94,7 @@ function Employees() {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => { handleDelete(row.id); handleClose();}} variant="contained" autoFocus>
+              <Button onClick={() => { handleDelete(Number(rowId)); handleClose();}} variant="contained" autoFocus>
                 Yes
               </Button>
               <Button onClick={handleClose} variant="contained" color="error">No</Button>
@@ -154,6 +155,11 @@ function Employees() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            onRowClick={(params) => {
+              console.log(params.row.ID); 
+              setrowID(params.row.ID)
+              
+            }}
           />
         </div>
       </Container>

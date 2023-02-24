@@ -570,7 +570,7 @@ function PaitentCreate() {
                     variant="outlined"
                     type="string"
                     size="medium"
-                    placeholder="กรุณากรอกรายละเอียด"
+                    placeholder="กรุณากรอกรายละเอียดมีความยาว 6-100 ตัวอักษร"
                     value={patient.Symptom_name || ""}
                     onChange={handleInputChange}
                   />

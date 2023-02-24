@@ -1,0 +1,4670 @@
+{
+  "id": "4f08425a-644b-4405-ac19-3d7f428e5442",
+  "version": "2.0",
+  "name": "Create Treatment",
+  "url": "http://localhost:3000/treatmentscreate",
+  "tests": [{
+    "id": "2c6f934c-abf5-456c-9444-c6a7651c8cac",
+    "name": "สำเร็จ",
+    "commands": [{
+      "id": "5c530b72-abad-4fcd-8f0a-9e0b2a3673a6",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "46367749-bf30-4b2d-8b27-c844bb9e11a1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3e4e4b0b-1f02-443c-9aa8-aaf1136c8578",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9a76d3c2-0ca6-4367-afa2-8804e0edb6d3",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af3304f4-da34-46eb-b89b-fe9b13f0be83",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "061fb05b-b608-4e0d-af50-2f262227686f",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa8f5be0-e712-485c-b6ed-f18523fb9752",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e61ee0f3-ed24-44da-84ef-ccd01c85ad14",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "47979a27-7fe5-4914-a9fd-21abf437e8a0",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ee3590e-86b4-484b-9411-0c82ba13e0a5",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "6dc4a5fd-d52f-438f-b77f-28ca89ffd251",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f232f5b-7cc5-4100-922c-473f66962842",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "1985637e-a0bc-48e2-8fbe-bb13dcee3de4",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "41d40fc8-27f5-44cf-869b-b5b7c065d7e3",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a480fef-641f-4c46-8003-7873559dfaea",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0cf7fc90-5dde-4c83-a3bd-95b414f40009",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4054429-9f30-401a-997f-cabdee84a56b",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "0cc7b3ef-0849-4d25-af68-5eb7751def99",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "378ee469-460e-4c5e-8ac2-1c21c09432dc",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b54b77fb-66b5-4f83-82b8-377e0da5ad22",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "72ba17e5-034c-4376-a654-211212442473",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "224d62ab-1bb1-4205-bbea-9e16da87b9d1",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ซ้ายบน ขณะถอนฟัน ฟันเเตกมีเลือดไหลจำนวนมาก"
+    }, {
+      "id": "bc2f29fb-1b9f-400b-a468-06e0df470e2d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "d59322cb-c72b-4d25-991f-ee4009d9fbb0",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root > .MuiSvgIcon-root",
+      "targets": [
+        ["css=.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root > .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "5274773d-0cad-4bce-bce9-c0df8d49b017",
+      "comment": "",
+      "command": "click",
+      "target": "css=.Mui-selected",
+      "targets": [
+        ["css=.Mui-selected", "css:finder"],
+        ["xpath=(//button[@type='button'])[40]", "xpath:attributes"],
+        ["xpath=//div[4]/button[6]", "xpath:position"],
+        ["xpath=//button[contains(.,'24')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8403fc9-cb49-4601-839c-36048d5070b9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiClock-squareMask",
+      "targets": [
+        ["css=.MuiClock-squareMask", "css:finder"],
+        ["xpath=//div[2]/div[2]/div/div/div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "222a7bc3-3b06-4aa4-bbc2-8c63451bc3e2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiClock-squareMask",
+      "targets": [
+        ["css=.MuiClock-squareMask", "css:finder"],
+        ["xpath=//div[2]/div[2]/div/div/div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "aeb39da4-b5b1-4879-a48b-7b53df5da2dc",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cbe39b76-4985-4972-9ccf-c65118301120",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "05861d7b-0c0f-465b-9347-d41c42d61dda",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f92f64e1-0fd1-4431-95cb-564292e98ed5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fad57d7a-683d-47eb-aee1-8e8e8e5454bd",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5c99c9f7-1826-4c4d-8da5-9207d8e01fc6",
+    "name": "จำนวนฟันผุจะต้องไม่เป็นลบหรือมากเกินไป",
+    "commands": [{
+      "id": "83355c1d-5860-48eb-ba88-2a1e92aa435b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e79a2191-5768-4a30-9f3a-50695886d845",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "75ace11c-b311-48a1-ad90-ccebbd50fd14",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83093f53-e510-4988-a02c-1cb1b0086389",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d9223915-7ce1-4433-b8e9-8ae3af3f0910",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "11bc38d0-f1f9-42c6-b7e1-271c30c519ae",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ce0c8168-d461-4864-8517-27a55d15cf07",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9e8d767-7c43-4c9f-897e-d8a4a17e2b67",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "-1"
+    }, {
+      "id": "b41d303e-998b-486c-a9bc-a54db0d434b0",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53edcd8f-37a5-4cbf-b992-86c769a49412",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "22bf5052-ae09-4d30-a0cf-6ef0a9055c5f",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bd970102-e917-409b-8466-abfb80e4ad6f",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "fab9dc1d-dd76-4134-b266-10510c2592ba",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0491dd3-d967-436b-83a7-49b6fa21b0ee",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8dcc6b5-3993-408b-85d0-b32ed5fc2433",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "adcc0fc3-6673-4fc4-b76c-919e02e1c32f",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "57039fb2-9a28-4fc3-866c-432f639be2cd",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1263c9d-4f96-4940-826c-407b96173c9b",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "63a5370b-47a0-4fae-b1c8-1ef8428e1b3a",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "97f4efb8-120f-441c-91e9-c129d54964cb",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1เล่ม"
+    }, {
+      "id": "5e093499-82c0-484b-b19c-2fcd6f789909",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c2615ec0-2c20-4c4d-979f-fa846ff4d9e6",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1เล่ม ซ้ายบน ขณะถอนมีเลือดไหลจำนวนมาก"
+    }, {
+      "id": "b8341bb5-d26d-4798-81eb-df7d631c24b5",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "07aad6fa-b76f-491d-97a4-087a2185e73e",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "e450fce3-1ce5-4ac2-a007-0f76af6f43f5",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b31bc262-9dbd-4dda-9b00-3d037f500f1c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f08d089-87e7-41d5-a8ad-bc581482cdf0",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "218ecfee-9dd3-43a9-9fd8-234ff81708ff",
+    "name": "จำนวนเหงือกบวมจะต้องไม่เป็นลบหรือมากเกินไป",
+    "commands": [{
+      "id": "8971a545-671f-4ad5-ae05-b5b12e15ee42",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cfee418f-dc66-4fa1-8b61-b1275312dda8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "148b448e-db28-40c1-ac52-9397f531f3c7",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ff39479e-7ed7-49bc-8602-670354756372",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "88b85045-fcad-495c-bc4f-a7a5bd34a4b8",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "24c61ae1-3be1-439e-aff0-998160cab7d6",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9d2baa0d-d49e-4ee1-81ff-7f422f131f38",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8106cf7-db10-42e0-b301-c4e9e9557393",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "8d6bafe9-ead2-4c80-821a-d4bcef38ad3f",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b57aaaf-5d92-40f0-af60-8d876554939d",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "-1"
+    }, {
+      "id": "9b9e1598-f608-4aae-b2b3-5d7df935db48",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bbf01712-eda7-46cb-83ec-1b2b60d2ef17",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "2570bb41-1719-4ed6-816b-53b03bee6bd4",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b4a27fe-38dd-435b-aee2-9bc6c5798a43",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c4db5741-edcb-4ae4-b6a2-9c34942d807d",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c2b28d52-762a-4981-895a-7a54484acd5b",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "7b9710a7-256f-46bf-a174-dc82d6cc0815",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e5085e92-6f98-4890-8694-3e480edd2067",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1c2200c3-f871-4926-808d-4fb791ae3e31",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a3a0f863-bdb2-466e-bc2f-10130bbe725e",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "fe45d40b-44e9-448e-8b0d-890e06027f97",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0edb7d7d-ab19-4366-843e-c824c910afa3",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "888af6f1-5008-4e42-b88b-9a2e844adf85",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "282d76b9-6417-436f-be48-f141f439cdc3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a6d9a93c-9457-4673-95c3-a877348da29a",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3a09b3d2-e542-4dde-b868-5ecb150d77b5",
+    "name": "ปัญหาฟันอื่นๆไม่สามารถเป็นค่าว่างได้",
+    "commands": [{
+      "id": "71c422b2-b002-42d5-ba1a-26ca988b1155",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "701a43f9-874e-47e9-8fa4-481eddd24790",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "12921a53-a12c-48ab-9a0a-d709437f5497",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9eed7769-e425-4077-a2ad-82b6d21137a3",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d4aad72-8b02-4177-b2d9-2a9eb362e35b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(2) .MuiInputBase-root",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(2) .MuiInputBase-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "670e5795-2a7a-4f5d-9c26-e20dd8ac132f",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f08ba062-4eb6-4967-a4ca-58354aafeb4d",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "07dfd04c-a628-44b5-a8f9-2939decc061f",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9012ac01-999e-4fb4-939d-9b3fe213e174",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "94c5af54-8483-419a-8623-202b567e8e95",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cfb46a97-1f97-4a5b-bd70-d70644093d38",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "1fd7a356-4f8f-45c4-aad4-6d002c5043e4",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "314d386c-0394-45fe-92b0-0e198c8f6191",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c75a385d-7f0b-46d4-8627-9a7f40c930dc",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4016aba5-476f-4d83-816a-ae89f86c7fd8",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "e1c22dca-3d0f-40f5-8e8f-61e9f19f5b2e",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0137fd64-d6af-4bb3-adf2-813b229b5bb7",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e998f9d2-e4e2-407e-a769-0d949fc15f25",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8bbedd9-bb36-440f-a1c2-9b3fd4570258",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "5f3f11ef-71f3-4282-ad9e-76ce479f1e83",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f88d2ec9-12c0-43ba-b1bc-4f55aeab5206",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "25da1718-f8c6-4aee-a39e-b408c9d4034b",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f85eac38-18c2-479e-9a92-80b1d6118207",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d23c4f3e-e624-4986-9425-645cd5fd3e1b",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "63d52f52-ea9e-4cb2-aa90-333361fb181c",
+    "name": "จำนวนการรักษาจะต้องไม่เป็นลบหรือมากเกินไป",
+    "commands": [{
+      "id": "436ec3ab-5cdb-4830-a0fb-2d4ac51b2e62",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "58923f4f-9874-49b6-a1af-356f18c3c5f2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "29a65aa9-f3fb-41cd-b256-0d05a92eacf3",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ea230c4-c18c-4274-a39c-2771f0a1167e",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6982bff9-e958-42f5-9852-8c316c91fe7c",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7c155fdc-d408-420b-8826-c27999d70d2c",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "44a0ac36-7711-40bc-844d-138581ea2bd7",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8c52fd1b-521e-4d34-bede-a184afcafd9d",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "55cc6172-4d64-459a-b625-f8fdd5494962",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7cb95ba-369f-470a-b87f-8f8995a746e9",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "beed24cd-d094-446e-81e7-0b8e702b8926",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b85ae77-a180-47a9-ae6f-b4dfe575a49a",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "b6a013fa-222e-4033-92ee-693eb1205eba",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f6c91e30-a018-4bc6-8f4d-98abfef41b6d",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d988860d-7fd0-4882-96d7-fd37da0d4e3b",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9c09614e-462a-408a-9ac6-d798d9d005de",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "11111111111"
+    }, {
+      "id": "63fe7b35-ea1a-452b-917f-7c048ae80c0e",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2a5fe2a-3a65-47c2-8732-93a0300ee23a",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "38e6ea54-11e2-4983-b1ac-62775eaa795f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(9) > .MuiFormControl-root",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(9) > .MuiFormControl-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div", "xpath:idRelative"],
+        ["xpath=//div[9]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "570643e6-18e3-419e-87d6-11c20bbfc810",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "95cd7854-f6a4-45fd-bd9a-ac99e2c266d1",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "bde0a16f-4238-44b8-bd57-09fad6f19fef",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3b0a245d-b3b4-475a-aa43-2c94a188ce80",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "7124fb9d-1aad-4248-817b-3a6d2f064413",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d0da3ce8-9e08-4252-94c0-811ed659cc32",
+    "name": "รายละเอียดการรักษาไม่สามารถเป็นค่าว่างได้",
+    "commands": [{
+      "id": "4f37d799-50d0-4216-85d8-07309faecb6a",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "49897598-166b-4db2-86c3-c447507145c4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "86fdd9a7-1856-4aee-85ff-5895268e354d",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad76f3cf-1da7-42fd-b0d2-cdf3757d679e",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "74137f63-c378-4e4e-a8e6-95e269fb4527",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0db5fb58-b862-4c18-af7c-fca3fbea6c49",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "id=PatientID-label",
+      "targets": [
+        ["id=PatientID-label", "id"],
+        ["css=#PatientID-label", "css:finder"],
+        ["xpath=//label[@id='PatientID-label']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/label", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/label", "xpath:position"],
+        ["xpath=//label[contains(.,'เลือกผู้ป่วย')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "477675d2-32ab-40f5-8dd5-6f5838f1fa87",
+      "comment": "",
+      "command": "click",
+      "target": "css=.Mui-focused > .MuiFormControl-root",
+      "targets": [
+        ["css=.Mui-focused > .MuiFormControl-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "26fc05f0-694e-42b9-af27-0ce3584fda9d",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "243b582b-0bfa-41aa-ba2e-7bb191b43b8b",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29b2c785-6d61-4e31-904f-edee1b1d9f09",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "8158a03f-f89d-47ec-8231-754d80f766d1",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8220fc4-eaf4-4b17-b51f-c5a28d1b7eb4",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "f68c9ff0-e0cb-4c3c-be69-4a993cc49882",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dc8a57ba-bce6-44ae-9e97-e30e2c6d77b6",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "25969ad4-dd32-4d92-a872-8a2278f334e2",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "0692ceb7-8041-4ff8-b545-307f4c3671bf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(6) .MuiInputBase-root",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(6) .MuiInputBase-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c34d91b-d62b-4d0c-81fd-09d3d22acd40",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e3fb29f-b156-4516-83fb-26f0cdd7a9c6",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d11f658e-fff2-42db-890f-80777f719688",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cef9b92d-926e-4469-9d3c-3ff10b06fd6e",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "648ad3db-6b10-43c3-a6dd-64aab896e2e0",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "54369240-c4d2-49e9-bb11-49e38c2b27f0",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0ee8d35-5572-4fcc-8409-4149b260b06e",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "67178539-8bbb-4819-99dd-f8637c16b7f0",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bceadb9a-33d0-421e-ad7b-051b198d661f",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa3a6c5b-7e49-4ff7-aadb-50b2e48b12b4",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "fc044628-abf5-4fa5-b568-ccb0162dd559",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(9)",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(9)", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]", "xpath:idRelative"],
+        ["xpath=//div[9]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "684667f1-7faf-4a2f-a08c-62c4fbaaa589",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3034d4e0-ba3a-46c7-bb4d-f24be43ce6ac",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a3b885c2-024d-427a-a9ef-2f721cc851cd",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "42cd2371-bfc8-4d2d-9c93-460803a07228",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0e5f872-7367-4a60-9db0-230f86fd8cf5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c060cce0-7bf2-476b-b3af-3bc594bd86dc",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "7b15361a-4751-4afa-87e9-4f9c84240bcb",
+    "name": "รายละเอียดการรักษาจะต้องมีอย่างน้อย 6 ตัวอักษรหรือมากกว่า",
+    "commands": [{
+      "id": "3f045923-cd7c-4f1b-aefb-19358156dd26",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0785ce57-0820-48bd-8516-4abecbe2fbef",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e73e54c3-12f5-4b4f-9c38-e57ea6b01e41",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "74fed238-c01c-4fb7-8765-5aede2817a21",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "77f0f06a-bd50-40f0-b940-e4b20becf8a2",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "24954e45-694f-442d-984c-e75da5c95223",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eef08cfb-1f7e-4579-99ab-8cdd1a54132f",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "987e9cd6-ea2e-4b48-b83d-1acec43ecc63",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f3a4d01-07a5-42e3-9b77-d5599b085a4a",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "4397f66a-b0d9-4be9-94cb-8d3d4f56da3c",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a7c4218a-4b88-4a57-a8c8-2a2aed70153a",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "14ca54fc-79e3-4da4-a017-a2a67dc5acfa",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cd8fd121-e7f1-4a4a-a605-f84edbc6e6c4",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "0971adc8-ed6b-4d7f-b7ed-25a3ee3921e2",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d3a876a-ccba-4060-96b1-89640f604fda",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f015052-86df-4497-a508-d746ca989d6a",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73ab5672-dc45-4283-ab24-2e7302852b0e",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "0e50c95a-27a3-434b-a809-a49a83a9c004",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "caf415ce-9895-4d4c-87d3-8e4816fe6a5a",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "95b78c0f-91d4-457f-948a-e687b44e993f",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7f29e5a-074e-4ad0-a6e4-90611ef70250",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1เล่ม"
+    }, {
+      "id": "187abb74-7dd2-4a5d-bd9a-4968731f2d9d",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอน"
+    }, {
+      "id": "0b48ec71-6aa2-4542-8028-6c19fac07901",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-container",
+      "targets": [
+        ["css=.MuiGrid-container", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a2902946-f400-4471-86db-5568896df384",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e16c7883-be64-4f17-9a3b-33193c84fbc4",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "5307b138-7ec1-4101-8bbd-221ae02d9197",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3cbb755-ea35-4e9b-97ff-5bbdcde5f3c7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8e3267b5-7e56-4328-b83b-927d60172a50",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d7e54544-762d-4358-9e61-fee98ee66c30",
+    "name": "เวลาการรักษาจะต้องเป็นอดีต",
+    "commands": [{
+      "id": "5ea87eec-8bb2-438a-bd7f-fcd7f75aa9b5",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7d5d50bc-1073-41c1-8ca3-740bc9829596",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "12746e0b-8f53-438a-b753-be18d180a34d",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.MuiGrid-root:nth-child(1) > .MuiFormControl-root",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(1) > .MuiFormControl-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b1592a96-b7bb-4e2a-b3d7-8ef284bde41b",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.MuiGrid-root:nth-child(1) .MuiInputBase-root",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(1) .MuiInputBase-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2676db3-278d-43cf-b48a-94ff67b1a4c3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(1) > .MuiFormControl-root",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(1) > .MuiFormControl-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2092e55b-d551-492a-b947-220cc647bd89",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e1a06ce8-8f00-4351-bd85-a3c865066e45",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8a67ebe9-dd69-4fd8-bb6b-1c6e6877da03",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "92894688-65be-41dd-95b5-c54cf042d12f",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "84ed4546-eb7e-4745-8e63-6853efb4d0c2",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b00964bc-bdf8-4c2e-8245-c75eda68ff20",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "948627d1-3310-42b9-862f-34b1057473ff",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "121ac054-8ada-484e-9839-3620e259d56f",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "e61a61c1-1858-4893-b610-326a50d8f592",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(7)",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(7)", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]", "xpath:idRelative"],
+        ["xpath=//div[7]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d39fd8b5-7ad5-4500-b232-41d14182ba6a",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0fb4bfc3-60b7-4adb-ae4a-57b682afbeab",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "a926c8e9-0c42-48bf-b934-cfdd6ac6bba7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-root:nth-child(8)",
+      "targets": [
+        ["css=.MuiGrid-root:nth-child(8)", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]", "xpath:idRelative"],
+        ["xpath=//div[8]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b815648c-07cd-4a60-9cfd-b6e1e817fb07",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c62b034e-f485-4c59-a4b4-aaa3382bf67e",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f04305ee-e703-48e1-be0b-a19f338812fd",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4b85994a-0682-454b-8087-ffc56115791b",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "dcfa198e-b650-47ab-8308-83b032dee591",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2040074-8915-42c5-a121-17dcde98df5f",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d21661c-dc4d-418b-8f7f-3beb58fa80cd",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5376a62-4107-410f-90c8-2d7743317f07",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "ccd80e38-4640-427e-96d3-45dbb555aef1",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "71c38199-29f7-49b9-a957-0ba0c8e7ab0f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiIconButton-edgeEnd > .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "4216dcc6-1145-43b9-8c22-f7ff17dee189",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root > .MuiSvgIcon-root",
+      "targets": [
+        ["css=.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root > .MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "6f8c1285-0cbd-46ff-a9b7-c75de3e06281",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiDayPicker-weekContainer:nth-child(5) > .MuiButtonBase-root:nth-child(3)",
+      "targets": [
+        ["css=.MuiDayPicker-weekContainer:nth-child(5) > .MuiButtonBase-root:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='button'])[44]", "xpath:attributes"],
+        ["xpath=//div[5]/button[3]", "xpath:position"],
+        ["xpath=//button[contains(.,'28')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1e1cd92e-1573-4d15-8310-15d59d15e190",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiClock-squareMask",
+      "targets": [
+        ["css=.MuiClock-squareMask", "css:finder"],
+        ["xpath=//div[2]/div[2]/div/div/div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a692479a-a92c-4f30-94d5-01c5f9bf3966",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiClock-squareMask",
+      "targets": [
+        ["css=.MuiClock-squareMask", "css:finder"],
+        ["xpath=//div[2]/div[2]/div/div/div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "538b801f-6723-4c41-8c9e-6242e04f0ddc",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6aafcfd3-51d7-4a46-9891-348bac983982",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "c1151c81-81e3-40b0-a2d2-e5fa3889039f",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "12d9bcaa-4f9e-4b87-9590-1b97d59a733c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e4f31161-2093-4a5b-9134-96c7b449a259",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c3b5057c-ccec-4b1a-886e-5b771fc7a195",
+    "name": "รหัสการรักษาไม่สามารถเป็นค่าว่างได้",
+    "commands": [{
+      "id": "2257bd43-f8f1-4896-aad8-aaa9913cf306",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9a16373d-99a7-4dc9-87bf-361b44f1f0bc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1053x800",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b7460b5b-7412-41f8-8cac-2205047a9996",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4eea2ba1-ccb2-4c57-ba7a-c149b68a4fec",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e66b1c70-1830-4b7e-93dd-2d722f9810f9",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e750389-1aaa-4c4e-8ace-e6e4baef507e",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2cb4d2bc-49f7-44e2-9a6f-f536a61e85e4",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "02e4e045-020d-479d-886a-c7bf8cfa6668",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "b4d9fb7d-7e5a-444a-9b05-df6b90dc67af",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7fae2a5-82b8-45c4-b29d-e7db8cbea192",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "c244676f-5f59-40ec-8232-48379721f787",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7eade40e-8062-4d41-bc68-b34705af36ce",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "6bdcf2b3-2391-4185-b2e1-724d3cfc6aab",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a3e1401-b74d-42a0-8178-afd475e01ee9",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f12f3018-7fab-4236-88c2-d838cc5b0b20",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6501edb0-1fd9-4c7a-b917-a751d8cdbd2b",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "c2858a82-b848-4da7-ae27-1dfe161728aa",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "86e98abf-934e-43ec-b8fa-e98c4e369f42",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1841eb79-feab-43df-858f-5e8753ddcf65",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a63f77f2-a936-4d5e-bea1-8049d4439431",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "0ae78dbe-6a2f-40f9-87d8-3139abe43485",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5a80012-f484-4c77-a2eb-c1bd864f4f12",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiGrid-container",
+      "targets": [
+        ["css=.MuiGrid-container", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14ef8e49-f82e-4e3d-b782-324a69b2f437",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "db079353-f5e6-4b2d-861b-6adba0566cbf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9052bd77-66bb-4c37-8781-76d90a4c60ee",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c31b8915-50a9-4b1f-ae38-ec0b0343ff41",
+    "name": "รหัสการรักษาจะต้องขึ้นต้นด้วย T ตามด้วยตัวเลข 7 ตัว",
+    "commands": [{
+      "id": "b155e26e-4ebf-47d9-a7d3-9652231be128",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2d0023f8-fbd7-4d6c-938b-5f7a9c8b2e7b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "09afd61d-4b55-4242-a3c7-30544653d7c8",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5f5b59cc-db7d-4360-b302-4e68ffc21774",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8e00e793-eba9-46fc-867d-6c65a783d432",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "89ad01b1-1b63-4588-9811-faae3b4eccb5",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "59af1397-ceaa-44d4-8ea7-cd856339487b",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7012bca7-b1ce-40df-832b-a8203ce5a3c2",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "0e5be110-95f3-4572-9ded-48df6e6ec45a",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df77360c-027a-42e7-8e12-dec4d32e2f60",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "c27b1fd2-a78c-4223-80b7-e2154275c323",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2774fc29-e07b-43bc-9bdd-9f0621af1588",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "3a45b68a-f753-4da3-b37f-d5bc8b1af0ec",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fa18e2b5-d645-40f8-8554-900bc2a187c9",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d39ee9b-9858-43e4-b0ab-2862ea626aa9",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "79a3f544-22e1-417e-bcd9-6e7e8b40896a",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "57a80d7c-4153-499d-a230-8678978754ed",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9f8ca99d-e1de-43a8-aa2a-deff9710e6ed",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "91eb6f79-23ec-4f7e-9d3b-91141db9aa60",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0e91ada-b9d3-4407-80bf-55ffd6eadb77",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b870af5e-e959-4267-9be9-5e8076490b03",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7c5f1590-22db-4b23-b6a5-a1df8b5a29e6",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "75666a58-a47c-4515-ab35-36e73712c92e",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fb2868e2-7764-4dda-9a32-34810ff7629b",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "7777"
+    }, {
+      "id": "fb4c2778-a1de-433e-bb51-1d6aee73f5b8",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bb8e7dae-3730-4f43-b60a-cc2c894f0264",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cde6150b-471e-4ab3-a541-e8991412aee6",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "509fe5ff-0bda-4a3d-b57e-77f9a7d62901",
+    "name": "dentist not found",
+    "commands": [{
+      "id": "915c0cbb-1d29-46e2-9976-baab01cd4ddd",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "40ee22a3-b3fa-4f86-8ecf-8578b4ec4238",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6eb4bbbf-63d5-4b2f-9a2d-2001a37e5eab",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "48cf013f-bef9-44b2-901d-95b2adbdbe2b",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "29f9454e-4598-4852-a3ed-2f867129b85b",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ead4784-2fc6-4dd5-acfe-dfe4cc94c5aa",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "4a077a43-ef75-4826-9f0d-ff85ba6f6bc2",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b72ecd96-e5c4-457f-82a7-102f71e76c24",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "8477ba82-e568-4070-9e84-3555dac59b1a",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "47dc610f-aecb-46b1-b6f9-52c1867fa3f1",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "82e28d12-67f3-47c2-9433-472a65231505",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6e0a2400-54c7-43a9-b41e-0be3a01d053f",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e696f88f-d6cd-4b90-be85-9840fd3b806f",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b775e46-a1b7-405c-b70e-fb61e4f2c63a",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "242ac033-6c9f-43a1-b435-7d48d9ad0e54",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "176446d2-d2aa-4fb3-b2ac-90142c9cb7dd",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "917f755b-4105-4695-8940-8db6d9ad93dd",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b8f4845-cb8b-4463-83a6-50b7b2f7554e",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5960d444-508b-4dd7-9184-089430e4a876",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad8e1b08-9b5e-4d41-87ba-180c2c33306c",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "75db2d15-f437-4ab0-b266-f2ea4cf6990a",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "281c5821-8644-481d-b7b0-c4efd83067d3",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "bf84449d-510a-4496-9319-9ec9d078cf9c",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "86ddfdad-c0d9-4c30-b24b-29e2435b8b73",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "39c6404b-0055-4469-8f7c-915a2f234872",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fc9b30ab-1b32-4fce-8bfa-1bb1068becba",
+    "name": "patient not found",
+    "commands": [{
+      "id": "64c93c86-387d-478e-a853-a2efb1fbb86c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d45d4cee-0edf-417b-b42c-4d1dbb20f19d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fd694cc3-e5a4-4ffd-b731-cbd0d7c4f666",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a115dd05-16e6-438b-a009-b0cf3b7598c2",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "01536025-653c-4821-8f87-1298e702f510",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5502d45-235b-491c-ac1c-ff21d6e758cf",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "31d602b0-026a-48f1-a914-5be9412049b6",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "466f5f21-a874-45fc-8cf7-45647b5c947c",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "42051515-9579-49d4-81b7-f195b415c804",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a27192ef-76ef-42d8-a914-13ba9ceaa98a",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "1af2cfaa-7b0a-431d-af0d-d55d32ff6b48",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f26b5ed-ab1c-45f5-ad25-897f144c9720",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f90f23c4-cce4-4dbd-a86a-b077659afd5b",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2efe2f0-fcb3-482b-be94-780915333e40",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "0d0fe01e-338c-4891-b5a1-e035a1efc6a4",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "baa4b417-9007-41a6-bd2f-b0e3c82db11d",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6f8c4de8-2370-45b6-9344-2feaf4ec7b0c",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "307426b6-be17-4d64-8972-7e7557eca7ec",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "0fc908fb-3f49-4485-80d0-1d57432a772f",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d41f624f-717b-4be3-8cfa-5b897abbf7eb",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "f3a39a41-277e-4491-8d4f-f0a4274456a3",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "db143176-639d-420b-bb15-188ad58bdb9b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ce429fef-0155-4c2c-85c2-ceeb6981307b",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "be2d524e-b37f-4aa4-91b2-2f49a7feda44",
+    "name": "type of treatment not found",
+    "commands": [{
+      "id": "cdf92904-b4c7-412d-89b1-5a51dc41ffff",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4b6df045-ec0e-4973-9672-d354a97d9968",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1053x800",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3d31971e-1c3b-4817-9fad-599ce001d4f6",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "296da667-7ec7-4a41-8c89-2000de77dde0",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "573960d9-b083-4d8b-a8ca-6eba1dd7fc9e",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b90becf3-e294-439f-8491-a720cc12de6a",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cb409775-81b5-4f8b-ba08-4c7f8660c364",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be55351d-f521-44b5-bb20-653a8911be6b",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "3d3f6ba4-3bb2-4383-bbcf-40fc29bfa2a8",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a939b49-f557-40be-ba5b-42a5f0219fcb",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "e80b8ff2-ec50-403a-9554-7af7f22f919e",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "72b20ce9-38ef-4b50-a0a0-5afad2f7e387",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "780d0d86-c4f7-49a3-b053-472386b67083",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e88bf8f-3f5a-4ee1-a5b2-b114b066302d",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "347677df-a0fe-4a67-8f8d-0abc8df1b71f",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f96abf7-bde3-45a5-9772-ea52759abd96",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID-option-0",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID-option-0", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID-option-0", "css:finder"],
+        ["xpath=//li[@id='Type_Of_Number_Of_TreatmentID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_Number_Of_TreatmentID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'ซี่')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dbedda38-e043-4840-bc7e-a2caa0863156",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "76c265ef-6e16-46d5-a3ac-eb27f3c6d4d6",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1ซี่ ซ้ายบน"
+    }, {
+      "id": "c1550e70-de02-4f60-9e3d-5c90341a6a07",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3dbf2958-e881-4b37-8458-b752ab2e2351",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T6999987"
+    }, {
+      "id": "5d06c9c2-70bc-42c7-94ec-4e82f5994730",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f32d6348-f520-4c68-a71a-b450af8b641d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1ed5089b-1766-4691-a278-fa76cb539133",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "413ccbd3-e96e-4b73-bace-e6c497d10265",
+    "name": "type of numberr of treatment not found",
+    "commands": [{
+      "id": "f234674d-8eae-4f55-b62b-47c15b3a0c94",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/treatmentscreate",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cc98dc37-d221-4240-aea8-1be1abdbde34",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1053x800",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "33b13268-f7fe-418f-a868-c03bbd6aaff1",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID",
+      "targets": [
+        ["id=DentistID", "id"],
+        ["css=#DentistID", "css:finder"],
+        ["xpath=//input[@id='DentistID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ce3a9d3-338e-43a3-a76f-f3af0bdf2d55",
+      "comment": "",
+      "command": "click",
+      "target": "id=DentistID-option-0",
+      "targets": [
+        ["id=DentistID-option-0", "id"],
+        ["css=#DentistID-option-0", "css:finder"],
+        ["xpath=//li[@id='DentistID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='DentistID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Lawn')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "91fee669-6952-479b-920d-f450b7f5ee2e",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID",
+      "targets": [
+        ["id=PatientID", "id"],
+        ["css=#PatientID", "css:finder"],
+        ["xpath=//input[@id='PatientID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "85cde7a6-c506-4d2a-a4b4-d8d6f78840a0",
+      "comment": "",
+      "command": "click",
+      "target": "id=PatientID-option-0",
+      "targets": [
+        ["id=PatientID-option-0", "id"],
+        ["css=#PatientID-option-0", "css:finder"],
+        ["xpath=//li[@id='PatientID-option-0']", "xpath:attributes"],
+        ["xpath=//ul[@id='PatientID-listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Kaoru')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fffb8c5c-9fb0-4fe6-b6ed-e26e2d5c6289",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3443fd56-6197-4a92-8e32-678b1682cf73",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_cavities",
+      "targets": [
+        ["id=number_of_cavities", "id"],
+        ["css=#number_of_cavities", "css:finder"],
+        ["xpath=//input[@id='number_of_cavities']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[3]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "6f57bc78-7382-48b1-8b04-7da58a9365d8",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8cb4a913-3e84-4d57-87b6-05e5b9d8ced0",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_swollen_gums",
+      "targets": [
+        ["id=number_of_swollen_gums", "id"],
+        ["css=#number_of_swollen_gums", "css:finder"],
+        ["xpath=//input[@id='number_of_swollen_gums']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[4]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "3ccb9f82-ec96-42d8-8da8-322c574ce1c4",
+      "comment": "",
+      "command": "click",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f253476-6752-4149-be93-27401bf40c85",
+      "comment": "",
+      "command": "type",
+      "target": "id=other_teeth_problems",
+      "targets": [
+        ["id=other_teeth_problems", "id"],
+        ["css=#other_teeth_problems", "css:finder"],
+        ["xpath=//input[@id='other_teeth_problems']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[5]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "มีหินปูน"
+    }, {
+      "id": "d58e6635-f591-481a-b028-a7453a27751e",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_TreatmentID", "id"],
+        ["css=#Type_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[6]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "61087738-c9b7-4f91-9931-8d8b3d3c7b93",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_TreatmentID-option-7",
+      "targets": [
+        ["id=Type_Of_TreatmentID-option-7", "id"],
+        ["css=#Type_Of_TreatmentID-option-7", "css:finder"],
+        ["xpath=//li[@id='Type_Of_TreatmentID-option-7']", "xpath:attributes"],
+        ["xpath=//ul[@id='Type_Of_TreatmentID-listbox']/li[8]", "xpath:idRelative"],
+        ["xpath=//li[8]", "xpath:position"],
+        ["xpath=//li[contains(.,'ถอนฟัน')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6220efb1-55b6-4b0b-8298-c054797db394",
+      "comment": "",
+      "command": "click",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f917d5ec-bf8a-44e4-b655-0d2938ac2fcc",
+      "comment": "",
+      "command": "type",
+      "target": "id=number_of_treatment",
+      "targets": [
+        ["id=number_of_treatment", "id"],
+        ["css=#number_of_treatment", "css:finder"],
+        ["xpath=//input[@id='number_of_treatment']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[7]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "4052d20f-3888-4a29-b76d-7f7260442a35",
+      "comment": "",
+      "command": "click",
+      "target": "id=Type_Of_Number_Of_TreatmentID",
+      "targets": [
+        ["id=Type_Of_Number_Of_TreatmentID", "id"],
+        ["css=#Type_Of_Number_Of_TreatmentID", "css:finder"],
+        ["xpath=//input[@id='Type_Of_Number_Of_TreatmentID']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[8]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dfefbd9f-0ddd-483a-a06c-e833298a3ae1",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "66083223-b2b7-4091-8244-c2240ba49116",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_detail",
+      "targets": [
+        ["id=treatment_detail", "id"],
+        ["css=#treatment_detail", "css:finder"],
+        ["xpath=//input[@id='treatment_detail']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[9]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "ถอนฟัน1เล่ม"
+    }, {
+      "id": "1f6ae736-b7a7-43b6-8368-d56f1041905c",
+      "comment": "",
+      "command": "click",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1268fac-c8f9-4b85-b596-9db1fd674aa4",
+      "comment": "",
+      "command": "type",
+      "target": "id=treatment_code",
+      "targets": [
+        ["id=treatment_code", "id"],
+        ["css=#treatment_code", "css:finder"],
+        ["xpath=//input[@id='treatment_code']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[11]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[11]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "T1236985"
+    }, {
+      "id": "226e3612-f25a-4376-b981-8f72f7a7e29d",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d996fbea-03c9-44ff-baf8-e1b4098b7a7d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "26ae5b46-7853-4f0e-9b5a-ce513a1c20a1",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiButtonBase-root:nth-child(2) > .good-font",
+      "targets": [
+        ["css=.MuiButtonBase-root:nth-child(2) > .good-font", "css:finder"],
+        ["xpath=//div[@id='root']/div/main/div[2]/div/div[2]/div[2]/div[12]/button/div", "xpath:idRelative"],
+        ["xpath=//button/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "2077d9be-b836-44ea-8105-29713ae003b4",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:3000/", "http://localhost:3000/treatmentscreate"],
+  "plugins": []
+}
